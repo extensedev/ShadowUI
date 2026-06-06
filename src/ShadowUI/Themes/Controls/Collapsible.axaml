@@ -1,0 +1,40 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Контейнер: показывает/скрывает контент по IsExpanded -->
+  <ControlTheme x:Key="{x:Type shadui:Collapsible}" TargetType="shadui:Collapsible">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel>
+          <!-- Триггер-слот: сюда помещается CollapsibleTrigger -->
+          <ContentPresenter Name="PART_Trigger"
+                            HorizontalAlignment="Stretch" />
+          <!-- Контент: отображается только при IsExpanded=true -->
+          <ContentPresenter Name="PART_Content"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            IsVisible="{TemplateBinding IsExpanded}"
+                            Margin="0,4,0,0" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- Триггер для Collapsible: устанавливает Cursor=Hand -->
+  <ControlTheme x:Key="{x:Type shadui:CollapsibleTrigger}" TargetType="shadui:CollapsibleTrigger">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter"
+                          Content="{TemplateBinding Content}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Cursor="Hand"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

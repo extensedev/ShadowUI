@@ -1,0 +1,56 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- InputGroup — обёртка поля ввода с prefix/suffix-слотами -->
+  <ControlTheme x:Key="{x:Type shadui:InputGroup}" TargetType="shadui:InputGroup">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="Auto,*,Auto">
+
+          <!-- prefix-слот -->
+          <Border Name="PART_Prefix"
+                  Grid.Column="0"
+                  Background="{DynamicResource ShadowMutedBrush}"
+                  BorderBrush="{DynamicResource ShadowInputBrush}"
+                  BorderThickness="1,1,0,1"
+                  CornerRadius="8,0,0,8"
+                  Padding="8,0"
+                  MinHeight="36"
+                  VerticalAlignment="Stretch"
+                  IsVisible="{Binding Path=Prefix, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <ContentPresenter Content="{TemplateBinding Prefix}"
+                              VerticalAlignment="Center" />
+          </Border>
+
+          <!-- основной контент -->
+          <ContentPresenter Name="PART_Content"
+                            Grid.Column="1"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+
+          <!-- suffix-слот -->
+          <Border Name="PART_Suffix"
+                  Grid.Column="2"
+                  Background="{DynamicResource ShadowMutedBrush}"
+                  BorderBrush="{DynamicResource ShadowInputBrush}"
+                  BorderThickness="0,1,1,1"
+                  CornerRadius="0,8,8,0"
+                  Padding="8,0"
+                  MinHeight="36"
+                  VerticalAlignment="Stretch"
+                  IsVisible="{Binding Path=Suffix, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <ContentPresenter Content="{TemplateBinding Suffix}"
+                              VerticalAlignment="Center" />
+          </Border>
+
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

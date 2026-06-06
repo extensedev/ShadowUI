@@ -1,0 +1,77 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <ControlTheme x:Key="{x:Type shadui:Alert}" TargetType="shadui:Alert">
+    <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusLg}" />
+    <Setter Property="Padding" Value="16" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}">
+          <Grid ColumnDefinitions="Auto,*">
+            <!-- icon -->
+            <ContentPresenter Name="PART_Icon"
+                              Grid.Column="0"
+                              Content="{TemplateBinding Icon}"
+                              IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
+                              Width="18" Height="18"
+                              Margin="0,1,12,0"
+                              VerticalAlignment="Top" />
+            <StackPanel Grid.Column="1" Spacing="3">
+              <TextBlock Name="PART_Title"
+                         Text="{TemplateBinding Title}"
+                         IsVisible="{TemplateBinding Title, Converter={x:Static ObjectConverters.IsNotNull}}"
+                         FontSize="14" FontWeight="Medium"
+                         Foreground="{DynamicResource ShadowForegroundBrush}"
+                         TextWrapping="Wrap" />
+              <ContentPresenter Name="PART_Description"
+                                Content="{TemplateBinding Description}"
+                                IsVisible="{TemplateBinding Description, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                TextElement.FontSize="13"
+                                TextElement.Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                                TextBlock.TextWrapping="Wrap" />
+            </StackPanel>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- variants: colored border + title/icon -->
+    <Style Selector="^.info">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowInfoBrush}" />
+    </Style>
+    <Style Selector="^.info /template/ TextBlock#PART_Title">
+      <Setter Property="Foreground" Value="{DynamicResource ShadowInfoBrush}" />
+    </Style>
+
+    <Style Selector="^.success">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowSuccessBrush}" />
+    </Style>
+    <Style Selector="^.success /template/ TextBlock#PART_Title">
+      <Setter Property="Foreground" Value="{DynamicResource ShadowSuccessBrush}" />
+    </Style>
+
+    <Style Selector="^.warning">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowWarningBrush}" />
+    </Style>
+    <Style Selector="^.warning /template/ TextBlock#PART_Title">
+      <Setter Property="Foreground" Value="{DynamicResource ShadowWarningBrush}" />
+    </Style>
+
+    <Style Selector="^.destructive">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowDestructiveBrush}" />
+    </Style>
+    <Style Selector="^.destructive /template/ TextBlock#PART_Title">
+      <Setter Property="Foreground" Value="{DynamicResource ShadowDestructiveBrush}" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

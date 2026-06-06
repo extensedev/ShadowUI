@@ -1,0 +1,86 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- DatePicker: поле ввода даты с иконкой-кнопкой и всплывающим ShadowCalendar -->
+  <ControlTheme x:Key="{x:Type shadui:DatePicker}" TargetType="shadui:DatePicker">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!-- Panel: корневой элемент, не обрезает всплывающий Popup -->
+        <Panel>
+
+          <!-- Внешняя рамка, объединяющая TextBox и кнопку открытия -->
+          <Border Name="PART_Border"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{DynamicResource ShadowInputBrush}"
+                  BorderThickness="1"
+                  CornerRadius="{DynamicResource ShadowRadiusMd}">
+
+            <!-- Grid: col 0 = TextBox, col 1 = кнопка-иконка -->
+            <Grid ColumnDefinitions="*,Auto" ClipToBounds="False">
+
+              <!-- Поле ввода даты -->
+              <TextBox Name="PART_TextBox"
+                       Grid.Column="0"
+                       PlaceholderText="{TemplateBinding Watermark}"
+                       BorderThickness="0"
+                       Background="Transparent"
+                       VerticalAlignment="Stretch"
+                       VerticalContentAlignment="Center"
+                       Padding="12,0,8,0" />
+
+              <!-- Кнопка открытия Popup с иконкой календаря -->
+              <Button Name="PART_PopupButton"
+                      Grid.Column="1"
+                      Classes="ghost icon"
+                      VerticalAlignment="Stretch"
+                      Padding="8,0"
+                      CornerRadius="0,8,8,0">
+                <!-- Иконка календаря (Lucide calendar) -->
+                <Path Data="M 8 2 V 6 M 16 2 V 6 M 3 10 H 21 M 5 4 H 19 A 2 2 0 0 1 21 6 V 20 A 2 2 0 0 1 19 22 H 5 A 2 2 0 0 1 3 20 V 6 A 2 2 0 0 1 5 4 Z"
+                      Width="16"
+                      Height="16"
+                      Stretch="None"
+                      Stroke="{DynamicResource ShadowMutedForegroundBrush}"
+                      StrokeThickness="1.5"
+                      StrokeLineCap="Round"
+                      Fill="Transparent" />
+              </Button>
+
+            </Grid>
+          </Border>
+
+          <!-- Popup с встроенным ShadowCalendar -->
+          <Popup Name="PART_Popup"
+                 PlacementTarget="{TemplateBinding}"
+                 Placement="BottomEdgeAlignedLeft"
+                 VerticalOffset="4"
+                 IsLightDismissEnabled="True"
+                 WindowManagerAddShadowHint="False">
+            <Border Background="{DynamicResource ShadowCardBrush}"
+                    BorderBrush="{DynamicResource ShadowBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{DynamicResource ShadowRadiusMd}"
+                    BoxShadow="{DynamicResource ShadowShadowMd}"
+                    Padding="4">
+              <shadui:ShadowCalendar Name="PART_Calendar" />
+            </Border>
+          </Popup>
+
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Фокус внутри контрола: добавляем focus ring вокруг рамки -->
+    <Style Selector="^:focus-within /template/ Border#PART_Border">
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+    </Style>
+
+    <!-- Наведение курсора: выделяем рамку ring-цветом -->
+    <Style Selector="^:pointerover /template/ Border#PART_Border">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>

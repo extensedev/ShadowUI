@@ -1,0 +1,51 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Тема EmptyState: пустое состояние с иконкой, заголовком, описанием и кнопкой действия -->
+  <ControlTheme x:Key="{x:Type shadui:EmptyState}" TargetType="shadui:EmptyState">
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Padding" Value="24" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel HorizontalAlignment="Center" Spacing="12">
+
+          <!-- иконка -->
+          <ContentPresenter Name="PART_Icon"
+                            Content="{TemplateBinding Icon}"
+                            HorizontalAlignment="Center"
+                            Margin="0,0,0,4" />
+
+          <!-- заголовок -->
+          <TextBlock Name="PART_Title"
+                     Text="{TemplateBinding Title}"
+                     Classes="h3"
+                     TextAlignment="Center"
+                     Foreground="{DynamicResource ShadowForegroundBrush}"
+                     IsVisible="{TemplateBinding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+          <!-- описание -->
+          <TextBlock Name="PART_Description"
+                     Text="{TemplateBinding Description}"
+                     Classes="muted"
+                     TextAlignment="Center"
+                     TextWrapping="Wrap"
+                     MaxWidth="360"
+                     Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                     IsVisible="{TemplateBinding Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+          <!-- кнопка действия — скрыта при null ActionContent -->
+          <Button Name="PART_ActionButton"
+                  Content="{TemplateBinding ActionContent}"
+                  Command="{TemplateBinding ActionCommand}"
+                  HorizontalAlignment="Center"
+                  Margin="0,4,0,0"
+                  IsVisible="{TemplateBinding ActionContent, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

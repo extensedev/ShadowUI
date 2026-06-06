@@ -1,0 +1,334 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SidebarItem  (shadcn SidebarMenuButton)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <ControlTheme x:Key="{x:Type shadui:SidebarItem}" TargetType="shadui:SidebarItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
+    <Setter Property="Padding" Value="8,0" />
+    <Setter Property="Height" Value="32" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowSidebarForegroundBrush}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}">
+          <!-- shadcn SidebarMenuButton: flex, gap-2 (8px), icon size-4 (16px) -->
+          <DockPanel Name="PART_Layout" LastChildFill="True">
+            <!-- Icon (16px); collapses to 0 width when not set -->
+            <ContentPresenter Name="PART_Icon"
+                              DockPanel.Dock="Left"
+                              Content="{TemplateBinding Icon}"
+                              Width="16" Height="16"
+                              Margin="0,0,8,0"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+            <!-- Label: hidden when Sidebar is collapsed -->
+            <ContentPresenter Name="PART_Content"
+                              Content="{TemplateBinding Content}"
+                              VerticalAlignment="Center"
+                              HorizontalContentAlignment="Left"
+                              VerticalContentAlignment="Center" />
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- hover: set on control → template binding propagates to Border -->
+    <Style Selector="^:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
+    </Style>
+
+    <!-- active / selected (no weight change — only background) -->
+    <Style Selector="^:active">
+      <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
+    </Style>
+
+    <!-- disabled -->
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+
+    <!-- collapsed: square 36px button centered, label hidden, icon centered -->
+    <Style Selector="^:sidebar-collapsed">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="Margin" Value="0,2" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style Selector="^:sidebar-collapsed /template/ ContentPresenter#PART_Content">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:sidebar-collapsed /template/ ContentPresenter#PART_Icon">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="^:sidebar-collapsed /template/ DockPanel#PART_Layout">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+  </ControlTheme>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SidebarGroup  (shadcn SidebarGroup)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <ControlTheme x:Key="{x:Type shadui:SidebarGroup}" TargetType="shadui:SidebarGroup">
+    <!-- spacing between items (extra gap so active/hover backgrounds never touch) -->
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Spacing="12" />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Spacing="4">
+          <!-- Group label (optional): h-8, px-2, text-xs (12px), font-medium, fg/70 -->
+          <ContentPresenter Name="PART_Header"
+                            Content="{TemplateBinding Header}"
+                            IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}"
+                            Height="28"
+                            Padding="8,0"
+                            VerticalContentAlignment="Center"
+                            TextElement.FontSize="12"
+                            TextElement.FontWeight="Medium"
+                            TextElement.Foreground="{DynamicResource ShadowSidebarForegroundBrush}"
+                            Opacity="0.7" />
+          <!-- Items -->
+          <ItemsPresenter Name="PART_ItemsPresenter" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SidebarMenuItem  (expandable item with optional sub-items)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <ControlTheme x:Key="{x:Type shadui:SidebarMenuItem}" TargetType="shadui:SidebarMenuItem">
+    <!-- shadcn SidebarMenuSub: gap-1 (4px) between sub-items -->
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Spacing="4" />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Spacing="4">
+          <!-- Toggle button (h-8): icon + label + chevron -->
+          <Button Name="PART_Toggle"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  CornerRadius="{DynamicResource ShadowRadiusMd}"
+                  Padding="8,0"
+                  Height="32"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                  VerticalContentAlignment="Center"
+                  Foreground="{DynamicResource ShadowSidebarForegroundBrush}"
+                  FontSize="14"
+                  Cursor="Hand">
+            <DockPanel Name="PART_ToggleLayout" LastChildFill="True">
+              <!-- Icon (16px) -->
+              <ContentPresenter Name="PART_MenuIcon"
+                                DockPanel.Dock="Left"
+                                Content="{TemplateBinding Icon}"
+                                Width="16" Height="16"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+              <!-- Chevron (ChevronRight) — static, always points right (no rotation). -->
+              <Viewbox Name="PART_Chevron"
+                       DockPanel.Dock="Right"
+                       Width="16" Height="16"
+                       Stretch="Uniform"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Opacity="0.5">
+                <Canvas Width="16" Height="16">
+                  <Path Data="M 5 3 L 11 8 L 5 13"
+                        Stroke="{DynamicResource ShadowSidebarForegroundBrush}"
+                        StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round" />
+                </Canvas>
+              </Viewbox>
+              <ContentPresenter Name="PART_Header"
+                                Content="{TemplateBinding Header}"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Left" />
+            </DockPanel>
+          </Button>
+          <!-- Sub-items: ml-7 (28) aligns sub-item text past parent icon+gap -->
+          <Border Name="PART_SubBorder"
+                  Margin="28,0,8,0"
+                  Padding="8,2"
+                  BorderBrush="{DynamicResource ShadowSidebarBorderBrush}"
+                  BorderThickness="1,0,0,0"
+                  IsVisible="{TemplateBinding IsExpanded}">
+            <ItemsPresenter Name="PART_ItemsPresenter" />
+          </Border>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Hide chevron when no items -->
+    <Style Selector="^.no-sub /template/ Viewbox#PART_Chevron">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <!-- Hover only on the toggle itself (not when hovering sub-items) -->
+    <Style Selector="^ /template/ Button#PART_Toggle:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
+    </Style>
+    <!-- Active: accent bg only (no weight change) -->
+    <Style Selector="^:active /template/ Button#PART_Toggle">
+      <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
+    </Style>
+    <!-- Collapsed sidebar: hide header label, chevron, sub-items -->
+    <Style Selector="^:sidebar-collapsed /template/ ContentPresenter#PART_Header">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:sidebar-collapsed /template/ Viewbox#PART_Chevron">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:sidebar-collapsed /template/ Border#PART_SubBorder">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <!-- collapsed: square 36px toggle centered, icon centered -->
+    <Style Selector="^:sidebar-collapsed">
+      <Setter Property="Margin" Value="0,2" />
+    </Style>
+    <Style Selector="^:sidebar-collapsed /template/ Button#PART_Toggle">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style Selector="^:sidebar-collapsed /template/ ContentPresenter#PART_MenuIcon">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="^:sidebar-collapsed /template/ DockPanel#PART_ToggleLayout">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+  </ControlTheme>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       Sidebar  (shadcn Sidebar panel)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <ControlTheme x:Key="{x:Type shadui:Sidebar}" TargetType="shadui:Sidebar">
+    <Setter Property="Background" Value="{DynamicResource ShadowSidebarBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowSidebarForegroundBrush}" />
+    <!-- Width is driven from code-behind (ExpandedWidth / CollapsedWidth); animate it -->
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Width" Duration="0:0:0.2" Easing="CubicEaseInOut" />
+      </Transitions>
+    </Setter>
+    <!-- shadcn SidebarContent: gap-2 (8px) between groups -->
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Spacing="8" />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Root"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{DynamicResource ShadowSidebarBorderBrush}"
+                BorderThickness="0,0,1,0"
+                HorizontalAlignment="Stretch">
+          <DockPanel LastChildFill="True">
+
+            <!-- ── Header ── -->
+            <Border Name="PART_HeaderBorder"
+                    DockPanel.Dock="Top"
+                    Padding="12,10,8,10"
+                    BorderBrush="{DynamicResource ShadowSidebarBorderBrush}"
+                    BorderThickness="0,0,0,1">
+              <Grid ColumnDefinitions="*,Auto">
+                <!-- User-supplied header content -->
+                <ContentPresenter Name="PART_Header"
+                                  Grid.Column="0"
+                                  Content="{TemplateBinding Header}"
+                                  VerticalAlignment="Center"
+                                  ClipToBounds="True" />
+                <!-- Collapse toggle -->
+                <Button Name="PART_ToggleButton"
+                        Grid.Column="1"
+                        Width="28" Height="28"
+                        Padding="0"
+                        Classes="ghost"
+                        CornerRadius="{DynamicResource ShadowRadiusSm}"
+                        VerticalAlignment="Center"
+                        IsVisible="{TemplateBinding ShowToggleButton}"
+                        ToolTip.Tip="Toggle sidebar">
+                  <Viewbox Width="14" Height="14">
+                    <Path Data="M 3 6 H 21 M 3 12 H 21 M 3 18 H 21"
+                          Width="24" Height="24" Stretch="None"
+                          Stroke="{DynamicResource ShadowSidebarForegroundBrush}"
+                          Opacity="0.6"
+                          StrokeThickness="2" StrokeLineCap="Round" />
+                  </Viewbox>
+                </Button>
+              </Grid>
+            </Border>
+
+            <!-- ── Footer ── -->
+            <Border DockPanel.Dock="Bottom"
+                    Name="PART_FooterBorder"
+                    Padding="8,8,8,10"
+                    BorderBrush="{DynamicResource ShadowSidebarBorderBrush}"
+                    BorderThickness="0,1,0,0"
+                    IsVisible="{TemplateBinding Footer, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <ContentPresenter Name="PART_Footer"
+                                Content="{TemplateBinding Footer}"
+                                ClipToBounds="True" />
+            </Border>
+
+            <!-- ── Nav items (scrollable) ── -->
+            <!-- shadcn: just overflow-auto with uniform padding; thin scrollbar at edge -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+              <ItemsPresenter Name="PART_ItemsPresenter"
+                              Margin="8,8" />
+            </ScrollViewer>
+
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Collapsed width is set from code-behind (CollapsedWidth) -->
+
+    <!-- Collapsed: hide header user content (keep toggle) -->
+    <Style Selector="^:collapsed /template/ ContentPresenter#PART_Header">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <!-- Collapsed: hide footer -->
+    <Style Selector="^:collapsed /template/ Border#PART_FooterBorder">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <!-- Collapsed: center the toggle button across the full header width -->
+    <Style Selector="^:collapsed /template/ Border#PART_HeaderBorder">
+      <Setter Property="Padding" Value="0,10" />
+    </Style>
+    <Style Selector="^:collapsed /template/ Button#PART_ToggleButton">
+      <Setter Property="Grid.Column" Value="0" />
+      <Setter Property="Grid.ColumnSpan" Value="2" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>

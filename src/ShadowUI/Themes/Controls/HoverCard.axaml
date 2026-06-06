@@ -1,0 +1,66 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- HoverCard: карточка-превью, появляется при наведении на триггер -->
+  <ControlTheme x:Key="{x:Type shadui:HoverCard}" TargetType="shadui:HoverCard">
+    <!-- По умолчанию скрыт до получения :open -->
+    <Setter Property="IsVisible" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!-- Panel не обрезает popup за пределы контрола -->
+        <Panel>
+
+          <!-- Триггер: прозрачный контейнер вокруг TriggerContent -->
+          <Border Name="PART_Trigger"
+                  Background="Transparent">
+            <ContentPresenter Content="{TemplateBinding TriggerContent}" />
+          </Border>
+
+          <!-- Popup управляется из C#-кода (IsOpen через _popupPart.IsOpen) -->
+          <Popup Name="PART_Popup"
+                 WindowManagerAddShadowHint="False"
+                 IsLightDismissEnabled="True"
+                 PlacementTarget="{TemplateBinding}"
+                 Placement="BottomEdgeAlignedLeft"
+                 VerticalOffset="8">
+
+            <!-- Карточка: появляется с opacity-переходом -->
+            <Border Name="PART_Card"
+                    Background="{DynamicResource ShadowPopoverBrush}"
+                    BorderBrush="{DynamicResource ShadowBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{DynamicResource ShadowRadiusMd}"
+                    Padding="16"
+                    MaxWidth="320"
+                    BoxShadow="{DynamicResource ShadowShadowMd}"
+                    Opacity="0">
+              <Border.Transitions>
+                <Transitions>
+                  <!-- Плавное появление/исчезновение карточки -->
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                </Transitions>
+              </Border.Transitions>
+
+              <ContentPresenter Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+            </Border>
+          </Popup>
+
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Состояние :open — показываем контрол -->
+    <Style Selector="^:open">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <!-- Состояние :open — карточка становится видимой (Opacity=1) -->
+    <Style Selector="^:open /template/ Border#PART_Card">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>

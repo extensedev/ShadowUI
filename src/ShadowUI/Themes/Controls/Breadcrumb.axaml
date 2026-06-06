@@ -1,0 +1,50 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- BreadcrumbItem: link-styled button. Class "current" = active page. -->
+  <ControlTheme x:Key="{x:Type shadui:BreadcrumbItem}" TargetType="shadui:BreadcrumbItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Content="{TemplateBinding Content}"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    </Style>
+    <!-- current page: normal foreground, default cursor -->
+    <Style Selector="^.current">
+      <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="Cursor" Value="Arrow" />
+    </Style>
+  </ControlTheme>
+
+  <!-- BreadcrumbSeparator: chevron-right -->
+  <ControlTheme x:Key="{x:Type shadui:BreadcrumbSeparator}" TargetType="shadui:BreadcrumbSeparator">
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Path Data="M 6 4 L 10 8 L 6 12"
+              Width="14" Height="14" Stretch="None"
+              Stroke="{DynamicResource ShadowMutedForegroundBrush}"
+              StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
+              Opacity="0.6"
+              VerticalAlignment="Center" HorizontalAlignment="Center" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ControlTheme x:Key="{x:Type RadioButton}" TargetType="RadioButton">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Border Name="PART_Box" Width="16" Height="16" CornerRadius="9999"
+                  Background="Transparent"
+                  BorderBrush="{DynamicResource ShadowInputBrush}"
+                  BorderThickness="1" VerticalAlignment="Center"
+                  BoxShadow="{DynamicResource ShadowShadowXs}">
+            <Ellipse Name="PART_Dot" Width="8" Height="8"
+                     Fill="{DynamicResource ShadowPrimaryBrush}"
+                     HorizontalAlignment="Center" VerticalAlignment="Center"
+                     IsVisible="False" />
+          </Border>
+          <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:checked /template/ Ellipse#PART_Dot">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Box">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

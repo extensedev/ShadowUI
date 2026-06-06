@@ -1,0 +1,78 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- ControlTheme для ShadowDataTable: фильтр + заголовок + строки + пагинация -->
+  <ControlTheme x:Key="{x:Type shadui:ShadowDataTable}" TargetType="shadui:ShadowDataTable">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!-- внешняя обёртка с border/radius из Table.axaml (.table) -->
+        <Border Name="PART_Border" Classes="table" ClipToBounds="True">
+          <DockPanel LastChildFill="True">
+
+            <!-- фильтр -->
+            <Border DockPanel.Dock="Top"
+                    BorderBrush="{DynamicResource ShadowBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    Padding="8,6">
+              <TextBox Name="PART_FilterBox"
+                       PlaceholderText="Фильтр строк..."
+                       HorizontalAlignment="Stretch"
+                       BorderThickness="0"
+                       Background="Transparent"
+                       FontSize="13"
+                       Padding="6,4" />
+            </Border>
+
+            <!-- пагинация (скрыта по умолчанию, показывается из code-behind) -->
+            <Border Name="PART_PaginationBar"
+                    DockPanel.Dock="Bottom"
+                    IsVisible="False"
+                    BorderBrush="{DynamicResource ShadowBorderBrush}"
+                    BorderThickness="0,1,0,0"
+                    Padding="8,6">
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Grid.Column="0"
+                        Name="PART_PrevButton"
+                        Classes="ghost sm"
+                        Content="← Пред." />
+                <TextBlock Grid.Column="1"
+                           Name="PART_PageInfo"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="12"
+                           Foreground="{DynamicResource ShadowMutedForegroundBrush}" />
+                <Button Grid.Column="2"
+                        Name="PART_NextButton"
+                        Classes="ghost sm"
+                        Content="След. →" />
+              </Grid>
+            </Border>
+
+            <!-- область таблицы: заголовок + строки -->
+            <DockPanel LastChildFill="True">
+
+              <!-- заголовок (ColumnDefinitions строятся в code-behind) -->
+              <Border DockPanel.Dock="Top" Classes="thead">
+                <Grid Name="PART_HeaderGrid" />
+              </Border>
+
+              <!-- строки данных -->
+              <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                            VerticalScrollBarVisibility="Auto">
+                <StackPanel Name="PART_RowsPanel" />
+              </ScrollViewer>
+
+            </DockPanel>
+
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+  </ControlTheme>
+
+</ResourceDictionary>

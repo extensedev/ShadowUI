@@ -1,0 +1,19 @@
+bin/
+obj/
+*.user
+.vs/
+artifacts/
+[Tt]est[Rr]esults/
+
+# Internal tooling — not part of the public library
+.planning/
+.claude/
+.idea/
+samples/
+tests/
+tools/
+tasks/
+CLAUDE.md
+ShadowUI.slnx
+Directory.Build.props
+Directory.Packages.props

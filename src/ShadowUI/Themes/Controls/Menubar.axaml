@@ -1,0 +1,99 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Menubar — горизонтальная строка меню в стиле shadcn new-york -->
+  <ControlTheme x:Key="{x:Type shadui:Menubar}" TargetType="shadui:Menubar">
+    <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <!-- Только нижняя граница — характерный shadcn menubar -->
+    <Setter Property="BorderThickness" Value="0,0,0,1" />
+    <Setter Property="Padding" Value="4,0" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Orientation="Horizontal" />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Padding="{TemplateBinding Padding}">
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                          ItemsPanel="{TemplateBinding ItemsPanel}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- MenubarItem — пункт верхнего уровня (File/Edit/View/…) -->
+  <ControlTheme x:Key="{x:Type shadui:MenubarItem}" TargetType="shadui:MenubarItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="Padding" Value="12,8" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_LayoutRoot"
+                Background="{TemplateBinding Background}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}">
+          <Grid ColumnDefinitions="*,Auto">
+            <!-- Заголовок пункта меню -->
+            <ContentPresenter Name="PART_HeaderPresenter"
+                              Grid.Column="0"
+                              Content="{TemplateBinding Header}"
+                              VerticalAlignment="Center" />
+            <!-- Шеврон скрыт на верхнем уровне Menubar -->
+            <Path Name="PART_ChevronPath"
+                  Grid.Column="1"
+                  IsVisible="False" />
+            <!-- Выпадающее подменю -->
+            <Popup Name="PART_Popup"
+                   Grid.Column="0"
+                   WindowManagerAddShadowHint="False"
+                   IsLightDismissEnabled="False"
+                   Placement="BottomEdgeAlignedLeft">
+              <Border Background="{DynamicResource ShadowPopoverBrush}"
+                      BorderBrush="{DynamicResource ShadowBorderBrush}"
+                      BorderThickness="1"
+                      CornerRadius="{DynamicResource ShadowRadiusMd}"
+                      Padding="4"
+                      MinWidth="160"
+                      Margin="0,4,0,0"
+                      BoxShadow="{DynamicResource ShadowShadowMd}">
+                <ItemsPresenter Name="PART_ItemsPresenter"
+                                ItemsPanel="{TemplateBinding ItemsPanel}" />
+              </Border>
+            </Popup>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Hover: подсветка фона -->
+    <Style Selector="^:pointerover /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <!-- Выделен (keyboard nav) -->
+    <Style Selector="^:selected /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <!-- Открыто подменю -->
+    <Style Selector="^[IsSubMenuOpen=True] /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <!-- Недоступный пункт -->
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+    <!-- Нет дочерних элементов — шеврон всегда скрыт -->
+    <Style Selector="^:empty /template/ Path#PART_ChevronPath">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

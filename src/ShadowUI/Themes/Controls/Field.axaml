@@ -1,0 +1,70 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Field — обёртка контрола ввода: метка, контент, подсказка/ошибка -->
+  <ControlTheme x:Key="{x:Type shadui:Field}" TargetType="shadui:Field">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Orientation="Vertical">
+
+          <!-- метка -->
+          <StackPanel Orientation="Horizontal"
+                      Spacing="2"
+                      Margin="0,0,0,6"
+                      IsVisible="{Binding Path=Label, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <ContentPresenter Name="PART_Label"
+                              Content="{TemplateBinding Label}"
+                              VerticalAlignment="Center"
+                              Foreground="{DynamicResource ShadowForegroundBrush}"
+                              FontSize="14"
+                              FontWeight="Medium" />
+            <TextBlock Name="PART_Required"
+                       Text="*"
+                       Foreground="{DynamicResource ShadowDestructiveBrush}"
+                       FontSize="14"
+                       FontWeight="Medium"
+                       VerticalAlignment="Center"
+                       IsVisible="{TemplateBinding IsRequired}" />
+          </StackPanel>
+
+          <!-- основной контрол -->
+          <ContentPresenter Name="PART_Content"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            HorizontalAlignment="Stretch" />
+
+          <!-- подсказка / ошибка -->
+          <TextBlock Name="PART_HintText"
+                     Text="{TemplateBinding HintText}"
+                     Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                     FontSize="12"
+                     Margin="0,4,0,0"
+                     TextWrapping="Wrap"
+                     IsVisible="{TemplateBinding HintText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+          <TextBlock Name="PART_ErrorMessage"
+                     Text="{TemplateBinding ErrorMessage}"
+                     Foreground="{DynamicResource ShadowDestructiveBrush}"
+                     FontSize="12"
+                     Margin="0,4,0,0"
+                     TextWrapping="Wrap"
+                     IsVisible="False" />
+
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- при ошибке: скрываем подсказку, показываем сообщение об ошибке -->
+    <Style Selector="^:error /template/ TextBlock#PART_HintText">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:error /template/ TextBlock#PART_ErrorMessage">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>

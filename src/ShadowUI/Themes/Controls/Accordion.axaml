@@ -1,0 +1,76 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <ControlTheme x:Key="{x:Type shadui:Accordion}" TargetType="shadui:Accordion">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ItemsPresenter />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type shadui:AccordionItem}" TargetType="shadui:AccordionItem">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="BorderThickness" Value="0,0,0,1" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+          <StackPanel>
+            <!-- Trigger -->
+            <Border Name="PART_Trigger"
+                    Background="Transparent"
+                    Padding="2,16"
+                    Cursor="Hand">
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Grid.Column="0"
+                           Name="PART_Header"
+                           Text="{TemplateBinding Header}"
+                           FontSize="14"
+                           FontWeight="Medium"
+                           Foreground="{DynamicResource ShadowForegroundBrush}"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center" />
+                <Path Name="PART_Chevron"
+                      Grid.Column="1"
+                      Data="M 4 6 L 8 10 L 12 6"
+                      Width="16" Height="16" Stretch="None"
+                      Stroke="{DynamicResource ShadowMutedForegroundBrush}"
+                      StrokeThickness="1.5" StrokeLineCap="Round" StrokeJoin="Round"
+                      VerticalAlignment="Center" HorizontalAlignment="Center"
+                      RenderTransformOrigin="50%,50%">
+                  <Path.Transitions>
+                    <Transitions>
+                      <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.18" />
+                    </Transitions>
+                  </Path.Transitions>
+                </Path>
+              </Grid>
+            </Border>
+            <!-- Content -->
+            <ContentPresenter Name="PART_Content"
+                              Content="{TemplateBinding Content}"
+                              IsVisible="{TemplateBinding IsExpanded}"
+                              Margin="2,0,2,16"
+                              TextElement.FontSize="14"
+                              TextElement.Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                              TextBlock.TextWrapping="Wrap" />
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- chevron rotation (base via style, not local value) -->
+    <Style Selector="^ /template/ Path#PART_Chevron">
+      <Setter Property="RenderTransform" Value="rotate(0deg)" />
+    </Style>
+    <Style Selector="^:expanded /template/ Path#PART_Chevron">
+      <Setter Property="RenderTransform" Value="rotate(180deg)" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

@@ -1,0 +1,80 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="ShadowUI.GrayPalette">
+  <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Light">
+      <SolidColorBrush x:Key="ShadowBackgroundBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ShadowForegroundBrush" Color="#030712" />
+      <SolidColorBrush x:Key="ShadowCardBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ShadowCardForegroundBrush" Color="#030712" />
+      <SolidColorBrush x:Key="ShadowPopoverBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ShadowPopoverForegroundBrush" Color="#030712" />
+      <SolidColorBrush x:Key="ShadowPrimaryBrush" Color="#101828" />
+      <SolidColorBrush x:Key="ShadowPrimaryForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowSecondaryBrush" Color="#F3F4F6" />
+      <SolidColorBrush x:Key="ShadowSecondaryForegroundBrush" Color="#101828" />
+      <SolidColorBrush x:Key="ShadowMutedBrush" Color="#F3F4F6" />
+      <SolidColorBrush x:Key="ShadowMutedForegroundBrush" Color="#6A7282" />
+      <SolidColorBrush x:Key="ShadowAccentBrush" Color="#F3F4F6" />
+      <SolidColorBrush x:Key="ShadowAccentForegroundBrush" Color="#101828" />
+      <SolidColorBrush x:Key="ShadowDestructiveBrush" Color="#E7000B" />
+      <SolidColorBrush x:Key="ShadowDestructiveForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowBorderBrush" Color="#E5E7EB" />
+      <SolidColorBrush x:Key="ShadowInputBrush" Color="#E5E7EB" />
+      <SolidColorBrush x:Key="ShadowRingBrush" Color="#99A1AF" />
+      <SolidColorBrush x:Key="ShadowPrimary20Brush" Color="#33101828" />
+      <SolidColorBrush x:Key="ShadowSwitchThumbBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ShadowSwitchThumbCheckedBrush" Color="#FFFFFF" />
+      <BoxShadows x:Key="ShadowFocusRing">0 0 0 3 #8099A1AF</BoxShadows>
+      <SolidColorBrush x:Key="ShadowChart1Brush" Color="#F54900" />
+      <SolidColorBrush x:Key="ShadowChart2Brush" Color="#009689" />
+      <SolidColorBrush x:Key="ShadowChart3Brush" Color="#104E64" />
+      <SolidColorBrush x:Key="ShadowChart4Brush" Color="#FFB900" />
+      <SolidColorBrush x:Key="ShadowChart5Brush" Color="#FE9A00" />
+      <SolidColorBrush x:Key="ShadowSidebarBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowSidebarForegroundBrush" Color="#030712" />
+      <SolidColorBrush x:Key="ShadowSidebarAccentBrush" Color="#E1E3E7" />
+      <SolidColorBrush x:Key="ShadowSidebarAccentForegroundBrush" Color="#101828" />
+      <SolidColorBrush x:Key="ShadowSidebarPrimaryBrush" Color="#101828" />
+      <SolidColorBrush x:Key="ShadowSidebarPrimaryForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowSidebarBorderBrush" Color="#E5E7EB" />
+    </ResourceDictionary>
+    <ResourceDictionary x:Key="Dark">
+      <SolidColorBrush x:Key="ShadowBackgroundBrush" Color="#030712" />
+      <SolidColorBrush x:Key="ShadowForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowCardBrush" Color="#101828" />
+      <SolidColorBrush x:Key="ShadowCardForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowPopoverBrush" Color="#101828" />
+      <SolidColorBrush x:Key="ShadowPopoverForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowPrimaryBrush" Color="#E5E7EB" />
+      <SolidColorBrush x:Key="ShadowPrimaryForegroundBrush" Color="#101828" />
+      <SolidColorBrush x:Key="ShadowSecondaryBrush" Color="#1E2939" />
+      <SolidColorBrush x:Key="ShadowSecondaryForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowMutedBrush" Color="#1E2939" />
+      <SolidColorBrush x:Key="ShadowMutedForegroundBrush" Color="#99A1AF" />
+      <SolidColorBrush x:Key="ShadowAccentBrush" Color="#1E2939" />
+      <SolidColorBrush x:Key="ShadowAccentForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowDestructiveBrush" Color="#FF6467" />
+      <SolidColorBrush x:Key="ShadowDestructiveForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowBorderBrush" Color="#1AFFFFFF" />
+      <SolidColorBrush x:Key="ShadowInputBrush" Color="#26FFFFFF" />
+      <SolidColorBrush x:Key="ShadowRingBrush" Color="#6A7282" />
+      <SolidColorBrush x:Key="ShadowPrimary20Brush" Color="#33E5E7EB" />
+      <SolidColorBrush x:Key="ShadowSwitchThumbBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowSwitchThumbCheckedBrush" Color="#101828" />
+      <BoxShadows x:Key="ShadowFocusRing">0 0 0 3 #806A7282</BoxShadows>
+      <SolidColorBrush x:Key="ShadowChart1Brush" Color="#1447E6" />
+      <SolidColorBrush x:Key="ShadowChart2Brush" Color="#00BC7D" />
+      <SolidColorBrush x:Key="ShadowChart3Brush" Color="#FE9A00" />
+      <SolidColorBrush x:Key="ShadowChart4Brush" Color="#AD46FF" />
+      <SolidColorBrush x:Key="ShadowChart5Brush" Color="#FF2056" />
+      <SolidColorBrush x:Key="ShadowSidebarBrush" Color="#141E2E" />
+      <SolidColorBrush x:Key="ShadowSidebarForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowSidebarAccentBrush" Color="#253147" />
+      <SolidColorBrush x:Key="ShadowSidebarAccentForegroundBrush" Color="#F9FAFB" />
+      <SolidColorBrush x:Key="ShadowSidebarPrimaryBrush" Color="#E5E7EB" />
+      <SolidColorBrush x:Key="ShadowSidebarPrimaryForegroundBrush" Color="#101828" />
+      <SolidColorBrush x:Key="ShadowSidebarBorderBrush" Color="#1E2939" />
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

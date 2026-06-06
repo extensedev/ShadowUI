@@ -1,0 +1,24 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Семантические цвета статусов (success/warning/info). Палитро-независимы
+       (зелёный/янтарный/синий не зависят от gray-палитры), но различаются Light/Dark.
+       Значения — уровни Tailwind: 600 для Light, 500 для Dark. -->
+  <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Light">
+      <SolidColorBrush x:Key="ShadowSuccessBrush" Color="#16A34A" />
+      <SolidColorBrush x:Key="ShadowSuccessForegroundBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ShadowWarningBrush" Color="#D97706" />
+      <SolidColorBrush x:Key="ShadowWarningForegroundBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="ShadowInfoBrush" Color="#2563EB" />
+      <SolidColorBrush x:Key="ShadowInfoForegroundBrush" Color="#FFFFFF" />
+    </ResourceDictionary>
+    <ResourceDictionary x:Key="Dark">
+      <SolidColorBrush x:Key="ShadowSuccessBrush" Color="#22C55E" />
+      <SolidColorBrush x:Key="ShadowSuccessForegroundBrush" Color="#052E16" />
+      <SolidColorBrush x:Key="ShadowWarningBrush" Color="#F59E0B" />
+      <SolidColorBrush x:Key="ShadowWarningForegroundBrush" Color="#451A03" />
+      <SolidColorBrush x:Key="ShadowInfoBrush" Color="#3B82F6" />
+      <SolidColorBrush x:Key="ShadowInfoForegroundBrush" Color="#FFFFFF" />
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

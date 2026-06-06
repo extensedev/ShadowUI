@@ -1,0 +1,52 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Базовые стили таблицы (аналог shadcn Table). Компонуется из Border.table +
+       Grid со строками; ячейки — TextBlock с классами .th / .td. -->
+
+  <!-- Обёртка таблицы -->
+  <Style Selector="Border.table">
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusLg}" />
+    <Setter Property="ClipToBounds" Value="True" />
+  </Style>
+
+  <!-- Строка-заголовок (фон muted) -->
+  <Style Selector="Border.thead">
+    <Setter Property="Background" Value="{DynamicResource ShadowMutedBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="BorderThickness" Value="0,0,0,1" />
+  </Style>
+
+  <!-- Обычная строка (нижняя граница) -->
+  <Style Selector="Border.tr">
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="BorderThickness" Value="0,0,0,1" />
+  </Style>
+  <!-- Последняя строка без нижней границы -->
+  <Style Selector="Border.tr.last">
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+  <Style Selector="Border.tr:pointerover">
+    <Setter Property="Background" Value="{DynamicResource ShadowMutedBrush}" />
+  </Style>
+
+  <!-- Ячейка-заголовок -->
+  <Style Selector="TextBlock.th">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="Padding" Value="14,10" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <!-- Ячейка данных -->
+  <Style Selector="TextBlock.td">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Padding" Value="14,10" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+</Styles>

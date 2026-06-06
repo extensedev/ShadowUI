@@ -1,0 +1,129 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Тема Sheet: выезжающая overlay-панель (Right / Bottom) -->
+  <ControlTheme x:Key="{x:Type shadui:Sheet}" TargetType="shadui:Sheet">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="ZIndex" Value="1000" />
+    <Setter Property="IsVisible" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!-- Scrim: затемнение, клик снаружи закрывает панель -->
+        <Border Name="PART_Scrim"
+                Background="#99000000"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Opacity="0">
+          <Border.Transitions>
+            <Transitions>
+              <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+            </Transitions>
+          </Border.Transitions>
+
+          <!-- Панель: выезжает с нужной стороны через RenderTransform -->
+          <Border Name="PART_Panel"
+                  Background="{DynamicResource ShadowBackgroundBrush}"
+                  BorderBrush="{DynamicResource ShadowBorderBrush}"
+                  BorderThickness="1"
+                  CornerRadius="{DynamicResource ShadowRadiusLg}"
+                  BoxShadow="{DynamicResource ShadowShadowMd}"
+                  Padding="24">
+            <Border.Transitions>
+              <Transitions>
+                <!-- Анимация выезда / въезда панели -->
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" />
+              </Transitions>
+            </Border.Transitions>
+
+            <!-- Содержимое панели: заголовок, описание, контент, кнопка закрытия -->
+            <Grid RowDefinitions="Auto,Auto,Auto">
+
+              <!-- Заголовок -->
+              <ContentPresenter Grid.Row="0"
+                                Name="PART_Title"
+                                Content="{TemplateBinding Title}"
+                                IsVisible="{TemplateBinding Title, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                TextElement.FontSize="18"
+                                TextElement.FontWeight="SemiBold"
+                                TextElement.Foreground="{DynamicResource ShadowForegroundBrush}"
+                                Margin="0,0,0,6" />
+
+              <!-- Описание -->
+              <ContentPresenter Grid.Row="1"
+                                Name="PART_Description"
+                                Content="{TemplateBinding Description}"
+                                IsVisible="{TemplateBinding Description, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                TextElement.FontSize="14"
+                                TextElement.Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                                TextBlock.TextWrapping="Wrap"
+                                Margin="0,0,24,16" />
+
+              <!-- Основной контент -->
+              <ContentPresenter Grid.Row="2"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+
+              <!-- Кнопка закрытия -->
+              <Button Name="PART_CloseButton"
+                      Grid.Row="0"
+                      Classes="ghost icon"
+                      Width="28" Height="28"
+                      Padding="0"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      Margin="0,-4,-4,0"
+                      IsVisible="{TemplateBinding ShowCloseButton}"
+                      ToolTip.Tip="Закрыть">
+                <Viewbox Width="16" Height="16">
+                  <Path Data="M 6 6 L 18 18 M 18 6 L 6 18"
+                        Width="24" Height="24" Stretch="None"
+                        Stroke="{DynamicResource ShadowMutedForegroundBrush}"
+                        StrokeThickness="2" StrokeLineCap="Round" />
+                </Viewbox>
+              </Button>
+
+            </Grid>
+          </Border>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Открытое состояние: показать -->
+    <Style Selector="^:open">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <!-- Scrim: появление при открытии -->
+    <Style Selector="^:open /template/ Border#PART_Scrim">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <!-- Стороны: базовые позиции (закрытое состояние) -->
+    <Style Selector="^:side-right /template/ Border#PART_Panel">
+      <Setter Property="RenderTransform" Value="translateX(400px)" />
+      <Setter Property="MaxWidth" Value="400" />
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+
+    <Style Selector="^:side-bottom /template/ Border#PART_Panel">
+      <Setter Property="RenderTransform" Value="translateY(360px)" />
+      <Setter Property="MaxHeight" Value="360" />
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
+    <!-- Стороны: финальные позиции при открытии (slide-in) -->
+    <Style Selector="^:open:side-right /template/ Border#PART_Panel">
+      <Setter Property="RenderTransform" Value="translateX(0)" />
+    </Style>
+
+    <Style Selector="^:open:side-bottom /template/ Border#PART_Panel">
+      <Setter Property="RenderTransform" Value="translateY(0)" />
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>

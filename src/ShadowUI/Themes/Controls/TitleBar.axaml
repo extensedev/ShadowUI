@@ -1,0 +1,163 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI"
+                    xmlns:conv="clr-namespace:Avalonia.Data.Converters;assembly=Avalonia.Base">
+
+  <!-- Icon button styled like a sidebar item: padded icon + rounded inset hover -->
+  <ControlTheme x:Key="TitleBarButton" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowSidebarForegroundBrush}" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Border"
+                Background="{TemplateBinding Background}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Width="30" Height="30"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Content="{TemplateBinding Content}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
+    </Style>
+    <!-- brighten the icon on hover -->
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ Border#PART_Border">
+      <Setter Property="Opacity" Value="0.8" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.4" />
+    </Style>
+  </ControlTheme>
+
+  <!-- Close button: destructive background + white icon on hover -->
+  <ControlTheme x:Key="TitleBarCloseButton" TargetType="Button" BasedOn="{StaticResource TitleBarButton}">
+    <Style Selector="^:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowDestructiveBrush}" />
+    </Style>
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource ShadowDestructiveForegroundBrush}" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type shadui:TitleBar}" TargetType="shadui:TitleBar">
+    <Setter Property="Height" Value="40" />
+    <Setter Property="Background" Value="{DynamicResource ShadowSidebarBrush}" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{DynamicResource ShadowSidebarBorderBrush}"
+                BorderThickness="0,0,0,1">
+          <DockPanel LastChildFill="True">
+
+            <!-- Window control buttons -->
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+
+              <Button Name="PART_MinimizeButton"
+                      Theme="{StaticResource TitleBarButton}"
+                      Width="46" Height="40" Focusable="False"
+                      ToolTip.Tip="Minimize">
+                <Viewbox Width="16" Height="16">
+                  <Path Data="M 4 12 H 20"
+                        Width="24" Height="24" Stretch="None"
+                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                        StrokeThickness="2" StrokeLineCap="Round" />
+                </Viewbox>
+              </Button>
+
+              <!-- Maximize (visible when normal) -->
+              <Button Name="PART_MaximizeButton"
+                      Theme="{StaticResource TitleBarButton}"
+                      Width="46" Height="40" Focusable="False"
+                      IsVisible="{TemplateBinding ShowMaximize}"
+                      ToolTip.Tip="Maximize">
+                <Viewbox Width="16" Height="16">
+                  <Path Data="M 5 5 H 19 V 19 H 5 Z"
+                        Width="24" Height="24" Stretch="None"
+                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                        StrokeThickness="2" StrokeJoin="Round" Fill="Transparent" />
+                </Viewbox>
+              </Button>
+
+              <!-- Restore (visible when maximized) -->
+              <Button Name="PART_RestoreButton"
+                      Theme="{StaticResource TitleBarButton}"
+                      Width="46" Height="40" Focusable="False"
+                      IsVisible="False"
+                      ToolTip.Tip="Restore">
+                <Viewbox Width="16" Height="16">
+                  <Path Data="M 9 3 H 21 V 15 M 3 9 H 15 V 21 H 3 Z"
+                        Width="24" Height="24" Stretch="None"
+                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                        StrokeThickness="2" StrokeLineCap="Round" Fill="Transparent" />
+                </Viewbox>
+              </Button>
+
+              <Button Name="PART_CloseButton"
+                      Theme="{StaticResource TitleBarCloseButton}"
+                      Width="46" Height="40" Focusable="False"
+                      ToolTip.Tip="Close">
+                <Viewbox Width="16" Height="16">
+                  <Path Data="M 6 6 L 18 18 M 18 6 L 6 18"
+                        Width="24" Height="24" Stretch="None"
+                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                        StrokeThickness="2" StrokeLineCap="Round" />
+                </Viewbox>
+              </Button>
+
+            </StackPanel>
+
+            <!-- Drag area + icon + title -->
+            <Grid DockPanel.Dock="Left">
+              <!-- Transparent drag surface (fills entire left area) -->
+              <Border Name="PART_DragArea" Background="Transparent" />
+              <!-- Icon + title (visual only, no hit test) -->
+              <StackPanel IsHitTestVisible="False"
+                          Orientation="Horizontal"
+                          VerticalAlignment="Center"
+                          Spacing="7"
+                          Margin="12,0,0,0">
+                <ContentPresenter Name="PART_Icon"
+                                  Content="{TemplateBinding Icon}"
+                                  Width="{TemplateBinding IconSize}"
+                                  Height="{TemplateBinding IconSize}"
+                                  VerticalAlignment="Center"
+                                  IsVisible="{TemplateBinding Icon, Converter={x:Static conv:ObjectConverters.IsNotNull}}" />
+                <TextBlock Text="{TemplateBinding Title}"
+                           Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                           FontSize="12" FontWeight="Medium"
+                           VerticalAlignment="Center"
+                           LineHeight="16" />
+              </StackPanel>
+            </Grid>
+
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Show restore button when maximized, hide maximize button -->
+    <Style Selector="^:maximized /template/ Button#PART_MaximizeButton">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:maximized /template/ Button#PART_RestoreButton">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>

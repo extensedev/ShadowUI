@@ -1,0 +1,134 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Popover (Flyout) -->
+  <ControlTheme x:Key="{x:Type FlyoutPresenter}" TargetType="FlyoutPresenter">
+    <Setter Property="Background" Value="{DynamicResource ShadowPopoverBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowPopoverForegroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
+    <Setter Property="Padding" Value="16" />
+    <Setter Property="MaxWidth" Value="288" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}">
+          <ContentPresenter Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- DropdownMenu контейнер (MenuFlyout) -->
+  <ControlTheme x:Key="{x:Type MenuFlyoutPresenter}" TargetType="MenuFlyoutPresenter">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{DynamicResource ShadowPopoverBrush}"
+                BorderBrush="{DynamicResource ShadowBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="{DynamicResource ShadowRadiusMd}"
+                Padding="4"
+                MinWidth="128">
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                          ItemsPanel="{TemplateBinding ItemsPanel}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ContextMenu контейнер -->
+  <ControlTheme x:Key="{x:Type ContextMenu}" TargetType="ContextMenu">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{DynamicResource ShadowPopoverBrush}"
+                BorderBrush="{DynamicResource ShadowBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="{DynamicResource ShadowRadiusMd}"
+                Padding="4"
+                MinWidth="128">
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                          ItemsPanel="{TemplateBinding ItemsPanel}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- Пункт меню -->
+  <ControlTheme x:Key="{x:Type MenuItem}" TargetType="MenuItem">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowPopoverForegroundBrush}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Padding" Value="8,6" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_LayoutRoot"
+                Background="{TemplateBinding Background}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}">
+          <Grid ColumnDefinitions="*,Auto">
+            <ContentPresenter Name="PART_HeaderPresenter"
+                              Grid.Column="0"
+                              Content="{TemplateBinding Header}"
+                              VerticalAlignment="Center" />
+            <Path Name="PART_ChevronPath"
+                  Grid.Column="1"
+                  Margin="16,0,0,0"
+                  VerticalAlignment="Center"
+                  Stroke="{DynamicResource ShadowMutedForegroundBrush}"
+                  StrokeThickness="1.5"
+                  StrokeLineCap="Round" StrokeJoin="Round"
+                  Data="M0,0 L4,4 L0,8"
+                  IsVisible="False" />
+            <Popup Name="PART_Popup"
+                   Grid.Column="0"
+                   WindowManagerAddShadowHint="False"
+                   IsLightDismissEnabled="False"
+                   Placement="RightEdgeAlignedTop">
+              <Border Background="{DynamicResource ShadowPopoverBrush}"
+                      BorderBrush="{DynamicResource ShadowBorderBrush}"
+                      BorderThickness="1"
+                      CornerRadius="{DynamicResource ShadowRadiusMd}"
+                      Padding="4" MinWidth="128" Margin="4,0,0,0">
+                <ItemsPresenter Name="PART_ItemsPresenter"
+                                ItemsPanel="{TemplateBinding ItemsPanel}" />
+              </Border>
+            </Popup>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:selected /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <Style Selector="^:pointerover /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+    <Style Selector="^[IsSubMenuOpen=True] /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <Style Selector="^:empty /template/ Path#PART_ChevronPath">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:not(:empty) /template/ Path#PART_ChevronPath">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <!-- разделитель -->
+    <Style Selector="^.separator">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Height="1" Margin="-4,4" Background="{DynamicResource ShadowBorderBrush}" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

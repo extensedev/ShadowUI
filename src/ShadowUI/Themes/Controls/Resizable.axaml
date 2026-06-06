@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Тема Resizable: Grid с двумя ContentPresenter и GridSplitter между ними -->
+  <ControlTheme x:Key="{x:Type shadui:Resizable}" TargetType="shadui:Resizable">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!-- ColumnDefinitions/RowDefinitions задаются из code-behind в ConfigureLayout() -->
+        <Grid Name="PART_Grid">
+          <ContentPresenter Name="PART_FirstPresenter" />
+          <GridSplitter Name="PART_Splitter"
+                        Background="{DynamicResource ShadowBorderBrush}"
+                        ResizeBehavior="PreviousAndNext"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" />
+          <ContentPresenter Name="PART_SecondPresenter" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Разделитель: слегка прозрачный, подсвечивается акцентом при наведении -->
+    <Style Selector="^ /template/ GridSplitter#PART_Splitter">
+      <Setter Property="Opacity" Value="0.4" />
+    </Style>
+    <Style Selector="^ /template/ GridSplitter#PART_Splitter:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

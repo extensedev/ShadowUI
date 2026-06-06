@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- ControlTheme для BarChart: базовые размеры, без Template (рендеринг через override Render) -->
+  <ControlTheme x:Key="{x:Type shadui:BarChart}" TargetType="shadui:BarChart">
+    <Setter Property="MinHeight" Value="160" />
+    <Setter Property="MinWidth" Value="200" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="Cursor" Value="Arrow" />
+  </ControlTheme>
+
+</ResourceDictionary>

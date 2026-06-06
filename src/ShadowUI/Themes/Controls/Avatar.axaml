@@ -1,0 +1,27 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+  <ControlTheme x:Key="{x:Type shadui:Avatar}" TargetType="shadui:Avatar">
+    <Setter Property="Width" Value="40" />
+    <Setter Property="Height" Value="40" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{DynamicResource ShadowMutedBrush}"
+                CornerRadius="9999" ClipToBounds="True">
+          <Panel>
+            <TextBlock Name="PART_Fallback"
+                       Text="{TemplateBinding Fallback}"
+                       Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                       FontSize="14" FontWeight="Medium"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       IsVisible="{TemplateBinding Source, Converter={x:Static ObjectConverters.IsNull}}" />
+            <Image Name="PART_Image"
+                   Source="{TemplateBinding Source}"
+                   Stretch="UniformToFill"
+                   IsVisible="{TemplateBinding Source, Converter={x:Static ObjectConverters.IsNotNull}}" />
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

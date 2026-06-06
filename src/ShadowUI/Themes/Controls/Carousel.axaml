@@ -1,0 +1,71 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Тема Carousel: слайдер с prev/next навигацией и dot-индикатором -->
+  <ControlTheme x:Key="{x:Type shadui:Carousel}" TargetType="shadui:Carousel">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+
+        <!-- Корневой Grid: Row 0 — слайды + кнопки, Row 1 — точки навигации -->
+        <Grid RowDefinitions="*,Auto">
+
+          <!-- Row 0: слайды (ListBox) и overlay-кнопки -->
+          <Grid Grid.Row="0">
+
+            <!-- ContentPresenter — показывает только текущий слайд -->
+            <ContentPresenter Name="PART_ItemsHost"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch"
+                              VerticalContentAlignment="Stretch" />
+
+            <!-- Overlay с кнопками Prev и Next -->
+            <Grid>
+              <!-- Кнопка назад -->
+              <Button Name="PART_PrevButton"
+                      Classes="ghost"
+                      Content="&#8592;"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Margin="8,0"
+                      ZIndex="10" />
+
+              <!-- Кнопка вперёд -->
+              <Button Name="PART_NextButton"
+                      Classes="ghost"
+                      Content="&#8594;"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Margin="8,0"
+                      ZIndex="10" />
+            </Grid>
+
+          </Grid>
+
+          <!-- Row 1: dot-навигация — точки создаются из кода -->
+          <StackPanel Name="PART_DotsPanel"
+                      Grid.Row="1"
+                      Orientation="Horizontal"
+                      HorizontalAlignment="Center"
+                      Margin="0,8,0,0" />
+
+        </Grid>
+
+      </ControlTemplate>
+    </Setter>
+
+    <!-- стили dot-индикаторов -->
+    <Style Selector="^ /template/ StackPanel#PART_DotsPanel Ellipse">
+      <Setter Property="Fill" Value="{DynamicResource ShadowMutedBrush}" />
+    </Style>
+    <Style Selector="^ /template/ StackPanel#PART_DotsPanel Ellipse.active">
+      <Setter Property="Fill" Value="{DynamicResource ShadowPrimaryBrush}" />
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>

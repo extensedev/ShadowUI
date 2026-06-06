@@ -1,0 +1,8 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shadui="using:ShadowUI">
+  <!-- Плавная прокрутка колесом по умолчанию (BaseStepSize/SmoothingFactor берутся из дефолтов attached-свойств) -->
+  <Style Selector="ScrollViewer">
+    <Setter Property="shadui:SmoothScrollAssist.IsEnabled" Value="True" />
+  </Style>
+</Styles>

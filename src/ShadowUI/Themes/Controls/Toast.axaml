@@ -1,0 +1,83 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <ControlTheme x:Key="{x:Type shadui:ToastCard}" TargetType="shadui:ToastCard">
+    <!-- enter/exit animation base (overridden by :shown) -->
+    <Setter Property="Opacity" Value="0" />
+    <Setter Property="RenderTransform" Value="translateX(30px)" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.18" />
+        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.18" Easing="CubicEaseOut" />
+      </Transitions>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{DynamicResource ShadowPopoverBrush}"
+                BorderBrush="{DynamicResource ShadowBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="{DynamicResource ShadowRadiusLg}"
+                BoxShadow="{DynamicResource ShadowShadowMd}"
+                ClipToBounds="True">
+          <Grid ColumnDefinitions="4,*,Auto">
+            <!-- accent bar by type -->
+            <Border Name="PART_Accent" Grid.Column="0"
+                    Background="{DynamicResource ShadowPrimaryBrush}" />
+
+            <StackPanel Grid.Column="1" Margin="14,12" Spacing="2" VerticalAlignment="Center">
+              <TextBlock Name="PART_Title"
+                         Text="{TemplateBinding Title}"
+                         IsVisible="{TemplateBinding Title, Converter={x:Static ObjectConverters.IsNotNull}}"
+                         FontSize="14" FontWeight="SemiBold"
+                         Foreground="{DynamicResource ShadowForegroundBrush}"
+                         TextWrapping="Wrap" />
+              <TextBlock Name="PART_Message"
+                         Text="{TemplateBinding Message}"
+                         IsVisible="{TemplateBinding Message, Converter={x:Static ObjectConverters.IsNotNull}}"
+                         FontSize="13"
+                         Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                         TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Button Name="PART_CloseButton"
+                    Grid.Column="2"
+                    Classes="ghost icon"
+                    Width="28" Height="28" Padding="0"
+                    Margin="0,6,6,0"
+                    VerticalAlignment="Top"
+                    ToolTip.Tip="Закрыть">
+              <Viewbox Width="14" Height="14">
+                <Path Data="M 6 6 L 18 18 M 18 6 L 6 18"
+                      Width="24" Height="24" Stretch="None"
+                      Stroke="{DynamicResource ShadowMutedForegroundBrush}"
+                      StrokeThickness="2" StrokeLineCap="Round" />
+              </Viewbox>
+            </Button>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- shown state -->
+    <Style Selector="^:shown">
+      <Setter Property="Opacity" Value="1" />
+      <Setter Property="RenderTransform" Value="translateX(0)" />
+    </Style>
+
+    <!-- accent colors by type -->
+    <Style Selector="^:success /template/ Border#PART_Accent">
+      <Setter Property="Background" Value="{DynamicResource ShadowSuccessBrush}" />
+    </Style>
+    <Style Selector="^:warning /template/ Border#PART_Accent">
+      <Setter Property="Background" Value="{DynamicResource ShadowWarningBrush}" />
+    </Style>
+    <Style Selector="^:info /template/ Border#PART_Accent">
+      <Setter Property="Background" Value="{DynamicResource ShadowInfoBrush}" />
+    </Style>
+    <Style Selector="^:error /template/ Border#PART_Accent">
+      <Setter Property="Background" Value="{DynamicResource ShadowDestructiveBrush}" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

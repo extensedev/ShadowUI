@@ -1,0 +1,51 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <ControlTheme x:Key="{x:Type shadui:ColorPicker}" TargetType="shadui:ColorPicker">
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid>
+          <Button Name="PART_Trigger"
+                  Height="36"
+                  Padding="10,0"
+                  Background="{DynamicResource ShadowBackgroundBrush}"
+                  BorderBrush="{DynamicResource ShadowInputBrush}"
+                  BorderThickness="1"
+                  CornerRadius="{DynamicResource ShadowRadiusMd}"
+                  Foreground="{DynamicResource ShadowForegroundBrush}"
+                  Cursor="Hand"
+                  HorizontalContentAlignment="Left">
+            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+              <Border Name="PART_Swatch"
+                      Width="18" Height="18"
+                      CornerRadius="4"
+                      BorderBrush="{DynamicResource ShadowBorderBrush}"
+                      BorderThickness="1" />
+              <TextBlock Name="PART_Hex" FontSize="13" VerticalAlignment="Center" />
+            </StackPanel>
+          </Button>
+
+          <Popup Name="PART_Popup"
+                 PlacementTarget="{Binding ElementName=PART_Trigger}"
+                 Placement="BottomEdgeAlignedLeft"
+                 VerticalOffset="4"
+                 IsLightDismissEnabled="True"
+                 WindowManagerAddShadowHint="False">
+            <Border Background="{DynamicResource ShadowPopoverBrush}"
+                    BorderBrush="{DynamicResource ShadowBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{DynamicResource ShadowRadiusMd}"
+                    BoxShadow="{DynamicResource ShadowShadowMd}"
+                    Padding="8">
+              <ColorView Name="PART_ColorView"
+                         Color="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+            </Border>
+          </Popup>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

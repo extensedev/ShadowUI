@@ -1,0 +1,9 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style Selector="ProgressBar">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimary20Brush}" />
+    <Setter Property="MinHeight" Value="8" />
+    <Setter Property="CornerRadius" Value="9999" />
+  </Style>
+</Styles>

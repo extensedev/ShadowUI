@@ -1,0 +1,82 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Горизонтальный контейнер NavigationMenu -->
+  <ControlTheme x:Key="{x:Type shadui:NavigationMenu}" TargetType="shadui:NavigationMenu">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}">
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                          ItemsPanel="{TemplateBinding ItemsPanel}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <!-- Горизонтальный layout через ItemsPanel -->
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Orientation="Horizontal" Spacing="4" />
+      </ItemsPanelTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- Пункт навигационного меню с hover-flyout -->
+  <ControlTheme x:Key="{x:Type shadui:NavigationMenuItem}" TargetType="shadui:NavigationMenuItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <!-- Триггер (кнопка-заголовок) — при наведении курсора открывает flyout -->
+          <Border Name="PART_Trigger"
+                  Background="Transparent"
+                  CornerRadius="{DynamicResource ShadowRadiusMd}"
+                  Padding="12,8"
+                  Cursor="Hand">
+              <!-- Заголовок пункта меню (текст триггера) -->
+            <ContentPresenter Content="{TemplateBinding Header}"
+                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              TextElement.FontSize="{TemplateBinding FontSize}"
+                              TextElement.Foreground="{TemplateBinding Foreground}" />
+          </Border>
+
+          <!-- Flyout-подменю (открывается при наведении) -->
+          <Popup Name="PART_Popup"
+                 IsLightDismissEnabled="True"
+                 Placement="BottomEdgeAlignedLeft"
+                 VerticalOffset="8"
+                 WindowManagerAddShadowHint="False"
+                 IsOpen="{TemplateBinding IsFlyoutOpen, Mode=OneWay}">
+            <Border Background="{DynamicResource ShadowPopoverBrush}"
+                    BorderBrush="{DynamicResource ShadowBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{DynamicResource ShadowRadiusMd}"
+                    Padding="16"
+                    BoxShadow="{DynamicResource ShadowShadowMd}"
+                    MinWidth="200">
+              <!-- Контент подменю -->
+              <ContentPresenter Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+            </Border>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Состояние при наведении: подсветка триггера -->
+    <Style Selector="^:pointerover /template/ Border#PART_Trigger">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+
+    <!-- Состояние при открытом flyout: подсветка триггера -->
+    <Style Selector="^:flyout-open /template/ Border#PART_Trigger">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

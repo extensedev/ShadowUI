@@ -1,0 +1,42 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ControlTheme x:Key="{x:Type ToggleSwitch}" TargetType="ToggleSwitch">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <Border Name="PART_Track" Width="32" Height="18" CornerRadius="9999"
+                  Background="{DynamicResource ShadowInputBrush}"
+                  VerticalAlignment="Center">
+            <Panel Name="PART_MovingKnobs" Margin="1"
+                   HorizontalAlignment="Left" VerticalAlignment="Center">
+              <Panel Name="PART_SwitchKnob" Width="16" Height="16">
+                <Border Name="PART_Knob" CornerRadius="9999"
+                        Background="{DynamicResource ShadowSwitchThumbBrush}"
+                        BoxShadow="{DynamicResource ShadowShadowSm}" />
+              </Panel>
+            </Panel>
+          </Border>
+          <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:checked /template/ Border#PART_Track">
+      <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+    </Style>
+    <Style Selector="^:checked /template/ Panel#PART_MovingKnobs">
+      <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+    <Style Selector="^:checked /template/ Border#PART_Knob">
+      <Setter Property="Background" Value="{DynamicResource ShadowSwitchThumbCheckedBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Track">
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

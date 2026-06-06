@@ -1,0 +1,33 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Крупные табы: TabControl Classes="largetabs". Иконка + жирный текст, активный белый с тенью, равная ширина. -->
+  <Style Selector="TabControl.largetabs">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <UniformGrid Rows="1" />
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="TabControl.largetabs /template/ Border#PART_ListBorder">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="CornerRadius" Value="12" />
+    <Setter Property="Padding" Value="6" />
+  </Style>
+
+  <Style Selector="TabControl.largetabs TabItem">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Padding" Value="16,8" />
+    <Setter Property="Margin" Value="2,0" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
+  </Style>
+  <Style Selector="TabControl.largetabs TabItem:selected">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+  </Style>
+  <!-- default: outline only (no fill) — inherits the base active outline.
+       For the filled look add Classes="largetabs legacytabs". -->
+</Styles>

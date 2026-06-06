@@ -1,0 +1,154 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- ShadowCalendar: сетка месяца с одиночным и диапазонным выбором даты -->
+  <ControlTheme x:Key="{x:Type shadui:ShadowCalendar}" TargetType="shadui:ShadowCalendar">
+
+    <!-- значения по умолчанию -->
+    <Setter Property="Padding" Value="16" />
+    <Setter Property="Background" Value="{DynamicResource ShadowCardBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!-- Внешняя граница: фон, скругление, тень -->
+        <Border Name="PART_Border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}"
+                BoxShadow="{DynamicResource ShadowShadowXs}">
+
+          <StackPanel Spacing="8">
+
+            <!-- Навигация по месяцам: кнопки prev/next и заголовок -->
+            <Grid ColumnDefinitions="Auto,*,Auto">
+
+              <!-- Кнопка предыдущего месяца -->
+              <Button Name="PART_PrevButton"
+                      Grid.Column="0"
+                      Classes="ghost icon"
+                      Width="28" Height="28"
+                      Padding="0">
+                <Path Data="M 15 18 L 9 12 L 15 6"
+                      Width="16" Height="16"
+                      Stretch="None"
+                      StrokeThickness="2"
+                      StrokeLineCap="Round"
+                      Stroke="{DynamicResource ShadowForegroundBrush}"
+                      Fill="Transparent" />
+              </Button>
+
+              <!-- Заголовок месяца и года -->
+              <TextBlock Name="PART_MonthYearText"
+                         Grid.Column="1"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Classes="small"
+                         FontWeight="SemiBold"
+                         Foreground="{DynamicResource ShadowForegroundBrush}" />
+
+              <!-- Кнопка следующего месяца -->
+              <Button Name="PART_NextButton"
+                      Grid.Column="2"
+                      Classes="ghost icon"
+                      Width="28" Height="28"
+                      Padding="0">
+                <Path Data="M 9 18 L 15 12 L 9 6"
+                      Width="16" Height="16"
+                      Stretch="None"
+                      StrokeThickness="2"
+                      StrokeLineCap="Round"
+                      Stroke="{DynamicResource ShadowForegroundBrush}"
+                      Fill="Transparent" />
+              </Button>
+
+            </Grid>
+
+            <!-- Заголовки дней недели -->
+            <UniformGrid Columns="7">
+              <TextBlock Text="Mo" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Classes="muted small" Width="36" Height="28" TextAlignment="Center" />
+              <TextBlock Text="Tu" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Classes="muted small" Width="36" Height="28" TextAlignment="Center" />
+              <TextBlock Text="We" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Classes="muted small" Width="36" Height="28" TextAlignment="Center" />
+              <TextBlock Text="Th" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Classes="muted small" Width="36" Height="28" TextAlignment="Center" />
+              <TextBlock Text="Fr" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Classes="muted small" Width="36" Height="28" TextAlignment="Center" />
+              <TextBlock Text="Sa" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Classes="muted small" Width="36" Height="28" TextAlignment="Center" />
+              <TextBlock Text="Su" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Classes="muted small" Width="36" Height="28" TextAlignment="Center" />
+            </UniformGrid>
+
+            <!-- Сетка дней: заполняется из кода (BuildDayGrid создаёт 42 кнопки) -->
+            <UniformGrid Name="PART_DaysGrid" Columns="7" />
+
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <!-- базовый стиль кнопок-дней -->
+    <Style Selector="^ /template/ UniformGrid#PART_DaysGrid Button">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
+      <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <!-- hover-состояние кнопок-дней -->
+    <Style Selector="^ /template/ UniformGrid#PART_DaysGrid Button:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+
+    <!-- дни вне текущего месяца -->
+    <Style Selector="^ /template/ UniformGrid#PART_DaysGrid Button.calendar-day-other-month">
+      <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+
+    <!-- сегодняшняя дата: рамка-обводка -->
+    <Style Selector="^ /template/ UniformGrid#PART_DaysGrid Button.calendar-day-today">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- выбранный день (Single) или крайние дни диапазона -->
+    <Style Selector="^ /template/ UniformGrid#PART_DaysGrid Button.calendar-day-selected">
+      <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
+    </Style>
+
+    <!-- начало диапазона -->
+    <Style Selector="^ /template/ UniformGrid#PART_DaysGrid Button.calendar-day-range-start">
+      <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
+    </Style>
+
+    <!-- конец диапазона -->
+    <Style Selector="^ /template/ UniformGrid#PART_DaysGrid Button.calendar-day-range-end">
+      <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
+    </Style>
+
+    <!-- дни внутри диапазона -->
+    <Style Selector="^ /template/ UniformGrid#PART_DaysGrid Button.calendar-day-in-range">
+      <Setter Property="Background" Value="{DynamicResource ShadowPrimary20Brush}" />
+      <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    </Style>
+
+  </ControlTheme>
+
+</ResourceDictionary>
