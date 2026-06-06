@@ -1,7 +1,7 @@
 # ShadowUI
 
 A port of [shadcn/ui](https://ui.shadcn.com) for [Avalonia UI](https://avaloniaui.net) 12 / .NET 10.
-50+ components, Light/Dark theme, 5 color palettes, Native AOT compatible.
+50+ components · Light/Dark theme · 5 color palettes · Native AOT compatible.
 
 ## Screenshots
 
