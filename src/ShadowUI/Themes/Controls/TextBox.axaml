@@ -1,31 +1,170 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Style Selector="TextBox">
-    <Setter Property="Background" Value="Transparent" />
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <StreamGeometry x:Key="ShadowPasswordRevealData">M11,16c-1.52,0-3.03-.3-4.48-.89C3.65,13.93,1.32,11.6.14,8.73c0-.01,0-.02-.01-.03-.17-.45-.17-.94,0-1.39C2.61,1.28,9.49-1.58,15.48.89c2.87,1.18,5.2,3.51,6.38,6.38.18.48.18.98.01,1.42-1.21,2.94-3.47,5.2-6.36,6.4-1.46.6-2.98.91-4.51.91ZM2,8c.99,2.37,2.91,4.28,5.28,5.26,2.41.99,5.06.99,7.46-.01,2.4-1,4.28-2.88,5.27-5.29-.98-2.32-2.91-4.25-5.3-5.23C9.76.69,4.06,3.05,2,8ZM11,12c-2.21,0-4-1.79-4-4s1.79-4,4-4,4,1.79,4,4-1.79,4-4,4ZM11,6c-1.1,0-2,.9-2,2s.9,2,2,2,2-.9,2-2-.9-2-2-2Z</StreamGeometry>
+  <StreamGeometry x:Key="ShadowPasswordHideData">M19.5,14.84c-.21,0-.43-.07-.61-.21-.44-.34-.52-.97-.18-1.4.54-.69.98-1.45,1.31-2.26-1.66-3.96-5.83-6.41-10.16-5.9-.55.06-1.05-.33-1.11-.88-.06-.55.33-1.05.88-1.11,5.21-.61,10.25,2.33,12.25,7.19.18.48.18.98.01,1.42-.42,1.01-.95,1.92-1.59,2.76-.2.25-.49.39-.79.39ZM21.71,21.71c-.2.19-.45.29-.71.29s-.51-.1-.71-.29l-3.98-3.98c-1.66.85-3.46,1.27-5.29,1.27-.98,0-1.96-.12-2.93-.37-3.04-.78-5.6-2.69-7.2-5.39-.29-.49-.54-1-.75-1.51-.18-.48-.18-.98-.02-1.43.82-1.97,2.15-3.68,3.83-4.93L.29,1.71C-.1,1.32-.1.68.29.29.68-.1,1.32-.1,1.71.29l4.49,4.5,15.51,15.5c.39.39.39,1.03,0,1.42ZM9.56,12.39c.52.53,1.27.72,1.95.54l-2.44-2.44c-.18.65-.01,1.38.49,1.9ZM14.8,16.22l-1.77-1.77c-.63.37-1.33.55-2.03.55-1.05,0-2.09-.41-2.88-1.22-1.28-1.33-1.47-3.29-.57-4.81l-2.18-2.18c-1.49,1.06-2.68,2.55-3.38,4.24.17.36.38.79.62,1.19,1.33,2.24,3.45,3.83,5.97,4.48,2.1.53,4.27.36,6.22-.48Z</StreamGeometry>
+
+  <ControlTheme TargetType="ToggleButton" x:Key="ShadowPasswordTogglerTheme">
+    <Setter Property="Cursor" Value="Arrow" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate TargetType="ToggleButton">
+        <Border Background="Transparent" Padding="4">
+          <Panel>
+            <Path Name="RevealIcon"
+                  Data="{DynamicResource ShadowPasswordRevealData}"
+                  Fill="{DynamicResource ShadowMutedForegroundBrush}"
+                  Height="12" Width="16"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                  Stretch="Uniform" />
+            <Path Name="HideIcon"
+                  Data="{DynamicResource ShadowPasswordHideData}"
+                  Fill="{DynamicResource ShadowMutedForegroundBrush}"
+                  Height="16" Width="16"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                  Stretch="Uniform" />
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:unchecked /template/ Path#HideIcon">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:checked /template/ Path#RevealIcon">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme TargetType="TextBox" x:Key="{x:Type TextBox}">
+    <Setter Property="FontSize" Value="14" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ShadowInputBackgroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
     <Setter Property="MinHeight" Value="36" />
     <Setter Property="Padding" Value="12,8" />
-    <Setter Property="FontSize" Value="14" />
-  </Style>
-  <Style Selector="TextBox /template/ Border#PART_BorderElement">
-    <Setter Property="BoxShadow" Value="{DynamicResource ShadowShadowXs}" />
-  </Style>
-  <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
-    <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
-  </Style>
-  <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
-    <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
-    <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
-  </Style>
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="SelectionBrush" Value="{DynamicResource ShadowAccentBrush}" />
+    <Setter Property="CaretBrush" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                MinHeight="{TemplateBinding MinHeight}"
+                BoxShadow="{DynamicResource ShadowShadowXs}">
+          <Grid ColumnDefinitions="Auto,*,Auto">
+            <ContentPresenter Name="PART_InnerLeftContent"
+                              Content="{TemplateBinding InnerLeftContent}"
+                              Grid.Column="0"
+                              VerticalAlignment="Center" />
+            <ScrollViewer Name="PART_ScrollViewer"
+                          Grid.Column="1"
+                          AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}"
+                          BringIntoViewOnFocusChange="{TemplateBinding (ScrollViewer.BringIntoViewOnFocusChange)}"
+                          HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                          IsScrollChainingEnabled="{TemplateBinding (ScrollViewer.IsScrollChainingEnabled)}"
+                          VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
+              <Panel>
+                <TextBlock Name="PART_Watermark"
+                           Text="{TemplateBinding Watermark}"
+                           Margin="{TemplateBinding Padding}"
+                           Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                           TextAlignment="{TemplateBinding TextAlignment}"
+                           TextWrapping="{TemplateBinding TextWrapping}" />
+                <TextPresenter Name="PART_TextPresenter"
+                               Text="{TemplateBinding Text, Mode=TwoWay}"
+                               CaretIndex="{TemplateBinding CaretIndex}"
+                               CaretBrush="{TemplateBinding CaretBrush}"
+                               CaretBlinkInterval="{TemplateBinding CaretBlinkInterval}"
+                               SelectionStart="{TemplateBinding SelectionStart}"
+                               SelectionEnd="{TemplateBinding SelectionEnd}"
+                               SelectionBrush="{TemplateBinding SelectionBrush}"
+                               SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                               PasswordChar="{TemplateBinding PasswordChar}"
+                               RevealPassword="{TemplateBinding RevealPassword}"
+                               TextAlignment="{TemplateBinding TextAlignment}"
+                               TextWrapping="{TemplateBinding TextWrapping}"
+                               LineHeight="{TemplateBinding LineHeight}"
+                               LetterSpacing="{TemplateBinding LetterSpacing}"
+                               Margin="{TemplateBinding Padding}"
+                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+              </Panel>
+            </ScrollViewer>
+            <ContentPresenter Name="PART_InnerRightContent"
+                              Content="{TemplateBinding InnerRightContent}"
+                              Grid.Column="2"
+                              Margin="0,4,8,4"
+                              VerticalAlignment="Center" />
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
 
-  <!-- textarea -->
-  <Style Selector="TextBox.textarea">
-    <Setter Property="AcceptsReturn" Value="True" />
-    <Setter Property="TextWrapping" Value="Wrap" />
-    <Setter Property="MinHeight" Value="80" />
-    <Setter Property="VerticalContentAlignment" Value="Top" />
-  </Style>
-</Styles>
+    <!-- watermark: hide when text present -->
+    <Style Selector="^:not(:empty) /template/ TextBlock#PART_Watermark">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <!-- focus (у shadcn-инпутов hover-состояния рамки нет) -->
+    <Style Selector="^:focus /template/ Border#PART_Border">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+    </Style>
+    <!-- error -->
+    <Style Selector="^:error /template/ Border#PART_Border">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowDestructiveBrush}" />
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowErrorRing}" />
+    </Style>
+    <!-- disabled -->
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+
+    <!-- transparent: для вложенных инпутов (NumericUpDown и т.п.) -->
+    <Style Selector="^.transparent /template/ Border#PART_Border">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
+    </Style>
+    <Style Selector="^.transparent:pointerover /template/ Border#PART_Border">
+      <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="^.transparent:focus /template/ Border#PART_Border">
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
+    </Style>
+
+    <!-- textarea -->
+    <Style Selector="^.textarea">
+      <Setter Property="AcceptsReturn" Value="True" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="MinHeight" Value="80" />
+      <Setter Property="VerticalContentAlignment" Value="Top" />
+    </Style>
+
+    <!-- otp-cell: лёгкая подсветка при hover -->
+    <Style Selector="^.otp-cell:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+
+    <!-- PasswordReveal: кнопка показа пароля появляется когда есть текст -->
+    <Style Selector="^.PasswordReveal[IsReadOnly=False]:not(TextBox:empty) /template/ ContentPresenter#PART_InnerRightContent">
+      <Setter Property="Content">
+        <Template>
+          <ToggleButton Background="Transparent"
+                        ClipToBounds="True"
+                        IsChecked="{Binding $parent[TextBox].RevealPassword, Mode=TwoWay}"
+                        Theme="{StaticResource ShadowPasswordTogglerTheme}" />
+        </Template>
+      </Setter>
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>
