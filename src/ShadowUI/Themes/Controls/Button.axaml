@@ -1,9 +1,10 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
   <ControlTheme x:Key="{x:Type Button}" TargetType="Button">
     <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
     <Setter Property="Height" Value="36" />
@@ -22,6 +23,7 @@
           <Border.Transitions>
             <Transitions>
               <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+              <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.10" Easing="CubicEaseOut" />
             </Transitions>
           </Border.Transitions>
           <ContentPresenter Name="PART_ContentPresenter"
@@ -48,6 +50,11 @@
       <Setter Property="Opacity" Value="0.5" />
     </Style>
 
+    <!-- bounce: лёгкое сжатие при нажатии (включается shadui:ButtonAssist.Bounce="True") -->
+    <Style Selector="^[(shadui|ButtonAssist.Bounce)=True]:pressed /template/ Border#PART_Border">
+      <Setter Property="RenderTransform" Value="scale(0.94)" />
+    </Style>
+
     <!-- размеры -->
     <Style Selector="^.sm">
       <Setter Property="Height" Value="32" />
@@ -67,17 +74,17 @@
     <Style Selector="^.secondary">
       <Setter Property="Background" Value="{DynamicResource ShadowSecondaryBrush}" />
       <Setter Property="Foreground" Value="{DynamicResource ShadowSecondaryForegroundBrush}" />
-      <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
     </Style>
     <Style Selector="^.destructive">
-      <Setter Property="Background" Value="{DynamicResource ShadowDestructiveBrush}" />
-      <Setter Property="Foreground" Value="{DynamicResource ShadowDestructiveForegroundBrush}" />
+      <Setter Property="Background" Value="{DynamicResource ShadowDestructiveButtonBrush}" />
+      <Setter Property="Foreground" Value="White" />
       <Setter Property="BorderBrush" Value="Transparent" />
     </Style>
     <Style Selector="^.outline">
       <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
       <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
-      <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     </Style>
     <Style Selector="^.outline /template/ Border#PART_Border">
       <Setter Property="BoxShadow" Value="{DynamicResource ShadowShadowXs}" />
