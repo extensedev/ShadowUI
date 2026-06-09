@@ -1,0 +1,56 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Инфраструктурные темы, ранее предоставлявшиеся FluentTheme.
+       Window: VisualLayerManager обязателен — он даёт OverlayLayer
+       (фоллбэк для Popup без нативного окна, adorner-слой, headless-тесты). -->
+  <ControlTheme x:Key="{x:Type Window}" TargetType="Window">
+    <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource ShadowBackgroundBrush}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_TransparencyFallback" IsHitTestVisible="False" />
+          <Border Background="{TemplateBinding Background}" IsHitTestVisible="False" />
+          <Panel Background="Transparent" Margin="{TemplateBinding WindowDecorationMargin}" />
+          <VisualLayerManager Name="PART_VisualLayerManager">
+            <ContentPresenter Name="PART_ContentPresenter"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </VisualLayerManager>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- PopupRoot: прозрачный фон окна попапа — иначе углы за скруглённым
+       контентом заливаются дефолтным (белым) фоном нативного окна. -->
+  <ControlTheme x:Key="{x:Type PopupRoot}" TargetType="PopupRoot">
+    <Setter Property="Background" Value="{x:Null}" />
+    <Setter Property="TransparencyLevelHint" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <LayoutTransformControl LayoutTransform="{TemplateBinding Transform}">
+          <Panel>
+            <Border Name="PART_TransparencyFallback" IsHitTestVisible="False" />
+            <VisualLayerManager Name="PART_VisualLayerManager">
+              <ContentPresenter Name="PART_ContentPresenter"
+                                Background="{TemplateBinding Background}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                Padding="{TemplateBinding Padding}" />
+            </VisualLayerManager>
+          </Panel>
+        </LayoutTransformControl>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

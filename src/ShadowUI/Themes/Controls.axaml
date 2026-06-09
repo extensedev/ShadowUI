@@ -1,8 +1,10 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shadui="using:ShadowUI">
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Window.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Button.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Badge.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Card.axaml" />
@@ -30,6 +32,7 @@
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Accordion.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Breadcrumb.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ToggleGroup.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/NumericUpDown.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ColorPicker.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/NavigationMenu.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/HoverCard.axaml" />
@@ -39,6 +42,7 @@
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/OtpInput.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/InputGroup.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ButtonGroup.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Toolbar.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Field.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ShadowCalendar.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/DatePicker.axaml" />
@@ -51,6 +55,9 @@
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ShadowItem.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/BarChart.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/LineChart.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/TextBox.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Tooltip.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ProgressBar.axaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>
@@ -71,12 +78,32 @@
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
   </Style>
 
+  <!-- Toolbar: компактные вложенные элементы — выделение по высоте элемента, а не всего бара -->
+  <Style Selector="shadui|Toolbar Button">
+    <Setter Property="Height" Value="28" />
+    <Setter Property="MinWidth" Value="28" />
+    <Setter Property="Padding" Value="6,0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="shadui|Toolbar ToggleButton">
+    <Setter Property="Height" Value="28" />
+    <Setter Property="MinWidth" Value="28" />
+    <Setter Property="Padding" Value="6,0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="shadui|Toolbar shadui|ToggleGroupItem">
+    <Setter Property="Height" Value="28" />
+    <Setter Property="Padding" Value="10,0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="shadui|Toolbar Separator.vertical">
+    <Setter Property="Height" Value="18" />
+    <Setter Property="Margin" Value="2,0" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
   <StyleInclude Source="avares://ShadowUI/Themes/Controls/ScrollViewer.axaml" />
   <StyleInclude Source="avares://ShadowUI/Themes/Controls/TabsLarge.axaml" />
   <StyleInclude Source="avares://ShadowUI/Themes/Controls/TabsLegacy.axaml" />
-  <StyleInclude Source="avares://ShadowUI/Themes/Controls/TextBox.axaml" />
-  <StyleInclude Source="avares://ShadowUI/Themes/Controls/Tooltip.axaml" />
-  <StyleInclude Source="avares://ShadowUI/Themes/Controls/ProgressBar.axaml" />
   <StyleInclude Source="avares://ShadowUI/Themes/Controls/Table.axaml" />
-  <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml" />
 </Styles>
