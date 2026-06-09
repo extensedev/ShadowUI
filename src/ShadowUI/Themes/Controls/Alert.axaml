@@ -3,11 +3,11 @@
                     xmlns:shadui="using:ShadowUI">
 
   <ControlTheme x:Key="{x:Type shadui:Alert}" TargetType="shadui:Alert">
-    <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ShadowCardBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusLg}" />
-    <Setter Property="Padding" Value="16" />
+    <Setter Property="Padding" Value="16,12" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">
       <ControlTemplate>
@@ -44,33 +44,38 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- variants: colored border + title/icon -->
-    <Style Selector="^.info">
-      <Setter Property="BorderBrush" Value="{DynamicResource ShadowInfoBrush}" />
-    </Style>
+    <!-- variants по канону shadcn: рамка всегда нейтральная (border),
+         цветом выделяются только заголовок и иконка -->
     <Style Selector="^.info /template/ TextBlock#PART_Title">
       <Setter Property="Foreground" Value="{DynamicResource ShadowInfoBrush}" />
     </Style>
-
-    <Style Selector="^.success">
-      <Setter Property="BorderBrush" Value="{DynamicResource ShadowSuccessBrush}" />
+    <Style Selector="^.info /template/ ContentPresenter#PART_Icon">
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource ShadowInfoBrush}" />
     </Style>
+
     <Style Selector="^.success /template/ TextBlock#PART_Title">
       <Setter Property="Foreground" Value="{DynamicResource ShadowSuccessBrush}" />
     </Style>
-
-    <Style Selector="^.warning">
-      <Setter Property="BorderBrush" Value="{DynamicResource ShadowWarningBrush}" />
+    <Style Selector="^.success /template/ ContentPresenter#PART_Icon">
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource ShadowSuccessBrush}" />
     </Style>
+
     <Style Selector="^.warning /template/ TextBlock#PART_Title">
       <Setter Property="Foreground" Value="{DynamicResource ShadowWarningBrush}" />
     </Style>
-
-    <Style Selector="^.destructive">
-      <Setter Property="BorderBrush" Value="{DynamicResource ShadowDestructiveBrush}" />
+    <Style Selector="^.warning /template/ ContentPresenter#PART_Icon">
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource ShadowWarningBrush}" />
     </Style>
+
     <Style Selector="^.destructive /template/ TextBlock#PART_Title">
       <Setter Property="Foreground" Value="{DynamicResource ShadowDestructiveBrush}" />
+    </Style>
+    <Style Selector="^.destructive /template/ ContentPresenter#PART_Icon">
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource ShadowDestructiveBrush}" />
+    </Style>
+    <Style Selector="^.destructive /template/ ContentPresenter#PART_Description">
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource ShadowDestructiveBrush}" />
+      <Setter Property="Opacity" Value="0.9" />
     </Style>
   </ControlTheme>
 
