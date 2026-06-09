@@ -1,33 +1,37 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 
 namespace ShadowUI;
 
-/// <summary>ComboBox with a built-in text filter: the list narrows as you type.</summary>
+/// <summary>ComboBox со встроенным текстовым фильтром: список сужается по мере ввода.</summary>
 public class SearchableComboBox : ComboBox
 {
 #pragma warning disable CS1591
     public static readonly StyledProperty<string?> SearchTextProperty =
         AvaloniaProperty.Register<SearchableComboBox, string?>(nameof(SearchText));
+
+    public static readonly StyledProperty<string> SearchPlaceholderProperty =
+        AvaloniaProperty.Register<SearchableComboBox, string>(nameof(SearchPlaceholder), "Search...");
 #pragma warning restore CS1591
 
-    /// <summary>Filter text; changes trigger an ItemsSource recalculation.</summary>
+    /// <summary>Текст фильтра; изменение скрывает неподходящие элементы списка.</summary>
     public string? SearchText
     {
         get => GetValue(SearchTextProperty);
         set => SetValue(SearchTextProperty, value);
     }
 
+    /// <summary>Плейсхолдер поля поиска в выпадающем списке.</summary>
+    public string SearchPlaceholder
+    {
+        get => GetValue(SearchPlaceholderProperty);
+        set => SetValue(SearchPlaceholderProperty, value);
+    }
+
     /// <inheritdoc />
     protected override Type StyleKeyOverride => typeof(SearchableComboBox);
-
-    private List<object?> _allItems = new();
-    private bool _updatingItems = false;
 
     static SearchableComboBox()
     {
@@ -35,12 +39,7 @@ public class SearchableComboBox : ComboBox
         IsDropDownOpenProperty.Changed.AddClassHandler<SearchableComboBox>((s, e) =>
         {
             if (!(bool)(e.NewValue ?? false))
-                s.ClearSearch();
-        });
-        ItemsSourceProperty.Changed.AddClassHandler<SearchableComboBox>((s, e) =>
-        {
-            if (s._updatingItems) return;
-            s._allItems = (e.NewValue as IEnumerable)?.Cast<object?>().ToList() ?? new List<object?>();
+                s.SetCurrentValue(SearchTextProperty, null);
         });
     }
 
@@ -53,37 +52,26 @@ public class SearchableComboBox : ComboBox
             searchBox.AddHandler(TextBox.TextChangedEvent, OnSearchTextChanged);
     }
 
-    private void OnSearchTextChanged(object? sender, Avalonia.Controls.TextChangedEventArgs e)
+    private void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
     {
         if (sender is TextBox tb)
             SetCurrentValue(SearchTextProperty, tb.Text);
     }
 
+    // Фильтрация видимостью контейнеров: Items/ItemsSource не модифицируются,
+    // поэтому работает и с инлайн-элементами, и с ItemsSource (AOT-safe).
     private void ApplyFilter()
     {
-        if (_updatingItems) return;
         var text = SearchText;
-        if (string.IsNullOrEmpty(text))
+        for (var i = 0; i < ItemCount; i++)
         {
-            SetItemsFiltered(_allItems);
-            return;
+            if (ContainerFromIndex(i) is not { } container)
+                continue;
+            container.IsVisible = string.IsNullOrEmpty(text)
+                || FormatItemText(Items[i] ?? container)?.Contains(text, StringComparison.OrdinalIgnoreCase) == true;
         }
-        var filtered = _allItems
-            .Where(item => item?.ToString()?.Contains(text, StringComparison.OrdinalIgnoreCase) == true)
-            .ToList();
-        SetItemsFiltered(filtered);
     }
 
-    private void SetItemsFiltered(IEnumerable<object?> items)
-    {
-        _updatingItems = true;
-        SetCurrentValue(ItemsControl.ItemsSourceProperty, items.ToList());
-        _updatingItems = false;
-    }
-
-    private void ClearSearch()
-    {
-        SetCurrentValue(SearchTextProperty, null);
-        SetItemsFiltered(_allItems);
-    }
+    private static string? FormatItemText(object item) =>
+        item is ContentControl cc ? cc.Content?.ToString() : item.ToString();
 }

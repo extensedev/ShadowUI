@@ -3,7 +3,7 @@
                     xmlns:shadui="using:ShadowUI">
   <!-- ComboBox с поиском в стиле shadcn -->
   <ControlTheme x:Key="{x:Type shadui:SearchableComboBox}" TargetType="shadui:SearchableComboBox">
-    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Background" Value="{DynamicResource ShadowInputBackgroundBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
     <Setter Property="BorderThickness" Value="1" />
@@ -35,13 +35,13 @@
                      VerticalAlignment="Center"
                      IsVisible="{TemplateBinding SelectionBoxItem, Converter={x:Static ObjectConverters.IsNull}}" />
 
-          <ContentControl Name="ContentPresenter"
-                          Grid.Column="0"
-                          Margin="{TemplateBinding Padding}"
-                          Content="{TemplateBinding SelectionBoxItem}"
-                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                          VerticalAlignment="Center" />
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Grid.Column="0"
+                            Margin="{TemplateBinding Padding}"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="Center" />
 
           <Path Name="DropDownGlyph"
                 Grid.Column="1"
@@ -74,7 +74,7 @@
                 <!-- поле поиска в popup -->
                 <TextBox Name="PART_SearchBox"
                          Margin="0,0,0,4"
-                         PlaceholderText="Поиск..." />
+                         PlaceholderText="{TemplateBinding SearchPlaceholder}" />
                 <!-- список результатов -->
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto">
@@ -88,8 +88,9 @@
       </ControlTemplate>
     </Setter>
 
+    <!-- hover только в dark (bg-input/50); в light токен Transparent -->
     <Style Selector="^:pointerover /template/ Border#PART_Border">
-      <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
+      <Setter Property="Background" Value="{DynamicResource ShadowInputHoverBrush}" />
     </Style>
     <Style Selector="^:focus-visible /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
