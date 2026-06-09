@@ -8,12 +8,18 @@
       <ControlTemplate>
         <StackPanel Orientation="Horizontal" Spacing="8">
           <Border Name="PART_Box" Width="16" Height="16"
-                  Background="Transparent"
+                  Background="{DynamicResource ShadowInputBackgroundBrush}"
                   BorderBrush="{DynamicResource ShadowInputBrush}"
                   BorderThickness="1"
                   CornerRadius="4"
                   BoxShadow="{DynamicResource ShadowShadowXs}"
                   VerticalAlignment="Center">
+            <Border.Transitions>
+              <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.15" />
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+              </Transitions>
+            </Border.Transitions>
             <Viewbox Width="10" Height="10"
                      HorizontalAlignment="Center" VerticalAlignment="Center">
               <Path Name="PART_Check"
@@ -21,7 +27,15 @@
                     StrokeThickness="2"
                     StrokeLineCap="Round" StrokeJoin="Round"
                     Data="M20,6 L9,17 L4,12"
-                    IsVisible="False" />
+                    Opacity="0"
+                    RenderTransform="scale(0.5)">
+                <Path.Transitions>
+                  <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="BackEaseOut" />
+                  </Transitions>
+                </Path.Transitions>
+              </Path>
             </Viewbox>
           </Border>
           <ContentPresenter Content="{TemplateBinding Content}"
@@ -39,7 +53,8 @@
       <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
     </Style>
     <Style Selector="^:checked /template/ Path#PART_Check">
-      <Setter Property="IsVisible" Value="True" />
+      <Setter Property="Opacity" Value="1" />
+      <Setter Property="RenderTransform" Value="scale(1)" />
     </Style>
     <Style Selector="^:indeterminate /template/ Border#PART_Box">
       <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />

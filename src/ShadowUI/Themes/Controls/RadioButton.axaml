@@ -7,21 +7,36 @@
       <ControlTemplate>
         <StackPanel Orientation="Horizontal" Spacing="8">
           <Border Name="PART_Box" Width="16" Height="16" CornerRadius="9999"
-                  Background="Transparent"
+                  Background="{DynamicResource ShadowInputBackgroundBrush}"
                   BorderBrush="{DynamicResource ShadowInputBrush}"
                   BorderThickness="1" VerticalAlignment="Center"
                   BoxShadow="{DynamicResource ShadowShadowXs}">
+            <Border.Transitions>
+              <Transitions>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+              </Transitions>
+            </Border.Transitions>
             <Ellipse Name="PART_Dot" Width="8" Height="8"
                      Fill="{DynamicResource ShadowPrimaryBrush}"
                      HorizontalAlignment="Center" VerticalAlignment="Center"
-                     IsVisible="False" />
+                     Opacity="0"
+                     RenderTransform="scale(0)">
+              <Ellipse.Transitions>
+                <Transitions>
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                  <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="BackEaseOut" />
+                </Transitions>
+              </Ellipse.Transitions>
+            </Ellipse>
           </Border>
           <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" />
         </StackPanel>
       </ControlTemplate>
     </Setter>
+    <!-- shadcn: рамка радио остаётся border-input и при checked -->
     <Style Selector="^:checked /template/ Ellipse#PART_Dot">
-      <Setter Property="IsVisible" Value="True" />
+      <Setter Property="Opacity" Value="1" />
+      <Setter Property="RenderTransform" Value="scale(1)" />
     </Style>
     <Style Selector="^:focus-visible /template/ Border#PART_Box">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
