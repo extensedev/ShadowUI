@@ -40,7 +40,7 @@
           <TextBlock Name="PART_HintText"
                      Text="{TemplateBinding HintText}"
                      Foreground="{DynamicResource ShadowMutedForegroundBrush}"
-                     FontSize="12"
+                     FontSize="14"
                      Margin="0,4,0,0"
                      TextWrapping="Wrap"
                      IsVisible="{TemplateBinding HintText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
@@ -48,7 +48,7 @@
           <TextBlock Name="PART_ErrorMessage"
                      Text="{TemplateBinding ErrorMessage}"
                      Foreground="{DynamicResource ShadowDestructiveBrush}"
-                     FontSize="12"
+                     FontSize="14"
                      Margin="0,4,0,0"
                      TextWrapping="Wrap"
                      IsVisible="False" />
