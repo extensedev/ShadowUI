@@ -1,60 +1,126 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Thin scrollbar in the shadcn ScrollArea style -->
+  <!-- Thin scrollbar in the shadcn ScrollArea style.
+       Behavior ported from ShadUI: transparent RepeatButtons in the Track make
+       track clicks page up/down, and AllowAutoHide doubles as a hover channel —
+       the ScrollViewer theme flips it to True while the pointer is over the
+       viewer, which widens the thumb (see ScrollViewer.axaml). -->
   <ControlTheme x:Key="ShadowScrollThumb" TargetType="Thumb">
     <Setter Property="Background" Value="{DynamicResource ShadowMutedForegroundBrush}" />
-    <Setter Property="Opacity" Value="0.4" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}" CornerRadius="9999" Margin="1" />
+        <Border Background="{TemplateBinding Background}" CornerRadius="9999" />
       </ControlTemplate>
     </Setter>
-    <Style Selector="^:pointerover">
-      <Setter Property="Opacity" Value="0.7" />
-    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="ShadowScrollPageButton" TargetType="RepeatButton">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" />
+      </ControlTemplate>
+    </Setter>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ScrollBar}" TargetType="ScrollBar">
     <Setter Property="Background" Value="Transparent" />
-    <Setter Property="MinWidth" Value="10" />
-    <Setter Property="MinHeight" Value="10" />
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Border Background="{TemplateBinding Background}">
-          <Track Name="PART_Track"
-                 Minimum="{TemplateBinding Minimum}"
-                 Maximum="{TemplateBinding Maximum}"
-                 Value="{TemplateBinding Value, Mode=TwoWay}"
-                 ViewportSize="{TemplateBinding ViewportSize}"
-                 Orientation="{TemplateBinding Orientation}">
-            <!-- At rest the thumb is thin (Margin 3 ~ 4px); it widens on hover/drag -->
-            <Thumb Name="PART_Thumb" Theme="{StaticResource ShadowScrollThumb}" Margin="2.5">
-              <Thumb.Transitions>
-                <Transitions>
-                  <ThicknessTransition Property="Margin" Duration="0:0:0.12" />
-                  <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
-                </Transitions>
-              </Thumb.Transitions>
-            </Thumb>
-          </Track>
-        </Border>
-      </ControlTemplate>
-    </Setter>
+    <!-- Hover channel, not actual auto-hide: True while the pointer is over the owning ScrollViewer -->
+    <Setter Property="AllowAutoHide" Value="False" />
 
     <Style Selector="^:vertical">
       <Setter Property="Width" Value="10" />
-    </Style>
-    <Style Selector="^:vertical /template/ Track#PART_Track">
-      <Setter Property="IsDirectionReversed" Value="True" />
-    </Style>
-    <Style Selector="^:horizontal">
-      <Setter Property="Height" Value="10" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}" UseLayoutRounding="False">
+            <Track Name="PART_Track"
+                   IsDirectionReversed="True"
+                   Minimum="{TemplateBinding Minimum}"
+                   Maximum="{TemplateBinding Maximum}"
+                   Value="{TemplateBinding Value, Mode=TwoWay}"
+                   ViewportSize="{TemplateBinding ViewportSize}"
+                   Orientation="{TemplateBinding Orientation}">
+              <Track.DecreaseButton>
+                <RepeatButton Name="PART_PageUpButton" Theme="{StaticResource ShadowScrollPageButton}" />
+              </Track.DecreaseButton>
+              <Track.IncreaseButton>
+                <RepeatButton Name="PART_PageDownButton" Theme="{StaticResource ShadowScrollPageButton}" />
+              </Track.IncreaseButton>
+              <Thumb Name="PART_Thumb" Theme="{StaticResource ShadowScrollThumb}"
+                     HorizontalAlignment="Center">
+                <Thumb.Transitions>
+                  <Transitions>
+                    <DoubleTransition Property="Width" Duration="0:0:0.1" />
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                  </Transitions>
+                </Thumb.Transitions>
+              </Thumb>
+            </Track>
+          </Border>
+        </ControlTemplate>
+      </Setter>
     </Style>
 
-    <!-- scrollbar hover: expand the thumb to full width -->
-    <Style Selector="^:pointerover /template/ Thumb#PART_Thumb">
-      <Setter Property="Margin" Value="0" />
+    <Style Selector="^:horizontal">
+      <Setter Property="Height" Value="10" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}" UseLayoutRounding="False">
+            <Track Name="PART_Track"
+                   Minimum="{TemplateBinding Minimum}"
+                   Maximum="{TemplateBinding Maximum}"
+                   Value="{TemplateBinding Value, Mode=TwoWay}"
+                   ViewportSize="{TemplateBinding ViewportSize}"
+                   Orientation="{TemplateBinding Orientation}">
+              <Track.DecreaseButton>
+                <RepeatButton Name="PART_PageUpButton" Theme="{StaticResource ShadowScrollPageButton}" />
+              </Track.DecreaseButton>
+              <Track.IncreaseButton>
+                <RepeatButton Name="PART_PageDownButton" Theme="{StaticResource ShadowScrollPageButton}" />
+              </Track.IncreaseButton>
+              <Thumb Name="PART_Thumb" Theme="{StaticResource ShadowScrollThumb}"
+                     VerticalAlignment="Center">
+                <Thumb.Transitions>
+                  <Transitions>
+                    <DoubleTransition Property="Height" Duration="0:0:0.1" />
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                  </Transitions>
+                </Thumb.Transitions>
+              </Thumb>
+            </Track>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <!-- Rest state: thin pill. Set via styles (not inline in the template) so the
+         hover styles below can override — inline template values would win otherwise. -->
+    <Style Selector="^:vertical /template/ Thumb#PART_Thumb">
+      <Setter Property="Width" Value="4" />
+      <Setter Property="Opacity" Value="0.4" />
+    </Style>
+    <Style Selector="^:horizontal /template/ Thumb#PART_Thumb">
+      <Setter Property="Height" Value="4" />
+      <Setter Property="Opacity" Value="0.4" />
+    </Style>
+
+    <!-- Pointer over the owning ScrollViewer: widen -->
+    <Style Selector="^:vertical[AllowAutoHide=True] /template/ Thumb#PART_Thumb">
+      <Setter Property="Width" Value="8" />
       <Setter Property="Opacity" Value="0.7" />
+    </Style>
+    <Style Selector="^:horizontal[AllowAutoHide=True] /template/ Thumb#PART_Thumb">
+      <Setter Property="Height" Value="8" />
+      <Setter Property="Opacity" Value="0.7" />
+    </Style>
+
+    <!-- Direct hover/drag on the thumb itself -->
+    <Style Selector="^ /template/ Thumb#PART_Thumb:pointerover">
+      <Setter Property="Opacity" Value="0.9" />
+    </Style>
+    <Style Selector="^ /template/ Thumb#PART_Thumb:pressed">
+      <Setter Property="Opacity" Value="0.9" />
     </Style>
 
     <Style Selector="^:disabled">

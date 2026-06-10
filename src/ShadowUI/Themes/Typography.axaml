@@ -1,26 +1,31 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- shadcn typography. LineHeight is set only where it is LARGER than the natural
+       line height: a smaller value in Avalonia pushes the baseline down and the text
+       visually "sinks" / clips descenders (unlike CSS leading-none). -->
   <Style Selector="TextBlock.h1">
     <Setter Property="FontSize" Value="36" />
     <Setter Property="FontWeight" Value="ExtraBold" />
-    <Setter Property="LineHeight" Value="40" />
+    <Setter Property="LetterSpacing" Value="-0.9" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
   </Style>
   <Style Selector="TextBlock.h2">
     <Setter Property="FontSize" Value="30" />
     <Setter Property="FontWeight" Value="SemiBold" />
-    <Setter Property="LineHeight" Value="36" />
+    <Setter Property="LetterSpacing" Value="-0.75" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
   </Style>
   <Style Selector="TextBlock.h3">
     <Setter Property="FontSize" Value="24" />
     <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LetterSpacing" Value="-0.6" />
     <Setter Property="LineHeight" Value="32" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
   </Style>
   <Style Selector="TextBlock.h4">
     <Setter Property="FontSize" Value="20" />
     <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LetterSpacing" Value="-0.5" />
     <Setter Property="LineHeight" Value="28" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
   </Style>
@@ -41,7 +46,6 @@
   <Style Selector="TextBlock.small">
     <Setter Property="FontSize" Value="14" />
     <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="LineHeight" Value="14" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
   </Style>
   <Style Selector="TextBlock.muted">
@@ -51,6 +55,7 @@
   <Style Selector="TextBlock.code">
     <Setter Property="FontFamily" Value="Cascadia Code, Consolas, monospace" />
     <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="SemiBold" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
   </Style>
   <Style Selector="TextBlock.blockquote">

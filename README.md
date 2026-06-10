@@ -1,37 +1,25 @@
 # ShadowUI
 
-A port of [shadcn/ui](https://ui.shadcn.com) for [Avalonia UI](https://avaloniaui.net) 12 / .NET 10.
-50+ components · Light/Dark theme · 5 color palettes · Native AOT compatible.
-
-## Screenshots
+A port of [shadcn/ui](https://ui.shadcn.com) for [Avalonia UI](https://avaloniaui.net) 12 / .NET.
+50+ components · Light/Dark theme · 13 color palettes · Custom title bar · Native AOT compatible.
 
 <p align="center">
-  <img src="docs/screenshots/buttons-input.png" width="680" alt="ShadowUI Gallery" />
+  <img src="docs/screenshots/overview.gif" width="720" alt="ShadowUI Gallery" />
 </p>
 
 ## Requirements
 
-- .NET 10
+- .NET 8 or .NET 10
 - Avalonia 12.0.4+
 
 ## Installation
-
-### NuGet Package Manager
-
-```
-Install-Package ShadowUI
-```
-
-### .NET CLI
 
 ```bash
 dotnet add package ShadowUI
 ```
 
-### PackageReference
-
 ```xml
-<PackageReference Include="ShadowUI" Version="0.1.1-alpha" />
+<PackageReference Include="ShadowUI" Version="1.0.0" />
 ```
 
 ## Getting Started
@@ -67,6 +55,8 @@ dotnet add package ShadowUI
 </shadui:Card>
 ```
 
+## Theming
+
 **Switch theme at runtime:**
 
 ```csharp
@@ -76,16 +66,66 @@ Application.Current!.RequestedThemeVariant = ThemeVariant.Dark;
 **Switch color palette at runtime:**
 
 ```csharp
-// get the theme instance
 var theme = Application.Current!.Styles.OfType<ShadowUITheme>().First();
 theme.BaseColor = BaseColor.Slate;
 ```
 
-Color palettes (`BaseColor`):
+13 palettes (`BaseColor`):
 
-- Neutrals: `Zinc`, `Slate` (cool), `Stone` (warm), `Gray` (cool, Tailwind gray), `Neutral` (true gray).
-- Lifted darks: `Charcoal` (default) -> `Graphite` -> `Ash` (progressively lighter dark backgrounds).
-- Colored accents (Zinc surfaces + colored primary): `Blue`, `Green`, `Violet`, `Rose`, `Orange`.
+- **Neutrals:** `Zinc`, `Slate` (cool), `Stone` (warm), `Gray` (cool, Tailwind gray), `Neutral` (true gray).
+- **Lifted darks:** `Charcoal` (default) → `Graphite` → `Ash` (progressively lighter dark backgrounds).
+- **Colored accents** (Zinc surfaces + colored primary): `Blue`, `Green`, `Violet`, `Rose`, `Orange`.
+
+## Custom Title Bar
+
+`TitleBar` replaces the native window chrome with a shadcn-style bar while keeping
+the native Windows 11 minimize / maximize / close animations, snap and resize borders:
+
+```xml
+<DockPanel>
+  <shadui:TitleBar DockPanel.Dock="Top"
+                   Title="My App"
+                   ShowMaximize="True">
+    <shadui:TitleBar.Icon>
+      <Image Source="/Assets/logo.png" />
+    </shadui:TitleBar.Icon>
+  </shadui:TitleBar>
+  <!-- window content -->
+</DockPanel>
+```
+
+Everything is optional and removable:
+
+| Property | Default | Purpose |
+|----------|---------|---------|
+| `Title` / `ShowTitle` | `null` / `true` | title text; `ShowTitle="False"` hides it |
+| `Icon` / `IconSize` | `null` / `16` | app icon (any visual); hidden when not set |
+| `ShowMinimize` / `ShowMaximize` / `ShowClose` | `true` | toggle individual window buttons |
+| `RightContent` | `null` | custom controls next to the window buttons |
+
+Custom icon buttons that match the built-in ones — use the `TitleBarButton` theme:
+
+```xml
+<shadui:TitleBar Title="My App">
+  <shadui:TitleBar.RightContent>
+    <Button Theme="{StaticResource TitleBarButton}"
+            Width="46" Height="40"
+            Click="OnSettingsClick">
+      <!-- any 16x16 icon -->
+    </Button>
+  </shadui:TitleBar.RightContent>
+</shadui:TitleBar>
+```
+
+## Smooth Scrolling
+
+All `ScrollViewer`s get inertial smooth scrolling out of the box. Opt out or tune per viewer:
+
+```xml
+<ScrollViewer shadui:SmoothScrollAssist.IsEnabled="False" />
+<ScrollViewer shadui:SmoothScrollAssist.BaseStepSize="100"
+              shadui:SmoothScrollAssist.SmoothingFactor="14" />
+```
 
 ## Components
 
@@ -95,10 +135,10 @@ TextBox / Textarea, CheckBox, Switch, RadioButton, Toggle, ToggleGroup, Slider,
 ProgressBar, Avatar, Skeleton, Kbd, Tooltip, AspectRatio, Spinner, ColorPicker
 
 ### Navigation & Overlays
-Tabs (underline / legacy / large), ComboBox (Select), Popover (Flyout),
+Tabs (underline / legacy / large), ComboBox (Select), MultiSelectComboBox, Popover (Flyout),
 Menu / DropdownMenu / ContextMenu, NavigationMenu, Menubar, HoverCard,
 **Sidebar** (icon-collapsed mode, expandable groups), **TitleBar** (custom window title bar),
-**Dialog**, **AlertDialog**, **Toast / Notifications** (6 positions, 5 types),
+**Dialog**, **AlertDialog**, **Toast / Notifications** (Sonner-style stacking, 6 positions, 5 types),
 **CommandPalette** (⌘K, fuzzy search, keyboard nav), Sheet / Drawer, ScrollBar
 
 ### Forms & Input
@@ -116,7 +156,7 @@ EmptyState, ShadowItem
 ShadowCalendar (Single / Range), DatePicker
 
 ### Visual & Charts
-Carousel (prev/next + dot navigation), BarChart, LineChart
+Carousel (prev/next + dot navigation), BarChart, LineChart, AreaChart, PieChart (donut)
 
 ## Design Tokens
 
@@ -147,6 +187,9 @@ dotnet run --project samples/ShadowUI.Gallery/ShadowUI.Gallery.csproj
 
 ## Native AOT
 
+ShadowUI is fully Native-AOT compatible: compiled bindings everywhere, no reflection,
+palettes instantiated via generated types.
+
 ```bash
 dotnet publish tests/ShadowUI.AotSmokeTest/ShadowUI.AotSmokeTest.csproj -r win-x64 -c Release
 ```
@@ -160,3 +203,7 @@ dotnet publish tests/ShadowUI.AotSmokeTest/ShadowUI.AotSmokeTest.csproj -r win-x
 dotnet build ShadowUI.slnx -c Debug
 dotnet test tests/ShadowUI.UnitTests/ShadowUI.UnitTests.csproj
 ```
+
+## License
+
+[MIT](LICENSE)

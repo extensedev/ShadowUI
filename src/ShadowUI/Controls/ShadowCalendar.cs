@@ -229,7 +229,16 @@ public class ShadowCalendar : TemplatedControl
             var button = _dayButtons[i];
             var date = firstDayOfMonth.AddDays(i - offset);
             button.Tag = date;
-            button.Content = date.Day.ToString();
+            if (button.Content is TextBlock tb)
+                tb.Text = date.Day.ToString();
+            else
+                button.Content = new TextBlock
+                {
+                    Text = date.Day.ToString(),
+                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                    VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+                    TextAlignment = Avalonia.Media.TextAlignment.Center,
+                };
             UpdateDayButtonClasses(button, date);
         }
 

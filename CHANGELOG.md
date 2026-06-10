@@ -3,6 +3,23 @@
 All notable changes to ShadowUI are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](https://semver.org).
 
+## [1.0.0] — 2026-06-10
+
+### Added
+- `TitleBar` customization: `ShowTitle`, `ShowMinimize`, `ShowClose` (alongside `ShowMaximize`), and a `RightContent` slot for custom buttons next to the window controls; the `TitleBarButton` theme is reusable for them.
+- ScrollBar: clicking/holding the track pages up/down (transparent `RepeatButton`s in the `Track`).
+- ScrollViewer `gutter` class: scrollbar gets a reserved column instead of overlaying — used by ComboBox, SearchableComboBox and CommandPalette dropdowns.
+
+### Changed
+- Scrollbars overlay the content (no reserved gutter, content no longer shifts when a bar appears); resting thumb is a thin always-visible pill that widens while the pointer is over the viewer (behavior modeled on ShadUI).
+- Typography: shadcn letter-spacing on `h1`–`h4`; removed `LineHeight` values smaller than the natural line height (they sank baselines and clipped descenders); `code` is now SemiBold.
+- DatePicker/ShadowCalendar visual parity pass: popover surface, borderless calendar inside the popup, Lucide icons in exact pixel coordinates.
+
+### Fixed
+- **Windows 11 minimize/maximize/close animations** with the custom `TitleBar`: Avalonia strips `WS_CAPTION` in extended-client-area mode (a Windows 10 workaround), which disables DWM transitions; the style bit is now forced back via `Win32Properties.AddWindowStylesCallback` on Windows 11+.
+- Scrollbar thumb fighting the smooth-scroll glide: grabbing the thumb (or any pointer press inside the viewer) now stops the wheel glide immediately instead of pulling the offset back to a stale target.
+- Scrollbar thumb hover-expansion never triggered (inline template `Margin` outranked the style setter).
+
 ## [1.0.0-beta] — 2026-06-10
 
 ### Added

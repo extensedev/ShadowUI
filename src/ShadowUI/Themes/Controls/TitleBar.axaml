@@ -64,12 +64,18 @@
                 BorderThickness="0,0,0,1">
           <DockPanel LastChildFill="True">
 
-            <!-- Window control buttons -->
+            <!-- Custom content + window control buttons -->
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+
+              <ContentPresenter Name="PART_RightContent"
+                                Content="{TemplateBinding RightContent}"
+                                VerticalAlignment="Center"
+                                IsVisible="{TemplateBinding RightContent, Converter={x:Static conv:ObjectConverters.IsNotNull}}" />
 
               <Button Name="PART_MinimizeButton"
                       Theme="{StaticResource TitleBarButton}"
                       Width="46" Height="40" Focusable="False"
+                      IsVisible="{TemplateBinding ShowMinimize}"
                       ToolTip.Tip="Minimize">
                 <Viewbox Width="16" Height="16">
                   <Path Data="M 4 12 H 20"
@@ -79,37 +85,40 @@
                 </Viewbox>
               </Button>
 
-              <!-- Maximize (visible when normal) -->
-              <Button Name="PART_MaximizeButton"
-                      Theme="{StaticResource TitleBarButton}"
-                      Width="46" Height="40" Focusable="False"
-                      IsVisible="{TemplateBinding ShowMaximize}"
-                      ToolTip.Tip="Maximize">
-                <Viewbox Width="16" Height="16">
-                  <Path Data="M 5 5 H 19 V 19 H 5 Z"
-                        Width="24" Height="24" Stretch="None"
-                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                        StrokeThickness="2" StrokeJoin="Round" Fill="Transparent" />
-                </Viewbox>
-              </Button>
+              <!-- Maximize/restore share one slot; the wrapper obeys ShowMaximize even while maximized -->
+              <Panel IsVisible="{TemplateBinding ShowMaximize}">
+                <!-- Maximize (visible when normal) -->
+                <Button Name="PART_MaximizeButton"
+                        Theme="{StaticResource TitleBarButton}"
+                        Width="46" Height="40" Focusable="False"
+                        ToolTip.Tip="Maximize">
+                  <Viewbox Width="16" Height="16">
+                    <Path Data="M 5 5 H 19 V 19 H 5 Z"
+                          Width="24" Height="24" Stretch="None"
+                          Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                          StrokeThickness="2" StrokeJoin="Round" Fill="Transparent" />
+                  </Viewbox>
+                </Button>
 
-              <!-- Restore (visible when maximized) -->
-              <Button Name="PART_RestoreButton"
-                      Theme="{StaticResource TitleBarButton}"
-                      Width="46" Height="40" Focusable="False"
-                      IsVisible="False"
-                      ToolTip.Tip="Restore">
-                <Viewbox Width="16" Height="16">
-                  <Path Data="M 9 3 H 21 V 15 M 3 9 H 15 V 21 H 3 Z"
-                        Width="24" Height="24" Stretch="None"
-                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                        StrokeThickness="2" StrokeLineCap="Round" Fill="Transparent" />
-                </Viewbox>
-              </Button>
+                <!-- Restore (visible when maximized) -->
+                <Button Name="PART_RestoreButton"
+                        Theme="{StaticResource TitleBarButton}"
+                        Width="46" Height="40" Focusable="False"
+                        IsVisible="False"
+                        ToolTip.Tip="Restore">
+                  <Viewbox Width="16" Height="16">
+                    <Path Data="M 9 3 H 21 V 15 M 3 9 H 15 V 21 H 3 Z"
+                          Width="24" Height="24" Stretch="None"
+                          Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                          StrokeThickness="2" StrokeLineCap="Round" Fill="Transparent" />
+                  </Viewbox>
+                </Button>
+              </Panel>
 
               <Button Name="PART_CloseButton"
                       Theme="{StaticResource TitleBarCloseButton}"
                       Width="46" Height="40" Focusable="False"
+                      IsVisible="{TemplateBinding ShowClose}"
                       ToolTip.Tip="Close">
                 <Viewbox Width="16" Height="16">
                   <Path Data="M 6 6 L 18 18 M 18 6 L 6 18"
@@ -141,7 +150,8 @@
                            Foreground="{DynamicResource ShadowMutedForegroundBrush}"
                            FontSize="12" FontWeight="Medium"
                            VerticalAlignment="Center"
-                           LineHeight="16" />
+                           LineHeight="16"
+                           IsVisible="{TemplateBinding ShowTitle}" />
               </StackPanel>
             </Grid>
 

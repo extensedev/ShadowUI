@@ -79,7 +79,8 @@
                     CornerRadius="{DynamicResource ShadowRadiusMd}"
                     ClipToBounds="True"
                     Padding="4">
-              <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+              <ScrollViewer Classes="gutter"
+                            HorizontalScrollBarVisibility="Disabled"
                             VerticalScrollBarVisibility="Auto">
                 <ItemsPresenter Name="PART_ItemsPresenter"
                                 ItemsPanel="{TemplateBinding ItemsPanel}" />

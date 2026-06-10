@@ -86,7 +86,8 @@
                          Margin="0,0,0,4"
                          PlaceholderText="{TemplateBinding SearchPlaceholder}" />
                 <!-- results list -->
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                <ScrollViewer Classes="gutter"
+                              HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto">
                   <ItemsPresenter Name="PART_ItemsPresenter"
                                   ItemsPanel="{TemplateBinding ItemsPanel}" />

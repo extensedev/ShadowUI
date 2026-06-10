@@ -32,11 +32,13 @@ internal sealed class SmoothScrollController
         SmoothingFactor = smoothingFactor;
 
         instance.AddHandler(InputElement.PointerWheelChangedEvent, OnPointerWheelChanged, RoutingStrategies.Tunnel);
+        instance.AddHandler(InputElement.PointerPressedEvent, OnPointerPressed, RoutingStrategies.Tunnel);
     }
 
     public void Stop()
     {
         _instance.RemoveHandler(InputElement.PointerWheelChangedEvent, OnPointerWheelChanged);
+        _instance.RemoveHandler(InputElement.PointerPressedEvent, OnPointerPressed);
 
         _isLoopRunning = false;
         _lastFrameTime = TimeSpan.Zero;
@@ -135,6 +137,11 @@ internal sealed class SmoothScrollController
         StartAnimationLoop();
         e.Handled = true;
     }
+
+    /// <summary>Any mouse press inside the viewer (thumb grab, track click) takes over:
+    /// stop the glide so the loop doesn't pull the offset back toward its stale target
+    /// while the user drags the scrollbar thumb.</summary>
+    private void OnPointerPressed(object? sender, PointerPressedEventArgs e) => _isLoopRunning = false;
 
     private void StartAnimationLoop()
     {
