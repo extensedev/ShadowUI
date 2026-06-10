@@ -132,6 +132,12 @@ By default — segmented tabs (muted background container, active tab has a bord
 - `shadui:Tabs.Underline="True"` — underline indicator;
 - `Classes="largetabs"` — large equal tabs (border), `largetabs legacytabs` — large with fill.
 
+`shadui:Tabs.UniformContentHeight="True"` — the content area reserves the height of the tallest tab page, so switching tabs no longer resizes the `TabControl`:
+
+```xml
+<TabControl shadui:Tabs.UniformContentHeight="True"> … </TabControl>
+```
+
 ---
 
 ## Popover / Menu / Context Menu
@@ -896,6 +902,143 @@ Universal list item with icon, primary/secondary text, and trailing action:
   </shadui:ShadowItem.TrailingAction>
 </shadui:ShadowItem>
 ```
+
+---
+
+## Styled built-in controls
+
+These are standard Avalonia controls — adding `ShadowUITheme` styles them automatically,
+no `shadui:` prefix needed. They have no custom API beyond Avalonia's own.
+
+### TreeView
+
+```xml
+<TreeView>
+  <TreeViewItem Header="src" IsExpanded="True">
+    <TreeViewItem Header="Controls" />
+    <TreeViewItem Header="Themes" />
+  </TreeViewItem>
+  <TreeViewItem Header="tests" />
+</TreeView>
+```
+
+ListBox-style rows with accent hover/selection and indent guides.
+
+### Expander
+
+```xml
+<Expander Header="Advanced settings" IsExpanded="True">
+  <TextBlock Text="Hidden until expanded." />
+</Expander>
+```
+
+Bordered card with a rotating chevron; all four `ExpandDirection`s (`Down`/`Up`/`Left`/`Right`).
+
+### SplitButton / ToggleSplitButton
+
+Two-segment button — primary action + dropdown chevron:
+
+```xml
+<SplitButton Content="Save">
+  <SplitButton.Flyout>
+    <MenuFlyout>
+      <MenuItem Header="Save As…" />
+      <MenuItem Header="Save All" />
+    </MenuFlyout>
+  </SplitButton.Flyout>
+</SplitButton>
+
+<!-- ToggleSplitButton: checked segment = solid primary -->
+<ToggleSplitButton Content="Bold" />
+```
+
+### DropDownButton
+
+Outline trigger with chevron; `sm` / `lg` / `ghost` classes:
+
+```xml
+<DropDownButton Content="Options">
+  <DropDownButton.Flyout>
+    <MenuFlyout>
+      <MenuItem Header="Rename" />
+      <MenuItem Header="Delete" />
+    </MenuFlyout>
+  </DropDownButton.Flyout>
+</DropDownButton>
+
+<DropDownButton Classes="ghost sm" Content="More" />
+```
+
+### HyperlinkButton
+
+The shadcn `link` look with hover underline:
+
+```xml
+<HyperlinkButton Content="Documentation" NavigateUri="https://example.com" />
+```
+
+### TabStrip
+
+Pill-list tabs (same look as the ShadowUI `TabControl`), without content panels:
+
+```xml
+<TabStrip>
+  <TabStripItem Content="All" />
+  <TabStripItem Content="Active" />
+  <TabStripItem Content="Archived" />
+</TabStrip>
+```
+
+### SplitView
+
+Collapsible side pane (all placements / display modes, light-dismiss scrim):
+
+```xml
+<SplitView IsPaneOpen="True" DisplayMode="CompactInline" CompactPaneLength="52" OpenPaneLength="240">
+  <SplitView.Pane>
+    <TextBlock Text="Pane content" />
+  </SplitView.Pane>
+  <TextBlock Text="Main content" />
+</SplitView>
+```
+
+### GroupBox
+
+Labeled card (no WinForms border-gap):
+
+```xml
+<GroupBox Header="Connection">
+  <StackPanel Spacing="8">
+    <TextBox Watermark="Host" />
+    <NumericUpDown Value="5432" />
+  </StackPanel>
+</GroupBox>
+```
+
+### Menu
+
+Native menu bar (top-level items open downward); submenu items use the standard `MenuItem` theme:
+
+```xml
+<Menu>
+  <MenuItem Header="File">
+    <MenuItem Header="New" />
+    <MenuItem Header="Open" />
+    <Separator />
+    <MenuItem Header="Exit" />
+  </MenuItem>
+  <MenuItem Header="Edit">
+    <MenuItem Header="Undo" />
+    <MenuItem Header="Redo" />
+  </MenuItem>
+</Menu>
+```
+
+### Also styled
+
+`RepeatButton` (inherits the full `Button` look + variant/size classes),
+`ButtonSpinner`, `SelectableTextBlock` (visible selection brush + I-beam cursor),
+`HeaderedContentControl` (plain header + content layout) — all drop-in, no extra markup.
 
 ---
 

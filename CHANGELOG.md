@@ -5,6 +5,9 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+### Documentation
+- Documented the wave-2 styled built-in controls in `README.md` and `docs/components.md` (`TreeView`, `Expander`, `SplitButton`/`ToggleSplitButton`, `DropDownButton`, `HyperlinkButton`, `TabStrip`, `SplitView`, `GroupBox`, `Menu`, plus `RepeatButton`/`ButtonSpinner`/`SelectableTextBlock`/`HeaderedContentControl`), and the `Tabs.UniformContentHeight` attached property.
+
 ## [1.0.2] — 2026-06-11
 
 ### Fixed

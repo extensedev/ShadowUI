@@ -136,22 +136,23 @@ TextBox / Textarea, CheckBox, Switch, RadioButton, Toggle, ToggleGroup, Slider,
 ProgressBar, Avatar, Skeleton, Kbd, Tooltip, AspectRatio, Spinner, ColorPicker
 
 ### Navigation & Overlays
-Tabs (underline / legacy / large), ComboBox (Select), MultiSelectComboBox, Popover (Flyout),
-Menu / DropdownMenu / ContextMenu, NavigationMenu, Menubar, HoverCard,
+Tabs (underline / legacy / large), TabStrip, ComboBox (Select), MultiSelectComboBox, Popover (Flyout),
+Menu / DropdownMenu / ContextMenu, NavigationMenu, Menubar, HoverCard, TreeView, SplitView,
 **Sidebar** (icon-collapsed mode, expandable groups), **TitleBar** (custom window title bar),
 **Dialog**, **AlertDialog**, **Toast / Notifications** (Sonner-style stacking, 6 positions, 5 types),
 **CommandPalette** (⌘K, fuzzy search, keyboard nav), Sheet / Drawer, ScrollBar
 
 ### Forms & Input
-NumericUpDown, SearchableComboBox, OtpInput, InputGroup, ButtonGroup, Field, ColorPicker
+NumericUpDown, SearchableComboBox, OtpInput, InputGroup, ButtonGroup, Field, ColorPicker,
+SplitButton / ToggleSplitButton, DropDownButton, HyperlinkButton, RepeatButton, ButtonSpinner
 
 ### Data & Tables
 ShadowDataTable (sort, filter, pagination), ShadowPagination, Resizable,
 Table (base styles)
 
 ### Content
-Accordion, Alert (5 variants), AlertDialog, Breadcrumb, Collapsible,
-EmptyState, ShadowItem
+Accordion, Alert (5 variants), AlertDialog, Breadcrumb, Collapsible, Expander, GroupBox,
+EmptyState, ShadowItem, SelectableTextBlock, HeaderedContentControl
 
 ### Date & Time
 ShadowCalendar (Single / Range), DatePicker
