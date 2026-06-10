@@ -3,6 +3,11 @@
 All notable changes to ShadowUI are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](https://semver.org).
 
+## [1.0.1] — 2026-06-11
+
+### Fixed
+- **Standalone-theme gap:** added infrastructure `ControlTheme`s previously provided by FluentTheme — `ItemsControl`, `PathIcon` and `TransitioningContentControl` rendered nothing in apps without `FluentTheme`. `PathIcon` inherits `Foreground` from its parent (button variants tint their icons) and defaults to 16×16. `ContentControl`/`UserControl` need no theme (Avalonia ships a built-in default template); `Expander`/`SplitButton` remain out of scope until they get a proper shadcn-styled port.
+
 ## [1.0.0] — 2026-06-10
 
 ### Added

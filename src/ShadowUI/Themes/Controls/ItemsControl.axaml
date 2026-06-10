@@ -1,0 +1,21 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Infrastructure theme previously provided by FluentTheme.
+       Without a template a bare ItemsControl renders nothing in a standalone theme. -->
+  <ControlTheme x:Key="{x:Type ItemsControl}" TargetType="ItemsControl">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}">
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                          ItemsPanel="{TemplateBinding ItemsPanel}"
+                          Margin="{TemplateBinding Padding}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

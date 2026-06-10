@@ -5,6 +5,9 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Window.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ItemsControl.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/PathIcon.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/TransitioningContentControl.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Button.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Badge.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Card.axaml" />
