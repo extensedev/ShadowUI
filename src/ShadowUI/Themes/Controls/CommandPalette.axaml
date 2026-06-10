@@ -62,6 +62,7 @@
                   <!-- поле ввода -->
                   <TextBox Name="PART_SearchBox"
                            Grid.Column="1"
+                           Classes="transparent"
                            BorderThickness="0"
                            Background="Transparent"
                            Padding="8,0,8,0"
