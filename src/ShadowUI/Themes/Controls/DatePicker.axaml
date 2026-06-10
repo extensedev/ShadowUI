@@ -4,6 +4,7 @@
 
   <!-- DatePicker: поле ввода даты с иконкой-кнопкой и всплывающим ShadowCalendar -->
   <ControlTheme x:Key="{x:Type shadui:DatePicker}" TargetType="shadui:DatePicker">
+    <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
         <!-- Panel: корневой элемент, не обрезает всплывающий Popup -->
@@ -22,6 +23,7 @@
               <!-- Поле ввода даты -->
               <TextBox Name="PART_TextBox"
                        Grid.Column="0"
+                       Classes="transparent"
                        PlaceholderText="{TemplateBinding Watermark}"
                        BorderThickness="0"
                        Background="Transparent"
@@ -50,6 +52,14 @@
             </Grid>
           </Border>
 
+          <Border Name="PART_FocusRing"
+                  Margin="{DynamicResource ShadowFocusRingMargin}"
+                  BorderThickness="{DynamicResource ShadowFocusRingThickness}"
+                  CornerRadius="{DynamicResource ShadowRadiusFocusMd}"
+                  BorderBrush="{DynamicResource ShadowFocusRingBrush}"
+                  IsVisible="False"
+                  IsHitTestVisible="False" />
+
           <!-- Popup с встроенным ShadowCalendar -->
           <Popup Name="PART_Popup"
                  PlacementTarget="{TemplateBinding}"
@@ -73,7 +83,10 @@
 
     <!-- Фокус внутри контрола: добавляем focus ring вокруг рамки -->
     <Style Selector="^:focus-within /template/ Border#PART_Border">
-      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
+    </Style>
+    <Style Selector="^:focus-within /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="True" />
     </Style>
 
     <!-- Наведение курсора: выделяем рамку ring-цветом -->

@@ -14,6 +14,7 @@
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="PlaceholderForeground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
     <Setter Property="MaxDropDownHeight" Value="384" />
+    <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
         <Grid ColumnDefinitions="*,Auto">
@@ -24,6 +25,15 @@
                   BorderThickness="{TemplateBinding BorderThickness}"
                   CornerRadius="{TemplateBinding CornerRadius}"
                   BoxShadow="{DynamicResource ShadowShadowXs}" />
+
+          <Border Name="PART_FocusRing"
+                  Grid.ColumnSpan="2"
+                  Margin="{DynamicResource ShadowFocusRingMargin}"
+                  BorderThickness="{DynamicResource ShadowFocusRingThickness}"
+                  CornerRadius="{DynamicResource ShadowRadiusFocusMd}"
+                  BorderBrush="{DynamicResource ShadowFocusRingBrush}"
+                  IsVisible="False"
+                  IsHitTestVisible="False" />
 
           <TextBlock Name="PlaceholderTextBlock"
                      Grid.Column="0"
@@ -86,7 +96,9 @@
     </Style>
     <Style Selector="^:focus-visible /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
-      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="True" />
     </Style>
     <Style Selector="^:disabled">
       <Setter Property="Opacity" Value="0.5" />

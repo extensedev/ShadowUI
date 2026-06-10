@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     x:Class="ShadowUI.NeutralPalette">
   <ResourceDictionary.ThemeDictionaries>
@@ -26,6 +26,8 @@
       <SolidColorBrush x:Key="ShadowSwitchThumbBrush" Color="#FFFFFF" />
       <SolidColorBrush x:Key="ShadowSwitchThumbCheckedBrush" Color="#FFFFFF" />
       <BoxShadows x:Key="ShadowFocusRing">0 0 0 3 #80A1A1A1</BoxShadows>
+      <SolidColorBrush x:Key="ShadowFocusRingBrush" Color="#80A1A1A1" />
+      <SolidColorBrush x:Key="ShadowErrorRingBrush" Color="#33E7000B" />
       <SolidColorBrush x:Key="ShadowInputBackgroundBrush" Color="Transparent" />
       <SolidColorBrush x:Key="ShadowInputHoverBrush" Color="Transparent" />
       <SolidColorBrush x:Key="ShadowDestructiveButtonBrush" Color="#E7000B" />
@@ -67,6 +69,8 @@
       <SolidColorBrush x:Key="ShadowSwitchThumbBrush" Color="#FAFAFA" />
       <SolidColorBrush x:Key="ShadowSwitchThumbCheckedBrush" Color="#171717" />
       <BoxShadows x:Key="ShadowFocusRing">0 0 0 3 #80737373</BoxShadows>
+      <SolidColorBrush x:Key="ShadowFocusRingBrush" Color="#80737373" />
+      <SolidColorBrush x:Key="ShadowErrorRingBrush" Color="#66FF6467" />
       <SolidColorBrush x:Key="ShadowInputBackgroundBrush" Color="#0BFFFFFF" />
       <SolidColorBrush x:Key="ShadowInputHoverBrush" Color="#13FFFFFF" />
       <SolidColorBrush x:Key="ShadowDestructiveButtonBrush" Color="#99FF6467" />

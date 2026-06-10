@@ -48,8 +48,10 @@
     <Setter Property="SelectionBrush" Value="{DynamicResource ShadowAccentBrush}" />
     <Setter Property="CaretBrush" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
+        <Panel>
         <Border Name="PART_Border"
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -105,6 +107,16 @@
                               VerticalAlignment="Center" />
           </Grid>
         </Border>
+        <!-- Фокус-кольцо отдельным бордером: BoxShadow в Avalonia не увеличивает
+             радиус на величину spread — углы кольца получаются «зажатыми» -->
+        <Border Name="PART_FocusRing"
+                Margin="{DynamicResource ShadowFocusRingMargin}"
+                BorderThickness="{DynamicResource ShadowFocusRingThickness}"
+                CornerRadius="{DynamicResource ShadowRadiusFocusMd}"
+                BorderBrush="{DynamicResource ShadowFocusRingBrush}"
+                IsVisible="False"
+                IsHitTestVisible="False" />
+        </Panel>
       </ControlTemplate>
     </Setter>
 
@@ -115,12 +127,16 @@
     <!-- focus (у shadcn-инпутов hover-состояния рамки нет) -->
     <Style Selector="^:focus /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
-      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
     </Style>
-    <!-- error -->
+    <Style Selector="^:focus /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <!-- error: рамка destructive всегда, кольцо (destructive/20) — только при фокусе, как в shadcn -->
     <Style Selector="^:error /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowDestructiveBrush}" />
-      <Setter Property="BoxShadow" Value="{DynamicResource ShadowErrorRing}" />
+    </Style>
+    <Style Selector="^:error /template/ Border#PART_FocusRing">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowErrorRingBrush}" />
     </Style>
     <!-- disabled -->
     <Style Selector="^:disabled">
@@ -139,6 +155,9 @@
     <Style Selector="^.transparent:focus /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="Transparent" />
       <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
+    </Style>
+    <Style Selector="^.transparent /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="False" />
     </Style>
 
     <!-- textarea -->

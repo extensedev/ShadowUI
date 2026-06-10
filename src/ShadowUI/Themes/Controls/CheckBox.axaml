@@ -4,9 +4,11 @@
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="FontSize" Value="14" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
         <StackPanel Orientation="Horizontal" Spacing="8">
+          <Panel VerticalAlignment="Center">
           <Border Name="PART_Box" Width="16" Height="16"
                   Background="{DynamicResource ShadowInputBackgroundBrush}"
                   BorderBrush="{DynamicResource ShadowInputBrush}"
@@ -38,6 +40,14 @@
               </Path>
             </Viewbox>
           </Border>
+          <Border Name="PART_FocusRing"
+                  Margin="{DynamicResource ShadowFocusRingMargin}"
+                  BorderThickness="{DynamicResource ShadowFocusRingThickness}"
+                  CornerRadius="{DynamicResource ShadowRadiusFocusXs}"
+                  BorderBrush="{DynamicResource ShadowFocusRingBrush}"
+                  IsVisible="False"
+                  IsHitTestVisible="False" />
+          </Panel>
           <ContentPresenter Content="{TemplateBinding Content}"
                             VerticalAlignment="Center" />
         </StackPanel>
@@ -50,7 +60,9 @@
     </Style>
     <Style Selector="^:focus-visible /template/ Border#PART_Box">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
-      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="True" />
     </Style>
     <Style Selector="^:checked /template/ Path#PART_Check">
       <Setter Property="Opacity" Value="1" />

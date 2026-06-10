@@ -40,8 +40,10 @@
 
   <!-- ShadowButtonSpinner: лэйаут для NumericUpDown (именованный ключ, не глобальный) -->
   <ControlTheme x:Key="ShadowButtonSpinner" TargetType="ButtonSpinner">
+    <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
+        <Panel>
         <Border Name="PART_Border"
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -91,11 +93,21 @@
             </Border>
           </Grid>
         </Border>
+        <Border Name="PART_FocusRing"
+                Margin="{DynamicResource ShadowFocusRingMargin}"
+                BorderThickness="{DynamicResource ShadowFocusRingThickness}"
+                CornerRadius="{DynamicResource ShadowRadiusFocusMd}"
+                BorderBrush="{DynamicResource ShadowFocusRingBrush}"
+                IsVisible="False"
+                IsHitTestVisible="False" />
+        </Panel>
       </ControlTemplate>
     </Setter>
     <Style Selector="^:focus-within /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
-      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+    </Style>
+    <Style Selector="^:focus-within /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="True" />
     </Style>
     <Style Selector="^:disabled">
       <Setter Property="Opacity" Value="0.5" />
@@ -114,6 +126,7 @@
     <Setter Property="FontSize" Value="14" />
     <Setter Property="AllowSpin" Value="True" />
     <Setter Property="ShowButtonSpinner" Value="True" />
+    <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
         <ButtonSpinner Name="PART_Spinner"

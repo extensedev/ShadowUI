@@ -3,9 +3,11 @@
   <ControlTheme x:Key="{x:Type RadioButton}" TargetType="RadioButton">
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="FontSize" Value="14" />
+    <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
         <StackPanel Orientation="Horizontal" Spacing="8">
+          <Panel VerticalAlignment="Center">
           <Border Name="PART_Box" Width="16" Height="16" CornerRadius="9999"
                   Background="{DynamicResource ShadowInputBackgroundBrush}"
                   BorderBrush="{DynamicResource ShadowInputBrush}"
@@ -29,6 +31,14 @@
               </Ellipse.Transitions>
             </Ellipse>
           </Border>
+          <Border Name="PART_FocusRing"
+                  Margin="{DynamicResource ShadowFocusRingMargin}"
+                  BorderThickness="{DynamicResource ShadowFocusRingThickness}"
+                  CornerRadius="9999"
+                  BorderBrush="{DynamicResource ShadowFocusRingBrush}"
+                  IsVisible="False"
+                  IsHitTestVisible="False" />
+          </Panel>
           <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" />
         </StackPanel>
       </ControlTemplate>
@@ -40,7 +50,9 @@
     </Style>
     <Style Selector="^:focus-visible /template/ Border#PART_Box">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
-      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="True" />
     </Style>
     <Style Selector="^:disabled">
       <Setter Property="Opacity" Value="0.5" />

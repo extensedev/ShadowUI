@@ -26,6 +26,8 @@
       <SolidColorBrush x:Key="ShadowSwitchThumbBrush" Color="#FFFFFF" />
       <SolidColorBrush x:Key="ShadowSwitchThumbCheckedBrush" Color="#FFFFFF" />
       <BoxShadows x:Key="ShadowFocusRing">0 0 0 3 #80A6A09B</BoxShadows>
+      <SolidColorBrush x:Key="ShadowFocusRingBrush" Color="#80A6A09B" />
+      <SolidColorBrush x:Key="ShadowErrorRingBrush" Color="#33E7000B" />
       <SolidColorBrush x:Key="ShadowInputBackgroundBrush" Color="Transparent" />
       <SolidColorBrush x:Key="ShadowInputHoverBrush" Color="Transparent" />
       <SolidColorBrush x:Key="ShadowDestructiveButtonBrush" Color="#E7000B" />
@@ -67,6 +69,8 @@
       <SolidColorBrush x:Key="ShadowSwitchThumbBrush" Color="#FAFAF9" />
       <SolidColorBrush x:Key="ShadowSwitchThumbCheckedBrush" Color="#1C1917" />
       <BoxShadows x:Key="ShadowFocusRing">0 0 0 3 #8079716B</BoxShadows>
+      <SolidColorBrush x:Key="ShadowFocusRingBrush" Color="#8079716B" />
+      <SolidColorBrush x:Key="ShadowErrorRingBrush" Color="#66FF6467" />
       <SolidColorBrush x:Key="ShadowInputBackgroundBrush" Color="#0BFFFFFF" />
       <SolidColorBrush x:Key="ShadowInputHoverBrush" Color="#13FFFFFF" />
       <SolidColorBrush x:Key="ShadowDestructiveButtonBrush" Color="#99FF6467" />
