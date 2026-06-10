@@ -3,37 +3,89 @@
   <ControlTheme x:Key="{x:Type ToggleSwitch}" TargetType="ToggleSwitch">
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="FontSize" Value="14" />
+    <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-          <Border Name="PART_Track" Width="32" Height="18" CornerRadius="9999"
-                  Background="{DynamicResource ShadowInputBrush}"
-                  VerticalAlignment="Center">
-            <Panel Name="PART_MovingKnobs" Margin="1"
-                   HorizontalAlignment="Left" VerticalAlignment="Center">
-              <Panel Name="PART_SwitchKnob" Width="16" Height="16">
-                <Border Name="PART_Knob" CornerRadius="9999"
-                        Background="{DynamicResource ShadowSwitchThumbBrush}"
-                        BoxShadow="{DynamicResource ShadowShadowSm}" />
-              </Panel>
-            </Panel>
-          </Border>
+          <Grid Width="32" Height="18" VerticalAlignment="Center">
+            <!-- Базовый (выкл) трек -->
+            <Border Name="PART_Track" CornerRadius="9999"
+                    Background="{DynamicResource ShadowInputBrush}" />
+            <!-- Накладка вкл-цвета: плавный fade вместо смены кисти (без флика) -->
+            <Border Name="SwitchBackground" CornerRadius="9999" Opacity="0"
+                    Background="{DynamicResource ShadowPrimaryBrush}">
+              <Border.Transitions>
+                <Transitions>
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+                </Transitions>
+              </Border.Transitions>
+            </Border>
+            <!-- Ползунок -->
+            <Canvas Name="PART_SwitchKnob" Width="32" Height="18" HorizontalAlignment="Left">
+              <Border Name="SwitchKnob" Canvas.Left="1" Canvas.Top="1"
+                      Width="16" Height="16" CornerRadius="9999" ClipToBounds="True"
+                      BoxShadow="{DynamicResource ShadowShadowSm}">
+                <Border.Transitions>
+                  <Transitions>
+                    <DoubleTransition Property="Canvas.Left" Duration="0:0:0.15">
+                      <DoubleTransition.Easing>
+                        <QuarticEaseOut />
+                      </DoubleTransition.Easing>
+                    </DoubleTransition>
+                  </Transitions>
+                </Border.Transitions>
+                <Panel>
+                  <Border Name="KnobOff" CornerRadius="9999" Opacity="1"
+                          Background="{DynamicResource ShadowSwitchThumbBrush}">
+                    <Border.Transitions>
+                      <Transitions>
+                        <DoubleTransition Property="Opacity" Duration="0:0:0.05" />
+                      </Transitions>
+                    </Border.Transitions>
+                  </Border>
+                  <Border Name="KnobOn" CornerRadius="9999" Opacity="0"
+                          Background="{DynamicResource ShadowSwitchThumbCheckedBrush}">
+                    <Border.Transitions>
+                      <Transitions>
+                        <DoubleTransition Property="Opacity" Duration="0:0:0.05" />
+                      </Transitions>
+                    </Border.Transitions>
+                  </Border>
+                </Panel>
+              </Border>
+              <Grid Name="PART_MovingKnobs" />
+              <!-- пустой PART_MovingKnobs включает встроенную toggle-анимацию Avalonia -->
+            </Canvas>
+            <Border Name="PART_FocusRing"
+                    Margin="{DynamicResource ShadowFocusRingMargin}"
+                    BorderThickness="{DynamicResource ShadowFocusRingThickness}"
+                    CornerRadius="9999"
+                    BorderBrush="{DynamicResource ShadowFocusRingBrush}"
+                    IsVisible="False"
+                    IsHitTestVisible="False" />
+          </Grid>
           <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" />
         </StackPanel>
       </ControlTemplate>
     </Setter>
 
-    <Style Selector="^:checked /template/ Border#PART_Track">
-      <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Style Selector="^:unchecked /template/ Border#SwitchKnob">
+      <Setter Property="Canvas.Left" Value="1" />
     </Style>
-    <Style Selector="^:checked /template/ Panel#PART_MovingKnobs">
-      <Setter Property="HorizontalAlignment" Value="Right" />
+    <Style Selector="^:checked /template/ Border#SwitchBackground">
+      <Setter Property="Opacity" Value="1" />
     </Style>
-    <Style Selector="^:checked /template/ Border#PART_Knob">
-      <Setter Property="Background" Value="{DynamicResource ShadowSwitchThumbCheckedBrush}" />
+    <Style Selector="^:checked /template/ Border#SwitchKnob">
+      <Setter Property="Canvas.Left" Value="15" />
     </Style>
-    <Style Selector="^:focus-visible /template/ Border#PART_Track">
-      <Setter Property="BoxShadow" Value="{DynamicResource ShadowFocusRing}" />
+    <Style Selector="^:checked /template/ Border#KnobOff">
+      <Setter Property="Opacity" Value="0" />
+    </Style>
+    <Style Selector="^:checked /template/ Border#KnobOn">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="True" />
     </Style>
     <Style Selector="^:disabled">
       <Setter Property="Opacity" Value="0.5" />
