@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Семантические цвета статусов (success/warning/info). Палитро-независимы
-       (зелёный/янтарный/синий не зависят от gray-палитры), но различаются Light/Dark.
-       Значения — уровни Tailwind: 600 для Light, 500 для Dark. -->
+  <!-- Semantic status colors (success/warning/info). Palette-independent
+       (green/amber/blue do not depend on the gray palette) but differ between Light/Dark.
+       Values are Tailwind levels: 600 for Light, 500 for Dark. -->
   <ResourceDictionary.ThemeDictionaries>
     <ResourceDictionary x:Key="Light">
       <SolidColorBrush x:Key="ShadowSuccessBrush" Color="#16A34A" />

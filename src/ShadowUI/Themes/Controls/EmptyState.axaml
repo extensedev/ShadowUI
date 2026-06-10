@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Тема EmptyState: пустое состояние с иконкой, заголовком, описанием и кнопкой действия -->
+  <!-- EmptyState theme: empty state with an icon, title, description and action button -->
   <ControlTheme x:Key="{x:Type shadui:EmptyState}" TargetType="shadui:EmptyState">
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
@@ -11,13 +11,13 @@
       <ControlTemplate>
         <StackPanel HorizontalAlignment="Center" Spacing="12">
 
-          <!-- иконка -->
+          <!-- icon -->
           <ContentPresenter Name="PART_Icon"
                             Content="{TemplateBinding Icon}"
                             HorizontalAlignment="Center"
                             Margin="0,0,0,4" />
 
-          <!-- заголовок -->
+          <!-- title -->
           <TextBlock Name="PART_Title"
                      Text="{TemplateBinding Title}"
                      Classes="h3"
@@ -25,7 +25,7 @@
                      Foreground="{DynamicResource ShadowForegroundBrush}"
                      IsVisible="{TemplateBinding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
 
-          <!-- описание -->
+          <!-- description -->
           <TextBlock Name="PART_Description"
                      Text="{TemplateBinding Description}"
                      Classes="muted"
@@ -35,7 +35,7 @@
                      Foreground="{DynamicResource ShadowMutedForegroundBrush}"
                      IsVisible="{TemplateBinding Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
 
-          <!-- кнопка действия — скрыта при null ActionContent -->
+          <!-- action button: hidden when ActionContent is null -->
           <Button Name="PART_ActionButton"
                   Content="{TemplateBinding ActionContent}"
                   Command="{TemplateBinding ActionCommand}"

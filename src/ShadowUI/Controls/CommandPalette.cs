@@ -52,6 +52,10 @@ public class CommandPalette : TemplatedControl
 
     public static readonly StyledProperty<int> SelectedIndexProperty =
         AvaloniaProperty.Register<CommandPalette, int>(nameof(SelectedIndex), defaultValue: -1);
+
+    public static readonly StyledProperty<string> SearchPlaceholderProperty =
+        AvaloniaProperty.Register<CommandPalette, string>(nameof(SearchPlaceholder),
+            defaultValue: "Type a command or search...");
 #pragma warning restore CS1591
 
     /// <summary>Whether the palette is open.</summary>
@@ -73,6 +77,13 @@ public class CommandPalette : TemplatedControl
     {
         get => GetValue(SearchTextProperty);
         set => SetValue(SearchTextProperty, value);
+    }
+
+    /// <summary>Search field placeholder.</summary>
+    public string SearchPlaceholder
+    {
+        get => GetValue(SearchPlaceholderProperty);
+        set => SetValue(SearchPlaceholderProperty, value);
     }
 
     /// <summary>Index of the selected command in the filtered list.</summary>

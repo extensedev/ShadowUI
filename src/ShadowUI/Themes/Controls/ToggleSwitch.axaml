@@ -8,10 +8,10 @@
       <ControlTemplate>
         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
           <Grid Width="32" Height="18" VerticalAlignment="Center">
-            <!-- Базовый (выкл) трек -->
+            <!-- Base (off) track -->
             <Border Name="PART_Track" CornerRadius="9999"
                     Background="{DynamicResource ShadowInputBrush}" />
-            <!-- Накладка вкл-цвета: плавный fade вместо смены кисти (без флика) -->
+            <!-- On-color overlay: smooth fade instead of a brush swap (no flicker) -->
             <Border Name="SwitchBackground" CornerRadius="9999" Opacity="0"
                     Background="{DynamicResource ShadowPrimaryBrush}">
               <Border.Transitions>
@@ -20,7 +20,7 @@
                 </Transitions>
               </Border.Transitions>
             </Border>
-            <!-- Ползунок -->
+            <!-- Knob -->
             <Canvas Name="PART_SwitchKnob" Width="32" Height="18" HorizontalAlignment="Left">
               <Border Name="SwitchKnob" Canvas.Left="1" Canvas.Top="1"
                       Width="16" Height="16" CornerRadius="9999" ClipToBounds="True"
@@ -54,7 +54,7 @@
                 </Panel>
               </Border>
               <Grid Name="PART_MovingKnobs" />
-              <!-- пустой PART_MovingKnobs включает встроенную toggle-анимацию Avalonia -->
+              <!-- empty PART_MovingKnobs enables Avalonia's built-in toggle animation -->
             </Canvas>
             <Border Name="PART_FocusRing"
                     Margin="{DynamicResource ShadowFocusRingMargin}"

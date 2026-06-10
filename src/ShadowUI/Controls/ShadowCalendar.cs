@@ -45,6 +45,10 @@ public class ShadowCalendar : TemplatedControl
     public static readonly StyledProperty<DateTime> DisplayMonthProperty =
         AvaloniaProperty.Register<ShadowCalendar, DateTime>(nameof(DisplayMonth),
             defaultValue: new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1));
+
+    /// <summary>FirstDayOfWeek registered property.</summary>
+    public static readonly StyledProperty<DayOfWeek?> FirstDayOfWeekProperty =
+        AvaloniaProperty.Register<ShadowCalendar, DayOfWeek?>(nameof(FirstDayOfWeek));
 #pragma warning restore CS1591
 
     /// <summary>Selected date (Single mode, TwoWay).</summary>
@@ -82,10 +86,21 @@ public class ShadowCalendar : TemplatedControl
         set => SetValue(DisplayMonthProperty, value);
     }
 
+    /// <summary>First day of the week; null means it is taken from the current culture.</summary>
+    public DayOfWeek? FirstDayOfWeek
+    {
+        get => GetValue(FirstDayOfWeekProperty);
+        set => SetValue(FirstDayOfWeekProperty, value);
+    }
+
+    private DayOfWeek EffectiveFirstDayOfWeek =>
+        FirstDayOfWeek ?? CultureInfo.CurrentUICulture.DateTimeFormat.FirstDayOfWeek;
+
     /// <inheritdoc />
     protected override Type StyleKeyOverride => typeof(ShadowCalendar);
 
     private UniformGrid? _daysGrid;
+    private UniformGrid? _weekdaysGrid;
     private readonly List<Button> _dayButtons = new();
     private TextBlock? _monthYearText;
     private Button? _prevButton;
@@ -104,6 +119,11 @@ public class ShadowCalendar : TemplatedControl
             s.SetCurrentValue(SelectedEndDateProperty, (DateTime?)null);
             s.RefreshDayGrid();
         });
+        FirstDayOfWeekProperty.Changed.AddClassHandler<ShadowCalendar>((s, _) =>
+        {
+            s.BuildWeekdayHeaders();
+            s.RefreshDayGrid();
+        });
     }
 
     /// <inheritdoc />
@@ -120,13 +140,42 @@ public class ShadowCalendar : TemplatedControl
         _nextButton = e.NameScope.Find<Button>("PART_NextButton");
         _monthYearText = e.NameScope.Find<TextBlock>("PART_MonthYearText");
         _daysGrid = e.NameScope.Find<UniformGrid>("PART_DaysGrid");
+        _weekdaysGrid = e.NameScope.Find<UniformGrid>("PART_WeekdaysGrid");
 
         if (_prevButton is not null)
             _prevButton.AddHandler(Button.ClickEvent, OnPrevClick);
         if (_nextButton is not null)
             _nextButton.AddHandler(Button.ClickEvent, OnNextClick);
 
+        BuildWeekdayHeaders();
         BuildDayGrid();
+    }
+
+    /// <summary>Weekday headers from the culture, starting at EffectiveFirstDayOfWeek.</summary>
+    private void BuildWeekdayHeaders()
+    {
+        if (_weekdaysGrid is null) return;
+
+        _weekdaysGrid.Children.Clear();
+
+        var names = CultureInfo.CurrentUICulture.DateTimeFormat.AbbreviatedDayNames;
+        int first = (int)EffectiveFirstDayOfWeek;
+        for (int i = 0; i < 7; i++)
+        {
+            var name = names[(first + i) % 7];
+            var tb = new TextBlock
+            {
+                Text = name.Length > 2 ? name[..2] : name,
+                Width = 36,
+                Height = 28,
+                TextAlignment = Avalonia.Media.TextAlignment.Center,
+                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+            };
+            tb.Classes.Add("muted");
+            tb.Classes.Add("small");
+            _weekdaysGrid.Children.Add(tb);
+        }
     }
 
     private void OnPrevClick(object? sender, RoutedEventArgs e)
@@ -153,6 +202,12 @@ public class ShadowCalendar : TemplatedControl
         for (int i = 0; i < 42; i++)
         {
             var button = new Button { Tag = i };
+            // ghost/icon from the Button theme (36x36, transparent, hover accent); calendar-day is for variant styles.
+            // ControlTheme child styles cannot reach elements created from code-behind (TemplatedParent == null),
+            // so the entire button look is assembled from classes + global styles in Controls.axaml.
+            button.Classes.Add("ghost");
+            button.Classes.Add("icon");
+            button.Classes.Add("calendar-day");
             button.AddHandler(Button.ClickEvent, OnDayButtonClick);
             _daysGrid.Children.Add(button);
             _dayButtons.Add(button);
@@ -166,8 +221,8 @@ public class ShadowCalendar : TemplatedControl
         if (_daysGrid is null) return;
 
         var firstDayOfMonth = new DateTime(DisplayMonth.Year, DisplayMonth.Month, 1);
-        // Offset: Monday = 0, Sunday = 6
-        int offset = ((int)firstDayOfMonth.DayOfWeek + 6) % 7;
+        // Offset of the first grid cell relative to the first day of the week (from the culture or FirstDayOfWeek)
+        int offset = ((int)firstDayOfMonth.DayOfWeek - (int)EffectiveFirstDayOfWeek + 7) % 7;
 
         for (int i = 0; i < _dayButtons.Count; i++)
         {

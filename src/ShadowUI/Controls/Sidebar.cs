@@ -76,6 +76,10 @@ public class Sidebar : ItemsControl
 
     static Sidebar()
     {
+        // Gap between groups (an ItemsPanel setter in a ControlTheme is not applied)
+        ItemsPanelProperty.OverrideDefaultValue<Sidebar>(
+            new Avalonia.Controls.Templates.FuncTemplate<Panel?>(() => new StackPanel { Spacing = 8 }));
+
         IsCollapsedProperty.Changed.AddClassHandler<Sidebar>((s, _) => s.ApplyCollapsedState());
         ExpandedWidthProperty.Changed.AddClassHandler<Sidebar>((s, _) => s.UpdateWidth());
         CollapsedWidthProperty.Changed.AddClassHandler<Sidebar>((s, _) => s.UpdateWidth());

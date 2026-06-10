@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Радиусы по формуле shadcn: база radius = 0.625rem (10px) -->
+  <!-- Radii per the shadcn formula: base radius = 0.625rem (10px) -->
   <CornerRadius x:Key="ShadowRadiusSm">6</CornerRadius>
   <CornerRadius x:Key="ShadowRadiusMd">8</CornerRadius>
   <CornerRadius x:Key="ShadowRadius">10</CornerRadius>
@@ -8,14 +8,14 @@
   <CornerRadius x:Key="ShadowRadiusXl">14</CornerRadius>
   <Thickness x:Key="ShadowBorderThickness">1</Thickness>
 
-  <!-- Фокус-кольцо: 3px снаружи элемента; внешний радиус = радиус элемента + 3 -->
+  <!-- Focus ring: 3px outside the element; outer radius = element radius + 3 -->
   <CornerRadius x:Key="ShadowRadiusFocusXs">7</CornerRadius>
   <CornerRadius x:Key="ShadowRadiusFocusSm">9</CornerRadius>
   <CornerRadius x:Key="ShadowRadiusFocusMd">11</CornerRadius>
   <Thickness x:Key="ShadowFocusRingThickness">3</Thickness>
   <Thickness x:Key="ShadowFocusRingMargin">-3</Thickness>
 
-  <!-- Тени shadcn (чёрный с низкой альфой; одинаковы для Light и Dark) -->
+  <!-- shadcn shadows (black with low alpha; identical for Light and Dark) -->
   <BoxShadows x:Key="ShadowShadowXs">0 1 2 0 #0D000000</BoxShadows>
   <BoxShadows x:Key="ShadowShadowSm">0 1 3 0 #1A000000, 0 1 2 -1 #1A000000</BoxShadows>
   <BoxShadows x:Key="ShadowShadowMd">0 4 6 -1 #1A000000, 0 2 4 -2 #1A000000</BoxShadows>

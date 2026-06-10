@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Select (ComboBox) в стиле shadcn -->
+  <!-- shadcn-style Select (ComboBox) -->
   <ControlTheme x:Key="{x:Type ComboBox}" TargetType="ComboBox">
     <Setter Property="Background" Value="{DynamicResource ShadowInputBackgroundBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
@@ -90,7 +90,7 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- hover только в dark (bg-input/50); в light токен Transparent -->
+    <!-- hover only in dark (bg-input/50); in light the token is Transparent -->
     <Style Selector="^:pointerover /template/ Border#PART_Border">
       <Setter Property="Background" Value="{DynamicResource ShadowInputHoverBrush}" />
     </Style>

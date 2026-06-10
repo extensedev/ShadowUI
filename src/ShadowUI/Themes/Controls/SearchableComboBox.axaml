@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
-  <!-- ComboBox с поиском в стиле shadcn -->
+  <!-- shadcn-style searchable ComboBox -->
   <ControlTheme x:Key="{x:Type shadui:SearchableComboBox}" TargetType="shadui:SearchableComboBox">
     <Setter Property="Background" Value="{DynamicResource ShadowInputBackgroundBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
@@ -81,11 +81,11 @@
                     ClipToBounds="True"
                     Padding="4">
               <StackPanel Orientation="Vertical">
-                <!-- поле поиска в popup -->
+                <!-- search field in the popup -->
                 <TextBox Name="PART_SearchBox"
                          Margin="0,0,0,4"
                          PlaceholderText="{TemplateBinding SearchPlaceholder}" />
-                <!-- список результатов -->
+                <!-- results list -->
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto">
                   <ItemsPresenter Name="PART_ItemsPresenter"
@@ -98,7 +98,7 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- hover только в dark (bg-input/50); в light токен Transparent -->
+    <!-- hover only in dark (bg-input/50); in light the token is Transparent -->
     <Style Selector="^:pointerover /template/ Border#PART_Border">
       <Setter Property="Background" Value="{DynamicResource ShadowInputHoverBrush}" />
     </Style>

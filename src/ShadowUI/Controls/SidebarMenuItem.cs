@@ -37,6 +37,10 @@ public class SidebarMenuItem : ItemsControl
 
     static SidebarMenuItem()
     {
+        // Gap between sub-items (an ItemsPanel setter in a ControlTheme is not applied)
+        ItemsPanelProperty.OverrideDefaultValue<SidebarMenuItem>(
+            new Avalonia.Controls.Templates.FuncTemplate<Panel?>(() => new StackPanel { Spacing = 6 }));
+
         IsExpandedProperty.Changed.AddClassHandler<SidebarMenuItem>((s, _) =>
             s.PseudoClasses.Set(":expanded", s.IsExpanded));
         IsActiveProperty.Changed.AddClassHandler<SidebarMenuItem>((s, _) =>

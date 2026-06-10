@@ -2,25 +2,25 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- DatePicker: поле ввода даты с иконкой-кнопкой и всплывающим ShadowCalendar -->
+  <!-- DatePicker: date input field with an icon button and a popup ShadowCalendar -->
   <ControlTheme x:Key="{x:Type shadui:DatePicker}" TargetType="shadui:DatePicker">
     <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
-        <!-- Panel: корневой элемент, не обрезает всплывающий Popup -->
+        <!-- Panel: root element, does not clip the popup -->
         <Panel>
 
-          <!-- Внешняя рамка, объединяющая TextBox и кнопку открытия -->
+          <!-- Outer border wrapping the TextBox and the open button -->
           <Border Name="PART_Border"
                   Background="{TemplateBinding Background}"
                   BorderBrush="{DynamicResource ShadowInputBrush}"
                   BorderThickness="1"
                   CornerRadius="{DynamicResource ShadowRadiusMd}">
 
-            <!-- Grid: col 0 = TextBox, col 1 = кнопка-иконка -->
+            <!-- Grid: col 0 = TextBox, col 1 = icon button -->
             <Grid ColumnDefinitions="*,Auto" ClipToBounds="False">
 
-              <!-- Поле ввода даты -->
+              <!-- Date input field -->
               <TextBox Name="PART_TextBox"
                        Grid.Column="0"
                        Classes="transparent"
@@ -31,14 +31,14 @@
                        VerticalContentAlignment="Center"
                        Padding="12,0,8,0" />
 
-              <!-- Кнопка открытия Popup с иконкой календаря -->
+              <!-- Button that opens the Popup, with a calendar icon -->
               <Button Name="PART_PopupButton"
                       Grid.Column="1"
                       Classes="ghost icon"
                       VerticalAlignment="Stretch"
                       Padding="8,0"
                       CornerRadius="0,8,8,0">
-                <!-- Иконка календаря (Lucide calendar) -->
+                <!-- Calendar icon (Lucide calendar) -->
                 <Path Data="M 8 2 V 6 M 16 2 V 6 M 3 10 H 21 M 5 4 H 19 A 2 2 0 0 1 21 6 V 20 A 2 2 0 0 1 19 22 H 5 A 2 2 0 0 1 3 20 V 6 A 2 2 0 0 1 5 4 Z"
                       Width="16"
                       Height="16"
@@ -60,7 +60,7 @@
                   IsVisible="False"
                   IsHitTestVisible="False" />
 
-          <!-- Popup с встроенным ShadowCalendar -->
+          <!-- Popup with the embedded ShadowCalendar -->
           <Popup Name="PART_Popup"
                  PlacementTarget="{TemplateBinding}"
                  Placement="BottomEdgeAlignedLeft"
@@ -81,7 +81,7 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- Фокус внутри контрола: добавляем focus ring вокруг рамки -->
+    <!-- Focus inside the control: add a focus ring around the border -->
     <Style Selector="^:focus-within /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
     </Style>
@@ -89,7 +89,7 @@
       <Setter Property="IsVisible" Value="True" />
     </Style>
 
-    <!-- Наведение курсора: выделяем рамку ring-цветом -->
+    <!-- Pointer over: highlight the border with the ring color -->
     <Style Selector="^:pointerover /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
     </Style>

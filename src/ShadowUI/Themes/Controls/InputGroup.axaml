@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- InputGroup — обёртка поля ввода с prefix/suffix-слотами -->
+  <!-- InputGroup: input field wrapper with prefix/suffix slots -->
   <ControlTheme x:Key="{x:Type shadui:InputGroup}" TargetType="shadui:InputGroup">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -10,7 +10,7 @@
       <ControlTemplate>
         <Grid ColumnDefinitions="Auto,*,Auto">
 
-          <!-- prefix-слот -->
+          <!-- prefix slot -->
           <Border Name="PART_Prefix"
                   Grid.Column="0"
                   Background="{DynamicResource ShadowMutedBrush}"
@@ -25,7 +25,7 @@
                               VerticalAlignment="Center" />
           </Border>
 
-          <!-- основной контент -->
+          <!-- main content -->
           <ContentPresenter Name="PART_Content"
                             Grid.Column="1"
                             Content="{TemplateBinding Content}"
@@ -33,7 +33,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch" />
 
-          <!-- suffix-слот -->
+          <!-- suffix slot -->
           <Border Name="PART_Suffix"
                   Grid.Column="2"
                   Background="{DynamicResource ShadowMutedBrush}"

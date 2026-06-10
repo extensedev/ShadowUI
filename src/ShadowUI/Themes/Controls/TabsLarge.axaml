@@ -1,6 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Крупные табы: TabControl Classes="largetabs". Иконка + жирный текст, активный белый с тенью, равная ширина. -->
+  <!-- Large tabs: TabControl Classes="largetabs". Icon + bold text, active tab is white with a shadow, equal widths. -->
   <Style Selector="TabControl.largetabs">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="ItemsPanel">

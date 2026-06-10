@@ -21,22 +21,48 @@
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 CornerRadius="{TemplateBinding CornerRadius}">
-          <ContentPresenter Content="{TemplateBinding Content}"
-                            Padding="{TemplateBinding Padding}"
-                            HorizontalAlignment="Center" VerticalAlignment="Center" />
+          <Panel>
+            <!-- hover layer (muted): opacity is animated, no brush flicker -->
+            <Border Name="PART_Hover" Opacity="0"
+                    Background="{DynamicResource ShadowMutedBrush}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+              <Border.Transitions>
+                <Transitions>
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                </Transitions>
+              </Border.Transitions>
+            </Border>
+            <!-- active/pressed state layer (accent) on top of hover -->
+            <Border Name="PART_Active" Opacity="0"
+                    Background="{DynamicResource ShadowAccentBrush}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+              <Border.Transitions>
+                <Transitions>
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                </Transitions>
+              </Border.Transitions>
+            </Border>
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              Padding="{TemplateBinding Padding}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Panel>
         </Border>
       </ControlTemplate>
     </Setter>
 
-    <Style Selector="^:pointerover /template/ Border#PART_Border">
-      <Setter Property="Background" Value="{DynamicResource ShadowMutedBrush}" />
+    <Style Selector="^:pointerover /template/ Border#PART_Hover">
+      <Setter Property="Opacity" Value="1" />
     </Style>
-    <Style Selector="^:checked /template/ Border#PART_Border">
-      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    <Style Selector="^:pressed /template/ Border#PART_Active">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="^:checked /template/ Border#PART_Active">
+      <Setter Property="Opacity" Value="1" />
     </Style>
     <Style Selector="^:checked">
       <Setter Property="Foreground" Value="{DynamicResource ShadowAccentForegroundBrush}" />
     </Style>
+
     <Style Selector="^.outline">
       <Setter Property="BorderThickness" Value="1" />
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />

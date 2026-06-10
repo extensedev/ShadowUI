@@ -107,8 +107,8 @@
                               VerticalAlignment="Center" />
           </Grid>
         </Border>
-        <!-- Фокус-кольцо отдельным бордером: BoxShadow в Avalonia не увеличивает
-             радиус на величину spread — углы кольца получаются «зажатыми» -->
+        <!-- Focus ring as a separate border: BoxShadow in Avalonia does not grow
+             the radius by the spread amount, so the ring corners look "pinched" -->
         <Border Name="PART_FocusRing"
                 Margin="{DynamicResource ShadowFocusRingMargin}"
                 BorderThickness="{DynamicResource ShadowFocusRingThickness}"
@@ -124,14 +124,14 @@
     <Style Selector="^:not(:empty) /template/ TextBlock#PART_Watermark">
       <Setter Property="IsVisible" Value="False" />
     </Style>
-    <!-- focus (у shadcn-инпутов hover-состояния рамки нет) -->
+    <!-- focus (shadcn inputs have no border hover state) -->
     <Style Selector="^:focus /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
     </Style>
     <Style Selector="^:focus /template/ Border#PART_FocusRing">
       <Setter Property="IsVisible" Value="True" />
     </Style>
-    <!-- error: рамка destructive всегда, кольцо (destructive/20) — только при фокусе, как в shadcn -->
+    <!-- error: destructive border always; the ring (destructive/20) only when focused, as in shadcn -->
     <Style Selector="^:error /template/ Border#PART_Border">
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowDestructiveBrush}" />
     </Style>
@@ -143,7 +143,7 @@
       <Setter Property="Opacity" Value="0.5" />
     </Style>
 
-    <!-- transparent: для вложенных инпутов (NumericUpDown и т.п.) -->
+    <!-- transparent: for nested inputs (NumericUpDown etc.) -->
     <Style Selector="^.transparent /template/ Border#PART_Border">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="BorderBrush" Value="Transparent" />
@@ -168,12 +168,12 @@
       <Setter Property="VerticalContentAlignment" Value="Top" />
     </Style>
 
-    <!-- otp-cell: лёгкая подсветка при hover -->
+    <!-- otp-cell: subtle highlight on hover -->
     <Style Selector="^.otp-cell:pointerover /template/ Border#PART_Border">
       <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>
 
-    <!-- PasswordReveal: кнопка показа пароля появляется когда есть текст -->
+    <!-- PasswordReveal: the reveal button appears when there is text -->
     <Style Selector="^.PasswordReveal[IsReadOnly=False]:not(TextBox:empty) /template/ ContentPresenter#PART_InnerRightContent">
       <Setter Property="Content">
         <Template>

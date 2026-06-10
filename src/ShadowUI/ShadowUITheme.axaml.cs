@@ -14,7 +14,7 @@ public class ShadowUITheme : Styles
 {
     private IResourceProvider? _palette;
 
-    /// <summary>Creates the theme and applies the default palette (<see cref="ShadowUI.BaseColor.Zinc"/>).</summary>
+    /// <summary>Creates the theme and applies the default palette (<see cref="ShadowUI.BaseColor.Charcoal"/>).</summary>
     public ShadowUITheme(IServiceProvider? serviceProvider = null)
     {
         AvaloniaXamlLoader.Load(serviceProvider, this);
@@ -23,7 +23,7 @@ public class ShadowUITheme : Styles
 
     /// <summary>Base neutral palette of the theme.</summary>
     public static readonly StyledProperty<BaseColor> BaseColorProperty =
-        AvaloniaProperty.Register<ShadowUITheme, BaseColor>(nameof(BaseColor), BaseColor.Zinc);
+        AvaloniaProperty.Register<ShadowUITheme, BaseColor>(nameof(BaseColor), BaseColor.Charcoal);
 
     /// <summary>Base neutral palette of the theme.</summary>
     public BaseColor BaseColor
@@ -58,6 +58,14 @@ public class ShadowUITheme : Styles
         BaseColor.Stone => new StonePalette(),
         BaseColor.Gray => new GrayPalette(),
         BaseColor.Neutral => new NeutralPalette(),
+        BaseColor.Graphite => new GraphitePalette(),
+        BaseColor.Charcoal => new CharcoalPalette(),
+        BaseColor.Ash => new AshPalette(),
+        BaseColor.Blue => new BluePalette(),
+        BaseColor.Green => new GreenPalette(),
+        BaseColor.Violet => new VioletPalette(),
+        BaseColor.Rose => new RosePalette(),
+        BaseColor.Orange => new OrangePalette(),
         _ => new ZincPalette(),
     };
 }

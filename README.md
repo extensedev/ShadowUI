@@ -43,8 +43,7 @@ dotnet add package ShadowUI
              xmlns:shadui="using:ShadowUI"
              RequestedThemeVariant="Dark">
   <Application.Styles>
-    <FluentTheme />
-    <shadui:ShadowUITheme BaseColor="Zinc" />
+    <shadui:ShadowUITheme />  <!-- default: Charcoal; or BaseColor="Zinc|Blue|..." -->
   </Application.Styles>
 </Application>
 ```
@@ -82,12 +81,16 @@ var theme = Application.Current!.Styles.OfType<ShadowUITheme>().First();
 theme.BaseColor = BaseColor.Slate;
 ```
 
-Color palettes (`BaseColor`): `Zinc` (default), `Slate`, `Stone`, `Gray`, `Neutral`.
+Color palettes (`BaseColor`):
+
+- Neutrals: `Zinc`, `Slate` (cool), `Stone` (warm), `Gray` (cool, Tailwind gray), `Neutral` (true gray).
+- Lifted darks: `Charcoal` (default) -> `Graphite` -> `Ash` (progressively lighter dark backgrounds).
+- Colored accents (Zinc surfaces + colored primary): `Blue`, `Green`, `Violet`, `Rose`, `Orange`.
 
 ## Components
 
 ### Base
-Button (6 variants + icon), Badge (+ success/warning/info), Card, Separator, Label,
+Button (`default` `secondary` `destructive` `outline` `ghost` `link` + `icon`), Badge (+ success/warning/info), Card, Separator, Label,
 TextBox / Textarea, CheckBox, Switch, RadioButton, Toggle, ToggleGroup, Slider,
 ProgressBar, Avatar, Skeleton, Kbd, Tooltip, AspectRatio, Spinner, ColorPicker
 
@@ -99,7 +102,7 @@ Menu / DropdownMenu / ContextMenu, NavigationMenu, Menubar, HoverCard,
 **CommandPalette** (⌘K, fuzzy search, keyboard nav), Sheet / Drawer, ScrollBar
 
 ### Forms & Input
-SearchableComboBox, OtpInput, InputGroup, ButtonGroup, Field, ColorPicker
+NumericUpDown, SearchableComboBox, OtpInput, InputGroup, ButtonGroup, Field, ColorPicker
 
 ### Data & Tables
 ShadowDataTable (sort, filter, pagination), ShadowPagination, Resizable,

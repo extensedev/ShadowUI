@@ -75,7 +75,7 @@ public class BarChart : Control
         if (pts is null || pts.Count == 0) return;
 
         IBrush? brush = null;
-        if (this.TryFindResource(BarBrushKey, out var res) && res is IBrush b)
+        if (this.TryFindResource(BarBrushKey, ActualThemeVariant, out var res) && res is IBrush b)
             brush = b;
         brush ??= Brushes.SteelBlue;
 
@@ -108,7 +108,7 @@ public class BarChart : Control
             _barRects.Add(rect);
         }
 
-        IBrush labelBrush = this.TryFindResource("ShadowMutedForegroundBrush", out var lr) && lr is IBrush lb
+        IBrush labelBrush = this.TryFindResource("ShadowMutedForegroundBrush", ActualThemeVariant, out var lr) && lr is IBrush lb
             ? lb
             : Brushes.Gray;
 
@@ -217,7 +217,7 @@ public class LineChart : Control
         if (pts is null || pts.Count == 0) return;
 
         IBrush? brush = null;
-        if (this.TryFindResource(LineBrushKey, out var res) && res is IBrush b)
+        if (this.TryFindResource(LineBrushKey, ActualThemeVariant, out var res) && res is IBrush b)
             brush = b;
         brush ??= Brushes.CornflowerBlue;
 
@@ -252,7 +252,7 @@ public class LineChart : Control
         foreach (var p in _pointCoords)
             context.DrawEllipse(brush, null, p, 4, 4);
 
-        IBrush labelBrush = this.TryFindResource("ShadowMutedForegroundBrush", out var lr) && lr is IBrush lb
+        IBrush labelBrush = this.TryFindResource("ShadowMutedForegroundBrush", ActualThemeVariant, out var lr) && lr is IBrush lb
             ? lb
             : Brushes.Gray;
 

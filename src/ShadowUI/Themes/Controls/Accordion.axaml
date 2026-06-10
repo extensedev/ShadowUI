@@ -6,7 +6,7 @@
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">
       <ControlTemplate>
-        <ItemsPresenter />
+        <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
       </ControlTemplate>
     </Setter>
   </ControlTheme>

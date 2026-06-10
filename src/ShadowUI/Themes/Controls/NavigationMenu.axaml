@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Горизонтальный контейнер NavigationMenu -->
+  <!-- Horizontal NavigationMenu container -->
   <ControlTheme x:Key="{x:Type shadui:NavigationMenu}" TargetType="shadui:NavigationMenu">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
@@ -14,7 +14,7 @@
         </Border>
       </ControlTemplate>
     </Setter>
-    <!-- Горизонтальный layout через ItemsPanel -->
+    <!-- Horizontal layout via ItemsPanel -->
     <Setter Property="ItemsPanel">
       <ItemsPanelTemplate>
         <StackPanel Orientation="Horizontal" Spacing="4" />
@@ -22,7 +22,7 @@
     </Setter>
   </ControlTheme>
 
-  <!-- Пункт навигационного меню с hover-flyout -->
+  <!-- Navigation menu item with a hover flyout -->
   <ControlTheme x:Key="{x:Type shadui:NavigationMenuItem}" TargetType="shadui:NavigationMenuItem">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
@@ -30,13 +30,13 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>
-          <!-- Триггер (кнопка-заголовок) — при наведении курсора открывает flyout -->
+          <!-- Trigger (header button): opens the flyout on pointer hover -->
           <Border Name="PART_Trigger"
                   Background="Transparent"
                   CornerRadius="{DynamicResource ShadowRadiusMd}"
                   Padding="12,8"
                   Cursor="Hand">
-              <!-- Заголовок пункта меню (текст триггера) -->
+              <!-- Menu item header (trigger text) -->
             <ContentPresenter Content="{TemplateBinding Header}"
                               ContentTemplate="{TemplateBinding HeaderTemplate}"
                               HorizontalAlignment="Center"
@@ -45,7 +45,7 @@
                               TextElement.Foreground="{TemplateBinding Foreground}" />
           </Border>
 
-          <!-- Flyout-подменю (открывается при наведении) -->
+          <!-- Flyout submenu (opens on hover) -->
           <Popup Name="PART_Popup"
                  IsLightDismissEnabled="True"
                  Placement="BottomEdgeAlignedLeft"
@@ -59,7 +59,7 @@
                     Padding="16"
                     BoxShadow="{DynamicResource ShadowShadowMd}"
                     MinWidth="200">
-              <!-- Контент подменю -->
+              <!-- Submenu content -->
               <ContentPresenter Content="{TemplateBinding Content}"
                                 ContentTemplate="{TemplateBinding ContentTemplate}" />
             </Border>
@@ -68,12 +68,12 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- Состояние при наведении: подсветка триггера -->
+    <!-- Hover state: trigger highlight -->
     <Style Selector="^:pointerover /template/ Border#PART_Trigger">
       <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>
 
-    <!-- Состояние при открытом flyout: подсветка триггера -->
+    <!-- Open-flyout state: trigger highlight -->
     <Style Selector="^:flyout-open /template/ Border#PART_Trigger">
       <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>

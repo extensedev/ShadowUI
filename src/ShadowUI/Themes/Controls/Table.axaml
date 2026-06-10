@@ -1,10 +1,10 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-  <!-- Базовые стили таблицы (аналог shadcn Table). Компонуется из Border.table +
-       Grid со строками; ячейки — TextBlock с классами .th / .td. -->
+  <!-- Base table styles (analogous to shadcn Table). Composed of Border.table +
+       a Grid with rows; cells are TextBlocks with .th / .td classes. -->
 
-  <!-- Обёртка таблицы -->
+  <!-- Table wrapper -->
   <Style Selector="Border.table">
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="BorderThickness" Value="1" />
@@ -12,21 +12,21 @@
     <Setter Property="ClipToBounds" Value="True" />
   </Style>
 
-  <!-- Строка-заголовок (фон muted) -->
+  <!-- Header row (muted background) -->
   <Style Selector="Border.thead">
     <Setter Property="Background" Value="{DynamicResource ShadowMutedBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="BorderThickness" Value="0,0,0,1" />
   </Style>
 
-  <!-- Обычная строка (нижняя граница) -->
+  <!-- Regular row (bottom border) -->
   <Style Selector="Border.tr">
-    <!-- Transparent (не null): иначе строка не хит-тестится между ячейками и hover мигает -->
+    <!-- Transparent (not null): otherwise the row is not hit-tested between cells and hover flickers -->
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="BorderThickness" Value="0,0,0,1" />
   </Style>
-  <!-- Последняя строка без нижней границы -->
+  <!-- Last row without a bottom border -->
   <Style Selector="Border.tr.last">
     <Setter Property="BorderThickness" Value="0" />
   </Style>
@@ -34,7 +34,7 @@
     <Setter Property="Background" Value="{DynamicResource ShadowMutedBrush}" />
   </Style>
 
-  <!-- Ячейка-заголовок -->
+  <!-- Header cell -->
   <Style Selector="TextBlock.th">
     <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
     <Setter Property="FontSize" Value="13" />
@@ -43,7 +43,7 @@
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
 
-  <!-- Ячейка данных -->
+  <!-- Data cell -->
   <Style Selector="TextBlock.td">
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="FontSize" Value="14" />

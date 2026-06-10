@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Menubar — горизонтальная строка меню в стиле shadcn new-york -->
+  <!-- Menubar: horizontal menu bar in the shadcn new-york style -->
   <ControlTheme x:Key="{x:Type shadui:Menubar}" TargetType="shadui:Menubar">
     <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
-    <!-- Только нижняя граница — характерный shadcn menubar -->
+    <!-- Bottom border only: the signature shadcn menubar look -->
     <Setter Property="BorderThickness" Value="0,0,0,1" />
     <Setter Property="Padding" Value="4,0" />
     <Setter Property="ItemsPanel">
@@ -28,7 +28,7 @@
     </Setter>
   </ControlTheme>
 
-  <!-- MenubarItem — пункт верхнего уровня (File/Edit/View/…) -->
+  <!-- MenubarItem: top-level item (File/Edit/View/...) -->
   <ControlTheme x:Key="{x:Type shadui:MenubarItem}" TargetType="shadui:MenubarItem">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
@@ -42,16 +42,16 @@
                 CornerRadius="{TemplateBinding CornerRadius}"
                 Padding="{TemplateBinding Padding}">
           <Grid ColumnDefinitions="*,Auto">
-            <!-- Заголовок пункта меню -->
+            <!-- Menu item header -->
             <ContentPresenter Name="PART_HeaderPresenter"
                               Grid.Column="0"
                               Content="{TemplateBinding Header}"
                               VerticalAlignment="Center" />
-            <!-- Шеврон скрыт на верхнем уровне Menubar -->
+            <!-- Chevron is hidden at the top level of the Menubar -->
             <Path Name="PART_ChevronPath"
                   Grid.Column="1"
                   IsVisible="False" />
-            <!-- Выпадающее подменю -->
+            <!-- Dropdown submenu -->
             <Popup Name="PART_Popup"
                    Grid.Column="0"
                    WindowManagerAddShadowHint="False"
@@ -74,23 +74,23 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- Hover: подсветка фона -->
+    <!-- Hover: background highlight -->
     <Style Selector="^:pointerover /template/ Border#PART_LayoutRoot">
       <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>
-    <!-- Выделен (keyboard nav) -->
+    <!-- Selected (keyboard nav) -->
     <Style Selector="^:selected /template/ Border#PART_LayoutRoot">
       <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>
-    <!-- Открыто подменю -->
+    <!-- Submenu open -->
     <Style Selector="^[IsSubMenuOpen=True] /template/ Border#PART_LayoutRoot">
       <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>
-    <!-- Недоступный пункт -->
+    <!-- Disabled item -->
     <Style Selector="^:disabled">
       <Setter Property="Opacity" Value="0.5" />
     </Style>
-    <!-- Нет дочерних элементов — шеврон всегда скрыт -->
+    <!-- No children: chevron always hidden -->
     <Style Selector="^:empty /template/ Path#PART_ChevronPath">
       <Setter Property="IsVisible" Value="False" />
     </Style>

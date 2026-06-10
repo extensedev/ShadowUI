@@ -736,6 +736,49 @@ Shows a card on hover, hides on mouse leave:
 
 ---
 
+## MultiSelectComboBox
+
+Multi-select combobox: selected items render as removable chips, the dropdown has a search box
+and stays open while toggling items (shadcn Combobox multi-select pattern):
+
+```xml
+<shadui:MultiSelectComboBox x:Name="Frameworks"
+                            Width="320"
+                            PlaceholderText="Select frameworks..." />
+```
+
+```csharp
+Frameworks.ItemsSource = new[] { "Avalonia", "WPF", "MAUI" };
+Frameworks.SelectedItems.Add("Avalonia");           // программный выбор
+Frameworks.SelectionChanged += (_, _) => { ... };   // реакция на изменения
+```
+
+Properties: `ItemsSource`, `SelectedItems` (ObservableCollection), `IsDropDownOpen` (two-way),
+`PlaceholderText`, `SearchPlaceholder`, `MaxDropDownHeight`.
+
+---
+
+## Popover
+
+Click-toggled floating card anchored to a trigger (light dismiss on outside click):
+
+```xml
+<shadui:Popover>
+  <shadui:Popover.TriggerContent>
+    <Button Content="Open Popover" />
+  </shadui:Popover.TriggerContent>
+  <StackPanel Spacing="8" Width="240">
+    <TextBlock Classes="large" Text="Dimensions" />
+    <TextBlock Classes="muted" Text="Set the layer dimensions." />
+    <TextBox PlaceholderText="Width" />
+  </StackPanel>
+</shadui:Popover>
+```
+
+Properties: `IsOpen` (two-way), `Placement` (default `BottomEdgeAlignedLeft`).
+
+---
+
 ## Resizable
 
 Two panels with a draggable divider:
@@ -797,6 +840,28 @@ Line.Points = points;
 ```
 
 Hover tooltip is built-in.
+
+---
+
+## AreaChart / PieChart
+
+```xml
+<shadui:AreaChart x:Name="Area" Height="200" Width="480" />
+<shadui:PieChart  x:Name="Pie"  Height="220" Width="220" />
+```
+
+```csharp
+Area.Points = points;                       // line + 25% fill
+Pie.Points = new[]
+{
+    new ChartPoint("Chrome", 62),
+    new ChartPoint("Safari", 19),
+    new ChartPoint("Firefox", 8),
+};
+```
+
+`PieChart` is a donut by default (`InnerRadiusRatio="0.6"`; set `0` for a solid pie).
+Slices cycle through `ShadowChart1..5Brush`. Hover tooltip is built-in.
 
 ---
 

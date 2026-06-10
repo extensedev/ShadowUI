@@ -1,25 +1,45 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <!-- net8.0 = Avalonia's LTS audience; net10.0 = current. Overrides the global TargetFramework -->
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <TargetFramework></TargetFramework>
     <IsAotCompatible>true</IsAotCompatible>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>ShadowUI</PackageId>
-    <Version>0.1.1-alpha</Version>
+    <Version>1.0.0-beta</Version>
     <Authors>extense</Authors>
     <Copyright>Copyright © 2025–2026 extense</Copyright>
-    <Description>shadcn/ui port for Avalonia — AOT-ready UI components.</Description>
+    <Description>shadcn/ui port for Avalonia — AOT-ready UI components: 50+ controls, 13 palettes, dark/light theming.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>avalonia;ui;shadcn;components;controls;theme;avalonia-ui</PackageTags>
+    <PackageTags>avalonia;ui;shadcn;components;controls;theme;avalonia-ui;darkmode</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotes>See CHANGELOG.md in the repository.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/extensedev/ShadowUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/extensedev/ShadowUI</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <!-- SourceLink: consumers can step into the GitHub sources while debugging -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" />
     <PackageReference Include="Avalonia.Controls.ColorPicker" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
+  <!-- HotAvalonia: instruments theme AXAML for hot reload. Debug only,
+       PrivateAssets="All", so it is not included in the NuGet package (Release). -->
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <PackageReference Include="HotAvalonia" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
-    <!-- Открываем internal-члены для unit-тестов -->
+    <!-- Expose internal members to unit tests -->
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>ShadowUI.UnitTests</_Parameter1>
     </AssemblyAttribute>

@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Тема Carousel: слайдер с prev/next навигацией и dot-индикатором -->
+  <!-- Carousel theme: slider with prev/next navigation and a dot indicator -->
   <ControlTheme x:Key="{x:Type shadui:Carousel}" TargetType="shadui:Carousel">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Top" />
@@ -10,22 +10,22 @@
     <Setter Property="Template">
       <ControlTemplate>
 
-        <!-- Корневой Grid: Row 0 — слайды + кнопки, Row 1 — точки навигации -->
+        <!-- Root Grid: Row 0 = slides + buttons, Row 1 = navigation dots -->
         <Grid RowDefinitions="*,Auto">
 
-          <!-- Row 0: слайды (ListBox) и overlay-кнопки -->
+          <!-- Row 0: slides (ListBox) and overlay buttons -->
           <Grid Grid.Row="0">
 
-            <!-- ContentPresenter — показывает только текущий слайд -->
+            <!-- ContentPresenter: shows only the current slide -->
             <ContentPresenter Name="PART_ItemsHost"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
                               HorizontalContentAlignment="Stretch"
                               VerticalContentAlignment="Stretch" />
 
-            <!-- Overlay с кнопками Prev и Next -->
+            <!-- Overlay with Prev and Next buttons -->
             <Grid>
-              <!-- Кнопка назад -->
+              <!-- Previous button -->
               <Button Name="PART_PrevButton"
                       Classes="ghost"
                       Content="&#8592;"
@@ -34,7 +34,7 @@
                       Margin="8,0"
                       ZIndex="10" />
 
-              <!-- Кнопка вперёд -->
+              <!-- Next button -->
               <Button Name="PART_NextButton"
                       Classes="ghost"
                       Content="&#8594;"
@@ -46,7 +46,7 @@
 
           </Grid>
 
-          <!-- Row 1: dot-навигация — точки создаются из кода -->
+          <!-- Row 1: dot navigation; dots are created from code -->
           <StackPanel Name="PART_DotsPanel"
                       Grid.Row="1"
                       Orientation="Horizontal"
@@ -58,13 +58,8 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- стили dot-индикаторов -->
-    <Style Selector="^ /template/ StackPanel#PART_DotsPanel Ellipse">
-      <Setter Property="Fill" Value="{DynamicResource ShadowMutedBrush}" />
-    </Style>
-    <Style Selector="^ /template/ StackPanel#PART_DotsPanel Ellipse.active">
-      <Setter Property="Fill" Value="{DynamicResource ShadowPrimaryBrush}" />
-    </Style>
+    <!-- Dot indicator styles live in Controls.axaml (global):
+         dots are created from code-behind, and ControlTheme child styles cannot reach them. -->
 
   </ControlTheme>
 

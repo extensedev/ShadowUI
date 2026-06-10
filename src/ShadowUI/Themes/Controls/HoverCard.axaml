@@ -2,22 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- HoverCard: карточка-превью, появляется при наведении на триггер -->
+  <!-- HoverCard: preview card shown when hovering over the trigger -->
   <ControlTheme x:Key="{x:Type shadui:HoverCard}" TargetType="shadui:HoverCard">
-    <!-- По умолчанию скрыт до получения :open -->
+    <!-- Hidden by default until :open is set -->
     <Setter Property="IsVisible" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
-        <!-- Panel не обрезает popup за пределы контрола -->
+        <!-- Panel does not clip the popup outside the control bounds -->
         <Panel>
 
-          <!-- Триггер: прозрачный контейнер вокруг TriggerContent -->
+          <!-- Trigger: transparent container around TriggerContent -->
           <Border Name="PART_Trigger"
                   Background="Transparent">
             <ContentPresenter Content="{TemplateBinding TriggerContent}" />
           </Border>
 
-          <!-- Popup управляется из C#-кода (IsOpen через _popupPart.IsOpen) -->
+          <!-- Popup is driven from C# code (IsOpen via _popupPart.IsOpen) -->
           <Popup Name="PART_Popup"
                  WindowManagerAddShadowHint="False"
                  IsLightDismissEnabled="True"
@@ -25,7 +25,7 @@
                  Placement="BottomEdgeAlignedLeft"
                  VerticalOffset="8">
 
-            <!-- Карточка: появляется с opacity-переходом -->
+            <!-- Card: appears with an opacity transition -->
             <Border Name="PART_Card"
                     Background="{DynamicResource ShadowPopoverBrush}"
                     BorderBrush="{DynamicResource ShadowBorderBrush}"
@@ -37,7 +37,7 @@
                     Opacity="0">
               <Border.Transitions>
                 <Transitions>
-                  <!-- Плавное появление/исчезновение карточки -->
+                  <!-- Smooth card fade in/out -->
                   <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
                 </Transitions>
               </Border.Transitions>
@@ -51,12 +51,12 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- Состояние :open — показываем контрол -->
+    <!-- :open state: show the control -->
     <Style Selector="^:open">
       <Setter Property="IsVisible" Value="True" />
     </Style>
 
-    <!-- Состояние :open — карточка становится видимой (Opacity=1) -->
+    <!-- :open state: the card becomes visible (Opacity=1) -->
     <Style Selector="^:open /template/ Border#PART_Card">
       <Setter Property="Opacity" Value="1" />
     </Style>

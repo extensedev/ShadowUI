@@ -46,7 +46,7 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- состояния (solid) -->
+    <!-- states (solid) -->
     <Style Selector="^:pointerover /template/ Border#PART_Border">
       <Setter Property="Opacity" Value="0.9" />
     </Style>
@@ -60,12 +60,12 @@
       <Setter Property="Opacity" Value="0.5" />
     </Style>
 
-    <!-- bounce: лёгкое сжатие при нажатии (включается shadui:ButtonAssist.Bounce="True") -->
+    <!-- bounce: slight scale-down on press (enabled via shadui:ButtonAssist.Bounce="True") -->
     <Style Selector="^[(shadui|ButtonAssist.Bounce)=True]:pressed /template/ Border#PART_Border">
       <Setter Property="RenderTransform" Value="scale(0.94)" />
     </Style>
 
-    <!-- размеры -->
+    <!-- sizes -->
     <Style Selector="^.sm">
       <Setter Property="Height" Value="32" />
       <Setter Property="Padding" Value="12,6" />
@@ -80,7 +80,7 @@
       <Setter Property="Padding" Value="0" />
     </Style>
 
-    <!-- варианты -->
+    <!-- variants -->
     <Style Selector="^.secondary">
       <Setter Property="Background" Value="{DynamicResource ShadowSecondaryBrush}" />
       <Setter Property="Foreground" Value="{DynamicResource ShadowSecondaryForegroundBrush}" />

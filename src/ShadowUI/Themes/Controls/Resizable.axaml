@@ -2,13 +2,23 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Тема Resizable: Grid с двумя ContentPresenter и GridSplitter между ними -->
+  <!-- Standalone GridSplitter template (no FluentTheme): without it the splitter is invisible and cannot be dragged -->
+  <ControlTheme x:Key="{x:Type GridSplitter}" TargetType="GridSplitter">
+    <Setter Property="Background" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- Resizable theme: Grid with two ContentPresenters and a GridSplitter between them -->
   <ControlTheme x:Key="{x:Type shadui:Resizable}" TargetType="shadui:Resizable">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
     <Setter Property="Template">
       <ControlTemplate>
-        <!-- ColumnDefinitions/RowDefinitions задаются из code-behind в ConfigureLayout() -->
+        <!-- ColumnDefinitions/RowDefinitions are set from code-behind in ConfigureLayout() -->
         <Grid Name="PART_Grid">
           <ContentPresenter Name="PART_FirstPresenter" />
           <GridSplitter Name="PART_Splitter"
@@ -21,7 +31,7 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- Разделитель: слегка прозрачный, подсвечивается акцентом при наведении -->
+    <!-- Splitter: slightly transparent, highlighted with accent on hover -->
     <Style Selector="^ /template/ GridSplitter#PART_Splitter">
       <Setter Property="Opacity" Value="0.4" />
     </Style>

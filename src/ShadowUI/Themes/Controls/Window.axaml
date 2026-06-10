@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-  <!-- Инфраструктурные темы, ранее предоставлявшиеся FluentTheme.
-       Window: VisualLayerManager обязателен — он даёт OverlayLayer
-       (фоллбэк для Popup без нативного окна, adorner-слой, headless-тесты). -->
+  <!-- Infrastructure themes previously provided by FluentTheme.
+       Window: the VisualLayerManager is mandatory; it provides the OverlayLayer
+       (fallback for Popup without a native window, the adorner layer, headless tests). -->
   <ControlTheme x:Key="{x:Type Window}" TargetType="Window">
     <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
@@ -20,6 +20,10 @@
                               ContentTemplate="{TemplateBinding ContentTemplate}"
                               Content="{TemplateBinding Content}"
                               Margin="{TemplateBinding Padding}"
+                              MaxWidth="{Binding $parent[Window].ClientSize.Width}"
+                              MaxHeight="{Binding $parent[Window].ClientSize.Height}"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
           </VisualLayerManager>
@@ -28,8 +32,8 @@
     </Setter>
   </ControlTheme>
 
-  <!-- PopupRoot: прозрачный фон окна попапа — иначе углы за скруглённым
-       контентом заливаются дефолтным (белым) фоном нативного окна. -->
+  <!-- PopupRoot: transparent popup window background; otherwise the corners behind
+       the rounded content are filled with the native window's default (white) background. -->
   <ControlTheme x:Key="{x:Type PopupRoot}" TargetType="PopupRoot">
     <Setter Property="Background" Value="{x:Null}" />
     <Setter Property="TransparencyLevelHint" Value="Transparent" />

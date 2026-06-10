@@ -23,7 +23,7 @@
     </Setter>
   </ControlTheme>
 
-  <!-- DropdownMenu контейнер (MenuFlyout) -->
+  <!-- DropdownMenu container (MenuFlyout) -->
   <ControlTheme x:Key="{x:Type MenuFlyoutPresenter}" TargetType="MenuFlyoutPresenter">
     <Setter Property="Template">
       <ControlTemplate>
@@ -40,7 +40,7 @@
     </Setter>
   </ControlTheme>
 
-  <!-- ContextMenu контейнер -->
+  <!-- ContextMenu container -->
   <ControlTheme x:Key="{x:Type ContextMenu}" TargetType="ContextMenu">
     <Setter Property="Template">
       <ControlTemplate>
@@ -57,7 +57,7 @@
     </Setter>
   </ControlTheme>
 
-  <!-- Пункт меню -->
+  <!-- Menu item -->
   <ControlTheme x:Key="{x:Type MenuItem}" TargetType="MenuItem">
     <Setter Property="Foreground" Value="{DynamicResource ShadowPopoverForegroundBrush}" />
     <Setter Property="Background" Value="Transparent" />
@@ -122,7 +122,7 @@
       <Setter Property="IsVisible" Value="True" />
     </Style>
 
-    <!-- разделитель -->
+    <!-- separator -->
     <Style Selector="^.separator">
       <Setter Property="Template">
         <ControlTemplate>

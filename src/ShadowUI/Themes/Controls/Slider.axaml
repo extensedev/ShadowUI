@@ -31,6 +31,9 @@
     <Setter Property="Background" Value="{DynamicResource ShadowSecondaryBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryBrush}" />
     <Setter Property="MinHeight" Value="20" />
+    <!-- MinWidth is required: without it the Slider collapses to zero in shrink containers
+         (only the thumb remains, no track); Fluent had the same default -->
+    <Setter Property="MinWidth" Value="200" />
     <Setter Property="Template">
       <ControlTemplate>
         <Border Background="Transparent">

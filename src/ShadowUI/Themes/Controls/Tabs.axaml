@@ -3,20 +3,25 @@
   <ControlTheme x:Key="{x:Type TabControl}" TargetType="TabControl">
     <Setter Property="Template">
       <ControlTemplate>
-        <DockPanel>
-          <Border Name="PART_ListBorder"
-                  DockPanel.Dock="Top"
+        <Grid RowDefinitions="Auto,*">
+          <Border Grid.Row="0"
+                  Name="PART_ListBorder"
                   Background="{DynamicResource ShadowMutedBrush}"
                   CornerRadius="{DynamicResource ShadowRadiusLg}"
                   Padding="3" HorizontalAlignment="Left">
             <ItemsPresenter Name="PART_ItemsPresenter"
                             ItemsPanel="{TemplateBinding ItemsPanel}" />
           </Border>
-          <ContentPresenter Name="PART_SelectedContentHost"
+          <ContentPresenter Grid.Row="1"
+                            Name="PART_SelectedContentHost"
                             Content="{TemplateBinding SelectedContent}"
                             ContentTemplate="{TemplateBinding SelectedContentTemplate}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
                             Margin="0,8,0,0" />
-        </DockPanel>
+        </Grid>
       </ControlTemplate>
     </Setter>
     <Setter Property="ItemsPanel">

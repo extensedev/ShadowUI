@@ -1,8 +1,42 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:shadui="using:ShadowUI">
-  <!-- Плавная прокрутка колесом по умолчанию (BaseStepSize/SmoothingFactor берутся из дефолтов attached-свойств) -->
-  <Style Selector="ScrollViewer">
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+  <!-- Standalone ScrollViewer template (no FluentTheme): content + shadcn ScrollArea overlay scrollbars -->
+  <ControlTheme x:Key="{x:Type ScrollViewer}" TargetType="ScrollViewer">
+    <!-- Transparent (not null): the ScrollContentPresenter must hit-test across its full area, otherwise the mouse wheel over empty spots falls through -->
+    <Setter Property="Background" Value="Transparent" />
     <Setter Property="shadui:SmoothScrollAssist.IsEnabled" Value="True" />
-  </Style>
-</Styles>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!-- Scrollbars in their own columns/rows (not overlaid):
+             otherwise in dropdown lists the bar sits on top of the items -->
+        <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
+          <ScrollContentPresenter Name="PART_ContentPresenter"
+                                  Grid.Row="0" Grid.Column="0"
+                                  Background="{TemplateBinding Background}"
+                                  Padding="{TemplateBinding Padding}"
+                                  HorizontalSnapPointsAlignment="{TemplateBinding HorizontalSnapPointsAlignment}"
+                                  HorizontalSnapPointsType="{TemplateBinding HorizontalSnapPointsType}"
+                                  VerticalSnapPointsAlignment="{TemplateBinding VerticalSnapPointsAlignment}"
+                                  VerticalSnapPointsType="{TemplateBinding VerticalSnapPointsType}"
+                                  ScrollViewer.IsScrollInertiaEnabled="{TemplateBinding IsScrollInertiaEnabled}">
+            <ScrollContentPresenter.GestureRecognizers>
+              <ScrollGestureRecognizer CanHorizontallyScroll="{Binding CanHorizontallyScroll, ElementName=PART_ContentPresenter}"
+                                       CanVerticallyScroll="{Binding CanVerticallyScroll, ElementName=PART_ContentPresenter}"
+                                       IsScrollInertiaEnabled="{Binding (ScrollViewer.IsScrollInertiaEnabled), ElementName=PART_ContentPresenter}" />
+            </ScrollContentPresenter.GestureRecognizers>
+          </ScrollContentPresenter>
+          <ScrollBar Name="PART_HorizontalScrollBar"
+                     Orientation="Horizontal"
+                     Grid.Row="1" Grid.Column="0" />
+          <ScrollBar Name="PART_VerticalScrollBar"
+                     Orientation="Vertical"
+                     Grid.Row="0" Grid.Column="1" />
+          <Panel Name="PART_ScrollBarsSeparator"
+                 Grid.Row="1" Grid.Column="1"
+                 Background="Transparent" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

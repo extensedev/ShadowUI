@@ -1,11 +1,38 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Style Selector="ToolTip">
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ControlTheme TargetType="ToolTip" x:Key="{x:Type ToolTip}">
     <Setter Property="Background" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowBackgroundBrush}" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
     <Setter Property="Padding" Value="12,6" />
     <Setter Property="FontSize" Value="12" />
-  </Style>
-</Styles>
+    <Setter Property="MaxWidth" Value="320" />
+    <Setter Property="Opacity" Value="0" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+      </Transitions>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}">
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            TextBlock.TextWrapping="Wrap" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:open">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

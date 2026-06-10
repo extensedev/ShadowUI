@@ -1,0 +1,40 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Popover: trigger + floating card (shadcn Popover) -->
+  <ControlTheme x:Key="{x:Type shadui:Popover}" TargetType="shadui:Popover">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <!-- Trigger: the click is handled in code-behind -->
+          <ContentPresenter Name="PART_TriggerPresenter"
+                            Content="{TemplateBinding TriggerContent}" />
+
+          <Popup Name="PART_Popup"
+                 PlacementTarget="{TemplateBinding}"
+                 Placement="{TemplateBinding Placement}"
+                 VerticalOffset="4"
+                 IsLightDismissEnabled="True"
+                 WindowManagerAddShadowHint="False">
+            <Border Background="{DynamicResource ShadowPopoverBrush}"
+                    BorderBrush="{DynamicResource ShadowBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{DynamicResource ShadowRadiusMd}"
+                    BoxShadow="{DynamicResource ShadowShadowMd}"
+                    Padding="16"
+                    MinWidth="200"
+                    TextBlock.Foreground="{DynamicResource ShadowPopoverForegroundBrush}">
+              <ContentPresenter Name="PART_ContentPresenter"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+            </Border>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

@@ -17,3 +17,7 @@ CLAUDE.md
 ShadowUI.slnx
 Directory.Build.props
 Directory.Packages.props
+
+# NuGet publish
+.nuget-key
+nupkg/

@@ -44,8 +44,8 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- variants по канону shadcn: рамка всегда нейтральная (border),
-         цветом выделяются только заголовок и иконка -->
+    <!-- variants per the shadcn canon: the border is always neutral (border),
+         only the title and icon are colored -->
     <Style Selector="^.info /template/ TextBlock#PART_Title">
       <Setter Property="Foreground" Value="{DynamicResource ShadowInfoBrush}" />
     </Style>

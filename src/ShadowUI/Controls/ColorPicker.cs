@@ -27,6 +27,7 @@ public class ColorPicker : TemplatedControl
 
     private Popup? _popup;
     private Border? _preview;
+    private Border? _previewLarge;
     private TextBlock? _hex;
 
     static ColorPicker()
@@ -42,6 +43,7 @@ public class ColorPicker : TemplatedControl
         var trigger = e.NameScope.Find<Button>("PART_Trigger");
         _popup = e.NameScope.Find<Popup>("PART_Popup");
         _preview = e.NameScope.Find<Border>("PART_Swatch");
+        _previewLarge = e.NameScope.Find<Border>("PART_PreviewLarge");
         _hex = e.NameScope.Find<TextBlock>("PART_Hex");
         if (trigger is not null)
             trigger.AddHandler(Button.ClickEvent, (_, _) => { if (_popup is not null) _popup.IsOpen = !_popup.IsOpen; });
@@ -52,6 +54,7 @@ public class ColorPicker : TemplatedControl
     private void UpdatePreview()
     {
         if (_preview is not null) _preview.Background = new SolidColorBrush(SelectedColor);
+        if (_previewLarge is not null) _previewLarge.Background = new SolidColorBrush(SelectedColor);
         if (_hex is not null) _hex.Text = "#" + SelectedColor.ToString().Substring(3).ToUpperInvariant();
     }
 }

@@ -54,6 +54,26 @@ public class ShadowDataTable : TemplatedControl
 
     public static readonly StyledProperty<string?> FilterTextProperty =
         AvaloniaProperty.Register<ShadowDataTable, string?>(nameof(FilterText));
+
+    public static readonly StyledProperty<string> FilterPlaceholderProperty =
+        AvaloniaProperty.Register<ShadowDataTable, string>(nameof(FilterPlaceholder),
+            defaultValue: "Filter rows...");
+
+    public static readonly StyledProperty<string> EmptyTextProperty =
+        AvaloniaProperty.Register<ShadowDataTable, string>(nameof(EmptyText),
+            defaultValue: "No data");
+
+    public static readonly StyledProperty<string> PrevTextProperty =
+        AvaloniaProperty.Register<ShadowDataTable, string>(nameof(PrevText),
+            defaultValue: "← Previous");
+
+    public static readonly StyledProperty<string> NextTextProperty =
+        AvaloniaProperty.Register<ShadowDataTable, string>(nameof(NextText),
+            defaultValue: "Next →");
+
+    public static readonly StyledProperty<string> PageInfoFormatProperty =
+        AvaloniaProperty.Register<ShadowDataTable, string>(nameof(PageInfoFormat),
+            defaultValue: "Page {0} of {1}");
 #pragma warning restore CS1591
 
     /// <summary>Column definitions.</summary>
@@ -89,6 +109,41 @@ public class ShadowDataTable : TemplatedControl
     {
         get => GetValue(FilterTextProperty);
         set => SetValue(FilterTextProperty, value);
+    }
+
+    /// <summary>Filter field placeholder.</summary>
+    public string FilterPlaceholder
+    {
+        get => GetValue(FilterPlaceholderProperty);
+        set => SetValue(FilterPlaceholderProperty, value);
+    }
+
+    /// <summary>Text shown when there is no data.</summary>
+    public string EmptyText
+    {
+        get => GetValue(EmptyTextProperty);
+        set => SetValue(EmptyTextProperty, value);
+    }
+
+    /// <summary>Previous-page button text.</summary>
+    public string PrevText
+    {
+        get => GetValue(PrevTextProperty);
+        set => SetValue(PrevTextProperty, value);
+    }
+
+    /// <summary>Next-page button text.</summary>
+    public string NextText
+    {
+        get => GetValue(NextTextProperty);
+        set => SetValue(NextTextProperty, value);
+    }
+
+    /// <summary>Pagination format string: {0} is the current page, {1} is the total page count.</summary>
+    public string PageInfoFormat
+    {
+        get => GetValue(PageInfoFormatProperty);
+        set => SetValue(PageInfoFormatProperty, value);
     }
 
     /// <inheritdoc />
@@ -323,7 +378,7 @@ public class ShadowDataTable : TemplatedControl
     private void UpdatePaginationUi(int pageSize)
     {
         if (_pageInfo is not null)
-            _pageInfo.Text = pageSize > 0 ? $"Page {CurrentPage} of {_totalPages}" : string.Empty;
+            _pageInfo.Text = pageSize > 0 ? string.Format(PageInfoFormat, CurrentPage, _totalPages) : string.Empty;
 
         if (_prevButton is not null)
             _prevButton.IsEnabled = CurrentPage > 1;
@@ -346,7 +401,7 @@ public class ShadowDataTable : TemplatedControl
             var emptyBorder = new Border { Padding = new Avalonia.Thickness(14, 20) };
             var emptyText = new TextBlock
             {
-                Text = "No data",
+                Text = EmptyText,
                 HorizontalAlignment = HorizontalAlignment.Center,
             };
             emptyText.Classes.Add("muted");

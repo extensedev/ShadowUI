@@ -43,7 +43,7 @@
         </StackPanel>
       </ControlTemplate>
     </Setter>
-    <!-- shadcn: рамка радио остаётся border-input и при checked -->
+    <!-- shadcn: the radio border stays border-input even when checked -->
     <Style Selector="^:checked /template/ Ellipse#PART_Dot">
       <Setter Property="Opacity" Value="1" />
       <Setter Property="RenderTransform" Value="scale(1)" />

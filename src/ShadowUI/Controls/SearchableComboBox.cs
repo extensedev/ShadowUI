@@ -5,7 +5,7 @@ using Avalonia.Controls.Primitives;
 
 namespace ShadowUI;
 
-/// <summary>ComboBox со встроенным текстовым фильтром: список сужается по мере ввода.</summary>
+/// <summary>ComboBox with a built-in text filter: the list narrows as you type.</summary>
 public class SearchableComboBox : ComboBox
 {
 #pragma warning disable CS1591
@@ -16,14 +16,14 @@ public class SearchableComboBox : ComboBox
         AvaloniaProperty.Register<SearchableComboBox, string>(nameof(SearchPlaceholder), "Search...");
 #pragma warning restore CS1591
 
-    /// <summary>Текст фильтра; изменение скрывает неподходящие элементы списка.</summary>
+    /// <summary>Filter text; changing it hides non-matching list items.</summary>
     public string? SearchText
     {
         get => GetValue(SearchTextProperty);
         set => SetValue(SearchTextProperty, value);
     }
 
-    /// <summary>Плейсхолдер поля поиска в выпадающем списке.</summary>
+    /// <summary>Placeholder for the search field in the dropdown.</summary>
     public string SearchPlaceholder
     {
         get => GetValue(SearchPlaceholderProperty);
@@ -58,8 +58,8 @@ public class SearchableComboBox : ComboBox
             SetCurrentValue(SearchTextProperty, tb.Text);
     }
 
-    // Фильтрация видимостью контейнеров: Items/ItemsSource не модифицируются,
-    // поэтому работает и с инлайн-элементами, и с ItemsSource (AOT-safe).
+    // Filtering via container visibility: Items/ItemsSource are not modified,
+    // so it works with both inline items and ItemsSource (AOT-safe).
     private void ApplyFilter()
     {
         var text = SearchText;

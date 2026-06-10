@@ -17,4 +17,28 @@ public enum BaseColor
 
     /// <summary>Pure neutral palette (Neutral).</summary>
     Neutral,
+
+    /// <summary>Graphite: elevated dark with a soft graphite background instead of black (like the codex theme).</summary>
+    Graphite,
+
+    /// <summary>Charcoal: dark gray between black and Graphite.</summary>
+    Charcoal,
+
+    /// <summary>Ash: the lightest of the dark grays (lighter than Graphite).</summary>
+    Ash,
+
+    /// <summary>Blue accent (primary = blue) on Zinc surfaces.</summary>
+    Blue,
+
+    /// <summary>Green accent (primary = green) on Zinc surfaces.</summary>
+    Green,
+
+    /// <summary>Violet accent (primary = violet) on Zinc surfaces.</summary>
+    Violet,
+
+    /// <summary>Rose accent (primary = rose) on Zinc surfaces.</summary>
+    Rose,
+
+    /// <summary>Orange accent (primary = orange) on Zinc surfaces.</summary>
+    Orange,
 }

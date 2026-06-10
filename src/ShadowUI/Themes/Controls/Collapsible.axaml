@@ -2,16 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Контейнер: показывает/скрывает контент по IsExpanded -->
+  <!-- Container: shows/hides content based on IsExpanded -->
   <ControlTheme x:Key="{x:Type shadui:Collapsible}" TargetType="shadui:Collapsible">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">
       <ControlTemplate>
         <StackPanel>
-          <!-- Триггер-слот: сюда помещается CollapsibleTrigger -->
+          <!-- Trigger slot: the CollapsibleTrigger goes here -->
           <ContentPresenter Name="PART_Trigger"
                             HorizontalAlignment="Stretch" />
-          <!-- Контент: отображается только при IsExpanded=true -->
+          <!-- Content: shown only when IsExpanded=true -->
           <ContentPresenter Name="PART_Content"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -22,7 +22,7 @@
     </Setter>
   </ControlTheme>
 
-  <!-- Триггер для Collapsible: устанавливает Cursor=Hand -->
+  <!-- Trigger for Collapsible: sets Cursor=Hand -->
   <ControlTheme x:Key="{x:Type shadui:CollapsibleTrigger}" TargetType="shadui:CollapsibleTrigger">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">

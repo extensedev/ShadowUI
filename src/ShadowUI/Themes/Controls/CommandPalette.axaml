@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Тема CommandPalette: полноэкранный overlay с поиском и списком команд -->
+  <!-- CommandPalette theme: full-screen overlay with search and a command list -->
   <ControlTheme x:Key="{x:Type shadui:CommandPalette}" TargetType="shadui:CommandPalette">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -11,7 +11,7 @@
     <Setter Property="Focusable" Value="True" />
     <Setter Property="Template">
       <ControlTemplate>
-        <!-- Scrim: затемнение фона, клик закрывает палитру -->
+        <!-- Scrim: background dimming; clicking it closes the palette -->
         <Border Name="PART_Scrim"
                 Background="#CC000000"
                 HorizontalAlignment="Stretch"
@@ -23,9 +23,9 @@
             </Transitions>
           </Border.Transitions>
 
-          <!-- Центрирование карточки поиска -->
+          <!-- Centers the search card -->
           <Grid>
-            <!-- карточка поиска -->
+            <!-- search card -->
             <Border Name="PART_Card"
                     Width="560"
                     MaxHeight="420"
@@ -44,10 +44,10 @@
 
               <Grid RowDefinitions="Auto,Auto,*">
 
-                <!-- поиск -->
+                <!-- search -->
                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="12,12,12,0">
 
-                  <!-- иконка поиска -->
+                  <!-- search icon -->
                   <Viewbox Grid.Column="0" Width="18" Height="18" VerticalAlignment="Center">
                     <Path Data="M 21 21 L 16.65 16.65 M 19 11 A 8 8 0 1 1 3 11 A 8 8 0 0 1 19 11"
                           Width="24" Height="24"
@@ -59,19 +59,19 @@
                           Fill="Transparent" />
                   </Viewbox>
 
-                  <!-- поле ввода -->
+                  <!-- input field -->
                   <TextBox Name="PART_SearchBox"
                            Grid.Column="1"
                            Classes="transparent"
                            BorderThickness="0"
                            Background="Transparent"
                            Padding="8,0,8,0"
-                           PlaceholderText="Найти команду…"
+                           PlaceholderText="{TemplateBinding SearchPlaceholder}"
                            VerticalAlignment="Center"
                            VerticalContentAlignment="Center"
                            FontSize="14" />
 
-                  <!-- значок Esc -->
+                  <!-- Esc badge -->
                   <Border Grid.Column="2"
                           Background="{DynamicResource ShadowMutedBrush}"
                           CornerRadius="{DynamicResource ShadowRadiusSm}"
@@ -85,10 +85,10 @@
 
                 </Grid>
 
-                <!-- разделитель -->
+                <!-- separator -->
                 <Separator Grid.Row="1" Margin="0,10,0,0" />
 
-                <!-- список команд -->
+                <!-- command list -->
                 <ScrollViewer Grid.Row="2" Padding="0,6,0,6">
                   <ListBox Name="PART_ItemsListBox"
                            Background="Transparent"
@@ -130,12 +130,12 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- закрытое состояние: карточка чуть уменьшена -->
+    <!-- closed state: card slightly scaled down -->
     <Style Selector="^ /template/ Border#PART_Card">
       <Setter Property="RenderTransform" Value="scale(0.97)" />
     </Style>
 
-    <!-- открытое состояние -->
+    <!-- open state -->
     <Style Selector="^:open">
       <Setter Property="IsVisible" Value="True" />
     </Style>

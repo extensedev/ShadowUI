@@ -103,6 +103,7 @@ public class OtpInput : TemplatedControl
             TextAlignment = Avalonia.Media.TextAlignment.Center,
             VerticalContentAlignment = VerticalAlignment.Center,
         };
+        cell.Classes.Add("otp-cell");
         cell.AddHandler(TextBox.TextChangedEvent, (_, _) => OnCellTextChanged(index));
         cell.AddHandler(KeyDownEvent, (_, e) => OnCellKeyDown(index, e), RoutingStrategies.Tunnel);
         return cell;

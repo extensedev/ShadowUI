@@ -2,13 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:shadui="using:ShadowUI">
 
-  <!-- ── legacytabs: сегментированные с ЗАЛИВКОЙ активной (прежний вид) ── -->
+  <!-- ── legacytabs: segmented with a FILLED active tab (previous look) ── -->
   <Style Selector="TabControl.legacytabs TabItem:selected /template/ Border#PART_Border">
     <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
     <Setter Property="BoxShadow" Value="{DynamicResource ShadowShadowSm}" />
   </Style>
 
-  <!-- ── Underline-вариант через флаг: shadui:Tabs.Underline="True" ── -->
+  <!-- ── Underline variant via flag: shadui:Tabs.Underline="True" ── -->
   <Style Selector="TabControl[(shadui|Tabs.Underline)=True]">
     <Setter Property="ItemsPanel">
       <ItemsPanelTemplate>
@@ -17,7 +17,7 @@
     </Setter>
   </Style>
 
-  <!-- container: прозрачный + нижняя линия-базлайн -->
+  <!-- container: transparent + bottom baseline -->
   <Style Selector="TabControl[(shadui|Tabs.Underline)=True] /template/ Border#PART_ListBorder">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="CornerRadius" Value="0" />
@@ -32,7 +32,7 @@
     <Setter Property="Padding" Value="2,8" />
     <Setter Property="Margin" Value="6,0" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
-    <!-- постоянная нижняя рамка (прозрачная) — подчёркивание не меняет размер -->
+    <!-- permanent (transparent) bottom border: the underline does not change the size -->
     <Setter Property="BorderThickness" Value="0,0,0,2" />
   </Style>
   <Style Selector="TabControl[(shadui|Tabs.Underline)=True] TabItem:pointerover">
@@ -42,7 +42,7 @@
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
   </Style>
 
-  <!-- selected: подчёркивание, без фона/тени/рамки сегмента -->
+  <!-- selected: underline, no segment background/shadow/border -->
   <Style Selector="TabControl[(shadui|Tabs.Underline)=True] TabItem:selected /template/ Border#PART_Border">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />

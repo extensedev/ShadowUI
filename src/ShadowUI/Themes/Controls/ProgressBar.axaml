@@ -1,9 +1,51 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Style Selector="ProgressBar">
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <ControlTheme TargetType="ProgressBar" x:Key="{x:Type ProgressBar}">
     <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryBrush}" />
     <Setter Property="Background" Value="{DynamicResource ShadowPrimary20Brush}" />
     <Setter Property="MinHeight" Value="8" />
+    <!-- MinWidth is required: without it the ProgressBar collapses to zero in shrink containers
+         (HorizontalAlignment=Left etc.); Fluent had the same default -->
+    <Setter Property="MinWidth" Value="200" />
     <Setter Property="CornerRadius" Value="9999" />
-  </Style>
-</Styles>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Border"
+                Background="{TemplateBinding Background}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                MinHeight="{TemplateBinding MinHeight}"
+                MinWidth="{TemplateBinding MinWidth}">
+          <Panel>
+            <Border Name="PART_Indicator"
+                    Background="{TemplateBinding Foreground}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    HorizontalAlignment="Left" />
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:indeterminate /template/ Border#PART_Indicator">
+      <Style.Animations>
+        <Animation Duration="0:0:1.5" IterationCount="INFINITE" Easing="SineEaseInOut">
+          <KeyFrame Cue="0%">
+            <Setter Property="TranslateTransform.X" Value="-100" />
+            <Setter Property="Width" Value="40" />
+          </KeyFrame>
+          <KeyFrame Cue="50%">
+            <Setter Property="TranslateTransform.X" Value="0" />
+            <Setter Property="Width" Value="80" />
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="TranslateTransform.X" Value="100" />
+            <Setter Property="Width" Value="40" />
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

@@ -2,24 +2,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- ControlTheme для ShadowDataTable: фильтр + заголовок + строки + пагинация -->
+  <!-- ControlTheme for ShadowDataTable: filter + header + rows + pagination -->
   <ControlTheme x:Key="{x:Type shadui:ShadowDataTable}" TargetType="shadui:ShadowDataTable">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
 
     <Setter Property="Template">
       <ControlTemplate>
-        <!-- внешняя обёртка с border/radius из Table.axaml (.table) -->
+        <!-- outer wrapper with border/radius from Table.axaml (.table) -->
         <Border Name="PART_Border" Classes="table" ClipToBounds="True">
           <DockPanel LastChildFill="True">
 
-            <!-- фильтр -->
+            <!-- filter -->
             <Border DockPanel.Dock="Top"
                     BorderBrush="{DynamicResource ShadowBorderBrush}"
                     BorderThickness="0,0,0,1"
                     Padding="8,6">
               <TextBox Name="PART_FilterBox"
-                       PlaceholderText="Фильтр строк..."
+                       PlaceholderText="{TemplateBinding FilterPlaceholder}"
                        HorizontalAlignment="Stretch"
                        BorderThickness="0"
                        Background="Transparent"
@@ -27,7 +27,7 @@
                        Padding="6,4" />
             </Border>
 
-            <!-- пагинация (скрыта по умолчанию, показывается из code-behind) -->
+            <!-- pagination (hidden by default, shown from code-behind) -->
             <Border Name="PART_PaginationBar"
                     DockPanel.Dock="Bottom"
                     IsVisible="False"
@@ -38,7 +38,7 @@
                 <Button Grid.Column="0"
                         Name="PART_PrevButton"
                         Classes="ghost sm"
-                        Content="← Пред." />
+                        Content="{TemplateBinding PrevText}" />
                 <TextBlock Grid.Column="1"
                            Name="PART_PageInfo"
                            HorizontalAlignment="Center"
@@ -48,19 +48,19 @@
                 <Button Grid.Column="2"
                         Name="PART_NextButton"
                         Classes="ghost sm"
-                        Content="След. →" />
+                        Content="{TemplateBinding NextText}" />
               </Grid>
             </Border>
 
-            <!-- область таблицы: заголовок + строки -->
+            <!-- table area: header + rows -->
             <DockPanel LastChildFill="True">
 
-              <!-- заголовок (ColumnDefinitions строятся в code-behind) -->
+              <!-- header (ColumnDefinitions are built in code-behind) -->
               <Border DockPanel.Dock="Top" Classes="thead">
                 <Grid Name="PART_HeaderGrid" />
               </Border>
 
-              <!-- строки данных -->
+              <!-- data rows -->
               <ScrollViewer HorizontalScrollBarVisibility="Auto"
                             VerticalScrollBarVisibility="Auto">
                 <StackPanel Name="PART_RowsPanel" />

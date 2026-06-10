@@ -1,6 +1,234 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadui="using:ShadowUI"
+                    xmlns:conv="using:Avalonia.Controls.Converters">
+
+  <!-- Checkered pattern for alpha/transparency areas -->
+  <VisualBrush x:Key="ShadowColorCheckeredBrush"
+               TileMode="Tile"
+               DestinationRect="0,0,8,8"
+               Stretch="Uniform">
+    <VisualBrush.Visual>
+      <Image Width="8" Height="8">
+        <Image.Source>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup>
+                <GeometryDrawing Brush="Transparent" Geometry="M0,0 L2,0 2,2, 0,2Z" />
+                <GeometryDrawing Brush="#19808080" Geometry="M0,1 L2,1 2,2, 1,2 1,0 0,0Z" />
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </Image.Source>
+      </Image>
+    </VisualBrush.Visual>
+  </VisualBrush>
+
+  <!-- Thumb used by ColorSlider -->
+  <ControlTheme TargetType="Thumb" x:Key="ShadowColorSliderThumbTheme">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="BorderThickness" Value="3" />
+    <Setter Property="CornerRadius" Value="10" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ColorSlider: hue / alpha strip -->
+  <ControlTheme TargetType="ColorSlider" x:Key="{x:Type ColorSlider}">
+    <Style Selector="^:horizontal">
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Height" Value="20" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="{x:Type ColorSlider}">
+          <Border BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}">
+            <Grid Margin="{TemplateBinding Padding}">
+              <Border Background="{StaticResource ShadowColorCheckeredBrush}"
+                      CornerRadius="10"
+                      Height="{Binding ElementName=PART_Track, Path=Bounds.Height}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center" />
+              <Border Background="{TemplateBinding Background}"
+                      CornerRadius="10"
+                      Height="{Binding ElementName=PART_Track, Path=Bounds.Height}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center" />
+              <Track Name="PART_Track"
+                     Height="20"
+                     HorizontalAlignment="Stretch"
+                     IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                     Maximum="{TemplateBinding Maximum}"
+                     Minimum="{TemplateBinding Minimum}"
+                     Orientation="Horizontal"
+                     Value="{TemplateBinding Value, Mode=TwoWay}"
+                     VerticalAlignment="Center">
+                <Track.DecreaseButton>
+                  <RepeatButton Background="Transparent" Focusable="False" HorizontalAlignment="Stretch" Name="PART_DecreaseButton" VerticalAlignment="Stretch">
+                    <RepeatButton.Template>
+                      <ControlTemplate><Border Background="Transparent" Margin="0,-10" Name="FocusTarget" /></ControlTemplate>
+                    </RepeatButton.Template>
+                  </RepeatButton>
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Background="Transparent" Focusable="False" HorizontalAlignment="Stretch" Name="PART_IncreaseButton" VerticalAlignment="Stretch">
+                    <RepeatButton.Template>
+                      <ControlTemplate><Border Background="Transparent" Margin="0,-10" Name="FocusTarget" /></ControlTemplate>
+                    </RepeatButton.Template>
+                  </RepeatButton>
+                </Track.IncreaseButton>
+                <Thumb Name="ColorSliderThumb"
+                       DataContext="{TemplateBinding Value}"
+                       Height="{TemplateBinding Height}"
+                       Margin="0"
+                       Padding="0"
+                       Theme="{DynamicResource ShadowColorSliderThumbTheme}"
+                       Width="{TemplateBinding Height}" />
+              </Track>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="^:vertical">
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Width" Value="20" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="{x:Type ColorSlider}">
+          <Border BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}">
+            <Grid Margin="{TemplateBinding Padding}">
+              <Border Background="{StaticResource ShadowColorCheckeredBrush}"
+                      CornerRadius="10"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Width="{Binding ElementName=PART_Track, Path=Bounds.Width}" />
+              <Border Background="{TemplateBinding Background}"
+                      CornerRadius="10"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Width="{Binding ElementName=PART_Track, Path=Bounds.Width}" />
+              <Track Name="PART_Track"
+                     HorizontalAlignment="Center"
+                     IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                     Maximum="{TemplateBinding Maximum}"
+                     Minimum="{TemplateBinding Minimum}"
+                     Orientation="Vertical"
+                     Value="{TemplateBinding Value, Mode=TwoWay}"
+                     VerticalAlignment="Stretch"
+                     Width="20">
+                <Track.DecreaseButton>
+                  <RepeatButton Background="Transparent" Focusable="False" HorizontalAlignment="Stretch" Name="PART_DecreaseButton" VerticalAlignment="Stretch">
+                    <RepeatButton.Template>
+                      <ControlTemplate><Border Background="Transparent" Margin="-10,0" Name="FocusTarget" /></ControlTemplate>
+                    </RepeatButton.Template>
+                  </RepeatButton>
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Background="Transparent" Focusable="False" HorizontalAlignment="Stretch" Name="PART_IncreaseButton" VerticalAlignment="Stretch">
+                    <RepeatButton.Template>
+                      <ControlTemplate><Border Background="Transparent" Margin="-10,0" Name="FocusTarget" /></ControlTemplate>
+                    </RepeatButton.Template>
+                  </RepeatButton>
+                </Track.IncreaseButton>
+                <Thumb Name="ColorSliderThumb"
+                       DataContext="{TemplateBinding Value}"
+                       Height="{TemplateBinding Width}"
+                       Margin="0"
+                       Padding="0"
+                       Theme="{DynamicResource ShadowColorSliderThumbTheme}"
+                       Width="{TemplateBinding Width}" />
+              </Track>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="^:dark-selector /template/ Thumb#ColorSliderThumb">
+      <Setter Property="BorderBrush" Value="#E4000000" />
+    </Style>
+    <Style Selector="^:light-selector /template/ Thumb#ColorSliderThumb">
+      <Setter Property="BorderBrush" Value="#FFFFFF" />
+    </Style>
+  </ControlTheme>
+
+  <!-- ColorSpectrum: 2D hue/saturation/value box (Box shape only) -->
+  <ControlTheme TargetType="ColorSpectrum" x:Key="{x:Type ColorSpectrum}">
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
+    <Setter Property="Template">
+      <ControlTemplate TargetType="{x:Type ColorSpectrum}">
+        <Panel Name="PART_LayoutRoot" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+          <Panel Name="PART_SizingPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Border ClipToBounds="True" CornerRadius="{TemplateBinding CornerRadius}">
+              <Rectangle Name="PART_SpectrumRectangle"
+                         HorizontalAlignment="Stretch"
+                         IsHitTestVisible="False"
+                         VerticalAlignment="Stretch" />
+            </Border>
+            <Border ClipToBounds="True" CornerRadius="{TemplateBinding CornerRadius}">
+              <Rectangle Name="PART_SpectrumOverlayRectangle"
+                         HorizontalAlignment="Stretch"
+                         IsHitTestVisible="False"
+                         VerticalAlignment="Stretch" />
+            </Border>
+            <!-- Ring shapes — hidden, Box mode only -->
+            <Ellipse Name="PART_SpectrumEllipse" IsVisible="False" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <Ellipse Name="PART_SpectrumOverlayEllipse" IsVisible="False" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <Border ClipToBounds="True" CornerRadius="{TemplateBinding CornerRadius}">
+              <Canvas Background="Transparent" Name="PART_InputTarget">
+                <Panel Name="PART_SelectionEllipsePanel"
+                       ToolTip.Placement="Top"
+                       ToolTip.VerticalOffset="-10">
+                  <Ellipse Name="FocusEllipse"
+                           HorizontalAlignment="Stretch"
+                           IsHitTestVisible="False"
+                           Margin="-2"
+                           StrokeThickness="2"
+                           VerticalAlignment="Stretch" />
+                  <Ellipse Name="SelectionEllipse"
+                           HorizontalAlignment="Stretch"
+                           IsHitTestVisible="False"
+                           StrokeThickness="2"
+                           VerticalAlignment="Stretch" />
+                </Panel>
+              </Canvas>
+            </Border>
+          </Panel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^ /template/ Panel#PART_SelectionEllipsePanel">
+      <Setter Property="Width" Value="16" />
+      <Setter Property="Height" Value="16" />
+    </Style>
+    <Style Selector="^ /template/ Ellipse#FocusEllipse">
+      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="Stroke" Value="#FFFFFF" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Ellipse#FocusEllipse">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^ /template/ Ellipse#SelectionEllipse">
+      <Setter Property="Stroke" Value="#E4000000" />
+    </Style>
+    <Style Selector="^:light-selector /template/ Ellipse#FocusEllipse">
+      <Setter Property="Stroke" Value="#E4000000" />
+    </Style>
+    <Style Selector="^:light-selector /template/ Ellipse#SelectionEllipse">
+      <Setter Property="Stroke" Value="#FFFFFF" />
+    </Style>
+  </ControlTheme>
+
 
   <ControlTheme x:Key="{x:Type shadui:ColorPicker}" TargetType="shadui:ColorPicker">
     <Setter Property="HorizontalAlignment" Value="Left" />
@@ -38,9 +266,41 @@
                     BorderThickness="1"
                     CornerRadius="{DynamicResource ShadowRadiusMd}"
                     BoxShadow="{DynamicResource ShadowShadowMd}"
-                    Padding="8">
-              <ColorView Name="PART_ColorView"
-                         Color="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                    Padding="12">
+              <Border.Resources>
+                <conv:ColorToHexConverter x:Key="HexConverter" />
+              </Border.Resources>
+              <StackPanel Width="220" Spacing="12">
+                <!-- 2D saturation/brightness square -->
+                <Border CornerRadius="{DynamicResource ShadowRadiusSm}" ClipToBounds="True"
+                        BorderBrush="{DynamicResource ShadowBorderBrush}" BorderThickness="1">
+                  <ColorSpectrum Name="PART_Spectrum"
+                                 Components="SaturationValue"
+                                 Shape="Box"
+                                 Height="180"
+                                 MinHeight="180"
+                                 Color="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                </Border>
+
+                <!-- hue slider -->
+                <ColorSlider Name="PART_Hue"
+                             ColorModel="Hsva"
+                             ColorComponent="Component1"
+                             IsAlphaVisible="False"
+                             IsPerceptive="False"
+                             Height="14"
+                             Color="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+
+                <!-- preview + hex -->
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                  <Border Grid.Column="0" Name="PART_PreviewLarge" Width="34" Height="34"
+                          CornerRadius="{DynamicResource ShadowRadiusSm}"
+                          BorderBrush="{DynamicResource ShadowBorderBrush}" BorderThickness="1" />
+                  <TextBox Grid.Column="1" VerticalAlignment="Stretch"
+                           VerticalContentAlignment="Center"
+                           Text="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Converter={StaticResource HexConverter}}" />
+                </Grid>
+              </StackPanel>
             </Border>
           </Popup>
         </Grid>

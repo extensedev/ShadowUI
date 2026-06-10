@@ -1,0 +1,107 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- MultiSelectComboBox: chips of selected items + popup with search and a multi-select list -->
+  <ControlTheme x:Key="{x:Type shadui:MultiSelectComboBox}" TargetType="shadui:MultiSelectComboBox">
+    <Setter Property="Background" Value="{DynamicResource ShadowInputBackgroundBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
+    <Setter Property="MinHeight" Value="36" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Focusable" Value="True" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_Border"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}"
+                  MinHeight="{TemplateBinding MinHeight}"
+                  BoxShadow="{DynamicResource ShadowShadowXs}"
+                  Padding="6,4">
+            <Grid ColumnDefinitions="*,Auto">
+              <Panel Grid.Column="0" VerticalAlignment="Center">
+                <TextBlock Name="PART_Placeholder"
+                           Margin="6,0"
+                           Text="{TemplateBinding PlaceholderText}"
+                           Foreground="{DynamicResource ShadowMutedForegroundBrush}"
+                           VerticalAlignment="Center" />
+                <!-- chips of selected items (created from code-behind) -->
+                <WrapPanel Name="PART_ChipsPanel"
+                           Orientation="Horizontal"
+                           ItemSpacing="4"
+                           LineSpacing="4" />
+              </Panel>
+              <Path Name="DropDownGlyph"
+                    Grid.Column="1"
+                    Margin="6,0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Opacity="0.5"
+                    Stroke="{DynamicResource ShadowMutedForegroundBrush}"
+                    StrokeThickness="1.5"
+                    StrokeLineCap="Round" StrokeJoin="Round"
+                    Data="M0,0 L4.5,4.5 L9,0" />
+            </Grid>
+          </Border>
+
+          <Border Name="PART_FocusRing"
+                  Margin="{DynamicResource ShadowFocusRingMargin}"
+                  BorderThickness="{DynamicResource ShadowFocusRingThickness}"
+                  CornerRadius="{DynamicResource ShadowRadiusFocusMd}"
+                  BorderBrush="{DynamicResource ShadowFocusRingBrush}"
+                  IsVisible="False"
+                  IsHitTestVisible="False" />
+
+          <Popup Name="PART_Popup"
+                 WindowManagerAddShadowHint="False"
+                 IsLightDismissEnabled="True"
+                 MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                 PlacementTarget="{TemplateBinding}"
+                 Placement="BottomEdgeAlignedLeft"
+                 VerticalOffset="4">
+            <Border Background="{DynamicResource ShadowPopoverBrush}"
+                    BorderBrush="{DynamicResource ShadowBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{DynamicResource ShadowRadiusMd}"
+                    BoxShadow="{DynamicResource ShadowShadowMd}"
+                    ClipToBounds="True"
+                    Padding="4">
+              <DockPanel LastChildFill="True">
+                <TextBox Name="PART_SearchBox"
+                         DockPanel.Dock="Top"
+                         Margin="0,0,0,4"
+                         PlaceholderText="{TemplateBinding SearchPlaceholder}" />
+                <!-- Multiple+Toggle: a click toggles selection, the popup stays open -->
+                <ListBox Name="PART_ListBox"
+                         SelectionMode="Multiple,Toggle"
+                         Background="Transparent" />
+              </DockPanel>
+            </Border>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowInputHoverBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Border">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

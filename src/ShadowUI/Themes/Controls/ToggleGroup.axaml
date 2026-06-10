@@ -21,11 +21,32 @@
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                CornerRadius="{TemplateBinding CornerRadius}">
-          <ContentPresenter Content="{TemplateBinding Content}"
-                            Padding="{TemplateBinding Padding}"
-                            HorizontalContentAlignment="Center"
-                            VerticalContentAlignment="Center" />
+                CornerRadius="{TemplateBinding CornerRadius}"
+                ClipToBounds="True">
+          <Panel>
+            <Border Name="PART_HoverFill" Opacity="0"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Background="{DynamicResource ShadowAccentBrush}">
+              <Border.Transitions>
+                <Transitions>
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                </Transitions>
+              </Border.Transitions>
+            </Border>
+            <Border Name="PART_ActiveFill" Opacity="0"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Background="{DynamicResource ShadowPrimaryBrush}">
+              <Border.Transitions>
+                <Transitions>
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
+                </Transitions>
+              </Border.Transitions>
+            </Border>
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              Padding="{TemplateBinding Padding}"
+                              HorizontalContentAlignment="Center"
+                              VerticalContentAlignment="Center" />
+          </Panel>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -40,11 +61,11 @@
     </Style>
 
     <!-- states -->
-    <Style Selector="^:pointerover /template/ Border#PART_Border">
-      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    <Style Selector="^:pointerover /template/ Border#PART_HoverFill">
+      <Setter Property="Opacity" Value="1" />
     </Style>
-    <Style Selector="^:checked /template/ Border#PART_Border">
-      <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Style Selector="^:checked /template/ Border#PART_ActiveFill">
+      <Setter Property="Opacity" Value="1" />
     </Style>
     <Style Selector="^:checked">
       <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />

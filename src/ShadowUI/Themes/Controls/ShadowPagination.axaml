@@ -2,17 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Тема ShadowPagination: Prev + кнопки страниц с «…» + Next -->
+  <!-- ShadowPagination theme: Prev + page buttons with "..." + Next -->
   <ControlTheme x:Key="{x:Type shadui:ShadowPagination}" TargetType="shadui:ShadowPagination">
     <Setter Property="HorizontalAlignment" Value="Left" />
     <Setter Property="Template">
       <ControlTemplate>
         <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
-          <!-- Кнопка Предыдущая -->
+          <!-- Previous button -->
           <Button Name="PART_PrevButton" Classes="outline sm" Content="←" />
-          <!-- Кнопки страниц (генерируются из code-behind) -->
+          <!-- Page buttons (generated from code-behind) -->
           <StackPanel Name="PART_PagesPanel" Orientation="Horizontal" Spacing="4" />
-          <!-- Кнопка Следующая -->
+          <!-- Next button -->
           <Button Name="PART_NextButton" Classes="outline sm" Content="→" />
         </StackPanel>
       </ControlTemplate>

@@ -78,7 +78,7 @@
                       VerticalAlignment="Top"
                       Margin="0,-4,-4,0"
                       IsVisible="{TemplateBinding ShowCloseButton}"
-                      ToolTip.Tip="Закрыть">
+                      ToolTip.Tip="Close">
                 <Viewbox Width="16" Height="16">
                   <Path Data="M 6 6 L 18 18 M 18 6 L 6 18"
                         Width="24" Height="24" Stretch="None"

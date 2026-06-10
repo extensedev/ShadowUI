@@ -1,22 +1,23 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Тонкий скроллбар в стиле shadcn ScrollArea -->
+  <!-- Thin scrollbar in the shadcn ScrollArea style -->
   <ControlTheme x:Key="ShadowScrollThumb" TargetType="Thumb">
-    <Setter Property="Background" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ShadowMutedForegroundBrush}" />
+    <Setter Property="Opacity" Value="0.4" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}" CornerRadius="9999" Margin="2" />
+        <Border Background="{TemplateBinding Background}" CornerRadius="9999" Margin="1" />
       </ControlTemplate>
     </Setter>
-    <Style Selector="^:pointerover /template/ Border">
-      <Setter Property="Background" Value="{DynamicResource ShadowMutedForegroundBrush}" />
+    <Style Selector="^:pointerover">
+      <Setter Property="Opacity" Value="0.7" />
     </Style>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ScrollBar}" TargetType="ScrollBar">
     <Setter Property="Background" Value="Transparent" />
-    <Setter Property="MinWidth" Value="8" />
-    <Setter Property="MinHeight" Value="8" />
+    <Setter Property="MinWidth" Value="10" />
+    <Setter Property="MinHeight" Value="10" />
     <Setter Property="Template">
       <ControlTemplate>
         <Border Background="{TemplateBinding Background}">
@@ -26,21 +27,36 @@
                  Value="{TemplateBinding Value, Mode=TwoWay}"
                  ViewportSize="{TemplateBinding ViewportSize}"
                  Orientation="{TemplateBinding Orientation}">
-            <Thumb Theme="{StaticResource ShadowScrollThumb}" />
+            <!-- At rest the thumb is thin (Margin 3 ~ 4px); it widens on hover/drag -->
+            <Thumb Name="PART_Thumb" Theme="{StaticResource ShadowScrollThumb}" Margin="2.5">
+              <Thumb.Transitions>
+                <Transitions>
+                  <ThicknessTransition Property="Margin" Duration="0:0:0.12" />
+                  <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+                </Transitions>
+              </Thumb.Transitions>
+            </Thumb>
           </Track>
         </Border>
       </ControlTemplate>
     </Setter>
 
     <Style Selector="^:vertical">
-      <Setter Property="Width" Value="8" />
+      <Setter Property="Width" Value="10" />
     </Style>
     <Style Selector="^:vertical /template/ Track#PART_Track">
       <Setter Property="IsDirectionReversed" Value="True" />
     </Style>
     <Style Selector="^:horizontal">
-      <Setter Property="Height" Value="8" />
+      <Setter Property="Height" Value="10" />
     </Style>
+
+    <!-- scrollbar hover: expand the thumb to full width -->
+    <Style Selector="^:pointerover /template/ Thumb#PART_Thumb">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Opacity" Value="0.7" />
+    </Style>
+
     <Style Selector="^:disabled">
       <Setter Property="Opacity" Value="0" />
     </Style>

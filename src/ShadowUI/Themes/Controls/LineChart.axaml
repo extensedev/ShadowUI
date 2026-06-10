@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- ControlTheme для LineChart: базовые размеры, без Template (рендеринг через override Render) -->
+  <!-- ControlTheme for LineChart: base sizes only, no Template (rendering via override Render) -->
   <ControlTheme x:Key="{x:Type shadui:LineChart}" TargetType="shadui:LineChart">
     <Setter Property="MinHeight" Value="160" />
     <Setter Property="MinWidth" Value="200" />

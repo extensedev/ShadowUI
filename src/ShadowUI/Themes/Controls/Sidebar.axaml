@@ -86,12 +86,8 @@
        SidebarGroup  (shadcn SidebarGroup)
   ═══════════════════════════════════════════════════════════════════ -->
   <ControlTheme x:Key="{x:Type shadui:SidebarGroup}" TargetType="shadui:SidebarGroup">
-    <!-- spacing between items (extra gap so active/hover backgrounds never touch) -->
-    <Setter Property="ItemsPanel">
-      <ItemsPanelTemplate>
-        <StackPanel Spacing="12" />
-      </ItemsPanelTemplate>
-    </Setter>
+    <!-- The item gap is set in code (OverrideDefaultValue of ItemsPanel):
+         an ItemsPanel setter in a ControlTheme does not reach the ItemsPresenter -->
     <Setter Property="Template">
       <ControlTemplate>
         <StackPanel Spacing="4">
@@ -107,7 +103,7 @@
                             TextElement.Foreground="{DynamicResource ShadowSidebarForegroundBrush}"
                             Opacity="0.7" />
           <!-- Items -->
-          <ItemsPresenter Name="PART_ItemsPresenter" />
+          <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
         </StackPanel>
       </ControlTemplate>
     </Setter>
@@ -117,12 +113,7 @@
        SidebarMenuItem  (expandable item with optional sub-items)
   ═══════════════════════════════════════════════════════════════════ -->
   <ControlTheme x:Key="{x:Type shadui:SidebarMenuItem}" TargetType="shadui:SidebarMenuItem">
-    <!-- shadcn SidebarMenuSub: gap-1 (4px) between sub-items -->
-    <Setter Property="ItemsPanel">
-      <ItemsPanelTemplate>
-        <StackPanel Spacing="4" />
-      </ItemsPanelTemplate>
-    </Setter>
+    <!-- The sub-item gap is set in code (OverrideDefaultValue of ItemsPanel) -->
     <Setter Property="Template">
       <ControlTemplate>
         <StackPanel Spacing="4">
@@ -175,7 +166,7 @@
                   BorderBrush="{DynamicResource ShadowSidebarBorderBrush}"
                   BorderThickness="1,0,0,0"
                   IsVisible="{TemplateBinding IsExpanded}">
-            <ItemsPresenter Name="PART_ItemsPresenter" />
+            <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
           </Border>
         </StackPanel>
       </ControlTemplate>
@@ -233,12 +224,7 @@
         <DoubleTransition Property="Width" Duration="0:0:0.2" Easing="CubicEaseInOut" />
       </Transitions>
     </Setter>
-    <!-- shadcn SidebarContent: gap-2 (8px) between groups -->
-    <Setter Property="ItemsPanel">
-      <ItemsPanelTemplate>
-        <StackPanel Spacing="8" />
-      </ItemsPanelTemplate>
-    </Setter>
+    <!-- The group gap is set in code (OverrideDefaultValue of ItemsPanel) -->
     <Setter Property="Template">
       <ControlTemplate>
         <Border Name="PART_Root"
@@ -299,6 +285,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Disabled">
               <ItemsPresenter Name="PART_ItemsPresenter"
+                              ItemsPanel="{TemplateBinding ItemsPanel}"
                               Margin="8,8" />
             </ScrollViewer>
 

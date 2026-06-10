@@ -21,6 +21,8 @@
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Slider.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ComboBox.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ScrollBar.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ScrollViewer.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ListBox.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Menu.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Menubar.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/TitleBar.axaml" />
@@ -36,9 +38,11 @@
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ColorPicker.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/NavigationMenu.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/HoverCard.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Popover.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Sheet.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Collapsible.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/SearchableComboBox.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/MultiSelectComboBox.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/OtpInput.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/InputGroup.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ButtonGroup.axaml" />
@@ -55,6 +59,7 @@
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ShadowItem.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/BarChart.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/LineChart.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/AreaChart.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/TextBox.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Tooltip.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ProgressBar.axaml" />
@@ -62,7 +67,7 @@
     </ResourceDictionary>
   </Styles.Resources>
 
-  <!-- ButtonGroup: скругления крайних кнопок — глобальные стили по классам -->
+  <!-- ButtonGroup: corner rounding of the outer buttons; global class-based styles -->
   <Style Selector="Button.button-group-first:not(.button-group-last)">
     <Setter Property="CornerRadius" Value="8,0,0,8" />
   </Style>
@@ -78,7 +83,7 @@
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
   </Style>
 
-  <!-- Toolbar: компактные вложенные элементы — выделение по высоте элемента, а не всего бара -->
+  <!-- Toolbar: compact nested items; highlight matches the item height, not the whole bar -->
   <Style Selector="shadui|Toolbar Button">
     <Setter Property="Height" Value="28" />
     <Setter Property="MinWidth" Value="28" />
@@ -102,7 +107,69 @@
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
 
-  <StyleInclude Source="avares://ShadowUI/Themes/Controls/ScrollViewer.axaml" />
+  <!-- ShadowCalendar day buttons: created from code-behind, so they are styled globally
+       (ControlTheme child styles cannot reach elements with TemplatedParent == null) -->
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day">
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
+    <Setter Property="FontWeight" Value="Normal" />
+  </Style>
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day-other-month">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
+    <Setter Property="Opacity" Value="0.5" />
+  </Style>
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day-today">
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+  </Style>
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day-selected">
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
+  </Style>
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day-selected:pointerover /template/ Border#PART_Border">
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+  </Style>
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day-range-start">
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
+  </Style>
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day-range-start:pointerover /template/ Border#PART_Border">
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+  </Style>
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day-range-end">
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
+  </Style>
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day-range-end:pointerover /template/ Border#PART_Border">
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+  </Style>
+  <Style Selector="shadui|ShadowCalendar Button.calendar-day-in-range">
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimary20Brush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+  </Style>
+
+  <!-- MultiSelectComboBox chips: created from code-behind, styled globally -->
+  <Style Selector="shadui|MultiSelectComboBox Border.multiselect-chip">
+    <Setter Property="Background" Value="{DynamicResource ShadowSecondaryBrush}" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
+    <Setter Property="Padding" Value="8,3,4,3" />
+  </Style>
+  <Style Selector="shadui|MultiSelectComboBox Border.multiselect-chip TextBlock">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowSecondaryForegroundBrush}" />
+  </Style>
+  <Style Selector="shadui|MultiSelectComboBox Button.chip-remove:pointerover /template/ Border#PART_Border">
+    <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+  </Style>
+
+  <!-- Carousel dot indicators: created from code-behind, styled globally -->
+  <Style Selector="shadui|Carousel StackPanel#PART_DotsPanel Ellipse">
+    <Setter Property="Fill" Value="{DynamicResource ShadowMutedForegroundBrush}" />
+    <Setter Property="Opacity" Value="0.5" />
+  </Style>
+  <Style Selector="shadui|Carousel StackPanel#PART_DotsPanel Ellipse.active">
+    <Setter Property="Fill" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+
   <StyleInclude Source="avares://ShadowUI/Themes/Controls/TabsLarge.axaml" />
   <StyleInclude Source="avares://ShadowUI/Themes/Controls/TabsLegacy.axaml" />
   <StyleInclude Source="avares://ShadowUI/Themes/Controls/Table.axaml" />

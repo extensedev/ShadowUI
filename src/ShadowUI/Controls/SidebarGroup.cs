@@ -1,6 +1,7 @@
 using System;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Templates;
 
 namespace ShadowUI;
 
@@ -11,6 +12,15 @@ public class SidebarGroup : ItemsControl
     public static readonly StyledProperty<object?> HeaderProperty =
         AvaloniaProperty.Register<SidebarGroup, object?>(nameof(Header));
 #pragma warning restore CS1591
+
+    static SidebarGroup()
+    {
+        // Gap between items: an ItemsPanel setter in a ControlTheme is not applied
+        // to the ItemsPresenter, so the panel is set as the type default.
+        // Without the gap, the selected item and a hovered neighbor visually merge.
+        ItemsPanelProperty.OverrideDefaultValue<SidebarGroup>(
+            new FuncTemplate<Panel?>(() => new StackPanel { Spacing = 8 }));
+    }
 
     /// <summary>Group header (string or arbitrary content).</summary>
     public object? Header

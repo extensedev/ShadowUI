@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Field — обёртка контрола ввода: метка, контент, подсказка/ошибка -->
+  <!-- Field: input control wrapper with a label, content, and hint/error -->
   <ControlTheme x:Key="{x:Type shadui:Field}" TargetType="shadui:Field">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -10,7 +10,7 @@
       <ControlTemplate>
         <StackPanel Orientation="Vertical">
 
-          <!-- метка -->
+          <!-- label -->
           <StackPanel Orientation="Horizontal"
                       Spacing="2"
                       Margin="0,0,0,6"
@@ -30,13 +30,13 @@
                        IsVisible="{TemplateBinding IsRequired}" />
           </StackPanel>
 
-          <!-- основной контрол -->
+          <!-- main control -->
           <ContentPresenter Name="PART_Content"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                             HorizontalAlignment="Stretch" />
 
-          <!-- подсказка / ошибка -->
+          <!-- hint / error -->
           <TextBlock Name="PART_HintText"
                      Text="{TemplateBinding HintText}"
                      Foreground="{DynamicResource ShadowMutedForegroundBrush}"
@@ -57,7 +57,7 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- при ошибке: скрываем подсказку, показываем сообщение об ошибке -->
+    <!-- on error: hide the hint, show the error message -->
     <Style Selector="^:error /template/ TextBlock#PART_HintText">
       <Setter Property="IsVisible" Value="False" />
     </Style>
