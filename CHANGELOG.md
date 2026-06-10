@@ -20,6 +20,15 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
   - `TreeView`/`TreeViewItem` — ListBox-like rows with accent hover/selection and indent.
   - `SelectableTextBlock` — visible selection brush + I-beam cursor.
   - `HeaderedContentControl` — plain header + content layout.
+- `Tabs.UniformContentHeight` attached property — the content area reserves the height of the tallest tab page, so switching tabs no longer changes the TabControl height.
+
+### Changed
+- **All field-like controls share one (transparent) background:** `TextBox`, `NumericUpDown`, `SearchableComboBox` and `MultiSelectComboBox` switched from `ShadowInputBackgroundBrush` to `Transparent`, matching `ComboBox` and `DatePicker`; hover fill (`ShadowInputHoverBrush`) is unchanged.
+- `.textarea` corner radius reduced to `ShadowRadiusSm` — radius Md on a tall multiline box reads larger than on a 36px field.
+
+### Fixed
+- **Text sat 1px below optical center in `Button` (all variants/sizes) and `Toggle`:** with an even-height content slot the 17px Inter text line rounds downward; vertical padding is now asymmetric (top 1px smaller) so the slot height is odd and the line lands exactly on center.
+- **`InputGroup` looked broken:** the inner `TextBox` kept its full rounded corners (and visible gaps) next to the prefix/suffix slots; the group now squares the adjacent corners via `input-group-first/middle/last` classes (same approach as `ButtonGroup`).
 
 ## [1.0.1] — 2026-06-11
 
