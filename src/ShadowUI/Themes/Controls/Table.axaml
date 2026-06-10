@@ -21,6 +21,8 @@
 
   <!-- Обычная строка (нижняя граница) -->
   <Style Selector="Border.tr">
+    <!-- Transparent (не null): иначе строка не хит-тестится между ячейками и hover мигает -->
+    <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="BorderThickness" Value="0,0,0,1" />
   </Style>
