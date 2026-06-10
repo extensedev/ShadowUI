@@ -10,7 +10,7 @@ A port of [shadcn/ui](https://ui.shadcn.com) for [Avalonia UI](https://avaloniau
 ## Requirements
 
 - .NET 8 or .NET 10
-- Avalonia 12.0.4+
+- Avalonia 12+
 
 ## Installation
 
@@ -31,7 +31,8 @@ dotnet add package ShadowUI
              xmlns:shadui="using:ShadowUI"
              RequestedThemeVariant="Dark">
   <Application.Styles>
-    <shadui:ShadowUITheme />  <!-- default: Charcoal; or BaseColor="Zinc|Blue|..." -->
+    <!-- Charcoal (recommended default); any of the 13 palettes: Zinc, Slate, Blue, Violet, ... -->
+    <shadui:ShadowUITheme BaseColor="Charcoal" />
   </Application.Styles>
 </Application>
 ```
