@@ -168,6 +168,12 @@
       <Setter Property="VerticalContentAlignment" Value="Top" />
       <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
     </Style>
+    <!-- textarea focus ring: thinner (2px) — a full 3px ring around a tall box reads heavy; outer radius = Sm(6)+2 = Md(8) -->
+    <Style Selector="^.textarea /template/ Border#PART_FocusRing">
+      <Setter Property="BorderThickness" Value="2" />
+      <Setter Property="Margin" Value="-2" />
+      <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
+    </Style>
 
     <!-- otp-cell: subtle highlight on hover -->
     <Style Selector="^.otp-cell:pointerover /template/ Border#PART_Border">

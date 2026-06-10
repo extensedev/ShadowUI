@@ -5,6 +5,11 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [1.0.2] — 2026-06-11
+
+### Fixed
+- **`.textarea` focus ring is now 2px** (was the shared 3px): a full-width 3px ring around a tall multiline box read heavy; the ring geometry is adjusted to match (`Margin -2`, outer radius `Md`). The 1px resting border is unchanged, and other inputs keep the 3px ring.
+
 ## [1.0.1] — 2026-06-11
 
 ### Added
