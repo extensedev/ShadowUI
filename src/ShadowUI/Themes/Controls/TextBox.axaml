@@ -38,7 +38,7 @@
   <ControlTheme TargetType="TextBox" x:Key="{x:Type TextBox}">
     <Setter Property="FontSize" Value="14" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
-    <Setter Property="Background" Value="{DynamicResource ShadowInputBackgroundBrush}" />
+    <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
@@ -160,12 +160,13 @@
       <Setter Property="IsVisible" Value="False" />
     </Style>
 
-    <!-- textarea -->
+    <!-- textarea: slightly tighter rounding — radius Md on a tall box reads larger than on a 36px field -->
     <Style Selector="^.textarea">
       <Setter Property="AcceptsReturn" Value="True" />
       <Setter Property="TextWrapping" Value="Wrap" />
       <Setter Property="MinHeight" Value="80" />
       <Setter Property="VerticalContentAlignment" Value="Top" />
+      <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
     </Style>
 
     <!-- otp-cell: subtle highlight on hover -->

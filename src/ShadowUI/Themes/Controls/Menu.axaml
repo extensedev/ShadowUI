@@ -57,6 +57,82 @@
     </Setter>
   </ControlTheme>
 
+  <!-- Top-level item of a native Menu bar: dropdown opens DOWN, not to the right.
+       Visuals match shadui:MenubarItem; the default MenuItem theme below is for
+       items inside the dropdown (submenu opens to the right). -->
+  <ControlTheme x:Key="ShadowTopLevelMenuItem" TargetType="MenuItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="Padding" Value="12,6" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_LayoutRoot"
+                Background="{TemplateBinding Background}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}">
+          <Panel>
+            <ContentPresenter Name="PART_HeaderPresenter"
+                              Content="{TemplateBinding Header}"
+                              VerticalAlignment="Center" />
+            <Popup Name="PART_Popup"
+                   WindowManagerAddShadowHint="False"
+                   IsLightDismissEnabled="True"
+                   Placement="BottomEdgeAlignedLeft"
+                   OverlayInputPassThroughElement="{Binding $parent[Menu]}">
+              <Border Background="{DynamicResource ShadowPopoverBrush}"
+                      BorderBrush="{DynamicResource ShadowBorderBrush}"
+                      BorderThickness="1"
+                      CornerRadius="{DynamicResource ShadowRadiusMd}"
+                      Padding="4"
+                      MinWidth="160"
+                      Margin="0,4,0,0"
+                      BoxShadow="{DynamicResource ShadowShadowMd}">
+                <ItemsPresenter Name="PART_ItemsPresenter"
+                                ItemsPanel="{TemplateBinding ItemsPanel}" />
+              </Border>
+            </Popup>
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <Style Selector="^:selected /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <Style Selector="^[IsSubMenuOpen=True] /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+  </ControlTheme>
+
+  <!-- Native Menu bar (infrastructure previously provided by FluentTheme).
+       For the shadcn menubar look (bottom border) use shadui:Menubar. -->
+  <ControlTheme x:Key="{x:Type Menu}" TargetType="Menu">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Padding" Value="4,2" />
+    <Setter Property="ItemContainerTheme" Value="{StaticResource ShadowTopLevelMenuItem}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Padding="{TemplateBinding Padding}">
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                          ItemsPanel="{TemplateBinding ItemsPanel}"
+                          KeyboardNavigation.TabNavigation="Continue" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
   <!-- Menu item -->
   <ControlTheme x:Key="{x:Type MenuItem}" TargetType="MenuItem">
     <Setter Property="Foreground" Value="{DynamicResource ShadowPopoverForegroundBrush}" />

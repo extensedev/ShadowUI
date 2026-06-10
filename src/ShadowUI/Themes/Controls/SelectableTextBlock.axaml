@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Infrastructure theme previously provided by FluentTheme: without a
+       SelectionBrush the text selection was invisible. -->
+  <ControlTheme x:Key="{x:Type SelectableTextBlock}" TargetType="SelectableTextBlock">
+    <Setter Property="SelectionBrush" Value="{DynamicResource ShadowAccentBrush}" />
+
+    <Style Selector="^[IsEnabled=True]">
+      <Setter Property="Cursor" Value="IBeam" />
+    </Style>
+  </ControlTheme>
+
+</ResourceDictionary>

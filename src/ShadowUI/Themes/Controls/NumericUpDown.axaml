@@ -114,9 +114,24 @@
     </Style>
   </ControlTheme>
 
+  <!-- Standalone ButtonSpinner (infrastructure previously provided by FluentTheme):
+       same layout as inside NumericUpDown plus the input-style defaults that
+       NumericUpDown normally supplies through its own properties. -->
+  <ControlTheme x:Key="{x:Type ButtonSpinner}" TargetType="ButtonSpinner"
+                BasedOn="{StaticResource ShadowButtonSpinner}">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
+    <Setter Property="MinHeight" Value="36" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+  </ControlTheme>
+
   <!-- NumericUpDown -->
   <ControlTheme x:Key="{x:Type NumericUpDown}" TargetType="NumericUpDown">
-    <Setter Property="Background" Value="{DynamicResource ShadowInputBackgroundBrush}" />
+    <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
     <Setter Property="BorderThickness" Value="1" />

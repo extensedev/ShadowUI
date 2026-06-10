@@ -4,7 +4,7 @@
 
   <!-- MultiSelectComboBox: chips of selected items + popup with search and a multi-select list -->
   <ControlTheme x:Key="{x:Type shadui:MultiSelectComboBox}" TargetType="shadui:MultiSelectComboBox">
-    <Setter Property="Background" Value="{DynamicResource ShadowInputBackgroundBrush}" />
+    <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
     <Setter Property="BorderThickness" Value="1" />

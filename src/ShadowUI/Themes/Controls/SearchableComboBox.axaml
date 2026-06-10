@@ -3,7 +3,7 @@
                     xmlns:shadui="using:ShadowUI">
   <!-- shadcn-style searchable ComboBox -->
   <ControlTheme x:Key="{x:Type shadui:SearchableComboBox}" TargetType="shadui:SearchableComboBox">
-    <Setter Property="Background" Value="{DynamicResource ShadowInputBackgroundBrush}" />
+    <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
     <Setter Property="BorderThickness" Value="1" />

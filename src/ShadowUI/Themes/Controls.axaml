@@ -8,7 +8,18 @@
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ItemsControl.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/PathIcon.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/TransitioningContentControl.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/SelectableTextBlock.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/HeaderedContentControl.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Button.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/RepeatButton.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/HyperlinkButton.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/DropDownButton.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/SplitButton.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Expander.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/TabStrip.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/GroupBox.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/SplitView.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/TreeView.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Badge.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Card.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Separator.axaml" />
@@ -84,6 +95,17 @@
   </Style>
   <Style Selector="Button.button-group-first.button-group-last">
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
+  </Style>
+
+  <!-- InputGroup: the inner field loses rounding on sides adjacent to prefix/suffix slots -->
+  <Style Selector="TextBox.input-group-middle">
+    <Setter Property="CornerRadius" Value="0" />
+  </Style>
+  <Style Selector="TextBox.input-group-first">
+    <Setter Property="CornerRadius" Value="8,0,0,8" />
+  </Style>
+  <Style Selector="TextBox.input-group-last">
+    <Setter Property="CornerRadius" Value="0,8,8,0" />
   </Style>
 
   <!-- Toolbar: compact nested items; highlight matches the item height, not the whole bar -->

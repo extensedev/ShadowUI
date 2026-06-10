@@ -8,7 +8,9 @@
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
     <Setter Property="Height" Value="36" />
-    <Setter Property="Padding" Value="16,8" />
+    <!-- Top padding is 1px less than bottom: with an even content slot the 17px text
+         line rounds downward and sits 1px below optical center; odd slot lands exact. -->
+    <Setter Property="Padding" Value="16,7,16,8" />
     <Setter Property="FontSize" Value="14" />
     <Setter Property="FontWeight" Value="Medium" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -68,11 +70,11 @@
     <!-- sizes -->
     <Style Selector="^.sm">
       <Setter Property="Height" Value="32" />
-      <Setter Property="Padding" Value="12,6" />
+      <Setter Property="Padding" Value="12,5,12,6" />
     </Style>
     <Style Selector="^.lg">
       <Setter Property="Height" Value="40" />
-      <Setter Property="Padding" Value="24,8" />
+      <Setter Property="Padding" Value="24,7,24,8" />
     </Style>
     <Style Selector="^.icon">
       <Setter Property="Height" Value="36" />

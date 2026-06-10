@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Infrastructure theme previously provided by FluentTheme: a standalone
+       RepeatButton rendered nothing. Inherits the full Button look including
+       variant/size classes (Button.axaml is merged before this file). -->
+  <ControlTheme x:Key="{x:Type RepeatButton}" TargetType="RepeatButton"
+                BasedOn="{StaticResource {x:Type Button}}" />
+
+</ResourceDictionary>

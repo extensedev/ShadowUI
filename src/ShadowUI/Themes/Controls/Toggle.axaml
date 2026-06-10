@@ -8,7 +8,8 @@
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
     <Setter Property="Height" Value="36" />
     <Setter Property="MinWidth" Value="36" />
-    <Setter Property="Padding" Value="8,6" />
+    <!-- Odd content slot: even slot makes the 17px text line round 1px below optical center -->
+    <Setter Property="Padding" Value="8,5,8,6" />
     <Setter Property="FontSize" Value="14" />
     <Setter Property="FontWeight" Value="Medium" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
