@@ -55,6 +55,8 @@ public class ColorPicker : TemplatedControl
     {
         if (_preview is not null) _preview.Background = new SolidColorBrush(SelectedColor);
         if (_previewLarge is not null) _previewLarge.Background = new SolidColorBrush(SelectedColor);
-        if (_hex is not null) _hex.Text = "#" + SelectedColor.ToString().Substring(3).ToUpperInvariant();
+        // Color.ToString() returns known-color NAMES (e.g. "Black"), not always "#aarrggbb" —
+        // format the hex from components explicitly.
+        if (_hex is not null) _hex.Text = $"#{SelectedColor.R:X2}{SelectedColor.G:X2}{SelectedColor.B:X2}";
     }
 }
