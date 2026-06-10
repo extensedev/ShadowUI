@@ -17,6 +17,9 @@ CLAUDE.md
 ShadowUI.slnx
 Directory.Build.props
 Directory.Packages.props
+publish.ps1
+docs/superpowers/
+/shot-*.png
 
 # NuGet publish
 .nuget-key
