@@ -5,6 +5,8 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [1.0.1] — 2026-06-11
+
 ### Added
 - **Second wave of standalone-theme coverage** — themes for every remaining basic Avalonia control that rendered nothing without FluentTheme:
   - `Menu` — native menu bar with a dedicated top-level item theme (dropdown opens down; the default `MenuItem` theme stays for submenu items).
@@ -30,10 +32,6 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 - **`ColorPicker` hex label showed garbage for named colors** (`#CK` for black, `#TE` for white, `#NSPARENT` for transparent): the trigger label was derived from `Color.ToString()`, which returns known-color *names*, not always `#aarrggbb`. The label is now formatted from the R/G/B components directly.
 - **Text sat 1px below optical center in `Button` (all variants/sizes) and `Toggle`:** with an even-height content slot the 17px Inter text line rounds downward; vertical padding is now asymmetric (top 1px smaller) so the slot height is odd and the line lands exactly on center.
 - **`InputGroup` looked broken:** the inner `TextBox` kept its full rounded corners (and visible gaps) next to the prefix/suffix slots; the group now squares the adjacent corners via `input-group-first/middle/last` classes (same approach as `ButtonGroup`).
-
-## [1.0.1] — 2026-06-11
-
-### Fixed
 - **Standalone-theme gap:** added infrastructure `ControlTheme`s previously provided by FluentTheme — `ItemsControl`, `PathIcon` and `TransitioningContentControl` rendered nothing in apps without `FluentTheme`. `PathIcon` inherits `Foreground` from its parent (button variants tint their icons) and defaults to 16×16. `ContentControl`/`UserControl` need no theme (Avalonia ships a built-in default template); `Expander`/`SplitButton` remain out of scope until they get a proper shadcn-styled port.
 
 ## [1.0.0] — 2026-06-10
