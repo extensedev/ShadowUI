@@ -3,6 +3,24 @@
 All notable changes to ShadowUI are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](https://semver.org).
 
+## [Unreleased]
+
+### Added
+- **Second wave of standalone-theme coverage** — themes for every remaining basic Avalonia control that rendered nothing without FluentTheme:
+  - `Menu` — native menu bar with a dedicated top-level item theme (dropdown opens down; the default `MenuItem` theme stays for submenu items).
+  - `RepeatButton` — inherits the full `Button` look including variant/size classes.
+  - `ButtonSpinner` (standalone) — input-style frame with the NumericUpDown spin buttons.
+  - `HyperlinkButton` — the shadcn "link" variant with hover underline.
+  - `DropDownButton` — outline trigger with chevron; `.sm`/`.lg`/`.ghost` classes.
+  - `SplitButton`/`ToggleSplitButton` — outline two-segment button, checked = solid primary.
+  - `Expander` — bordered card with rotating-chevron trigger, all four expand directions.
+  - `TabStrip`/`TabStripItem` — same pill-list look as the ShadowUI `TabControl`.
+  - `GroupBox` — labeled card (no WinForms border-gap).
+  - `SplitView` — structural FluentTheme port (all placements/display modes, pane separator, light-dismiss scrim).
+  - `TreeView`/`TreeViewItem` — ListBox-like rows with accent hover/selection and indent.
+  - `SelectableTextBlock` — visible selection brush + I-beam cursor.
+  - `HeaderedContentControl` — plain header + content layout.
+
 ## [1.0.1] — 2026-06-11
 
 ### Fixed
