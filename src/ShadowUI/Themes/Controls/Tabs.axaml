@@ -36,7 +36,7 @@
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="FontSize" Value="14" />
     <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="Padding" Value="8,4" />
+    <Setter Property="Padding" Value="8,3,8,4" />
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
     <Setter Property="BorderBrush" Value="Transparent" />
     <!-- constant 1px border (transparent when inactive) so selecting doesn't resize → no jitter -->

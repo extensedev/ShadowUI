@@ -3,7 +3,21 @@
 All notable changes to ShadowUI are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](https://semver.org).
 
-## [Unreleased]
+## [1.0.3] — 2026-06-11
+
+### Added
+- **`Button` `active` class** — persistent selected state (active tab, toggled tool button) that works on top of any variant: `Classes="ghost active"`. Declared after all variants, so it wins regardless of class order. Previously combining two variant classes (e.g. `ghost` + `secondary`) silently resolved to whichever was defined later in the theme — variants are now documented as mutually exclusive, `active` is the supported way to mark selection.
+- Hover tokens in all 13 palettes: `ShadowPrimaryHoverBrush` (primary @ 90%), `ShadowSecondaryHoverBrush` (secondary @ 80%), `ShadowDestructiveButtonHoverBrush` (destructive @ 90%).
+- **`ColorPicker` `swatch` format** — `Classes="swatch"` collapses the trigger to a single square colour chip (no hex label) for opening the palette.
+
+### Changed
+- **`Button` hover no longer dims the whole button** (`Opacity 0.9` + 0.15s fade): the animated dim pulsed when the pointer crossed gaps between adjacent buttons and dimmed the label along with the background. Hover/press now instantly tint the background per variant (shadcn v4 behavior): default/secondary/destructive use the new hover tokens, outline/ghost keep the accent fill, link only underlines.
+- **Input focus ring is now reserved inside the control bounds.** The 3px ring previously rendered *outside* the control via a negative margin (relying on `ClipToBounds=False`), which ancestor containers (a page `ScrollViewer`, `Card`, or a field flush against a padded edge) still clipped — so the ring was "swallowed" on the left/top. The ring band is now reserved inside the box (`TextBox`): the input's outer box grows ~6px (W/H) while the visible field size is unchanged, and the ring renders fully in any layout. New token `ShadowFocusRingReserve`.
+- **`ColorPicker` trigger restyled as an input field.** It was a default `Button`, so hover tinted it with the primary brush (a stray colour fill); it now matches Select/inputs — transparent background, input border, subtle input hover, focus ring.
+
+### Fixed
+- **`TextBox` no longer shrinks width on the first keystroke** when a `Watermark` is set — the placeholder now reserves its width (hidden via opacity instead of collapsing), so an auto-sized field stays put. An explicit `Width` still takes priority.
+- **Vertical text centring** — `Badge`, `TabItem`/`TabStripItem`, `ListBoxItem`, `ShadowItem`, `ComboBoxItem`, `ToolTip`, `MenubarItem`, the top-level `Menu` item, and `Table` data cells sat ~1px below optical centre (the content line box centres, leaving the cap-to-baseline glyph slightly low); top padding trimmed by 1px to centre them, matching the existing `Button` treatment.
 
 ### Documentation
 - Documented the wave-2 styled built-in controls in `README.md` and `docs/components.md` (`TreeView`, `Expander`, `SplitButton`/`ToggleSplitButton`, `DropDownButton`, `HyperlinkButton`, `TabStrip`, `SplitView`, `GroupBox`, `Menu`, plus `RepeatButton`/`ButtonSpinner`/`SelectableTextBlock`/`HeaderedContentControl`), and the `Tabs.UniformContentHeight` attached property.

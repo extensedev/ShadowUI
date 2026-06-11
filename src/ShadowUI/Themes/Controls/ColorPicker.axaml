@@ -230,20 +230,71 @@
   </ControlTheme>
 
 
+  <!-- Trigger styled as an input field (like Select), NOT a default Button: the default
+       Button theme tints PART_Border with the primary hover brush on pointerover, which
+       reads as a stray colored fill. Here: transparent bg + input border + subtle input
+       hover + focus ring, matching TextBox/ComboBox. -->
+  <ControlTheme x:Key="ShadowColorTriggerTheme" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_Border"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}"
+                  BoxShadow="{DynamicResource ShadowShadowXs}">
+            <Border.Transitions>
+              <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.15" />
+              </Transitions>
+            </Border.Transitions>
+            <ContentPresenter Name="PART_ContentPresenter"
+                              Content="{TemplateBinding Content}"
+                              Padding="{TemplateBinding Padding}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+          <Border Name="PART_FocusRing"
+                  Margin="{DynamicResource ShadowFocusRingMargin}"
+                  BorderThickness="{DynamicResource ShadowFocusRingThickness}"
+                  CornerRadius="{DynamicResource ShadowRadiusFocusMd}"
+                  BorderBrush="{DynamicResource ShadowFocusRingBrush}"
+                  IsVisible="False"
+                  IsHitTestVisible="False" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowInputHoverBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Border">
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowRingBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_FocusRing">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+  </ControlTheme>
+
   <ControlTheme x:Key="{x:Type shadui:ColorPicker}" TargetType="shadui:ColorPicker">
     <Setter Property="HorizontalAlignment" Value="Left" />
     <Setter Property="Template">
       <ControlTemplate>
         <Grid>
           <Button Name="PART_Trigger"
+                  Theme="{StaticResource ShadowColorTriggerTheme}"
                   Height="36"
                   Padding="10,0"
-                  Background="{DynamicResource ShadowBackgroundBrush}"
-                  BorderBrush="{DynamicResource ShadowInputBrush}"
-                  BorderThickness="1"
-                  CornerRadius="{DynamicResource ShadowRadiusMd}"
-                  Foreground="{DynamicResource ShadowForegroundBrush}"
-                  Cursor="Hand"
                   HorizontalContentAlignment="Left">
             <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
               <Border Name="PART_Swatch"
@@ -306,6 +357,21 @@
         </Grid>
       </ControlTemplate>
     </Setter>
+
+    <!-- swatch format: trigger collapses to a single square color chip (no hex label) -->
+    <Style Selector="^.swatch /template/ TextBlock#PART_Hex">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^.swatch /template/ Button#PART_Trigger">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="^.swatch /template/ Border#PART_Swatch">
+      <Setter Property="Width" Value="26" />
+      <Setter Property="Height" Value="26" />
+      <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
+    </Style>
   </ControlTheme>
 
 </ResourceDictionary>

@@ -47,7 +47,7 @@
   <Style Selector="TextBlock.td">
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="FontSize" Value="14" />
-    <Setter Property="Padding" Value="14,10" />
+    <Setter Property="Padding" Value="14,9,14,10" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
 

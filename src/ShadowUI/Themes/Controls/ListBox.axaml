@@ -32,7 +32,7 @@
   <!-- List item: hover/selected = accent (like the shadcn Command item) -->
   <ControlTheme x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
     <Setter Property="Background" Value="Transparent" />
-    <Setter Property="Padding" Value="8,6" />
+    <Setter Property="Padding" Value="8,5,8,6" />
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="VerticalContentAlignment" Value="Center" />

@@ -26,6 +26,20 @@ Variants and sizes are set via `Classes` (like utility classes in shadcn).
 <Button Classes="lg" Content="Large" />
 ```
 
+Variant classes (`secondary`, `destructive`, `outline`, `ghost`, `link`) are **mutually exclusive** — like shadcn's cva `variant` slot. Combining two of them is unsupported: the variant defined later in the theme wins, regardless of the order in `Classes`.
+
+### Active state
+
+For a persistent selected look (active tab, toggled tool button) add the `active` class on top of any variant — it always wins over the variant:
+
+```xml
+<Button Classes="ghost active"   Content="General" />
+<Button Classes="ghost"          Content="Appearance" />
+<Button Classes="outline active" Content="Selected" />
+```
+
+Hover feedback is an instant per-variant background change (shadcn v4 behavior): default/secondary/destructive tint their background to 90%/80%/90%, outline and ghost fill with the accent brush. There is no opacity dim and no fade animation.
+
 ### Icon Button
 
 Square button for icons — use the `icon` class, combinable with any variant:

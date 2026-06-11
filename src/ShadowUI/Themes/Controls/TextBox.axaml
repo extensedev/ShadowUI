@@ -53,6 +53,7 @@
       <ControlTemplate>
         <Panel>
         <Border Name="PART_Border"
+                Margin="{DynamicResource ShadowFocusRingReserve}"
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -74,6 +75,7 @@
               <Panel>
                 <TextBlock Name="PART_Watermark"
                            Text="{TemplateBinding Watermark}"
+                           IsHitTestVisible="False"
                            Margin="{TemplateBinding Padding}"
                            Foreground="{DynamicResource ShadowMutedForegroundBrush}"
                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -110,7 +112,7 @@
         <!-- Focus ring as a separate border: BoxShadow in Avalonia does not grow
              the radius by the spread amount, so the ring corners look "pinched" -->
         <Border Name="PART_FocusRing"
-                Margin="{DynamicResource ShadowFocusRingMargin}"
+                Margin="0"
                 BorderThickness="{DynamicResource ShadowFocusRingThickness}"
                 CornerRadius="{DynamicResource ShadowRadiusFocusMd}"
                 BorderBrush="{DynamicResource ShadowFocusRingBrush}"
@@ -120,9 +122,11 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- watermark: hide when text present -->
+    <!-- watermark: hide when text present, but keep it in layout (Opacity, not IsVisible)
+         so the field reserves the placeholder's width and does not shrink on the first
+         keystroke. An explicit Width still wins (it overrides content sizing). -->
     <Style Selector="^:not(:empty) /template/ TextBlock#PART_Watermark">
-      <Setter Property="IsVisible" Value="False" />
+      <Setter Property="Opacity" Value="0" />
     </Style>
     <!-- focus (shadcn inputs have no border hover state) -->
     <Style Selector="^:focus /template/ Border#PART_Border">
@@ -145,6 +149,7 @@
 
     <!-- transparent: for nested inputs (NumericUpDown etc.) -->
     <Style Selector="^.transparent /template/ Border#PART_Border">
+      <Setter Property="Margin" Value="0" />
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="BorderBrush" Value="Transparent" />
       <Setter Property="BoxShadow" Value="0 0 0 0 #00000000" />
@@ -168,10 +173,14 @@
       <Setter Property="VerticalContentAlignment" Value="Top" />
       <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
     </Style>
-    <!-- textarea focus ring: thinner (2px) — a full 3px ring around a tall box reads heavy; outer radius = Sm(6)+2 = Md(8) -->
+    <!-- textarea focus ring: thinner (2px) — a full 3px ring around a tall box reads heavy.
+         Reserve only 2px: inset PART_Border by 2, ring at Margin=0; outer radius = Sm(6)+2 = Md(8). -->
+    <Style Selector="^.textarea /template/ Border#PART_Border">
+      <Setter Property="Margin" Value="2" />
+    </Style>
     <Style Selector="^.textarea /template/ Border#PART_FocusRing">
       <Setter Property="BorderThickness" Value="2" />
-      <Setter Property="Margin" Value="-2" />
+      <Setter Property="Margin" Value="0" />
       <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
     </Style>
 

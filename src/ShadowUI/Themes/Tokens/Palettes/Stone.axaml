@@ -10,8 +10,10 @@
       <SolidColorBrush x:Key="ShadowPopoverBrush" Color="#FFFFFF" />
       <SolidColorBrush x:Key="ShadowPopoverForegroundBrush" Color="#0C0A09" />
       <SolidColorBrush x:Key="ShadowPrimaryBrush" Color="#1C1917" />
+      <SolidColorBrush x:Key="ShadowPrimaryHoverBrush" Color="#E61C1917" />
       <SolidColorBrush x:Key="ShadowPrimaryForegroundBrush" Color="#FAFAF9" />
       <SolidColorBrush x:Key="ShadowSecondaryBrush" Color="#F5F5F4" />
+      <SolidColorBrush x:Key="ShadowSecondaryHoverBrush" Color="#CCF5F5F4" />
       <SolidColorBrush x:Key="ShadowSecondaryForegroundBrush" Color="#1C1917" />
       <SolidColorBrush x:Key="ShadowMutedBrush" Color="#F5F5F4" />
       <SolidColorBrush x:Key="ShadowMutedForegroundBrush" Color="#79716B" />
@@ -31,6 +33,7 @@
       <SolidColorBrush x:Key="ShadowInputBackgroundBrush" Color="Transparent" />
       <SolidColorBrush x:Key="ShadowInputHoverBrush" Color="Transparent" />
       <SolidColorBrush x:Key="ShadowDestructiveButtonBrush" Color="#E7000B" />
+      <SolidColorBrush x:Key="ShadowDestructiveButtonHoverBrush" Color="#E6E7000B" />
       <BoxShadows x:Key="ShadowErrorRing">0 0 0 3 #33E7000B</BoxShadows>
       <SolidColorBrush x:Key="ShadowChart1Brush" Color="#F54900" />
       <SolidColorBrush x:Key="ShadowChart2Brush" Color="#009689" />
@@ -53,8 +56,10 @@
       <SolidColorBrush x:Key="ShadowPopoverBrush" Color="#1C1917" />
       <SolidColorBrush x:Key="ShadowPopoverForegroundBrush" Color="#FAFAF9" />
       <SolidColorBrush x:Key="ShadowPrimaryBrush" Color="#E7E5E4" />
+      <SolidColorBrush x:Key="ShadowPrimaryHoverBrush" Color="#E6E7E5E4" />
       <SolidColorBrush x:Key="ShadowPrimaryForegroundBrush" Color="#1C1917" />
       <SolidColorBrush x:Key="ShadowSecondaryBrush" Color="#292524" />
+      <SolidColorBrush x:Key="ShadowSecondaryHoverBrush" Color="#CC292524" />
       <SolidColorBrush x:Key="ShadowSecondaryForegroundBrush" Color="#FAFAF9" />
       <SolidColorBrush x:Key="ShadowMutedBrush" Color="#292524" />
       <SolidColorBrush x:Key="ShadowMutedForegroundBrush" Color="#A6A09B" />
@@ -74,6 +79,7 @@
       <SolidColorBrush x:Key="ShadowInputBackgroundBrush" Color="#0BFFFFFF" />
       <SolidColorBrush x:Key="ShadowInputHoverBrush" Color="#13FFFFFF" />
       <SolidColorBrush x:Key="ShadowDestructiveButtonBrush" Color="#99FF6467" />
+      <SolidColorBrush x:Key="ShadowDestructiveButtonHoverBrush" Color="#8AFF6467" />
       <BoxShadows x:Key="ShadowErrorRing">0 0 0 3 #66FF6467</BoxShadows>
       <SolidColorBrush x:Key="ShadowChart1Brush" Color="#1447E6" />
       <SolidColorBrush x:Key="ShadowChart2Brush" Color="#00BC7D" />

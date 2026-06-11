@@ -14,6 +14,10 @@
   <CornerRadius x:Key="ShadowRadiusFocusMd">11</CornerRadius>
   <Thickness x:Key="ShadowFocusRingThickness">3</Thickness>
   <Thickness x:Key="ShadowFocusRingMargin">-3</Thickness>
+  <!-- Reserve-space ring: the element is inset by this band so the ring (drawn at the
+       control's own bounds, Margin=0) stays inside the box and is never clipped by an
+       ancestor (ScrollViewer/Card). Field radius + reserve = ShadowRadiusFocus*. -->
+  <Thickness x:Key="ShadowFocusRingReserve">3</Thickness>
 
   <!-- shadcn shadows (black with low alpha; identical for Light and Dark) -->
   <BoxShadows x:Key="ShadowShadowXs">0 1 2 0 #0D000000</BoxShadows>

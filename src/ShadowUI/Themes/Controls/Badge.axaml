@@ -7,7 +7,8 @@
     <Setter Property="BorderBrush" Value="Transparent" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="9999" />
-    <Setter Property="Padding" Value="8,2" />
+    <!-- top 1px < bottom: line-box centering leaves the glyph 1px low; trim top to center. -->
+    <Setter Property="Padding" Value="8,1,8,2" />
     <Setter Property="FontSize" Value="12" />
     <Setter Property="FontWeight" Value="Medium" />
     <Setter Property="HorizontalAlignment" Value="Left" />

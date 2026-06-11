@@ -26,7 +26,6 @@
                 CornerRadius="{TemplateBinding CornerRadius}">
           <Border.Transitions>
             <Transitions>
-              <DoubleTransition Property="Opacity" Duration="0:0:0.15" />
               <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.10" Easing="CubicEaseOut" />
             </Transitions>
           </Border.Transitions>
@@ -48,12 +47,14 @@
       </ControlTemplate>
     </Setter>
 
-    <!-- states (solid) -->
+    <!-- states: hover/press tint the background (shadcn bg-primary/90), instant like shadcn v4.
+         No element-level opacity dim — it dims the label too, and an animated dim pulses when
+         the pointer crosses gaps between adjacent buttons. Variant styles below override. -->
     <Style Selector="^:pointerover /template/ Border#PART_Border">
-      <Setter Property="Opacity" Value="0.9" />
+      <Setter Property="Background" Value="{DynamicResource ShadowPrimaryHoverBrush}" />
     </Style>
     <Style Selector="^:pressed /template/ Border#PART_Border">
-      <Setter Property="Opacity" Value="0.9" />
+      <Setter Property="Background" Value="{DynamicResource ShadowPrimaryHoverBrush}" />
     </Style>
     <Style Selector="^:focus-visible /template/ Border#PART_FocusRing">
       <Setter Property="IsVisible" Value="True" />
@@ -82,16 +83,30 @@
       <Setter Property="Padding" Value="0" />
     </Style>
 
-    <!-- variants -->
+    <!-- variants: mutually exclusive (like shadcn's cva "variant" slot) — combining two
+         variant classes is unsupported, the one defined later in this file wins.
+         For a selected/toggled look on top of any variant use the "active" class below. -->
     <Style Selector="^.secondary">
       <Setter Property="Background" Value="{DynamicResource ShadowSecondaryBrush}" />
       <Setter Property="Foreground" Value="{DynamicResource ShadowSecondaryForegroundBrush}" />
       <Setter Property="BorderBrush" Value="Transparent" />
     </Style>
+    <Style Selector="^.secondary:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowSecondaryHoverBrush}" />
+    </Style>
+    <Style Selector="^.secondary:pressed /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowSecondaryHoverBrush}" />
+    </Style>
     <Style Selector="^.destructive">
       <Setter Property="Background" Value="{DynamicResource ShadowDestructiveButtonBrush}" />
       <Setter Property="Foreground" Value="White" />
       <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="^.destructive:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowDestructiveButtonHoverBrush}" />
+    </Style>
+    <Style Selector="^.destructive:pressed /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowDestructiveButtonHoverBrush}" />
     </Style>
     <Style Selector="^.outline">
       <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
@@ -104,6 +119,9 @@
     <Style Selector="^.outline:pointerover /template/ Border#PART_Border">
       <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>
+    <Style Selector="^.outline:pressed /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
     <Style Selector="^.ghost">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
@@ -112,13 +130,35 @@
     <Style Selector="^.ghost:pointerover /template/ Border#PART_Border">
       <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>
+    <Style Selector="^.ghost:pressed /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
     <Style Selector="^.link">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryBrush}" />
       <Setter Property="BorderThickness" Value="0" />
     </Style>
+    <Style Selector="^.link:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="^.link:pressed /template/ Border#PART_Border">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
     <Style Selector="^.link:pointerover /template/ ContentPresenter#PART_ContentPresenter">
       <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+    </Style>
+
+    <!-- active: persistent selected state (active tab, toggled tool button). Declared after
+         every variant so it reliably wins regardless of Classes order — e.g. "ghost active". -->
+    <Style Selector="^.active">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource ShadowAccentForegroundBrush}" />
+    </Style>
+    <Style Selector="^.active:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    </Style>
+    <Style Selector="^.active:pressed /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>
   </ControlTheme>
 </ResourceDictionary>
