@@ -3,6 +3,11 @@
 All notable changes to ShadowUI are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](https://semver.org).
 
+## [1.0.4] — 2026-06-11
+
+### Documentation
+- README install snippet updated to the current version (`PackageReference` pin).
+
 ## [1.0.3] — 2026-06-11
 
 ### Added
