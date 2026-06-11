@@ -45,7 +45,11 @@
     <Setter Property="MinHeight" Value="36" />
     <Setter Property="Padding" Value="12,8" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="SelectionBrush" Value="{DynamicResource ShadowAccentBrush}" />
+    <!-- selection: primary band + inverted text (shadcn selection:bg-primary text-primary-foreground).
+         ShadowAccentBrush (the hover-surface token) is ~invisible here — in Light it is #F4F4F5,
+         indistinguishable from the near-white field. -->
+    <Setter Property="SelectionBrush" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Setter Property="SelectionForegroundBrush" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
     <Setter Property="CaretBrush" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="FocusAdorner" Value="{x:Null}" />
     <Setter Property="ClipToBounds" Value="False" />

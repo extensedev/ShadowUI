@@ -2,9 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <!-- Infrastructure theme previously provided by FluentTheme: without a
-       SelectionBrush the text selection was invisible. -->
+       SelectionBrush the text selection was invisible. Use the primary band +
+       inverted text — ShadowAccentBrush is ~invisible in Light (#F4F4F5 ≈ page bg). -->
   <ControlTheme x:Key="{x:Type SelectableTextBlock}" TargetType="SelectableTextBlock">
-    <Setter Property="SelectionBrush" Value="{DynamicResource ShadowAccentBrush}" />
+    <Setter Property="SelectionBrush" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Setter Property="SelectionForegroundBrush" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
 
     <Style Selector="^[IsEnabled=True]">
       <Setter Property="Cursor" Value="IBeam" />
