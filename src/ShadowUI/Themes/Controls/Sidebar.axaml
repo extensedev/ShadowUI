@@ -176,10 +176,11 @@
     <Style Selector="^.no-sub /template/ Viewbox#PART_Chevron">
       <Setter Property="IsVisible" Value="False" />
     </Style>
-    <!-- Hover only on the toggle itself (not when hovering sub-items) -->
-    <Style Selector="^ /template/ Button#PART_Toggle:pointerover">
-      <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
-    </Style>
+    <!-- Toggle hover/press highlight lives in Controls.axaml: PART_Toggle is a default Button whose
+         own :pointerover paints the inner PART_Border with ShadowPrimaryHoverBrush (bright in dark
+         themes). Overriding that Border needs a descendant + single /template/ selector, which a
+         ControlTheme child style cannot express (double /template/ is forbidden). The :active
+         highlight below still works — at rest PART_Border binds to the control Background. -->
     <!-- Active: accent bg only (no weight change) -->
     <Style Selector="^:active /template/ Button#PART_Toggle">
       <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />

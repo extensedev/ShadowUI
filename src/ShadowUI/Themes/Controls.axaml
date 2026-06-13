@@ -185,6 +185,18 @@
     <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
   </Style>
 
+  <!-- SidebarMenuItem toggle: PART_Toggle is a default Button whose own :pointerover paints
+       PART_Border with ShadowPrimaryHoverBrush (bright near-white in dark themes). Override to the
+       sidebar accent so an expandable item hovers identically to a plain SidebarItem. Lives here,
+       not in the ControlTheme: reaching the inner Border needs a descendant hop + single /template/
+       (a double /template/ inside the ControlTheme is forbidden). -->
+  <Style Selector="shadui|SidebarMenuItem Button#PART_Toggle:pointerover /template/ Border#PART_Border">
+    <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
+  </Style>
+  <Style Selector="shadui|SidebarMenuItem Button#PART_Toggle:pressed /template/ Border#PART_Border">
+    <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
+  </Style>
+
   <!-- Carousel dot indicators: created from code-behind, styled globally -->
   <Style Selector="shadui|Carousel StackPanel#PART_DotsPanel Ellipse">
     <Setter Property="Fill" Value="{DynamicResource ShadowMutedForegroundBrush}" />
