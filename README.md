@@ -19,7 +19,7 @@ dotnet add package ShadowUI
 ```
 
 ```xml
-<PackageReference Include="ShadowUI" Version="1.0.4" />
+<PackageReference Include="ShadowUI" Version="1.0.6" />
 ```
 
 ## Getting Started

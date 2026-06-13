@@ -3,6 +3,18 @@
 All notable changes to ShadowUI are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](https://semver.org).
 
+## [1.0.6] — 2026-06-14
+
+### Fixed
+- **`TextBox` / `SelectableTextBlock` selected text now inverts to dark.** The selection band painted correctly but the text on top kept its light foreground — a stale `TextRunCache` meant the selected run never re-rendered with the inverted brush. The cache is now busted on selection change so selected glyphs flip to the dark foreground over the primary band.
+- **`OtpInput` digit now centers in the fixed-size cell.** The shared `TextBox` template insets `PART_Border` by the 3px focus-ring reserve and keeps the 12,8 field padding — on a fixed 40×40 OTP cell that clipped and offset the single digit. `.otp-cell` now drops the reserve inset (the ring renders outward into the 8px inter-cell gap) and zeroes the inner-content margin; the cell sets `FontSize`/`Padding`/`HorizontalContentAlignment` so the glyph sits dead-center.
+- **`SidebarMenuItem` (expandable item) hover now matches plain `SidebarItem`s.** The toggle row is a default `Button`, whose own theme painted its inner border with `ShadowPrimaryHoverBrush` (a bright near-white in dark palettes) — overriding the intended sidebar accent and flashing a stray highlight on hover. The toggle's border now uses `ShadowSidebarAccentBrush`, identical to the subtle hover on non-expandable items.
+
+## [1.0.5] — 2026-06-12
+
+### Added
+- **Visible text selection in `TextBox` and `SelectableTextBlock`.** Selected text now shows a primary-colored selection band with inverted (dark) foreground, so highlighted text stays legible.
+
 ## [1.0.4] — 2026-06-11
 
 ### Documentation
