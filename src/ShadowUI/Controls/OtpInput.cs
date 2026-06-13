@@ -100,7 +100,10 @@ public class OtpInput : TemplatedControl
             MaxLength = 1,
             Width = 40,
             Height = 40,
+            FontSize = 16,
+            Padding = new Thickness(0),
             TextAlignment = Avalonia.Media.TextAlignment.Center,
+            HorizontalContentAlignment = HorizontalAlignment.Center,
             VerticalContentAlignment = VerticalAlignment.Center,
         };
         cell.Classes.Add("otp-cell");

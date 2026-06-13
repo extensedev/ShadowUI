@@ -189,7 +189,21 @@
       <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
     </Style>
 
-    <!-- otp-cell: subtle highlight on hover -->
+    <!-- otp-cell: fixed 40×40 square. The shared template insets PART_Border by the
+         focus-ring reserve (3px) and keeps the 12,8 padding — on a fixed-size cell that
+         clips the digit and offsets it. Drop the reserve inset (ring goes outward into
+         the 8px inter-cell gap) and zero the empty inner-content margin so the single
+         digit centers (padding is zeroed on the cell itself in OtpInput.cs). -->
+    <Style Selector="^.otp-cell /template/ Border#PART_Border">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="^.otp-cell /template/ Border#PART_FocusRing">
+      <Setter Property="Margin" Value="-3" />
+    </Style>
+    <Style Selector="^.otp-cell /template/ ContentPresenter#PART_InnerRightContent">
+      <Setter Property="Margin" Value="0" />
+    </Style>
+    <!-- subtle highlight on hover -->
     <Style Selector="^.otp-cell:pointerover /template/ Border#PART_Border">
       <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
     </Style>
