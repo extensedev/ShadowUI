@@ -14,11 +14,9 @@
         <Border Name="PART_Border"
                 Background="{TemplateBinding Background}"
                 CornerRadius="{TemplateBinding CornerRadius}">
-          <Border.Transitions>
-            <Transitions>
-              <BrushTransition Property="Background" Duration="0:0:0.10" />
-            </Transitions>
-          </Border.Transitions>
+          <!-- Instant hover tint like shadcn v4 (see Button.axaml): an animated
+               background fade pulses when the pointer crosses the gap between the
+               two adjacent up/down buttons, reading as a double animation. -->
           <ContentPresenter Name="PART_ContentPresenter"
                             Content="{TemplateBinding Content}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"

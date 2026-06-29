@@ -1,5 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shadui="using:ShadowUI">
+
+  <!-- Built-in Avalonia Separator (used by Toolbar / Menu / Card): plain solid line -->
   <ControlTheme x:Key="{x:Type Separator}" TargetType="Separator">
     <Setter Property="Background" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="Height" Value="1" />
@@ -17,4 +20,55 @@
       <Setter Property="VerticalAlignment" Value="Stretch" />
     </Style>
   </ControlTheme>
+
+  <!-- ShadowUI Separator: orientation + optional edge-fade + custom gradient via Background -->
+  <ControlTheme x:Key="{x:Type shadui:Separator}" TargetType="shadui:Separator">
+    <Setter Property="Background" Value="{DynamicResource ShadowBorderBrush}" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Margin" Value="0,4" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Line"
+                Background="{TemplateBinding Background}"
+                Height="{TemplateBinding Thickness}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" />
+      </ControlTemplate>
+    </Setter>
+
+    <!-- Vertical orientation: swap stretch axis and bind the thickness to width -->
+    <Style Selector="^:vertical">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="Margin" Value="4,0" />
+    </Style>
+    <Style Selector="^:vertical /template/ Border#PART_Line">
+      <Setter Property="Height" Value="NaN" />
+      <Setter Property="Width" Value="{Binding $parent[shadui:Separator].Thickness}" />
+    </Style>
+
+    <!-- Edge-fade: axis-aware opacity mask (alpha only) — composes with any Background brush -->
+    <Style Selector="^:fade:not(:vertical) /template/ Border#PART_Line">
+      <Setter Property="OpacityMask">
+        <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+          <GradientStop Offset="0" Color="#00000000" />
+          <GradientStop Offset="0.15" Color="#FF000000" />
+          <GradientStop Offset="0.85" Color="#FF000000" />
+          <GradientStop Offset="1" Color="#00000000" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="^:fade:vertical /template/ Border#PART_Line">
+      <Setter Property="OpacityMask">
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Offset="0" Color="#00000000" />
+          <GradientStop Offset="0.15" Color="#FF000000" />
+          <GradientStop Offset="0.85" Color="#FF000000" />
+          <GradientStop Offset="1" Color="#00000000" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+  </ControlTheme>
+
 </ResourceDictionary>

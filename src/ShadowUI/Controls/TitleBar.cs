@@ -159,7 +159,10 @@ public class TitleBar : TemplatedControl
         _restoreBtn?.RemoveHandler(Button.ClickEvent, OnToggleMaximize);
         _closeBtn?.RemoveHandler(Button.ClickEvent, OnClose);
         if (_dragArea is not null)
+        {
             _dragArea.PointerPressed -= OnDragPointerPressed;
+            _dragArea.DoubleTapped -= OnDragDoubleTapped;
+        }
 
         _minBtn = e.NameScope.Find<Button>("PART_MinimizeButton");
         _maxBtn = e.NameScope.Find<Button>("PART_MaximizeButton");
@@ -172,7 +175,10 @@ public class TitleBar : TemplatedControl
         _restoreBtn?.AddHandler(Button.ClickEvent, OnToggleMaximize);
         _closeBtn?.AddHandler(Button.ClickEvent, OnClose);
         if (_dragArea is not null)
+        {
             _dragArea.PointerPressed += OnDragPointerPressed;
+            _dragArea.DoubleTapped += OnDragDoubleTapped;
+        }
     }
 
     private void OnWindowPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
@@ -183,8 +189,17 @@ public class TitleBar : TemplatedControl
 
     private void OnDragPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+        // Only start the move-drag on a single press. The double-click that
+        // toggles maximize is handled separately via DoubleTapped, because the
+        // Win32 move-drag modal loop swallows the second click otherwise.
+        if (e.ClickCount == 1 && e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             _window?.BeginMoveDrag(e);
+    }
+
+    private void OnDragDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        // Double-click on the title bar toggles maximize/restore (standard behavior).
+        if (ShowMaximize) OnToggleMaximize(sender, e);
     }
 
     private void OnMinimize(object? sender, RoutedEventArgs e)

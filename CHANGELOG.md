@@ -5,7 +5,17 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [1.0.7] — 2026-06-29
+
+### Added
+- **`Separator` control (ShadowUI).** A thin divider with `Orientation` (horizontal/vertical), `Thickness`, and `FadeEdges` — when set, both ends fade to transparent via an axis-aware opacity mask that composes with any `Background` brush (including a custom `LinearGradientBrush`). The built-in Avalonia `Separator` theme stays a plain solid line.
+- **`Spinner` `.loader` variant.** A lucide-style 8-spoke sunburst that spins continuously (Tailwind `animate-spin` equivalent).
+- **`TextBox` inner-left content slot.** `InnerLeftContent` renders an icon inside the field; the slot is padded off the rounded corner and collapses when empty, so a plain `TextBox` keeps its 12px text inset unchanged.
+
 ### Fixed
+- **`Collapsible` now actually expands.** The trigger resolved its target only by walking visual ancestors, but the demo placed trigger and container as siblings, so clicks no-op'd. Reworked to the shadcn structure: `Collapsible` hosts the header (`Trigger` slot) plus content, `CollapsibleTrigger` is a transparent `asChild` wrapper over a ghost `Button` (single hover surface), the rounded panel takes a muted background while open, and the chevron rotates 180° from the trigger's `:expanded` state.
+- **Title bar double-click toggles maximize/restore.** A single press still begins the move-drag, but the maximize double-click is now handled via `DoubleTapped` — the Win32 move-drag modal loop was swallowing the second click.
+- **`NumericUpDown` hover no longer double-pulses.** Dropped the background `BrushTransition`; the animated fade pulsed as the pointer crossed the gap between the adjacent up/down buttons, reading as a double animation. Hover tint is now instant, like the shadcn v4 buttons.
 - **Scrollbar thumb no longer "tears" while being dragged.** The bar is only 10px wide, so during a vertical drag the captured pointer drifts off it, the viewer loses `:pointerover`, `AllowAutoHide` flips off, and the thumb shrank 8→4px and dimmed mid-drag. The `:pressed` state now pins the thumb expanded and opaque, so a drag keeps it stable regardless of pointer-over.
 
 ## [1.0.6] — 2026-06-14

@@ -66,9 +66,13 @@
                 MinHeight="{TemplateBinding MinHeight}"
                 BoxShadow="{DynamicResource ShadowShadowXs}">
           <Grid ColumnDefinitions="Auto,*,Auto">
+            <!-- inner-left slot (icon inside the field). Pad it off the rounded corner and
+                 collapse it when empty so a plain TextBox keeps its 12px text inset unchanged. -->
             <ContentPresenter Name="PART_InnerLeftContent"
                               Content="{TemplateBinding InnerLeftContent}"
                               Grid.Column="0"
+                              Margin="12,0,0,0"
+                              IsVisible="{TemplateBinding InnerLeftContent, Converter={x:Static ObjectConverters.IsNotNull}}"
                               VerticalAlignment="Center" />
             <ScrollViewer Name="PART_ScrollViewer"
                           Grid.Column="1"

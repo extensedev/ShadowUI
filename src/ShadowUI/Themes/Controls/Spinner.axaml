@@ -48,6 +48,44 @@
     <Style Selector="^.primary">
       <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryBrush}" />
     </Style>
+
+    <!-- lucide Loader (8-spoke sunburst), spinning like Tailwind animate-spin -->
+    <Style Selector="^.loader">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Viewbox Width="{TemplateBinding Width}"
+                   Height="{TemplateBinding Height}"
+                   Stretch="Uniform">
+            <Canvas Width="24" Height="24">
+              <Path Name="PART_Loader"
+                    Stroke="{TemplateBinding Foreground}"
+                    StrokeThickness="2"
+                    StrokeLineCap="Round"
+                    RenderTransformOrigin="50%,50%"
+                    Data="M12 2 L12 6 M12 18 L12 22 M4.93 4.93 L7.76 7.76 M16.24 16.24 L19.07 19.07 M2 12 L6 12 M18 12 L22 12 M4.93 19.07 L7.76 16.24 M16.24 7.76 L19.07 4.93">
+                <Path.RenderTransform>
+                  <RotateTransform />
+                </Path.RenderTransform>
+                <Path.Styles>
+                  <Style Selector="Path">
+                    <Style.Animations>
+                      <Animation Duration="0:0:1" IterationCount="INFINITE" Easing="LinearEasing">
+                        <KeyFrame Cue="0%">
+                          <Setter Property="RotateTransform.Angle" Value="0" />
+                        </KeyFrame>
+                        <KeyFrame Cue="100%">
+                          <Setter Property="RotateTransform.Angle" Value="360" />
+                        </KeyFrame>
+                      </Animation>
+                    </Style.Animations>
+                  </Style>
+                </Path.Styles>
+              </Path>
+            </Canvas>
+          </Viewbox>
+        </ControlTemplate>
+      </Setter>
+    </Style>
   </ControlTheme>
 
 </ResourceDictionary>

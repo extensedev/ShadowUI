@@ -2,27 +2,36 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadui="using:ShadowUI">
 
-  <!-- Container: shows/hides content based on IsExpanded -->
+  <!-- Container: rounded surface that reveals content when IsExpanded; muted background while open. -->
   <ControlTheme x:Key="{x:Type shadui:Collapsible}" TargetType="shadui:Collapsible">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">
       <ControlTemplate>
-        <StackPanel>
-          <!-- Trigger slot: the CollapsibleTrigger goes here -->
-          <ContentPresenter Name="PART_Trigger"
-                            HorizontalAlignment="Stretch" />
-          <!-- Content: shown only when IsExpanded=true -->
-          <ContentPresenter Name="PART_Content"
-                            Content="{TemplateBinding Content}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                            IsVisible="{TemplateBinding IsExpanded}"
-                            Margin="0,4,0,0" />
-        </StackPanel>
+        <Border Name="PART_Root"
+                Background="Transparent"
+                CornerRadius="{DynamicResource ShadowRadiusMd}">
+          <StackPanel>
+            <!-- Trigger slot: the CollapsibleTrigger goes here -->
+            <ContentPresenter Name="PART_Trigger"
+                              Content="{TemplateBinding Trigger}"
+                              HorizontalAlignment="Stretch" />
+            <!-- Content: shown only when IsExpanded=true -->
+            <ContentPresenter Name="PART_Content"
+                              Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              IsVisible="{TemplateBinding IsExpanded}"
+                              Padding="12,0,12,10" />
+          </StackPanel>
+        </Border>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^:expanded /template/ Border#PART_Root">
+      <Setter Property="Background" Value="{DynamicResource ShadowMutedBrush}" />
+    </Style>
   </ControlTheme>
 
-  <!-- Trigger for Collapsible: sets Cursor=Hand -->
+  <!-- Trigger: transparent pass-through (asChild). The child (e.g. a ghost Button) is the only surface. -->
   <ControlTheme x:Key="{x:Type shadui:CollapsibleTrigger}" TargetType="shadui:CollapsibleTrigger">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">
