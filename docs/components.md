@@ -94,6 +94,26 @@ with Light and Dark variants.
 
 ---
 
+## Separator
+
+`shadowui:Separator` is a thin divider with orientation, thickness, and an optional edge-fade. The plain built-in `<Separator />` (used by toolbars/menus/cards above) stays a solid line.
+
+```xml
+<shadowui:Separator />                                  <!-- horizontal, 1px -->
+<shadowui:Separator Orientation="Vertical" />           <!-- vertical -->
+<shadowui:Separator Thickness="2" FadeEdges="True" />   <!-- fades to transparent at both ends -->
+```
+
+`FadeEdges` applies an axis-aware opacity mask that composes with any `Background` brush — assign a `LinearGradientBrush` to `Background` for a colored gradient line.
+
+| Property | Purpose |
+|----------|---------|
+| `Orientation` | `Horizontal` (default) / `Vertical` |
+| `Thickness` | line thickness in px (default `1`) |
+| `FadeEdges` | fade both ends to transparent |
+
+---
+
 ## Forms
 
 ```xml
@@ -117,6 +137,16 @@ with Light and Dark variants.
   <ComboBoxItem>Option A</ComboBoxItem>
   <ComboBoxItem>Option B</ComboBoxItem>
 </ComboBox>
+```
+
+`TextBox` accepts an inline icon via `InnerLeftContent` (and `InnerRightContent`); the slot is padded off the rounded corner and collapses when empty, so a plain `TextBox` keeps its default text inset:
+
+```xml
+<TextBox PlaceholderText="Search…">
+  <TextBox.InnerLeftContent>
+    <PathIcon Data="M 11 19 A 8 8 0 1 0 11 3 A 8 8 0 0 0 11 19 M 21 21 L 16.65 16.65" Width="16" Height="16" />
+  </TextBox.InnerLeftContent>
+</TextBox>
 ```
 
 ---
@@ -311,7 +341,7 @@ automatically in the window's `OverlayLayer` on first call.
 ## TitleBar
 
 `shadowui:TitleBar` replaces the native title bar with a custom one styled like the sidebar
-(same background, min/max/close buttons with inset hover). Drag, minimize, maximize, and close are built-in.
+(same background, min/max/close buttons with inset hover). Drag, minimize, maximize, and close are built-in — including double-clicking the bar to toggle maximize/restore.
 
 ```xml
 <DockPanel>
@@ -426,9 +456,10 @@ Composed from `BreadcrumbItem` and `BreadcrumbSeparator` (like shadcn):
 <shadowui:Spinner Classes="sm" />
 <shadowui:Spinner />
 <shadowui:Spinner Classes="lg primary" />
+<shadowui:Spinner Classes="loader" />
 ```
 
-Sizes: `sm` / (default) / `lg`; class `primary` — accent color.
+Sizes: `sm` / (default) / `lg`; class `primary` — accent color. Class `loader` swaps the ring for a lucide-style 8-spoke sunburst that spins continuously (`animate-spin` equivalent).
 
 ---
 
@@ -580,21 +611,30 @@ RightPanel.Close();
 
 ## Collapsible
 
+`Collapsible` hosts the header in its `Trigger` slot and the revealed body as its content (shown while `IsExpanded`). The rounded panel takes a muted background while open. `CollapsibleTrigger` is a transparent `asChild` wrapper — it renders no surface of its own, so the child (e.g. a ghost `Button`) is the only hover surface, and clicking it toggles the parent `Collapsible`.
+
 ```xml
-<shadowui:CollapsibleTrigger x:Name="Trigger">
-  <Button Classes="outline" Content="Toggle ▸" />
-</shadowui:CollapsibleTrigger>
-<shadowui:Collapsible x:Name="Panel">
-  <TextBlock Text="Hidden content revealed on trigger click." />
+<shadowui:Collapsible IsExpanded="False">
+  <shadowui:Collapsible.Trigger>
+    <shadowui:CollapsibleTrigger>
+      <Button Classes="ghost" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock Grid.Column="0" Text="Product details" VerticalAlignment="Center" />
+          <PathIcon Grid.Column="1" Classes="chevron" Data="M 4 6 L 8 10 L 12 6" />
+        </Grid>
+      </Button>
+    </shadowui:CollapsibleTrigger>
+  </shadowui:Collapsible.Trigger>
+  <TextBlock Classes="p" Text="Hidden content revealed on trigger click." TextWrapping="Wrap" />
 </shadowui:Collapsible>
 ```
 
-Link them in code-behind (when placed as siblings):
+The trigger mirrors the panel's open state as the `:expanded` pseudo-class, so a chevron rotates with a style — no code-behind needed:
 
-```csharp
-Trigger.AddHandler(PointerPressedEvent,
-    (_, _) => Panel.IsExpanded = !Panel.IsExpanded,
-    RoutingStrategies.Bubble);
+```xml
+<Style Selector="shadowui|CollapsibleTrigger:expanded PathIcon.chevron">
+  <Setter Property="RenderTransform" Value="rotate(180deg)" />
+</Style>
 ```
 
 ---
