@@ -1,10 +1,10 @@
 # ShadowUI — Component Reference
 
 All components are drop-in: adding `ShadowUITheme` automatically styles built-in Avalonia
-controls (`Button`, `TextBox`, `CheckBox`…) and unlocks custom controls from the `shadui:` namespace.
+controls (`Button`, `TextBox`, `CheckBox`…) and unlocks custom controls from the `shadowui:` namespace.
 
 ```xml
-<Window xmlns:shadui="using:ShadowUI" ...>
+<Window xmlns:shadowui="using:ShadowUI" ...>
 ```
 
 Variants and sizes are set via `Classes` (like utility classes in shadcn).
@@ -62,15 +62,15 @@ Square button for icons — use the `icon` class, combinable with any variant:
 ## Badge
 
 ```xml
-<shadui:Badge Content="Default" />
-<shadui:Badge Classes="secondary"   Content="Secondary" />
-<shadui:Badge Classes="destructive" Content="Destructive" />
-<shadui:Badge Classes="outline"     Content="Outline" />
+<shadowui:Badge Content="Default" />
+<shadowui:Badge Classes="secondary"   Content="Secondary" />
+<shadowui:Badge Classes="destructive" Content="Destructive" />
+<shadowui:Badge Classes="outline"     Content="Outline" />
 
 <!-- semantic -->
-<shadui:Badge Classes="success" Content="Success" />
-<shadui:Badge Classes="warning" Content="Warning" />
-<shadui:Badge Classes="info"    Content="Info" />
+<shadowui:Badge Classes="success" Content="Success" />
+<shadowui:Badge Classes="warning" Content="Warning" />
+<shadowui:Badge Classes="info"    Content="Info" />
 ```
 
 `success/warning/info` colors come from semantic tokens
@@ -82,14 +82,14 @@ with Light and Dark variants.
 ## Card
 
 ```xml
-<shadui:Card Width="320">
+<shadowui:Card Width="320">
   <StackPanel Spacing="6">
-    <shadui:CardTitle Content="Card Title" />
-    <shadui:CardDescription Content="Description below the title." />
+    <shadowui:CardTitle Content="Card Title" />
+    <shadowui:CardDescription Content="Description below the title." />
     <Separator />
     <TextBlock Classes="p" Text="Card content." />
   </StackPanel>
-</shadui:Card>
+</shadowui:Card>
 ```
 
 ---
@@ -135,7 +135,7 @@ By default — segmented tabs (muted background container, active tab has a bord
 <TabControl Classes="legacytabs"> … </TabControl>
 
 <!-- underline: tabs with underline indicator -->
-<TabControl shadui:Tabs.Underline="True"> … </TabControl>
+<TabControl shadowui:Tabs.Underline="True"> … </TabControl>
 
 <!-- large equal-width tabs (border; fill = largetabs legacytabs) -->
 <TabControl Classes="largetabs"> … </TabControl>
@@ -143,13 +143,13 @@ By default — segmented tabs (muted background container, active tab has a bord
 
 - default — border highlight (current shadcn);
 - `Classes="legacytabs"` — active tab fill (classic look);
-- `shadui:Tabs.Underline="True"` — underline indicator;
+- `shadowui:Tabs.Underline="True"` — underline indicator;
 - `Classes="largetabs"` — large equal tabs (border), `largetabs legacytabs` — large with fill.
 
-`shadui:Tabs.UniformContentHeight="True"` — the content area reserves the height of the tallest tab page, so switching tabs no longer resizes the `TabControl`:
+`shadowui:Tabs.UniformContentHeight="True"` — the content area reserves the height of the tallest tab page, so switching tabs no longer resizes the `TabControl`:
 
 ```xml
-<TabControl shadui:Tabs.UniformContentHeight="True"> … </TabControl>
+<TabControl shadowui:Tabs.UniformContentHeight="True"> … </TabControl>
 ```
 
 ---
@@ -184,7 +184,7 @@ By default — segmented tabs (muted background container, active tab has a bord
 
 ## Dialog
 
-`shadui:Dialog` — full-window overlay + centered card. Closes on the X button, click outside, or `Esc`.
+`shadowui:Dialog` — full-window overlay + centered card. Closes on the X button, click outside, or `Esc`.
 
 Place the dialog in the **root container** of your window (e.g. root `Grid`) so it overlays the entire UI:
 
@@ -192,7 +192,7 @@ Place the dialog in the **root container** of your window (e.g. root `Grid`) so 
 <Grid>
   <DockPanel> … main UI … </DockPanel>
 
-  <shadui:Dialog x:Name="ConfirmDialog"
+  <shadowui:Dialog x:Name="ConfirmDialog"
                  Title="Delete Project?"
                  Description="This action cannot be undone.">
     <!-- body (Content) -->
@@ -202,13 +202,13 @@ Place the dialog in the **root container** of your window (e.g. root `Grid`) so 
     </StackPanel>
 
     <!-- footer with actions -->
-    <shadui:Dialog.Footer>
+    <shadowui:Dialog.Footer>
       <StackPanel Orientation="Horizontal" Spacing="8">
         <Button Classes="outline" Content="Cancel" Click="OnCancel" />
         <Button Classes="destructive" Content="Delete" Click="OnDelete" />
       </StackPanel>
-    </shadui:Dialog.Footer>
-  </shadui:Dialog>
+    </shadowui:Dialog.Footer>
+  </shadowui:Dialog>
 </Grid>
 ```
 
@@ -266,32 +266,32 @@ automatically in the window's `OverlayLayer` on first call.
 ## Sidebar
 
 ```xml
-<shadui:Sidebar x:Name="Nav">
-  <shadui:Sidebar.Header>
+<shadowui:Sidebar x:Name="Nav">
+  <shadowui:Sidebar.Header>
     <TextBlock Text="ShadowUI" FontWeight="SemiBold" />
-  </shadui:Sidebar.Header>
+  </shadowui:Sidebar.Header>
 
-  <shadui:SidebarGroup Header="Platform">
-    <shadui:SidebarItem Content="Home" IsActive="True">
-      <shadui:SidebarItem.Icon>
+  <shadowui:SidebarGroup Header="Platform">
+    <shadowui:SidebarItem Content="Home" IsActive="True">
+      <shadowui:SidebarItem.Icon>
         <Viewbox Width="14" Height="14"><Path Data="…" /></Viewbox>
-      </shadui:SidebarItem.Icon>
-    </shadui:SidebarItem>
+      </shadowui:SidebarItem.Icon>
+    </shadowui:SidebarItem>
 
     <!-- expandable item with sub-items -->
-    <shadui:SidebarMenuItem Header="Projects" IsExpanded="True">
-      <shadui:SidebarMenuItem.Icon>
+    <shadowui:SidebarMenuItem Header="Projects" IsExpanded="True">
+      <shadowui:SidebarMenuItem.Icon>
         <Viewbox Width="14" Height="14"><Path Data="…" /></Viewbox>
-      </shadui:SidebarMenuItem.Icon>
-      <shadui:SidebarItem Content="Website" />
-      <shadui:SidebarItem Content="API" />
-    </shadui:SidebarMenuItem>
-  </shadui:SidebarGroup>
+      </shadowui:SidebarMenuItem.Icon>
+      <shadowui:SidebarItem Content="Website" />
+      <shadowui:SidebarItem Content="API" />
+    </shadowui:SidebarMenuItem>
+  </shadowui:SidebarGroup>
 
-  <shadui:Sidebar.Footer>
-    <shadui:Avatar Fallback="JD" />
-  </shadui:Sidebar.Footer>
-</shadui:Sidebar>
+  <shadowui:Sidebar.Footer>
+    <shadowui:Avatar Fallback="JD" />
+  </shadowui:Sidebar.Footer>
+</shadowui:Sidebar>
 ```
 
 - `Sidebar.IsCollapsed` — icon mode (52px wide): labels hide, icons center, sub-menus collapse. Built-in hamburger button in the header toggles this.
@@ -299,7 +299,7 @@ automatically in the window's `OverlayLayer` on first call.
 - `Sidebar.ExpandedWidth` / `Sidebar.CollapsedWidth` — widths for expanded (240) and collapsed (52) states, with animated transition.
 
 ```xml
-<shadui:Sidebar ExpandedWidth="280" CollapsedWidth="64"> … </shadui:Sidebar>
+<shadowui:Sidebar ExpandedWidth="280" CollapsedWidth="64"> … </shadowui:Sidebar>
 ```
 
 - `SidebarItem` — leaf item (`Content`, `Icon`, `IsActive`).
@@ -310,12 +310,12 @@ automatically in the window's `OverlayLayer` on first call.
 
 ## TitleBar
 
-`shadui:TitleBar` replaces the native title bar with a custom one styled like the sidebar
+`shadowui:TitleBar` replaces the native title bar with a custom one styled like the sidebar
 (same background, min/max/close buttons with inset hover). Drag, minimize, maximize, and close are built-in.
 
 ```xml
 <DockPanel>
-  <shadui:TitleBar DockPanel.Dock="Top" Title="My App" />
+  <shadowui:TitleBar DockPanel.Dock="Top" Title="My App" />
   <!-- window content -->
 </DockPanel>
 ```
@@ -323,21 +323,21 @@ automatically in the window's `OverlayLayer` on first call.
 With icon:
 
 ```xml
-<shadui:TitleBar Title="My App">
-  <shadui:TitleBar.Icon>
+<shadowui:TitleBar Title="My App">
+  <shadowui:TitleBar.Icon>
     <Image Source="/Assets/icon.png" />
-  </shadui:TitleBar.Icon>
-</shadui:TitleBar>
+  </shadowui:TitleBar.Icon>
+</shadowui:TitleBar>
 
 <!-- or SVG icon -->
-<shadui:TitleBar Title="My App">
-  <shadui:TitleBar.Icon>
+<shadowui:TitleBar Title="My App">
+  <shadowui:TitleBar.Icon>
     <Viewbox>
       <Path Data="M12 2L2 7l10 5 10-5-10-5z"
             Fill="{DynamicResource ShadowForegroundBrush}" />
     </Viewbox>
-  </shadui:TitleBar.Icon>
-</shadui:TitleBar>
+  </shadowui:TitleBar.Icon>
+</shadowui:TitleBar>
 ```
 
 | Property | Description |
@@ -351,11 +351,11 @@ With icon:
 ## Alert
 
 ```xml
-<shadui:Alert Title="Notice" Description="Notification text." />
-<shadui:Alert Classes="info"        Title="Info"    Description="…" />
-<shadui:Alert Classes="success"     Title="Success" Description="…" />
-<shadui:Alert Classes="warning"     Title="Warning" Description="…" />
-<shadui:Alert Classes="destructive" Title="Error"   Description="…" />
+<shadowui:Alert Title="Notice" Description="Notification text." />
+<shadowui:Alert Classes="info"        Title="Info"    Description="…" />
+<shadowui:Alert Classes="success"     Title="Success" Description="…" />
+<shadowui:Alert Classes="warning"     Title="Warning" Description="…" />
+<shadowui:Alert Classes="destructive" Title="Error"   Description="…" />
 ```
 
 Properties: `Title`, `Description`, `Icon`. Variants color the border and title with semantic color.
@@ -368,16 +368,16 @@ Like `Dialog`, but **does not close** on click outside or `Esc` (no X button) �
 only via explicit buttons. Place in the root `Grid`.
 
 ```xml
-<shadui:AlertDialog x:Name="Confirm"
+<shadowui:AlertDialog x:Name="Confirm"
                     Title="Are you sure?"
                     Description="This action cannot be undone.">
-  <shadui:AlertDialog.Footer>
+  <shadowui:AlertDialog.Footer>
     <StackPanel Orientation="Horizontal" Spacing="8">
       <Button Classes="outline" Content="Cancel" Click="OnCancel" />
       <Button Classes="destructive" Content="Continue" Click="OnConfirm" />
     </StackPanel>
-  </shadui:AlertDialog.Footer>
-</shadui:AlertDialog>
+  </shadowui:AlertDialog.Footer>
+</shadowui:AlertDialog>
 ```
 
 `Confirm.Open()` / `Confirm.Close()`. Same properties as `Dialog`, plus
@@ -388,14 +388,14 @@ only via explicit buttons. Place in the root `Grid`.
 ## Accordion
 
 ```xml
-<shadui:Accordion>
-  <shadui:AccordionItem Header="Section 1" IsExpanded="True">
+<shadowui:Accordion>
+  <shadowui:AccordionItem Header="Section 1" IsExpanded="True">
     <TextBlock Text="Content of the first section." />
-  </shadui:AccordionItem>
-  <shadui:AccordionItem Header="Section 2">
+  </shadowui:AccordionItem>
+  <shadowui:AccordionItem Header="Section 2">
     <TextBlock Text="Content of the second section." />
-  </shadui:AccordionItem>
-</shadui:Accordion>
+  </shadowui:AccordionItem>
+</shadowui:Accordion>
 ```
 
 `AccordionItem`: `Header`, `IsExpanded`, `Content`. Chevron rotates, sections are independent.
@@ -407,13 +407,13 @@ only via explicit buttons. Place in the root `Grid`.
 Composed from `BreadcrumbItem` and `BreadcrumbSeparator` (like shadcn):
 
 ```xml
-<shadui:Breadcrumb>
-  <shadui:BreadcrumbItem Content="Home" Click="..." />
-  <shadui:BreadcrumbSeparator />
-  <shadui:BreadcrumbItem Content="Section" Click="..." />
-  <shadui:BreadcrumbSeparator />
-  <shadui:BreadcrumbItem Content="Current" Classes="current" />
-</shadui:Breadcrumb>
+<shadowui:Breadcrumb>
+  <shadowui:BreadcrumbItem Content="Home" Click="..." />
+  <shadowui:BreadcrumbSeparator />
+  <shadowui:BreadcrumbItem Content="Section" Click="..." />
+  <shadowui:BreadcrumbSeparator />
+  <shadowui:BreadcrumbItem Content="Current" Classes="current" />
+</shadowui:Breadcrumb>
 ```
 
 `BreadcrumbItem` is a link (`Button`); `current` class marks the active page.
@@ -423,9 +423,9 @@ Composed from `BreadcrumbItem` and `BreadcrumbSeparator` (like shadcn):
 ## Spinner
 
 ```xml
-<shadui:Spinner Classes="sm" />
-<shadui:Spinner />
-<shadui:Spinner Classes="lg primary" />
+<shadowui:Spinner Classes="sm" />
+<shadowui:Spinner />
+<shadowui:Spinner Classes="lg primary" />
 ```
 
 Sizes: `sm` / (default) / `lg`; class `primary` — accent color.
@@ -437,11 +437,11 @@ Sizes: `sm` / (default) / `lg`; class `primary` — accent color.
 Single-selection (radio-like) — segments sharing a `GroupName`:
 
 ```xml
-<shadui:ToggleGroup>
-  <shadui:ToggleGroupItem GroupName="align" Content="Left"   IsChecked="True" />
-  <shadui:ToggleGroupItem GroupName="align" Content="Center" />
-  <shadui:ToggleGroupItem GroupName="align" Content="Right"  />
-</shadui:ToggleGroup>
+<shadowui:ToggleGroup>
+  <shadowui:ToggleGroupItem GroupName="align" Content="Left"   IsChecked="True" />
+  <shadowui:ToggleGroupItem GroupName="align" Content="Center" />
+  <shadowui:ToggleGroupItem GroupName="align" Content="Right"  />
+</shadowui:ToggleGroup>
 ```
 
 ---
@@ -449,7 +449,7 @@ Single-selection (radio-like) — segments sharing a `GroupName`:
 ## Color Picker
 
 ```xml
-<shadui:ColorPicker SelectedColor="#2563EB" />
+<shadowui:ColorPicker SelectedColor="#2563EB" />
 ```
 
 Swatch button + popover with a full spectrum (`ColorView`): hue/saturation field,
@@ -492,7 +492,7 @@ Classes: `table` (wrapper), `thead` (header), `tr` / `tr last` (rows with hover 
 Full-featured data table with column sorting, row filtering, and pagination:
 
 ```xml
-<shadui:ShadowDataTable x:Name="MyTable" PageSize="10" />
+<shadowui:ShadowDataTable x:Name="MyTable" PageSize="10" />
 ```
 
 ```csharp
@@ -523,7 +523,7 @@ MyTable.Rows = new[]
 Standalone pagination component:
 
 ```xml
-<shadui:ShadowPagination x:Name="Pager"
+<shadowui:ShadowPagination x:Name="Pager"
                          TotalPages="10"
                          CurrentPage="3"
                          CurrentPageChanged="OnPageChanged" />
@@ -537,7 +537,7 @@ Standalone pagination component:
 Place in the root `Grid`:
 
 ```xml
-<shadui:CommandPalette x:Name="Palette" />
+<shadowui:CommandPalette x:Name="Palette" />
 ```
 
 ```csharp
@@ -560,13 +560,13 @@ Palette.Open();
 Slide-in panel from any side. Place in the root `Grid`:
 
 ```xml
-<shadui:Sheet x:Name="RightPanel"
+<shadowui:Sheet x:Name="RightPanel"
               Title="Panel Title"
               Description="Optional description."
               Side="Right">
   <!-- panel content -->
   <TextBlock Text="Panel content here." />
-</shadui:Sheet>
+</shadowui:Sheet>
 ```
 
 `Side`: `Right` (default), `Left`, `Top`, `Bottom`.
@@ -581,12 +581,12 @@ RightPanel.Close();
 ## Collapsible
 
 ```xml
-<shadui:CollapsibleTrigger x:Name="Trigger">
+<shadowui:CollapsibleTrigger x:Name="Trigger">
   <Button Classes="outline" Content="Toggle ▸" />
-</shadui:CollapsibleTrigger>
-<shadui:Collapsible x:Name="Panel">
+</shadowui:CollapsibleTrigger>
+<shadowui:Collapsible x:Name="Panel">
   <TextBlock Text="Hidden content revealed on trigger click." />
-</shadui:Collapsible>
+</shadowui:Collapsible>
 ```
 
 Link them in code-behind (when placed as siblings):
@@ -604,11 +604,11 @@ Trigger.AddHandler(PointerPressedEvent,
 ComboBox with item filtering by typed input:
 
 ```xml
-<shadui:SearchableComboBox PlaceholderText="Select a fruit...">
+<shadowui:SearchableComboBox PlaceholderText="Select a fruit...">
   <ComboBoxItem>Apple</ComboBoxItem>
   <ComboBoxItem>Banana</ComboBoxItem>
   <ComboBoxItem>Cherry</ComboBoxItem>
-</shadui:SearchableComboBox>
+</shadowui:SearchableComboBox>
 ```
 
 ---
@@ -618,7 +618,7 @@ ComboBox with item filtering by typed input:
 One-time password input — focus moves automatically between digits:
 
 ```xml
-<shadui:OtpInput x:Name="Otp" Length="6" InputType="Digit" />
+<shadowui:OtpInput x:Name="Otp" Length="6" InputType="Digit" />
 ```
 
 ```csharp
@@ -634,15 +634,15 @@ string code = Otp.Value; // e.g. "123456"
 TextBox with prefix and/or suffix decorators:
 
 ```xml
-<shadui:InputGroup Width="280">
-  <shadui:InputGroup.Prefix>
+<shadowui:InputGroup Width="280">
+  <shadowui:InputGroup.Prefix>
     <TextBlock Text="@" Foreground="{DynamicResource ShadowMutedForegroundBrush}" />
-  </shadui:InputGroup.Prefix>
+  </shadowui:InputGroup.Prefix>
   <TextBox PlaceholderText="username" />
-  <shadui:InputGroup.Suffix>
+  <shadowui:InputGroup.Suffix>
     <TextBlock Text=".com" Foreground="{DynamicResource ShadowMutedForegroundBrush}" />
-  </shadui:InputGroup.Suffix>
-</shadui:InputGroup>
+  </shadowui:InputGroup.Suffix>
+</shadowui:InputGroup>
 ```
 
 ---
@@ -652,11 +652,11 @@ TextBox with prefix and/or suffix decorators:
 Groups buttons with shared borders — only outer edges are rounded, no double borders:
 
 ```xml
-<shadui:ButtonGroup>
+<shadowui:ButtonGroup>
   <Button Classes="outline" Content="Left" />
   <Button Classes="outline" Content="Center" />
   <Button Classes="outline" Content="Right" />
-</shadui:ButtonGroup>
+</shadowui:ButtonGroup>
 ```
 
 ---
@@ -666,11 +666,11 @@ Groups buttons with shared borders — only outer edges are rounded, no double b
 Control wrapper with Label, hint text, required marker, and error message:
 
 ```xml
-<shadui:Field Label="Email"
+<shadowui:Field Label="Email"
               HintText="We won't share your address."
               IsRequired="True">
   <TextBox PlaceholderText="name@example.com" />
-</shadui:Field>
+</shadowui:Field>
 ```
 
 Show / clear validation error:
@@ -686,13 +686,13 @@ MyField.ErrorMessage = null; // clear
 
 ```xml
 <!-- single date selection -->
-<shadui:ShadowCalendar />
+<shadowui:ShadowCalendar />
 
 <!-- date range selection -->
-<shadui:ShadowCalendar Mode="Range" />
+<shadowui:ShadowCalendar Mode="Range" />
 
 <!-- text input + calendar popup -->
-<shadui:DatePicker Width="240" />
+<shadowui:DatePicker Width="240" />
 ```
 
 `ShadowCalendar` properties: `SelectedDate`, `SelectedStartDate`, `SelectedEndDate` (for Range mode), `Mode` (`Single` / `Range`).
@@ -702,15 +702,15 @@ MyField.ErrorMessage = null; // clear
 ## NavigationMenu
 
 ```xml
-<shadui:NavigationMenu>
-  <shadui:NavigationMenuItem Header="Products">
+<shadowui:NavigationMenu>
+  <shadowui:NavigationMenuItem Header="Products">
     <StackPanel Spacing="8">
       <TextBlock Text="Overview" />
       <TextBlock Text="Documentation" />
     </StackPanel>
-  </shadui:NavigationMenuItem>
-  <shadui:NavigationMenuItem Header="Company" />
-</shadui:NavigationMenu>
+  </shadowui:NavigationMenuItem>
+  <shadowui:NavigationMenuItem Header="Company" />
+</shadowui:NavigationMenu>
 ```
 
 ---
@@ -718,22 +718,22 @@ MyField.ErrorMessage = null; // clear
 ## Menubar
 
 ```xml
-<shadui:Menubar>
-  <shadui:MenubarItem Header="File">
-    <shadui:MenubarItem.Items>
+<shadowui:Menubar>
+  <shadowui:MenubarItem Header="File">
+    <shadowui:MenubarItem.Items>
       <MenuItem Header="New" />
       <MenuItem Header="Open" />
       <MenuItem Classes="separator" />
       <MenuItem Header="Exit" />
-    </shadui:MenubarItem.Items>
-  </shadui:MenubarItem>
-  <shadui:MenubarItem Header="Edit">
-    <shadui:MenubarItem.Items>
+    </shadowui:MenubarItem.Items>
+  </shadowui:MenubarItem>
+  <shadowui:MenubarItem Header="Edit">
+    <shadowui:MenubarItem.Items>
       <MenuItem Header="Undo" />
       <MenuItem Header="Redo" />
-    </shadui:MenubarItem.Items>
-  </shadui:MenubarItem>
-</shadui:Menubar>
+    </shadowui:MenubarItem.Items>
+  </shadowui:MenubarItem>
+</shadowui:Menubar>
 ```
 
 ---
@@ -743,15 +743,15 @@ MyField.ErrorMessage = null; // clear
 Shows a card on hover, hides on mouse leave:
 
 ```xml
-<shadui:HoverCard>
-  <shadui:HoverCard.TriggerContent>
+<shadowui:HoverCard>
+  <shadowui:HoverCard.TriggerContent>
     <Button Classes="outline" Content="Hover me" />
-  </shadui:HoverCard.TriggerContent>
+  </shadowui:HoverCard.TriggerContent>
   <StackPanel Spacing="4">
     <TextBlock Classes="large" Text="HoverCard" />
     <TextBlock Classes="muted" Text="Appears on hover." />
   </StackPanel>
-</shadui:HoverCard>
+</shadowui:HoverCard>
 ```
 
 ---
@@ -762,7 +762,7 @@ Multi-select combobox: selected items render as removable chips, the dropdown ha
 and stays open while toggling items (shadcn Combobox multi-select pattern):
 
 ```xml
-<shadui:MultiSelectComboBox x:Name="Frameworks"
+<shadowui:MultiSelectComboBox x:Name="Frameworks"
                             Width="320"
                             PlaceholderText="Select frameworks..." />
 ```
@@ -783,16 +783,16 @@ Properties: `ItemsSource`, `SelectedItems` (ObservableCollection), `IsDropDownOp
 Click-toggled floating card anchored to a trigger (light dismiss on outside click):
 
 ```xml
-<shadui:Popover>
-  <shadui:Popover.TriggerContent>
+<shadowui:Popover>
+  <shadowui:Popover.TriggerContent>
     <Button Content="Open Popover" />
-  </shadui:Popover.TriggerContent>
+  </shadowui:Popover.TriggerContent>
   <StackPanel Spacing="8" Width="240">
     <TextBlock Classes="large" Text="Dimensions" />
     <TextBlock Classes="muted" Text="Set the layer dimensions." />
     <TextBox PlaceholderText="Width" />
   </StackPanel>
-</shadui:Popover>
+</shadowui:Popover>
 ```
 
 Properties: `IsOpen` (two-way), `Placement` (default `BottomEdgeAlignedLeft`).
@@ -804,18 +804,18 @@ Properties: `IsOpen` (two-way), `Placement` (default `BottomEdgeAlignedLeft`).
 Two panels with a draggable divider:
 
 ```xml
-<shadui:Resizable>
-  <shadui:Resizable.FirstContent>
+<shadowui:Resizable>
+  <shadowui:Resizable.FirstContent>
     <Border Padding="16">
       <TextBlock Classes="h4" Text="Left Panel" />
     </Border>
-  </shadui:Resizable.FirstContent>
-  <shadui:Resizable.SecondContent>
+  </shadowui:Resizable.FirstContent>
+  <shadowui:Resizable.SecondContent>
     <Border Padding="16">
       <TextBlock Classes="h4" Text="Right Panel" />
     </Border>
-  </shadui:Resizable.SecondContent>
-</shadui:Resizable>
+  </shadowui:Resizable.SecondContent>
+</shadowui:Resizable>
 ```
 
 `Orientation`: `Horizontal` (default, vertical divider) / `Vertical` (horizontal divider).
@@ -825,7 +825,7 @@ Two panels with a draggable divider:
 ## Carousel
 
 ```xml
-<shadui:Carousel x:Name="Slider" Height="200" Width="480" />
+<shadowui:Carousel x:Name="Slider" Height="200" Width="480" />
 ```
 
 ```csharp
@@ -844,8 +844,8 @@ Prev/next buttons and dot navigation are built-in.
 ## BarChart / LineChart
 
 ```xml
-<shadui:BarChart  x:Name="Bar"  Height="200" Width="480" />
-<shadui:LineChart x:Name="Line" Height="200" Width="480" />
+<shadowui:BarChart  x:Name="Bar"  Height="200" Width="480" />
+<shadowui:LineChart x:Name="Line" Height="200" Width="480" />
 ```
 
 ```csharp
@@ -866,8 +866,8 @@ Hover tooltip is built-in.
 ## AreaChart / PieChart
 
 ```xml
-<shadui:AreaChart x:Name="Area" Height="200" Width="480" />
-<shadui:PieChart  x:Name="Pie"  Height="220" Width="220" />
+<shadowui:AreaChart x:Name="Area" Height="200" Width="480" />
+<shadowui:PieChart  x:Name="Pie"  Height="220" Width="220" />
 ```
 
 ```csharp
@@ -888,15 +888,15 @@ Slices cycle through `ShadowChart1..5Brush`. Hover tooltip is built-in.
 ## EmptyState
 
 ```xml
-<shadui:EmptyState Title="No Data"
+<shadowui:EmptyState Title="No Data"
                    Description="Nothing here yet. Add your first item."
                    ActionContent="Add Item">
-  <shadui:EmptyState.Icon>
+  <shadowui:EmptyState.Icon>
     <Viewbox Width="40" Height="40">
       <Path Data="M 12 2 L 12 22 M 2 12 L 22 12" ... />
     </Viewbox>
-  </shadui:EmptyState.Icon>
-</shadui:EmptyState>
+  </shadowui:EmptyState.Icon>
+</shadowui:EmptyState>
 ```
 
 ---
@@ -906,15 +906,15 @@ Slices cycle through `ShadowChart1..5Brush`. Hover tooltip is built-in.
 Universal list item with icon, primary/secondary text, and trailing action:
 
 ```xml
-<shadui:ShadowItem PrimaryText="Alice Smith"
+<shadowui:ShadowItem PrimaryText="Alice Smith"
                    SecondaryText="alice@example.com">
-  <shadui:ShadowItem.Icon>
+  <shadowui:ShadowItem.Icon>
     <Viewbox Width="20" Height="20"><Path Data="…" /></Viewbox>
-  </shadui:ShadowItem.Icon>
-  <shadui:ShadowItem.TrailingAction>
+  </shadowui:ShadowItem.Icon>
+  <shadowui:ShadowItem.TrailingAction>
     <Button Classes="ghost sm" Content="···" />
-  </shadui:ShadowItem.TrailingAction>
-</shadui:ShadowItem>
+  </shadowui:ShadowItem.TrailingAction>
+</shadowui:ShadowItem>
 ```
 
 ---
@@ -922,7 +922,7 @@ Universal list item with icon, primary/secondary text, and trailing action:
 ## Styled built-in controls
 
 These are standard Avalonia controls — adding `ShadowUITheme` styles them automatically,
-no `shadui:` prefix needed. They have no custom API beyond Avalonia's own.
+no `shadowui:` prefix needed. They have no custom API beyond Avalonia's own.
 
 ### TreeView
 
@@ -1059,10 +1059,10 @@ Native menu bar (top-level items open downward); submenu items use the standard 
 ## Misc
 
 ```xml
-<shadui:Avatar Fallback="JD" />
-<shadui:Skeleton Width="160" Height="40" />
-<shadui:Kbd Content="Ctrl" />
-<shadui:AspectRatio Ratio="1.777"> … </shadui:AspectRatio>
+<shadowui:Avatar Fallback="JD" />
+<shadowui:Skeleton Width="160" Height="40" />
+<shadowui:Kbd Content="Ctrl" />
+<shadowui:AspectRatio Ratio="1.777"> … </shadowui:AspectRatio>
 ```
 
 ---

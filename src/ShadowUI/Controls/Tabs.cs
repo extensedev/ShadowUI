@@ -11,14 +11,14 @@ namespace ShadowUI;
 public static class Tabs
 {
     /// <summary>When true, the tab bar uses the underline style (underlines the active tab)
-    /// instead of a segmented container. Example: <c>shadui:Tabs.Underline="True"</c>.</summary>
+    /// instead of a segmented container. Example: <c>shadowui:Tabs.Underline="True"</c>.</summary>
     public static readonly AttachedProperty<bool> UnderlineProperty =
         AvaloniaProperty.RegisterAttached<TabControl, bool>("Underline", typeof(Tabs));
 
     /// <summary>When true, the content area always reserves the height of the tallest tab page,
     /// so switching tabs does not change the TabControl height (no layout jumping).
     /// Applies to tabs whose <see cref="TabItem"/>.Content is a control (the typical XAML case).
-    /// Example: <c>shadui:Tabs.UniformContentHeight="True"</c>.</summary>
+    /// Example: <c>shadowui:Tabs.UniformContentHeight="True"</c>.</summary>
     public static readonly AttachedProperty<bool> UniformContentHeightProperty =
         AvaloniaProperty.RegisterAttached<TabControl, bool>("UniformContentHeight", typeof(Tabs));
 

@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- DatePicker: date input field with an icon button and a popup ShadowCalendar -->
-  <ControlTheme x:Key="{x:Type shadui:DatePicker}" TargetType="shadui:DatePicker">
+  <ControlTheme x:Key="{x:Type shadowui:DatePicker}" TargetType="shadowui:DatePicker">
     <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
@@ -76,7 +76,7 @@
                     BorderThickness="1"
                     CornerRadius="{DynamicResource ShadowRadiusMd}"
                     BoxShadow="{DynamicResource ShadowShadowMd}">
-              <shadui:ShadowCalendar Name="PART_Calendar"
+              <shadowui:ShadowCalendar Name="PART_Calendar"
                                      Background="Transparent"
                                      BorderThickness="0"
                                      Padding="12" />

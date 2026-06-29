@@ -8,7 +8,7 @@ public static class ButtonAssist
 {
     /// <summary>
     /// Enables a "bounce" animation (slight scale-down) when the button is pressed.
-    /// Usage: <c>shadui:ButtonAssist.Bounce="True"</c>.
+    /// Usage: <c>shadowui:ButtonAssist.Bounce="True"</c>.
     /// </summary>
     public static readonly AttachedProperty<bool> BounceProperty =
         AvaloniaProperty.RegisterAttached<Control, bool>("Bounce", typeof(ButtonAssist));

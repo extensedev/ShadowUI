@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- Toolbar: horizontal toolbar in the shadcn style -->
-  <ControlTheme x:Key="{x:Type shadui:Toolbar}" TargetType="shadui:Toolbar">
+  <ControlTheme x:Key="{x:Type shadowui:Toolbar}" TargetType="shadowui:Toolbar">
     <Setter Property="Background" Value="{DynamicResource ShadowBackgroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="BorderThickness" Value="1" />

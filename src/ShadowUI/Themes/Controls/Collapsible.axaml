@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- Container: rounded surface that reveals content when IsExpanded; muted background while open. -->
-  <ControlTheme x:Key="{x:Type shadui:Collapsible}" TargetType="shadui:Collapsible">
+  <ControlTheme x:Key="{x:Type shadowui:Collapsible}" TargetType="shadowui:Collapsible">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">
       <ControlTemplate>
@@ -32,7 +32,7 @@
   </ControlTheme>
 
   <!-- Trigger: transparent pass-through (asChild). The child (e.g. a ghost Button) is the only surface. -->
-  <ControlTheme x:Key="{x:Type shadui:CollapsibleTrigger}" TargetType="shadui:CollapsibleTrigger">
+  <ControlTheme x:Key="{x:Type shadowui:CollapsibleTrigger}" TargetType="shadowui:CollapsibleTrigger">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">
       <ControlTemplate>

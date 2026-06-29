@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
-  <ControlTheme x:Key="{x:Type shadui:Card}" TargetType="shadui:Card">
+                    xmlns:shadowui="using:ShadowUI">
+  <ControlTheme x:Key="{x:Type shadowui:Card}" TargetType="shadowui:Card">
     <Setter Property="Background" Value="{DynamicResource ShadowCardBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowCardForegroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
@@ -22,7 +22,7 @@
     </Setter>
   </ControlTheme>
 
-  <ControlTheme x:Key="{x:Type shadui:CardTitle}" TargetType="shadui:CardTitle">
+  <ControlTheme x:Key="{x:Type shadowui:CardTitle}" TargetType="shadowui:CardTitle">
     <Setter Property="Foreground" Value="{DynamicResource ShadowCardForegroundBrush}" />
     <Setter Property="FontSize" Value="16" />
     <Setter Property="FontWeight" Value="SemiBold" />
@@ -33,7 +33,7 @@
     </Setter>
   </ControlTheme>
 
-  <ControlTheme x:Key="{x:Type shadui:CardDescription}" TargetType="shadui:CardDescription">
+  <ControlTheme x:Key="{x:Type shadowui:CardDescription}" TargetType="shadowui:CardDescription">
     <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
     <Setter Property="FontSize" Value="14" />
     <Setter Property="Template">

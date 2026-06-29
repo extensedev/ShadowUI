@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- Built-in Avalonia Separator (used by Toolbar / Menu / Card): plain solid line -->
   <ControlTheme x:Key="{x:Type Separator}" TargetType="Separator">
@@ -22,7 +22,7 @@
   </ControlTheme>
 
   <!-- ShadowUI Separator: orientation + optional edge-fade + custom gradient via Background -->
-  <ControlTheme x:Key="{x:Type shadui:Separator}" TargetType="shadui:Separator">
+  <ControlTheme x:Key="{x:Type shadowui:Separator}" TargetType="shadowui:Separator">
     <Setter Property="Background" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Center" />
@@ -45,7 +45,7 @@
     </Style>
     <Style Selector="^:vertical /template/ Border#PART_Line">
       <Setter Property="Height" Value="NaN" />
-      <Setter Property="Width" Value="{Binding $parent[shadui:Separator].Thickness}" />
+      <Setter Property="Width" Value="{Binding $parent[shadowui:Separator].Thickness}" />
     </Style>
 
     <!-- Edge-fade: axis-aware opacity mask (alpha only) — composes with any Background brush -->

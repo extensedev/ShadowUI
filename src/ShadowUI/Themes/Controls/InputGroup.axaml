@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- InputGroup: input field wrapper with prefix/suffix slots -->
-  <ControlTheme x:Key="{x:Type shadui:InputGroup}" TargetType="shadui:InputGroup">
+  <ControlTheme x:Key="{x:Type shadowui:InputGroup}" TargetType="shadowui:InputGroup">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">

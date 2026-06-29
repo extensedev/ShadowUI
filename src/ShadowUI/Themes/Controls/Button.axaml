@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
   <ControlTheme x:Key="{x:Type Button}" TargetType="Button">
     <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
@@ -63,8 +63,8 @@
       <Setter Property="Opacity" Value="0.5" />
     </Style>
 
-    <!-- bounce: slight scale-down on press (enabled via shadui:ButtonAssist.Bounce="True") -->
-    <Style Selector="^[(shadui|ButtonAssist.Bounce)=True]:pressed /template/ Border#PART_Border">
+    <!-- bounce: slight scale-down on press (enabled via shadowui:ButtonAssist.Bounce="True") -->
+    <Style Selector="^[(shadowui|ButtonAssist.Bounce)=True]:pressed /template/ Border#PART_Border">
       <Setter Property="RenderTransform" Value="scale(0.94)" />
     </Style>
 

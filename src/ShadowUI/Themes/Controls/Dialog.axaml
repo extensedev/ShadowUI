@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
-  <ControlTheme x:Key="{x:Type shadui:Dialog}" TargetType="shadui:Dialog">
+  <ControlTheme x:Key="{x:Type shadowui:Dialog}" TargetType="shadowui:Dialog">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
     <Setter Property="ZIndex" Value="1000" />

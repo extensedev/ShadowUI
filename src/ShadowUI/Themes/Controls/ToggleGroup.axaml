@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
-  <ControlTheme x:Key="{x:Type shadui:ToggleGroupItem}" TargetType="shadui:ToggleGroupItem">
+  <ControlTheme x:Key="{x:Type shadowui:ToggleGroupItem}" TargetType="shadowui:ToggleGroupItem">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />
     <Setter Property="BorderThickness" Value="0,1,1,1" />

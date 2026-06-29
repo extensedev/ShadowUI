@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- Carousel theme: slider with prev/next navigation and a dot indicator -->
-  <ControlTheme x:Key="{x:Type shadui:Carousel}" TargetType="shadui:Carousel">
+  <ControlTheme x:Key="{x:Type shadowui:Carousel}" TargetType="shadowui:Carousel">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Top" />
     <Setter Property="Padding" Value="0" />

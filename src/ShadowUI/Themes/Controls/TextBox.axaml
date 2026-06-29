@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <StreamGeometry x:Key="ShadowPasswordRevealData">M11,16c-1.52,0-3.03-.3-4.48-.89C3.65,13.93,1.32,11.6.14,8.73c0-.01,0-.02-.01-.03-.17-.45-.17-.94,0-1.39C2.61,1.28,9.49-1.58,15.48.89c2.87,1.18,5.2,3.51,6.38,6.38.18.48.18.98.01,1.42-1.21,2.94-3.47,5.2-6.36,6.4-1.46.6-2.98.91-4.51.91ZM2,8c.99,2.37,2.91,4.28,5.28,5.26,2.41.99,5.06.99,7.46-.01,2.4-1,4.28-2.88,5.27-5.29-.98-2.32-2.91-4.25-5.3-5.23C9.76.69,4.06,3.05,2,8ZM11,12c-2.21,0-4-1.79-4-4s1.79-4,4-4,4,1.79,4,4-1.79,4-4,4ZM11,6c-1.1,0-2,.9-2,2s.9,2,2,2,2-.9,2-2-.9-2-2-2Z</StreamGeometry>
   <StreamGeometry x:Key="ShadowPasswordHideData">M19.5,14.84c-.21,0-.43-.07-.61-.21-.44-.34-.52-.97-.18-1.4.54-.69.98-1.45,1.31-2.26-1.66-3.96-5.83-6.41-10.16-5.9-.55.06-1.05-.33-1.11-.88-.06-.55.33-1.05.88-1.11,5.21-.61,10.25,2.33,12.25,7.19.18.48.18.98.01,1.42-.42,1.01-.95,1.92-1.59,2.76-.2.25-.49.39-.79.39ZM21.71,21.71c-.2.19-.45.29-.71.29s-.51-.1-.71-.29l-3.98-3.98c-1.66.85-3.46,1.27-5.29,1.27-.98,0-1.96-.12-2.93-.37-3.04-.78-5.6-2.69-7.2-5.39-.29-.49-.54-1-.75-1.51-.18-.48-.18-.98-.02-1.43.82-1.97,2.15-3.68,3.83-4.93L.29,1.71C-.1,1.32-.1.68.29.29.68-.1,1.32-.1,1.71.29l4.49,4.5,15.51,15.5c.39.39.39,1.03,0,1.42ZM9.56,12.39c.52.53,1.27.72,1.95.54l-2.44-2.44c-.18.65-.01,1.38.49,1.9ZM14.8,16.22l-1.77-1.77c-.63.37-1.33.55-2.03.55-1.05,0-2.09-.41-2.88-1.22-1.28-1.33-1.47-3.29-.57-4.81l-2.18-2.18c-1.49,1.06-2.68,2.55-3.38,4.24.17.36.38.79.62,1.19,1.33,2.24,3.45,3.83,5.97,4.48,2.1.53,4.27.36,6.22-.48Z</StreamGeometry>
@@ -91,7 +91,7 @@
                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                            TextAlignment="{TemplateBinding TextAlignment}"
                            TextWrapping="{TemplateBinding TextWrapping}" />
-                <shadui:ShadowTextPresenter Name="PART_TextPresenter"
+                <shadowui:ShadowTextPresenter Name="PART_TextPresenter"
                                Text="{TemplateBinding Text, Mode=TwoWay}"
                                CaretIndex="{TemplateBinding CaretIndex}"
                                CaretBrush="{TemplateBinding CaretBrush}"

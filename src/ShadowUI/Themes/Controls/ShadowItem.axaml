@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- ShadowItem theme: generic list item with an icon, texts and a trailing action -->
-  <ControlTheme x:Key="{x:Type shadui:ShadowItem}" TargetType="shadui:ShadowItem">
+  <ControlTheme x:Key="{x:Type shadowui:ShadowItem}" TargetType="shadowui:ShadowItem">
     <Setter Property="Padding" Value="8,5,8,6" />
     <Setter Property="Cursor" Value="Hand" />
     <Setter Property="Template">

@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
-  <ControlTheme x:Key="{x:Type shadui:Accordion}" TargetType="shadui:Accordion">
+  <ControlTheme x:Key="{x:Type shadowui:Accordion}" TargetType="shadowui:Accordion">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">
       <ControlTemplate>
@@ -11,7 +11,7 @@
     </Setter>
   </ControlTheme>
 
-  <ControlTheme x:Key="{x:Type shadui:AccordionItem}" TargetType="shadui:AccordionItem">
+  <ControlTheme x:Key="{x:Type shadowui:AccordionItem}" TargetType="shadowui:AccordionItem">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />

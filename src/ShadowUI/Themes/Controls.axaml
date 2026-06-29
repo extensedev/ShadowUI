@@ -1,6 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:shadui="using:ShadowUI">
+        xmlns:shadowui="using:ShadowUI">
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -109,24 +109,24 @@
   </Style>
 
   <!-- Toolbar: compact nested items; highlight matches the item height, not the whole bar -->
-  <Style Selector="shadui|Toolbar Button">
+  <Style Selector="shadowui|Toolbar Button">
     <Setter Property="Height" Value="28" />
     <Setter Property="MinWidth" Value="28" />
     <Setter Property="Padding" Value="6,0" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
-  <Style Selector="shadui|Toolbar ToggleButton">
+  <Style Selector="shadowui|Toolbar ToggleButton">
     <Setter Property="Height" Value="28" />
     <Setter Property="MinWidth" Value="28" />
     <Setter Property="Padding" Value="6,0" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
-  <Style Selector="shadui|Toolbar shadui|ToggleGroupItem">
+  <Style Selector="shadowui|Toolbar shadowui|ToggleGroupItem">
     <Setter Property="Height" Value="28" />
     <Setter Property="Padding" Value="10,0" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
-  <Style Selector="shadui|Toolbar Separator.vertical">
+  <Style Selector="shadowui|Toolbar Separator.vertical">
     <Setter Property="Height" Value="18" />
     <Setter Property="Margin" Value="2,0" />
     <Setter Property="VerticalAlignment" Value="Center" />
@@ -134,54 +134,54 @@
 
   <!-- ShadowCalendar day buttons: created from code-behind, so they are styled globally
        (ControlTheme child styles cannot reach elements with TemplatedParent == null) -->
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day">
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day">
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
     <Setter Property="FontWeight" Value="Normal" />
   </Style>
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day-other-month">
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day-other-month">
     <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
     <Setter Property="Opacity" Value="0.5" />
   </Style>
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day-today">
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day-today">
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="BorderThickness" Value="1" />
   </Style>
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day-selected">
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day-selected">
     <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
   </Style>
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day-selected:pointerover /template/ Border#PART_Border">
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day-selected:pointerover /template/ Border#PART_Border">
     <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
   </Style>
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day-range-start">
-    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
-    <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
-  </Style>
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day-range-start:pointerover /template/ Border#PART_Border">
-    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
-  </Style>
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day-range-end">
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day-range-start">
     <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
   </Style>
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day-range-end:pointerover /template/ Border#PART_Border">
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day-range-start:pointerover /template/ Border#PART_Border">
     <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
   </Style>
-  <Style Selector="shadui|ShadowCalendar Button.calendar-day-in-range">
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day-range-end">
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ShadowPrimaryForegroundBrush}" />
+  </Style>
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day-range-end:pointerover /template/ Border#PART_Border">
+    <Setter Property="Background" Value="{DynamicResource ShadowPrimaryBrush}" />
+  </Style>
+  <Style Selector="shadowui|ShadowCalendar Button.calendar-day-in-range">
     <Setter Property="Background" Value="{DynamicResource ShadowPrimary20Brush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
   </Style>
 
   <!-- MultiSelectComboBox chips: created from code-behind, styled globally -->
-  <Style Selector="shadui|MultiSelectComboBox Border.multiselect-chip">
+  <Style Selector="shadowui|MultiSelectComboBox Border.multiselect-chip">
     <Setter Property="Background" Value="{DynamicResource ShadowSecondaryBrush}" />
     <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusSm}" />
     <Setter Property="Padding" Value="8,3,4,3" />
   </Style>
-  <Style Selector="shadui|MultiSelectComboBox Border.multiselect-chip TextBlock">
+  <Style Selector="shadowui|MultiSelectComboBox Border.multiselect-chip TextBlock">
     <Setter Property="Foreground" Value="{DynamicResource ShadowSecondaryForegroundBrush}" />
   </Style>
-  <Style Selector="shadui|MultiSelectComboBox Button.chip-remove:pointerover /template/ Border#PART_Border">
+  <Style Selector="shadowui|MultiSelectComboBox Button.chip-remove:pointerover /template/ Border#PART_Border">
     <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
   </Style>
 
@@ -190,19 +190,19 @@
        sidebar accent so an expandable item hovers identically to a plain SidebarItem. Lives here,
        not in the ControlTheme: reaching the inner Border needs a descendant hop + single /template/
        (a double /template/ inside the ControlTheme is forbidden). -->
-  <Style Selector="shadui|SidebarMenuItem Button#PART_Toggle:pointerover /template/ Border#PART_Border">
+  <Style Selector="shadowui|SidebarMenuItem Button#PART_Toggle:pointerover /template/ Border#PART_Border">
     <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
   </Style>
-  <Style Selector="shadui|SidebarMenuItem Button#PART_Toggle:pressed /template/ Border#PART_Border">
+  <Style Selector="shadowui|SidebarMenuItem Button#PART_Toggle:pressed /template/ Border#PART_Border">
     <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
   </Style>
 
   <!-- Carousel dot indicators: created from code-behind, styled globally -->
-  <Style Selector="shadui|Carousel StackPanel#PART_DotsPanel Ellipse">
+  <Style Selector="shadowui|Carousel StackPanel#PART_DotsPanel Ellipse">
     <Setter Property="Fill" Value="{DynamicResource ShadowMutedForegroundBrush}" />
     <Setter Property="Opacity" Value="0.5" />
   </Style>
-  <Style Selector="shadui|Carousel StackPanel#PART_DotsPanel Ellipse.active">
+  <Style Selector="shadowui|Carousel StackPanel#PART_DotsPanel Ellipse.active">
     <Setter Property="Fill" Value="{DynamicResource ShadowPrimaryBrush}" />
     <Setter Property="Opacity" Value="1" />
   </Style>

@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
   <!-- shadcn-style searchable ComboBox -->
-  <ControlTheme x:Key="{x:Type shadui:SearchableComboBox}" TargetType="shadui:SearchableComboBox">
+  <ControlTheme x:Key="{x:Type shadowui:SearchableComboBox}" TargetType="shadowui:SearchableComboBox">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />

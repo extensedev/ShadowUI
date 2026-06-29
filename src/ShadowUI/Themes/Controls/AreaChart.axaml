@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- ControlTheme for AreaChart: base sizes only, no Template (rendering via override Render) -->
-  <ControlTheme x:Key="{x:Type shadui:AreaChart}" TargetType="shadui:AreaChart">
+  <ControlTheme x:Key="{x:Type shadowui:AreaChart}" TargetType="shadowui:AreaChart">
     <Setter Property="MinHeight" Value="160" />
     <Setter Property="MinWidth" Value="200" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -12,7 +12,7 @@
   </ControlTheme>
 
   <!-- ControlTheme for PieChart -->
-  <ControlTheme x:Key="{x:Type shadui:PieChart}" TargetType="shadui:PieChart">
+  <ControlTheme x:Key="{x:Type shadowui:PieChart}" TargetType="shadowui:PieChart">
     <Setter Property="MinHeight" Value="160" />
     <Setter Property="MinWidth" Value="160" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />

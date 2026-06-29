@@ -28,11 +28,11 @@ dotnet add package ShadowUI
 
 ```xml
 <Application xmlns="https://github.com/avaloniaui"
-             xmlns:shadui="using:ShadowUI"
+             xmlns:shadowui="using:ShadowUI"
              RequestedThemeVariant="Dark">
   <Application.Styles>
     <!-- Charcoal (recommended default); any of the 13 palettes: Zinc, Slate, Blue, Violet, ... -->
-    <shadui:ShadowUITheme BaseColor="Charcoal" />
+    <shadowui:ShadowUITheme BaseColor="Charcoal" />
   </Application.Styles>
 </Application>
 ```
@@ -40,20 +40,20 @@ dotnet add package ShadowUI
 **2. Add the namespace to your views:**
 
 ```xml
-<Window xmlns:shadui="using:ShadowUI" ...>
+<Window xmlns:shadowui="using:ShadowUI" ...>
 ```
 
 **3. Use components:**
 
 ```xml
-<shadui:Card>
+<shadowui:Card>
   <StackPanel Spacing="8">
-    <shadui:CardTitle Content="Welcome" />
-    <shadui:CardDescription Content="Get started with ShadowUI." />
+    <shadowui:CardTitle Content="Welcome" />
+    <shadowui:CardDescription Content="Get started with ShadowUI." />
     <Button Content="Save" />
     <Button Classes="secondary" Content="Cancel" />
   </StackPanel>
-</shadui:Card>
+</shadowui:Card>
 ```
 
 ## Theming
@@ -84,13 +84,13 @@ the native Windows 11 minimize / maximize / close animations, snap and resize bo
 
 ```xml
 <DockPanel>
-  <shadui:TitleBar DockPanel.Dock="Top"
+  <shadowui:TitleBar DockPanel.Dock="Top"
                    Title="My App"
                    ShowMaximize="True">
-    <shadui:TitleBar.Icon>
+    <shadowui:TitleBar.Icon>
       <Image Source="/Assets/logo.png" />
-    </shadui:TitleBar.Icon>
-  </shadui:TitleBar>
+    </shadowui:TitleBar.Icon>
+  </shadowui:TitleBar>
   <!-- window content -->
 </DockPanel>
 ```
@@ -107,15 +107,15 @@ Everything is optional and removable:
 Custom icon buttons that match the built-in ones — use the `TitleBarButton` theme:
 
 ```xml
-<shadui:TitleBar Title="My App">
-  <shadui:TitleBar.RightContent>
+<shadowui:TitleBar Title="My App">
+  <shadowui:TitleBar.RightContent>
     <Button Theme="{StaticResource TitleBarButton}"
             Width="46" Height="40"
             Click="OnSettingsClick">
       <!-- any 16x16 icon -->
     </Button>
-  </shadui:TitleBar.RightContent>
-</shadui:TitleBar>
+  </shadowui:TitleBar.RightContent>
+</shadowui:TitleBar>
 ```
 
 ## Smooth Scrolling
@@ -123,9 +123,9 @@ Custom icon buttons that match the built-in ones — use the `TitleBarButton` th
 All `ScrollViewer`s get inertial smooth scrolling out of the box. Opt out or tune per viewer:
 
 ```xml
-<ScrollViewer shadui:SmoothScrollAssist.IsEnabled="False" />
-<ScrollViewer shadui:SmoothScrollAssist.BaseStepSize="100"
-              shadui:SmoothScrollAssist.SmoothingFactor="14" />
+<ScrollViewer shadowui:SmoothScrollAssist.IsEnabled="False" />
+<ScrollViewer shadowui:SmoothScrollAssist.BaseStepSize="100"
+              shadowui:SmoothScrollAssist.SmoothingFactor="14" />
 ```
 
 ## Components

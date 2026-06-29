@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI"
+                    xmlns:shadowui="using:ShadowUI"
                     xmlns:conv="using:Avalonia.Controls.Converters">
 
   <!-- Checkered pattern for alpha/transparency areas -->
@@ -286,7 +286,7 @@
     </Style>
   </ControlTheme>
 
-  <ControlTheme x:Key="{x:Type shadui:ColorPicker}" TargetType="shadui:ColorPicker">
+  <ControlTheme x:Key="{x:Type shadowui:ColorPicker}" TargetType="shadowui:ColorPicker">
     <Setter Property="HorizontalAlignment" Value="Left" />
     <Setter Property="Template">
       <ControlTemplate>

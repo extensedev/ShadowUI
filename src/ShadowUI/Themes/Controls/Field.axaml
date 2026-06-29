@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- Field: input control wrapper with a label, content, and hint/error -->
-  <ControlTheme x:Key="{x:Type shadui:Field}" TargetType="shadui:Field">
+  <ControlTheme x:Key="{x:Type shadowui:Field}" TargetType="shadowui:Field">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="Template">

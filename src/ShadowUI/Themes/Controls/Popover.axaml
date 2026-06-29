@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- Popover: trigger + floating card (shadcn Popover) -->
-  <ControlTheme x:Key="{x:Type shadui:Popover}" TargetType="shadui:Popover">
+  <ControlTheme x:Key="{x:Type shadowui:Popover}" TargetType="shadowui:Popover">
     <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="HorizontalAlignment" Value="Left" />
     <Setter Property="Template">

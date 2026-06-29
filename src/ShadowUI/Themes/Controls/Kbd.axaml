@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
-  <ControlTheme x:Key="{x:Type shadui:Kbd}" TargetType="shadui:Kbd">
+                    xmlns:shadowui="using:ShadowUI">
+  <ControlTheme x:Key="{x:Type shadowui:Kbd}" TargetType="shadowui:Kbd">
     <Setter Property="Background" Value="{DynamicResource ShadowMutedBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />

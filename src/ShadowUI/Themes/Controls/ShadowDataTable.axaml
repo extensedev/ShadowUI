@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- ControlTheme for ShadowDataTable: filter + header + rows + pagination -->
-  <ControlTheme x:Key="{x:Type shadui:ShadowDataTable}" TargetType="shadui:ShadowDataTable">
+  <ControlTheme x:Key="{x:Type shadowui:ShadowDataTable}" TargetType="shadowui:ShadowDataTable">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
 

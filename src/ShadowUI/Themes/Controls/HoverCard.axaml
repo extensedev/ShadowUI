@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- HoverCard: preview card shown when hovering over the trigger -->
-  <ControlTheme x:Key="{x:Type shadui:HoverCard}" TargetType="shadui:HoverCard">
+  <ControlTheme x:Key="{x:Type shadowui:HoverCard}" TargetType="shadowui:HoverCard">
     <!-- Hidden by default until :open is set -->
     <Setter Property="IsVisible" Value="False" />
     <Setter Property="Template">

@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
   <!-- Standalone ScrollViewer template (no FluentTheme), behavior ported from ShadUI:
        scrollbars overlay the content (no reserved gutter, so content does not shift
        when a bar appears), and hovering the viewer widens the thumbs by flipping
@@ -8,7 +8,7 @@
   <ControlTheme x:Key="{x:Type ScrollViewer}" TargetType="ScrollViewer">
     <!-- Transparent (not null): the ScrollContentPresenter must hit-test across its full area, otherwise the mouse wheel over empty spots falls through -->
     <Setter Property="Background" Value="Transparent" />
-    <Setter Property="shadui:SmoothScrollAssist.IsEnabled" Value="True" />
+    <Setter Property="shadowui:SmoothScrollAssist.IsEnabled" Value="True" />
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>

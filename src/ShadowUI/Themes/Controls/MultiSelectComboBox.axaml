@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- MultiSelectComboBox: chips of selected items + popup with search and a multi-select list -->
-  <ControlTheme x:Key="{x:Type shadui:MultiSelectComboBox}" TargetType="shadui:MultiSelectComboBox">
+  <ControlTheme x:Key="{x:Type shadowui:MultiSelectComboBox}" TargetType="shadowui:MultiSelectComboBox">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowInputBrush}" />

@@ -1,11 +1,11 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- ═══════════════════════════════════════════════════════════════
        SidebarItem  (shadcn SidebarMenuButton)
   ═══════════════════════════════════════════════════════════════════ -->
-  <ControlTheme x:Key="{x:Type shadui:SidebarItem}" TargetType="shadui:SidebarItem">
+  <ControlTheme x:Key="{x:Type shadowui:SidebarItem}" TargetType="shadowui:SidebarItem">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
     <Setter Property="BorderThickness" Value="0" />
@@ -85,7 +85,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        SidebarGroup  (shadcn SidebarGroup)
   ═══════════════════════════════════════════════════════════════════ -->
-  <ControlTheme x:Key="{x:Type shadui:SidebarGroup}" TargetType="shadui:SidebarGroup">
+  <ControlTheme x:Key="{x:Type shadowui:SidebarGroup}" TargetType="shadowui:SidebarGroup">
     <!-- The item gap is set in code (OverrideDefaultValue of ItemsPanel):
          an ItemsPanel setter in a ControlTheme does not reach the ItemsPresenter -->
     <Setter Property="Template">
@@ -112,7 +112,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        SidebarMenuItem  (expandable item with optional sub-items)
   ═══════════════════════════════════════════════════════════════════ -->
-  <ControlTheme x:Key="{x:Type shadui:SidebarMenuItem}" TargetType="shadui:SidebarMenuItem">
+  <ControlTheme x:Key="{x:Type shadowui:SidebarMenuItem}" TargetType="shadowui:SidebarMenuItem">
     <!-- The sub-item gap is set in code (OverrideDefaultValue of ItemsPanel) -->
     <Setter Property="Template">
       <ControlTemplate>
@@ -216,7 +216,7 @@
   <!-- ═══════════════════════════════════════════════════════════════
        Sidebar  (shadcn Sidebar panel)
   ═══════════════════════════════════════════════════════════════════ -->
-  <ControlTheme x:Key="{x:Type shadui:Sidebar}" TargetType="shadui:Sidebar">
+  <ControlTheme x:Key="{x:Type shadowui:Sidebar}" TargetType="shadowui:Sidebar">
     <Setter Property="Background" Value="{DynamicResource ShadowSidebarBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ShadowSidebarForegroundBrush}" />
     <!-- Width is driven from code-behind (ExpandedWidth / CollapsedWidth); animate it -->

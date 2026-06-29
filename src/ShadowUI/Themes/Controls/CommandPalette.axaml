@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- CommandPalette theme: full-screen overlay with search and a command list -->
-  <ControlTheme x:Key="{x:Type shadui:CommandPalette}" TargetType="shadui:CommandPalette">
+  <ControlTheme x:Key="{x:Type shadowui:CommandPalette}" TargetType="shadowui:CommandPalette">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
     <Setter Property="ZIndex" Value="1000" />
@@ -95,7 +95,7 @@
                            BorderThickness="0"
                            Padding="4,0,4,0">
                     <ListBox.ItemTemplate>
-                      <DataTemplate DataType="shadui:CommandItem">
+                      <DataTemplate DataType="shadowui:CommandItem">
                         <Border Padding="8,6"
                                 CornerRadius="{DynamicResource ShadowRadiusMd}">
                           <Grid ColumnDefinitions="*,Auto">

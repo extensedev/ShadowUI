@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- BreadcrumbItem: link-styled button. Class "current" = active page. -->
-  <ControlTheme x:Key="{x:Type shadui:BreadcrumbItem}" TargetType="shadui:BreadcrumbItem">
+  <ControlTheme x:Key="{x:Type shadowui:BreadcrumbItem}" TargetType="shadowui:BreadcrumbItem">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Padding" Value="0" />
@@ -33,7 +33,7 @@
   </ControlTheme>
 
   <!-- BreadcrumbSeparator: chevron-right -->
-  <ControlTheme x:Key="{x:Type shadui:BreadcrumbSeparator}" TargetType="shadui:BreadcrumbSeparator">
+  <ControlTheme x:Key="{x:Type shadowui:BreadcrumbSeparator}" TargetType="shadowui:BreadcrumbSeparator">
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="Template">
       <ControlTemplate>

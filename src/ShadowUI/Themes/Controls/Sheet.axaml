@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- Sheet theme: sliding overlay panel (Right / Bottom) -->
-  <ControlTheme x:Key="{x:Type shadui:Sheet}" TargetType="shadui:Sheet">
+  <ControlTheme x:Key="{x:Type shadowui:Sheet}" TargetType="shadowui:Sheet">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
     <Setter Property="ZIndex" Value="1000" />

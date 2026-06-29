@@ -58,7 +58,7 @@
   </ControlTheme>
 
   <!-- Top-level item of a native Menu bar: dropdown opens DOWN, not to the right.
-       Visuals match shadui:MenubarItem; the default MenuItem theme below is for
+       Visuals match shadowui:MenubarItem; the default MenuItem theme below is for
        items inside the dropdown (submenu opens to the right). -->
   <ControlTheme x:Key="ShadowTopLevelMenuItem" TargetType="MenuItem">
     <Setter Property="Background" Value="Transparent" />
@@ -113,7 +113,7 @@
   </ControlTheme>
 
   <!-- Native Menu bar (infrastructure previously provided by FluentTheme).
-       For the shadcn menubar look (bottom border) use shadui:Menubar. -->
+       For the shadcn menubar look (bottom border) use shadowui:Menubar. -->
   <ControlTheme x:Key="{x:Type Menu}" TargetType="Menu">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Padding" Value="4,2" />

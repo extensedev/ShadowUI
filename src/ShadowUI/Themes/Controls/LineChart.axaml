@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- ControlTheme for LineChart: base sizes only, no Template (rendering via override Render) -->
-  <ControlTheme x:Key="{x:Type shadui:LineChart}" TargetType="shadui:LineChart">
+  <ControlTheme x:Key="{x:Type shadowui:LineChart}" TargetType="shadowui:LineChart">
     <Setter Property="MinHeight" Value="160" />
     <Setter Property="MinWidth" Value="200" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />

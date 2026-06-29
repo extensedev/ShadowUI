@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
-  <ControlTheme x:Key="{x:Type shadui:ToastCard}" TargetType="shadui:ToastCard">
+  <ControlTheme x:Key="{x:Type shadowui:ToastCard}" TargetType="shadowui:ToastCard">
     <!-- enter/exit animation base (overridden by :shown) -->
     <Setter Property="Opacity" Value="0" />
     <Setter Property="RenderTransform" Value="translateX(30px)" />

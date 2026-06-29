@@ -1,9 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- EmptyState theme: empty state with an icon, title, description and action button -->
-  <ControlTheme x:Key="{x:Type shadui:EmptyState}" TargetType="shadui:EmptyState">
+  <ControlTheme x:Key="{x:Type shadowui:EmptyState}" TargetType="shadowui:EmptyState">
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="Padding" Value="24" />

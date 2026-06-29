@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
-  <ControlTheme x:Key="{x:Type shadui:Alert}" TargetType="shadui:Alert">
+  <ControlTheme x:Key="{x:Type shadowui:Alert}" TargetType="shadowui:Alert">
     <Setter Property="Background" Value="{DynamicResource ShadowCardBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     <Setter Property="BorderThickness" Value="1" />

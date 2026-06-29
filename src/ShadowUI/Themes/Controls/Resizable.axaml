@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
+                    xmlns:shadowui="using:ShadowUI">
 
   <!-- Standalone GridSplitter template (no FluentTheme): without it the splitter is invisible and cannot be dragged -->
   <ControlTheme x:Key="{x:Type GridSplitter}" TargetType="GridSplitter">
@@ -13,7 +13,7 @@
   </ControlTheme>
 
   <!-- Resizable theme: Grid with two ContentPresenters and a GridSplitter between them -->
-  <ControlTheme x:Key="{x:Type shadui:Resizable}" TargetType="shadui:Resizable">
+  <ControlTheme x:Key="{x:Type shadowui:Resizable}" TargetType="shadowui:Resizable">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
     <Setter Property="Template">

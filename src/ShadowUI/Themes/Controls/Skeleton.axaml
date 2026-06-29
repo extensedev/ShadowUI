@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:shadui="using:ShadowUI">
-  <ControlTheme x:Key="{x:Type shadui:Skeleton}" TargetType="shadui:Skeleton">
+                    xmlns:shadowui="using:ShadowUI">
+  <ControlTheme x:Key="{x:Type shadowui:Skeleton}" TargetType="shadowui:Skeleton">
     <Setter Property="MinHeight" Value="16" />
     <Setter Property="Template">
       <ControlTemplate>
