@@ -115,11 +115,20 @@
       <Setter Property="Opacity" Value="0.7" />
     </Style>
 
-    <!-- Direct hover/drag on the thumb itself -->
+    <!-- Direct hover on the thumb itself -->
     <Style Selector="^ /template/ Thumb#PART_Thumb:pointerover">
       <Setter Property="Opacity" Value="0.9" />
     </Style>
-    <Style Selector="^ /template/ Thumb#PART_Thumb:pressed">
+
+    <!-- Dragging: pin the thumb expanded + opaque so it stays stable even when the
+         pointer drifts off the thin bar — that drop of the viewer's pointer-over
+         would otherwise flip AllowAutoHide off and shrink/dim the thumb mid-drag. -->
+    <Style Selector="^:vertical /template/ Thumb#PART_Thumb:pressed">
+      <Setter Property="Width" Value="8" />
+      <Setter Property="Opacity" Value="0.9" />
+    </Style>
+    <Style Selector="^:horizontal /template/ Thumb#PART_Thumb:pressed">
+      <Setter Property="Height" Value="8" />
       <Setter Property="Opacity" Value="0.9" />
     </Style>
 

@@ -3,6 +3,11 @@
 All notable changes to ShadowUI are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](https://semver.org).
 
+## [Unreleased]
+
+### Fixed
+- **Scrollbar thumb no longer "tears" while being dragged.** The bar is only 10px wide, so during a vertical drag the captured pointer drifts off it, the viewer loses `:pointerover`, `AllowAutoHide` flips off, and the thumb shrank 8→4px and dimmed mid-drag. The `:pressed` state now pins the thumb expanded and opaque, so a drag keeps it stable regardless of pointer-over.
+
 ## [1.0.6] — 2026-06-14
 
 ### Fixed
