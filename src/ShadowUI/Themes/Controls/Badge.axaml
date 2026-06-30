@@ -40,17 +40,22 @@
       <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
       <Setter Property="BorderBrush" Value="{DynamicResource ShadowBorderBrush}" />
     </Style>
+    <!-- Status badges use the soft treatment (tinted surface + bright colored text):
+         reads cleanly in both themes, unlike a saturated fill under near-black text. -->
     <Style Selector="^.success">
-      <Setter Property="Background" Value="{DynamicResource ShadowSuccessBrush}" />
-      <Setter Property="Foreground" Value="{DynamicResource ShadowSuccessForegroundBrush}" />
+      <Setter Property="Background" Value="{DynamicResource ShadowSuccessSoftBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource ShadowSuccessSoftForegroundBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowSuccessSoftBorderBrush}" />
     </Style>
     <Style Selector="^.warning">
-      <Setter Property="Background" Value="{DynamicResource ShadowWarningBrush}" />
-      <Setter Property="Foreground" Value="{DynamicResource ShadowWarningForegroundBrush}" />
+      <Setter Property="Background" Value="{DynamicResource ShadowWarningSoftBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource ShadowWarningSoftForegroundBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowWarningSoftBorderBrush}" />
     </Style>
     <Style Selector="^.info">
-      <Setter Property="Background" Value="{DynamicResource ShadowInfoBrush}" />
-      <Setter Property="Foreground" Value="{DynamicResource ShadowInfoForegroundBrush}" />
+      <Setter Property="Background" Value="{DynamicResource ShadowInfoSoftBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource ShadowInfoSoftForegroundBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ShadowInfoSoftBorderBrush}" />
     </Style>
   </ControlTheme>
 </ResourceDictionary>

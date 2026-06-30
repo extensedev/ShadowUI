@@ -5,6 +5,11 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [1.1.2] — 2026-07-01
+
+### Fixed
+- **`Badge` status variants (`success` / `warning` / `info`) are now legible.** They painted a saturated fill under near-black text — technically ~6.5:1, but muddy on a bright surface. They now use the shadcn soft treatment: a tinted surface, bright colored text, and a faint border, reading cleanly in both light and dark. The saturated `Shadow{Status}Brush` tokens (still used as Alert text and the Toast accent stripe) are unchanged; new `Shadow{Status}SoftBrush` / `…SoftForegroundBrush` / `…SoftBorderBrush` tokens back the badge fill.
+
 ## [1.0.7] — 2026-06-29
 
 ### Added

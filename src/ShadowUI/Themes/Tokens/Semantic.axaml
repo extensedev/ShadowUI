@@ -2,7 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <!-- Semantic status colors (success/warning/info). Palette-independent
        (green/amber/blue do not depend on the gray palette) but differ between Light/Dark.
-       Values are Tailwind levels: 600 for Light, 500 for Dark. -->
+       Values are Tailwind levels: 600 for Light, 500 for Dark.
+       These are the saturated "accent" colors — used as text in Alert and as the
+       accent stripe in Toast. The *Soft* triplet below is the readable badge fill. -->
   <ResourceDictionary.ThemeDictionaries>
     <ResourceDictionary x:Key="Light">
       <SolidColorBrush x:Key="ShadowSuccessBrush" Color="#16A34A" />
@@ -11,6 +13,18 @@
       <SolidColorBrush x:Key="ShadowWarningForegroundBrush" Color="#FFFFFF" />
       <SolidColorBrush x:Key="ShadowInfoBrush" Color="#2563EB" />
       <SolidColorBrush x:Key="ShadowInfoForegroundBrush" Color="#FFFFFF" />
+
+      <!-- Soft status badges: tinted-100 surface + 700 text. shadcn status-badge look;
+           colored text on a pale tint reads far cleaner than near-black on a bright fill. -->
+      <SolidColorBrush x:Key="ShadowSuccessSoftBrush" Color="#DCFCE7" />
+      <SolidColorBrush x:Key="ShadowSuccessSoftForegroundBrush" Color="#15803D" />
+      <SolidColorBrush x:Key="ShadowSuccessSoftBorderBrush" Color="#A7F3C0" />
+      <SolidColorBrush x:Key="ShadowWarningSoftBrush" Color="#FEF3C7" />
+      <SolidColorBrush x:Key="ShadowWarningSoftForegroundBrush" Color="#B45309" />
+      <SolidColorBrush x:Key="ShadowWarningSoftBorderBrush" Color="#FDE2A0" />
+      <SolidColorBrush x:Key="ShadowInfoSoftBrush" Color="#DBEAFE" />
+      <SolidColorBrush x:Key="ShadowInfoSoftForegroundBrush" Color="#1D4ED8" />
+      <SolidColorBrush x:Key="ShadowInfoSoftBorderBrush" Color="#BFDBFE" />
     </ResourceDictionary>
     <ResourceDictionary x:Key="Dark">
       <SolidColorBrush x:Key="ShadowSuccessBrush" Color="#22C55E" />
@@ -19,6 +33,17 @@
       <SolidColorBrush x:Key="ShadowWarningForegroundBrush" Color="#451A03" />
       <SolidColorBrush x:Key="ShadowInfoBrush" Color="#3B82F6" />
       <SolidColorBrush x:Key="ShadowInfoForegroundBrush" Color="#FFFFFF" />
+
+      <!-- Soft status badges: translucent-500 surface (~15%) over the dark card + bright 400 text. -->
+      <SolidColorBrush x:Key="ShadowSuccessSoftBrush" Color="#2622C55E" />
+      <SolidColorBrush x:Key="ShadowSuccessSoftForegroundBrush" Color="#4ADE80" />
+      <SolidColorBrush x:Key="ShadowSuccessSoftBorderBrush" Color="#4022C55E" />
+      <SolidColorBrush x:Key="ShadowWarningSoftBrush" Color="#26F59E0B" />
+      <SolidColorBrush x:Key="ShadowWarningSoftForegroundBrush" Color="#FBBF24" />
+      <SolidColorBrush x:Key="ShadowWarningSoftBorderBrush" Color="#40F59E0B" />
+      <SolidColorBrush x:Key="ShadowInfoSoftBrush" Color="#263B82F6" />
+      <SolidColorBrush x:Key="ShadowInfoSoftForegroundBrush" Color="#60A5FA" />
+      <SolidColorBrush x:Key="ShadowInfoSoftBorderBrush" Color="#403B82F6" />
     </ResourceDictionary>
   </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
