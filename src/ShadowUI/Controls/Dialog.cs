@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 
 namespace ShadowUI;
 
@@ -31,6 +32,21 @@ public class Dialog : ContentControl
 
     public static readonly StyledProperty<bool> CloseOnEscapeProperty =
         AvaloniaProperty.Register<Dialog, bool>(nameof(CloseOnEscape), defaultValue: true);
+
+    public static readonly StyledProperty<double> CardWidthProperty =
+        AvaloniaProperty.Register<Dialog, double>(nameof(CardWidth), defaultValue: double.NaN);
+
+    public static readonly StyledProperty<double> CardMinWidthProperty =
+        AvaloniaProperty.Register<Dialog, double>(nameof(CardMinWidth), defaultValue: 320d);
+
+    public static readonly StyledProperty<double> CardMaxWidthProperty =
+        AvaloniaProperty.Register<Dialog, double>(nameof(CardMaxWidth), defaultValue: 480d);
+
+    public static readonly StyledProperty<double> CardHeightProperty =
+        AvaloniaProperty.Register<Dialog, double>(nameof(CardHeight), defaultValue: double.NaN);
+
+    public static readonly StyledProperty<double> CardMaxHeightProperty =
+        AvaloniaProperty.Register<Dialog, double>(nameof(CardMaxHeight), defaultValue: double.PositiveInfinity);
 #pragma warning restore CS1591
 
     /// <summary>Whether the dialog is open.</summary>
@@ -54,14 +70,38 @@ public class Dialog : ContentControl
     /// <summary>Whether pressing Esc closes the dialog (false for AlertDialog).</summary>
     public bool CloseOnEscape { get => GetValue(CloseOnEscapeProperty); set => SetValue(CloseOnEscapeProperty, value); }
 
+    /// <summary>Explicit card width. Default <see cref="double.NaN"/> (auto, sized by content within the min/max bounds).</summary>
+    public double CardWidth { get => GetValue(CardWidthProperty); set => SetValue(CardWidthProperty, value); }
+
+    /// <summary>Minimum card width. Default 320.</summary>
+    public double CardMinWidth { get => GetValue(CardMinWidthProperty); set => SetValue(CardMinWidthProperty, value); }
+
+    /// <summary>Maximum card width. Default 480.</summary>
+    public double CardMaxWidth { get => GetValue(CardMaxWidthProperty); set => SetValue(CardMaxWidthProperty, value); }
+
+    /// <summary>Explicit card height. Default <see cref="double.NaN"/> (auto, sized by content).</summary>
+    public double CardHeight { get => GetValue(CardHeightProperty); set => SetValue(CardHeightProperty, value); }
+
+    /// <summary>Maximum card height. Default unbounded; set this to cap tall content.</summary>
+    public double CardMaxHeight { get => GetValue(CardMaxHeightProperty); set => SetValue(CardMaxHeightProperty, value); }
+
     /// <inheritdoc />
     protected override Type StyleKeyOverride => typeof(Dialog);
 
     static Dialog()
     {
         IsOpenProperty.Changed.AddClassHandler<Dialog>((d, e) =>
-            d.PseudoClasses.Set(":open", (bool)(e.NewValue ?? false)));
+        {
+            d.PseudoClasses.Set(":open", (bool)(e.NewValue ?? false));
+            d.ApplyOpenState();
+        });
     }
+
+    // Scrim is hosted in the window's OverlayLayer (portal) rather than inline,
+    // so the overlay spans the whole window no matter where the Dialog is declared.
+    private Panel? _root;
+    private Border? _scrim;
+    private OverlayLayer? _overlay;
 
     /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -69,24 +109,87 @@ public class Dialog : ContentControl
         base.OnApplyTemplate(e);
         PseudoClasses.Set(":open", IsOpen);
 
-        var scrim = e.NameScope.Find<Border>("PART_Scrim");
-        if (scrim is not null)
-            scrim.AddHandler(PointerPressedEvent, OnScrimPressed, RoutingStrategies.Tunnel);
+        DetachScrim();
+
+        _root = e.NameScope.Find<Panel>("PART_Root");
+        _scrim = e.NameScope.Find<Border>("PART_Scrim");
+
+        if (_scrim is not null)
+        {
+            _root?.Children.Remove(_scrim);
+            _scrim.AddHandler(PointerPressedEvent, OnScrimPressed, RoutingStrategies.Tunnel);
+            _scrim.AddHandler(KeyDownEvent, OnScrimKeyDown);
+        }
 
         var close = e.NameScope.Find<Button>("PART_CloseButton");
         if (close is not null)
             close.AddHandler(Button.ClickEvent, (_, _) => Close());
+
+        AttachScrimToOverlay();
+        ApplyOpenState();
     }
 
     /// <inheritdoc />
-    protected override void OnKeyDown(KeyEventArgs e)
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        AttachScrimToOverlay();
+        ApplyOpenState();
+    }
+
+    /// <inheritdoc />
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        DetachScrim();
+    }
+
+    private void AttachScrimToOverlay()
+    {
+        if (_scrim is null)
+            return;
+
+        var layer = OverlayLayer.GetOverlayLayer(this);
+        if (layer is null)
+            return;
+
+        if (!ReferenceEquals(_overlay, layer))
+        {
+            _overlay?.Children.Remove(_scrim);
+            _overlay = layer;
+        }
+
+        if (!_overlay.Children.Contains(_scrim))
+            _overlay.Children.Add(_scrim);
+    }
+
+    private void DetachScrim()
+    {
+        if (_scrim is not null)
+            _overlay?.Children.Remove(_scrim);
+        _overlay = null;
+    }
+
+    private void ApplyOpenState()
+    {
+        if (_scrim is null)
+            return;
+
+        var open = IsOpen;
+        _scrim.Opacity = open ? 1 : 0;
+        _scrim.IsHitTestVisible = open;
+
+        if (open)
+            Dispatcher.UIThread.Post(() => _scrim?.Focus(), DispatcherPriority.Input);
+    }
+
+    private void OnScrimKeyDown(object? sender, KeyEventArgs e)
     {
         if (e.Key == Key.Escape && IsOpen && CloseOnEscape)
         {
             Close();
             e.Handled = true;
         }
-        base.OnKeyDown(e);
     }
 
     private void OnScrimPressed(object? sender, PointerPressedEventArgs e)

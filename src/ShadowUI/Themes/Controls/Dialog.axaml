@@ -1,19 +1,25 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:primitives="using:Avalonia.Controls.Primitives"
                     xmlns:shadowui="using:ShadowUI">
 
   <ControlTheme x:Key="{x:Type shadowui:Dialog}" TargetType="shadowui:Dialog">
-    <Setter Property="HorizontalAlignment" Value="Stretch" />
-    <Setter Property="VerticalAlignment" Value="Stretch" />
     <Setter Property="ZIndex" Value="1000" />
-    <Setter Property="IsVisible" Value="False" />
     <Setter Property="Template">
       <ControlTemplate>
-        <!-- Scrim (overlay), fills the host; click outside the card closes -->
+        <!-- Zero-footprint placeholder: PART_Scrim is reparented into the window's
+             OverlayLayer at runtime so the overlay always covers the whole window,
+             regardless of where <shadowui:Dialog> sits in the visual tree. -->
+        <Panel Name="PART_Root" IsVisible="False">
+        <!-- Scrim (overlay), fills the window; click outside the card closes.
+             Sized to the OverlayLayer it is reparented into (the layer is Canvas-like
+             and does not stretch its children, so an explicit size is required). -->
         <Border Name="PART_Scrim"
                 Background="#99000000"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
+                Width="{Binding $parent[primitives:OverlayLayer].Bounds.Width}"
+                Height="{Binding $parent[primitives:OverlayLayer].Bounds.Height}"
+                Focusable="True"
+                IsHitTestVisible="False"
                 Opacity="0">
           <Border.Transitions>
             <Transitions>
@@ -29,7 +35,11 @@
                   CornerRadius="{DynamicResource ShadowRadiusLg}"
                   BoxShadow="{DynamicResource ShadowShadowMd}"
                   Padding="24"
-                  MinWidth="320" MaxWidth="480"
+                  Width="{TemplateBinding CardWidth}"
+                  MinWidth="{TemplateBinding CardMinWidth}"
+                  MaxWidth="{TemplateBinding CardMaxWidth}"
+                  Height="{TemplateBinding CardHeight}"
+                  MaxHeight="{TemplateBinding CardMaxHeight}"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   Margin="24">
@@ -43,7 +53,7 @@
                                 TextElement.FontSize="18"
                                 TextElement.FontWeight="SemiBold"
                                 TextElement.Foreground="{DynamicResource ShadowForegroundBrush}"
-                                Margin="0,0,0,6" />
+                                Margin="0,0,0,20" />
 
               <!-- Description -->
               <ContentPresenter Grid.Row="1"
@@ -90,16 +100,9 @@
             </Grid>
           </Border>
         </Border>
+        </Panel>
       </ControlTemplate>
     </Setter>
-
-    <!-- Open: show + fade in -->
-    <Style Selector="^:open">
-      <Setter Property="IsVisible" Value="True" />
-    </Style>
-    <Style Selector="^:open /template/ Border#PART_Scrim">
-      <Setter Property="Opacity" Value="1" />
-    </Style>
   </ControlTheme>
 
 </ResourceDictionary>
