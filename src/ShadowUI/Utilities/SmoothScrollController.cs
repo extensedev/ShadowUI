@@ -172,7 +172,7 @@ internal sealed class SmoothScrollController
 
         if (Math.Abs(dx) < 0.1 && Math.Abs(dy) < 0.1) // displacement too small — stop
         {
-            _instance.Offset = new Vector(_targetX, _targetY);
+            _instance.Offset = new Vector(Math.Round(_targetX), Math.Round(_targetY));
             _isLoopRunning = false;
 
             return;
@@ -182,7 +182,7 @@ internal sealed class SmoothScrollController
         _currentX += dx * factor;
         _currentY += dy * factor;
 
-        _instance.Offset = new Vector(_currentX, _currentY);
+        _instance.Offset = new Vector(Math.Round(_currentX), Math.Round(_currentY));
         _topLevel.RequestAnimationFrame(OnFrameTick);
     }
 }
