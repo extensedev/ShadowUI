@@ -31,17 +31,23 @@
     </Style>
   </ControlTheme>
 
-  <!-- Trigger: transparent pass-through (asChild). The child (e.g. a ghost Button) is the only surface. -->
+  <!-- Trigger (asChild): header surface with a default accent background, shown in both collapsed and
+       expanded states. The child (e.g. a ghost Button) sits on top and fills it. -->
   <ControlTheme x:Key="{x:Type shadowui:CollapsibleTrigger}" TargetType="shadowui:CollapsibleTrigger">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Background" Value="{DynamicResource ShadowAccentBrush}" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ShadowRadiusMd}" />
     <Setter Property="Template">
       <ControlTemplate>
-        <ContentPresenter Name="PART_ContentPresenter"
-                          Content="{TemplateBinding Content}"
-                          ContentTemplate="{TemplateBinding ContentTemplate}"
-                          Cursor="Hand"
-                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        <Border Background="{TemplateBinding Background}"
+                CornerRadius="{TemplateBinding CornerRadius}">
+          <ContentPresenter Name="PART_ContentPresenter"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Cursor="Hand"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
       </ControlTemplate>
     </Setter>
   </ControlTheme>

@@ -45,9 +45,10 @@ public class Collapsible : ContentControl
 }
 
 /// <summary>
-/// Behavioral wrapper for a Collapsible header (the shadcn <c>asChild</c> pattern): it renders no
-/// surface of its own — clicking its content toggles the target Collapsible, and the trigger mirrors
-/// the expanded state as the <c>:expanded</c> pseudo-class so child content (e.g. a chevron) can react.
+/// Behavioral wrapper for a Collapsible header (the shadcn <c>asChild</c> pattern): it renders a
+/// default accent header surface that its child fills — clicking the content toggles the target
+/// Collapsible, and the trigger mirrors the expanded state as the <c>:expanded</c> pseudo-class so
+/// child content (e.g. a chevron) can react.
 /// </summary>
 public class CollapsibleTrigger : ContentControl
 {
