@@ -41,4 +41,7 @@ public enum BaseColor
 
     /// <summary>Orange accent (primary = orange) on Zinc surfaces.</summary>
     Orange,
+
+    /// <summary>NearBlack: Zinc-derived near-black (#09090B) with deep, low-lift elevated surfaces.</summary>
+    NearBlack,
 }

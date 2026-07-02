@@ -5,6 +5,11 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [1.1.5] — 2026-07-03
+
+### Added
+- **New `NearBlack` palette (14 total).** A near-black neutral: background `#09090B` (identical to `Zinc` dark) paired with deep, low-lift elevated surfaces — card/popover `#141417`, sidebar `#0B0B0D`, and subtle white-alpha borders (7% / 6%). Reads darker and more recessed than `Charcoal`/`Graphite`, for UIs that want a true black-ish canvas with quiet elevation. Colored accents (destructive, charts, focus ring) inherit the Zinc dark set; the Light variant mirrors Zinc.
+
 ## [1.1.4] — 2026-07-02
 
 ### Fixed

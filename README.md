@@ -1,7 +1,7 @@
 # ShadowUI
 
 A port of [shadcn/ui](https://ui.shadcn.com) for [Avalonia UI](https://avaloniaui.net) 12 / .NET.
-50+ components · Light/Dark theme · 13 color palettes · Custom title bar · Native AOT compatible.
+50+ components · Light/Dark theme · 14 color palettes · Custom title bar · Native AOT compatible.
 
 <p align="center">
   <img src="docs/screenshots/overview.gif" width="720" alt="ShadowUI Gallery" />
@@ -31,7 +31,7 @@ dotnet add package ShadowUI
              xmlns:shadowui="using:ShadowUI"
              RequestedThemeVariant="Dark">
   <Application.Styles>
-    <!-- Charcoal (recommended default); any of the 13 palettes: Zinc, Slate, Blue, Violet, ... -->
+    <!-- Charcoal (recommended default); any of the 14 palettes: Zinc, Slate, Blue, Violet, ... -->
     <shadowui:ShadowUITheme BaseColor="Charcoal" />
   </Application.Styles>
 </Application>
@@ -71,10 +71,11 @@ var theme = Application.Current!.Styles.OfType<ShadowUITheme>().First();
 theme.BaseColor = BaseColor.Slate;
 ```
 
-13 palettes (`BaseColor`):
+14 palettes (`BaseColor`):
 
 - **Neutrals:** `Zinc`, `Slate` (cool), `Stone` (warm), `Gray` (cool, Tailwind gray), `Neutral` (true gray).
 - **Lifted darks:** `Charcoal` (default) → `Graphite` → `Ash` (progressively lighter dark backgrounds).
+- **Deep dark:** `NearBlack` (near-black `#09090B` with deep, low-lift elevated surfaces — darker than Charcoal).
 - **Colored accents** (Zinc surfaces + colored primary): `Blue`, `Green`, `Violet`, `Rose`, `Orange`.
 
 ## Custom Title Bar

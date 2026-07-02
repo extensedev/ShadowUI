@@ -66,6 +66,7 @@ public class ShadowUITheme : Styles
         BaseColor.Violet => new VioletPalette(),
         BaseColor.Rose => new RosePalette(),
         BaseColor.Orange => new OrangePalette(),
+        BaseColor.NearBlack => new NearBlackPalette(),
         _ => new ZincPalette(),
     };
 }
