@@ -23,6 +23,10 @@ internal sealed class SmoothScrollController
 
     private bool _isLoopRunning;
     private TimeSpan _lastFrameTime = TimeSpan.Zero;
+    private double _lastWrittenX = double.NaN;
+    private double _lastWrittenY = double.NaN;
+
+    private const double ExternalMoveTolerance = 0.5;
 
     public SmoothScrollController(ScrollViewer instance, double baseStepSize, double smoothingFactor)
     {
@@ -50,6 +54,9 @@ internal sealed class SmoothScrollController
 
         _targetX = 0;
         _currentX = 0;
+
+        _lastWrittenX = double.NaN;
+        _lastWrittenY = double.NaN;
     }
 
     public double BaseStepSize { get; set; }
@@ -109,13 +116,8 @@ internal sealed class SmoothScrollController
             source = source.GetVisualParent();
         }
 
-        if (!_isLoopRunning)
-        {
-            _currentX = _instance.Offset.X;
-            _currentY = _instance.Offset.Y;
-            _targetX = _currentX;
-            _targetY = _currentY;
-        }
+        if (!_isLoopRunning || WasOffsetMovedExternally())
+            ResyncFromOffset();
 
         var hasHorizontal = _instance.HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled;
         var hasVertical = _instance.VerticalScrollBarVisibility != ScrollBarVisibility.Disabled;
@@ -134,6 +136,9 @@ internal sealed class SmoothScrollController
             _targetY -= dy * BaseStepSize;
         }
 
+        _targetX = Math.Clamp(_targetX, 0, Math.Max(_instance.Extent.Width - _instance.Viewport.Width, 0));
+        _targetY = Math.Clamp(_targetY, 0, Math.Max(_instance.Extent.Height - _instance.Viewport.Height, 0));
+
         StartAnimationLoop();
         e.Handled = true;
     }
@@ -141,7 +146,44 @@ internal sealed class SmoothScrollController
     /// <summary>Any mouse press inside the viewer (thumb grab, track click) takes over:
     /// stop the glide so the loop doesn't pull the offset back toward its stale target
     /// while the user drags the scrollbar thumb.</summary>
-    private void OnPointerPressed(object? sender, PointerPressedEventArgs e) => _isLoopRunning = false;
+    private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        _isLoopRunning = false;
+        ResyncFromOffset();
+    }
+
+    private void ResyncFromOffset()
+    {
+        var offset = _instance.Offset;
+
+        _currentX = offset.X;
+        _currentY = offset.Y;
+        _targetX = offset.X;
+        _targetY = offset.Y;
+
+        _lastWrittenX = double.NaN;
+        _lastWrittenY = double.NaN;
+    }
+
+    private bool WasOffsetMovedExternally()
+    {
+        if (double.IsNaN(_lastWrittenX) || double.IsNaN(_lastWrittenY))
+            return false;
+
+        var offset = _instance.Offset;
+
+        return Math.Abs(offset.X - _lastWrittenX) > ExternalMoveTolerance ||
+               Math.Abs(offset.Y - _lastWrittenY) > ExternalMoveTolerance;
+    }
+
+    private void WriteOffset(double x, double y)
+    {
+        _instance.Offset = new Vector(x, y);
+
+        var actual = _instance.Offset;
+        _lastWrittenX = actual.X;
+        _lastWrittenY = actual.Y;
+    }
 
     private void StartAnimationLoop()
     {
@@ -161,6 +203,12 @@ internal sealed class SmoothScrollController
         if (!_isLoopRunning || _topLevel is null)
             return;
 
+        if (WasOffsetMovedExternally())
+        {
+            _isLoopRunning = false;
+            return;
+        }
+
         var dt = (time - _lastFrameTime).TotalSeconds;
         _lastFrameTime = time;
 
@@ -172,7 +220,7 @@ internal sealed class SmoothScrollController
 
         if (Math.Abs(dx) < 0.1 && Math.Abs(dy) < 0.1) // displacement too small — stop
         {
-            _instance.Offset = new Vector(Math.Round(_targetX), Math.Round(_targetY));
+            WriteOffset(Math.Round(_targetX), Math.Round(_targetY));
             _isLoopRunning = false;
 
             return;
@@ -182,7 +230,7 @@ internal sealed class SmoothScrollController
         _currentX += dx * factor;
         _currentY += dy * factor;
 
-        _instance.Offset = new Vector(Math.Round(_currentX), Math.Round(_currentY));
+        WriteOffset(Math.Round(_currentX), Math.Round(_currentY));
         _topLevel.RequestAnimationFrame(OnFrameTick);
     }
 }

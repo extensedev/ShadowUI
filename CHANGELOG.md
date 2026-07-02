@@ -5,6 +5,11 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [1.1.4] — 2026-07-02
+
+### Fixed
+- **Scrollbar thumb drag no longer freezes; the first wheel tick after a drag no longer teleports the viewport.** The smooth-scroll glide loop never noticed external `Offset` changes: while it ran, a thumb drag was overwritten every frame (the thumb rubber-banded toward the stale glide target and read as "frozen at the bottom"), and a wheel tick arriving mid-loop reused that stale target, yanking the viewport toward it (typically the very top). The controller now tracks the offset it last wrote (read back after the viewer clamps), self-cancels the moment anything else moves the scroll, resyncs from the real offset on pointer-press and on wheel-after-drift, and clamps the wheel target against the live extent.
+
 ## [1.1.2] — 2026-07-01
 
 ### Fixed
