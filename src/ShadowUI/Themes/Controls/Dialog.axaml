@@ -39,11 +39,16 @@
                   MinWidth="{TemplateBinding CardMinWidth}"
                   MaxWidth="{TemplateBinding CardMaxWidth}"
                   Height="{TemplateBinding CardHeight}"
-                  MaxHeight="{TemplateBinding CardMaxHeight}"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   Margin="24">
-            <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+            <Border.MaxHeight>
+              <MultiBinding Converter="{x:Static shadowui:DialogCardMaxHeightConverter.Instance}" ConverterParameter="48">
+                <TemplateBinding Property="CardMaxHeight" />
+                <Binding Path="$parent[primitives:OverlayLayer].Bounds.Height" />
+              </MultiBinding>
+            </Border.MaxHeight>
+            <Grid RowDefinitions="Auto,Auto,*,Auto">
 
               <!-- Title -->
               <ContentPresenter Grid.Row="0"
@@ -66,9 +71,12 @@
                                 Margin="0,0,24,28" />
 
               <!-- Body -->
-              <ContentPresenter Grid.Row="2"
-                                Content="{TemplateBinding Content}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+              <ScrollViewer Grid.Row="2"
+                            VerticalScrollBarVisibility="Auto"
+                            HorizontalScrollBarVisibility="Disabled">
+                <ContentPresenter Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+              </ScrollViewer>
 
               <!-- Footer (actions) -->
               <ContentPresenter Grid.Row="3"

@@ -38,7 +38,7 @@
             </Border.Transitions>
 
             <!-- Panel content: title, description, content, close button -->
-            <Grid RowDefinitions="Auto,Auto,Auto">
+            <Grid RowDefinitions="Auto,Auto,*">
 
               <!-- Title -->
               <ContentPresenter Grid.Row="0"
@@ -61,9 +61,12 @@
                                 Margin="0,0,24,16" />
 
               <!-- Main content -->
-              <ContentPresenter Grid.Row="2"
-                                Content="{TemplateBinding Content}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+              <ScrollViewer Grid.Row="2"
+                            VerticalScrollBarVisibility="Auto"
+                            HorizontalScrollBarVisibility="Disabled">
+                <ContentPresenter Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+              </ScrollViewer>
 
               <!-- Close button -->
               <Button Name="PART_CloseButton"
