@@ -2,9 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <!-- Thin scrollbar in the shadcn ScrollArea style.
        Behavior ported from ShadUI: transparent RepeatButtons in the Track make
-       track clicks page up/down, and AllowAutoHide doubles as a hover channel —
-       the ScrollViewer theme flips it to True while the pointer is over the
-       viewer, which widens the thumb (see ScrollViewer.axaml). -->
+       track clicks page up/down. The thumb stays thin at all times and only
+       widens while the pointer is directly over the bar's own hit column
+       (^:pointerover), not the whole ScrollViewer. -->
   <ControlTheme x:Key="ShadowScrollThumb" TargetType="Thumb">
     <Setter Property="Background" Value="{DynamicResource ShadowMutedForegroundBrush}" />
     <Setter Property="Template">
@@ -26,7 +26,6 @@
 
   <ControlTheme x:Key="{x:Type ScrollBar}" TargetType="ScrollBar">
     <Setter Property="Background" Value="Transparent" />
-    <!-- Hover channel, not actual auto-hide: True while the pointer is over the owning ScrollViewer -->
     <Setter Property="AllowAutoHide" Value="False" />
 
     <Style Selector="^:vertical">
@@ -105,12 +104,12 @@
       <Setter Property="Opacity" Value="0.4" />
     </Style>
 
-    <!-- Pointer over the owning ScrollViewer: widen -->
-    <Style Selector="^:vertical[AllowAutoHide=True] /template/ Thumb#PART_Thumb">
+    <!-- Pointer directly over the scrollbar (its 10px hit column): widen -->
+    <Style Selector="^:vertical:pointerover /template/ Thumb#PART_Thumb">
       <Setter Property="Width" Value="8" />
       <Setter Property="Opacity" Value="0.7" />
     </Style>
-    <Style Selector="^:horizontal[AllowAutoHide=True] /template/ Thumb#PART_Thumb">
+    <Style Selector="^:horizontal:pointerover /template/ Thumb#PART_Thumb">
       <Setter Property="Height" Value="8" />
       <Setter Property="Opacity" Value="0.7" />
     </Style>
@@ -121,8 +120,8 @@
     </Style>
 
     <!-- Dragging: pin the thumb expanded + opaque so it stays stable even when the
-         pointer drifts off the thin bar — that drop of the viewer's pointer-over
-         would otherwise flip AllowAutoHide off and shrink/dim the thumb mid-drag. -->
+         pointer drifts off the thin bar — losing :pointerover mid-drag would
+         otherwise shrink/dim the thumb. -->
     <Style Selector="^:vertical /template/ Thumb#PART_Thumb:pressed">
       <Setter Property="Width" Value="8" />
       <Setter Property="Opacity" Value="0.9" />

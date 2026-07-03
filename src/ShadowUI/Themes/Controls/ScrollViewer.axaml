@@ -3,8 +3,8 @@
                     xmlns:shadowui="using:ShadowUI">
   <!-- Standalone ScrollViewer template (no FluentTheme), behavior ported from ShadUI:
        scrollbars overlay the content (no reserved gutter, so content does not shift
-       when a bar appears), and hovering the viewer widens the thumbs by flipping
-       AllowAutoHide on the bars (the ScrollBar theme styles against it). -->
+       when a bar appears). The thumbs widen only on direct hover over the bar
+       itself — see ScrollBar.axaml. -->
   <ControlTheme x:Key="{x:Type ScrollViewer}" TargetType="ScrollViewer">
     <!-- Transparent (not null): the ScrollContentPresenter must hit-test across its full area, otherwise the mouse wheel over empty spots falls through -->
     <Setter Property="Background" Value="Transparent" />
@@ -40,11 +40,6 @@
         </Panel>
       </ControlTemplate>
     </Setter>
-
-    <!-- Hover channel: widen the thumbs while the pointer is anywhere over the viewer -->
-    <Style Selector="^:pointerover /template/ ScrollBar">
-      <Setter Property="AllowAutoHide" Value="True" />
-    </Style>
 
     <!-- gutter: scrollbars get their own reserved column/row instead of overlaying.
          For dropdown lists (ComboBox, CommandPalette, ...) where an overlay bar
