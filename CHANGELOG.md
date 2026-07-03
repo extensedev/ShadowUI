@@ -5,6 +5,8 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [1.1.6] — 2026-07-03
+
 ### Changed
 - **Scrollbar thumb now widens only on direct hover over the bar, not on hover anywhere over the ScrollViewer.** The thumb stays thin at rest and thickens the moment the pointer enters the scrollbar's own hit column (`:pointerover`); the previous viewer-wide `AllowAutoHide` widen channel was removed. Drag-pinning is unaffected.
 
