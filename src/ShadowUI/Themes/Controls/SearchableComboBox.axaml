@@ -80,19 +80,25 @@
                     CornerRadius="{DynamicResource ShadowRadiusMd}"
                     ClipToBounds="True"
                     Padding="4">
-              <StackPanel Orientation="Vertical">
+              <!-- Grid (Auto,*), not a StackPanel: a vertical StackPanel measures children with
+                   infinite height, so the ScrollViewer never constrains and the list is clipped by
+                   the popup's MaxHeight with no scrollbar. The * row bounds the ScrollViewer to the
+                   remaining popup height, so long lists scroll. -->
+              <Grid RowDefinitions="Auto,*">
                 <!-- search field in the popup -->
                 <TextBox Name="PART_SearchBox"
+                         Grid.Row="0"
                          Margin="0,0,0,4"
                          PlaceholderText="{TemplateBinding SearchPlaceholder}" />
                 <!-- results list -->
-                <ScrollViewer Classes="gutter"
+                <ScrollViewer Grid.Row="1"
+                              Classes="gutter"
                               HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto">
                   <ItemsPresenter Name="PART_ItemsPresenter"
                                   ItemsPanel="{TemplateBinding ItemsPanel}" />
                 </ScrollViewer>
-              </StackPanel>
+              </Grid>
             </Border>
           </Popup>
         </Grid>

@@ -6,7 +6,7 @@
     <IsAotCompatible>true</IsAotCompatible>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>ShadowUI</PackageId>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Authors>extense</Authors>
     <Copyright>Copyright © 2025–2026 extense</Copyright>
     <Description>shadcn/ui port for Avalonia — AOT-ready UI components: 50+ controls, 14 palettes, dark/light theming.</Description>
