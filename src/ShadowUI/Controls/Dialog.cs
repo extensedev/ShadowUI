@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Threading;
 
 namespace ShadowUI;
@@ -47,6 +48,9 @@ public class Dialog : ContentControl
 
     public static readonly StyledProperty<double> CardMaxHeightProperty =
         AvaloniaProperty.Register<Dialog, double>(nameof(CardMaxHeight), defaultValue: double.PositiveInfinity);
+
+    public static readonly StyledProperty<bool> OverlayProperty =
+        AvaloniaProperty.Register<Dialog, bool>(nameof(Overlay), defaultValue: true);
 #pragma warning restore CS1591
 
     /// <summary>Whether the dialog is open.</summary>
@@ -85,8 +89,13 @@ public class Dialog : ContentControl
     /// <summary>Maximum card height. Default unbounded; set this to cap tall content.</summary>
     public double CardMaxHeight { get => GetValue(CardMaxHeightProperty); set => SetValue(CardMaxHeightProperty, value); }
 
+    /// <summary>Whether the dimming scrim behind the card is shown. Default true; false keeps the dialog modal but transparent.</summary>
+    public bool Overlay { get => GetValue(OverlayProperty); set => SetValue(OverlayProperty, value); }
+
     /// <inheritdoc />
     protected override Type StyleKeyOverride => typeof(Dialog);
+
+    private static readonly IBrush ScrimBrush = new SolidColorBrush(Color.Parse("#99000000"));
 
     static Dialog()
     {
@@ -95,6 +104,8 @@ public class Dialog : ContentControl
             d.PseudoClasses.Set(":open", (bool)(e.NewValue ?? false));
             d.ApplyOpenState();
         });
+
+        OverlayProperty.Changed.AddClassHandler<Dialog>((d, _) => d.ApplyOverlay());
     }
 
     // Scrim is hosted in the window's OverlayLayer (portal) rather than inline,
@@ -126,7 +137,14 @@ public class Dialog : ContentControl
             close.AddHandler(Button.ClickEvent, (_, _) => Close());
 
         AttachScrimToOverlay();
+        ApplyOverlay();
         ApplyOpenState();
+    }
+
+    private void ApplyOverlay()
+    {
+        if (_scrim is not null)
+            _scrim.Background = Overlay ? ScrimBrush : Brushes.Transparent;
     }
 
     /// <inheritdoc />

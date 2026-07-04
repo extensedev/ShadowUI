@@ -7,7 +7,11 @@
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
     <Setter Property="ZIndex" Value="1000" />
-    <Setter Property="IsVisible" Value="False" />
+    <!-- Stays realized (not IsVisible=False) so the panel is rendered off-screen at its closed
+         position from the start; the very first open then slides in like every subsequent open.
+         When closed it is click-through via IsHitTestVisible=False. -->
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="PanelCornerRadius" Value="{DynamicResource ShadowRadiusLg}" />
     <Setter Property="Template">
       <ControlTemplate>
         <!-- Scrim: dimming; clicking outside closes the panel -->
@@ -22,14 +26,14 @@
             </Transitions>
           </Border.Transitions>
 
-          <!-- Panel: slides in from the configured side via RenderTransform -->
+          <!-- Panel: slides in from the configured side via RenderTransform (set from code) -->
           <Border Name="PART_Panel"
                   Background="{DynamicResource ShadowBackgroundBrush}"
                   BorderBrush="{DynamicResource ShadowBorderBrush}"
                   BorderThickness="1"
-                  CornerRadius="{DynamicResource ShadowRadiusLg}"
-                  BoxShadow="{DynamicResource ShadowShadowMd}"
-                  Padding="24">
+                  CornerRadius="{TemplateBinding PanelCornerRadius}"
+                  Margin="{TemplateBinding PanelMargin}"
+                  BoxShadow="{DynamicResource ShadowShadowMd}">
             <Border.Transitions>
               <Transitions>
                 <!-- Panel slide in/out animation -->
@@ -37,8 +41,9 @@
               </Transitions>
             </Border.Transitions>
 
+            <Panel>
             <!-- Panel content: title, description, content, close button -->
-            <Grid RowDefinitions="Auto,Auto,*">
+            <Grid Margin="24" RowDefinitions="Auto,Auto,*">
 
               <!-- Title -->
               <ContentPresenter Grid.Row="0"
@@ -88,14 +93,20 @@
               </Button>
 
             </Grid>
+
+            <!-- Resize grip on the inner edge (left for Right, top for Bottom); positioned per side below -->
+            <Border Name="PART_ResizeGrip"
+                    Background="Transparent"
+                    IsVisible="{TemplateBinding IsResizable}" />
+            </Panel>
           </Border>
         </Border>
       </ControlTemplate>
     </Setter>
 
-    <!-- Open state: show -->
+    <!-- Open state: allow interaction (scrim catches outside clicks, panel is interactive) -->
     <Style Selector="^:open">
-      <Setter Property="IsVisible" Value="True" />
+      <Setter Property="IsHitTestVisible" Value="True" />
     </Style>
 
     <!-- Scrim: fades in when opening -->
@@ -103,28 +114,39 @@
       <Setter Property="Opacity" Value="1" />
     </Style>
 
-    <!-- Sides: base positions (closed state) -->
+    <!-- Overlay disabled: keep the panel modal but drop the dimming -->
+    <Style Selector="^:no-overlay /template/ Border#PART_Scrim">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <!-- Sides: panel docking (size + slide transform are driven from code) -->
     <Style Selector="^:side-right /template/ Border#PART_Panel">
-      <Setter Property="RenderTransform" Value="translateX(400px)" />
-      <Setter Property="MaxWidth" Value="400" />
       <Setter Property="HorizontalAlignment" Value="Right" />
       <Setter Property="VerticalAlignment" Value="Stretch" />
     </Style>
 
     <Style Selector="^:side-bottom /template/ Border#PART_Panel">
-      <Setter Property="RenderTransform" Value="translateY(360px)" />
-      <Setter Property="MaxHeight" Value="360" />
       <Setter Property="VerticalAlignment" Value="Bottom" />
       <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 
-    <!-- Sides: final positions when open (slide-in) -->
-    <Style Selector="^:open:side-right /template/ Border#PART_Panel">
-      <Setter Property="RenderTransform" Value="translateX(0)" />
+    <!-- Resize grip: docked to the inner edge, cursor hints the drag axis -->
+    <Style Selector="^:side-right /template/ Border#PART_ResizeGrip">
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="Width" Value="6" />
+      <Setter Property="Cursor" Value="SizeWestEast" />
     </Style>
 
-    <Style Selector="^:open:side-bottom /template/ Border#PART_Panel">
-      <Setter Property="RenderTransform" Value="translateY(0)" />
+    <Style Selector="^:side-bottom /template/ Border#PART_ResizeGrip">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Height" Value="6" />
+      <Setter Property="Cursor" Value="SizeNorthSouth" />
+    </Style>
+
+    <Style Selector="^ /template/ Border#PART_ResizeGrip:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ShadowBorderBrush}" />
     </Style>
 
   </ControlTheme>

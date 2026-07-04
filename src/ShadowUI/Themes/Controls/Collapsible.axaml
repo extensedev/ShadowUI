@@ -10,18 +10,24 @@
         <Border Name="PART_Root"
                 Background="Transparent"
                 CornerRadius="{DynamicResource ShadowRadiusMd}">
-          <StackPanel>
+          <!-- Single "*" column: width flows top-down (control/parent -> children), so the body
+               never widens the header. A vertical StackPanel would size to its widest child instead. -->
+          <Grid RowDefinitions="Auto,Auto">
             <!-- Trigger slot: the CollapsibleTrigger goes here -->
             <ContentPresenter Name="PART_Trigger"
+                              Grid.Row="0"
                               Content="{TemplateBinding Trigger}"
                               HorizontalAlignment="Stretch" />
-            <!-- Content: shown only when IsExpanded=true -->
+            <!-- Content: shown only when IsExpanded=true. Left/right padding is fixed at 16 to line up
+                 with the trigger's text (default ghost Button has 16px padding), so every Collapsible's
+                 body sits under the same edge as its header — the indent is always present and uniform. -->
             <ContentPresenter Name="PART_Content"
+                              Grid.Row="1"
                               Content="{TemplateBinding Content}"
                               ContentTemplate="{TemplateBinding ContentTemplate}"
                               IsVisible="{TemplateBinding IsExpanded}"
-                              Padding="12,0,12,10" />
-          </StackPanel>
+                              Padding="16,2,16,12" />
+          </Grid>
         </Border>
       </ControlTemplate>
     </Setter>
