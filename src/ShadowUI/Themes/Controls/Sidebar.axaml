@@ -2,6 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:shadowui="using:ShadowUI">
 
+  <ControlTheme x:Key="ShadowSidebarMenuToggleButtonTheme"
+                TargetType="Button"
+                BasedOn="{StaticResource {x:Type Button}}">
+    <Style Selector="^:pointerover /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
+    </Style>
+    <Style Selector="^:pressed /template/ Border#PART_Border">
+      <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
+    </Style>
+  </ControlTheme>
+
   <!-- ═══════════════════════════════════════════════════════════════
        SidebarItem  (shadcn SidebarMenuButton)
   ═══════════════════════════════════════════════════════════════════ -->
@@ -119,6 +130,7 @@
         <StackPanel Spacing="4">
           <!-- Toggle button (h-8): icon + label + chevron -->
           <Button Name="PART_Toggle"
+                  Theme="{StaticResource ShadowSidebarMenuToggleButtonTheme}"
                   Background="Transparent"
                   BorderThickness="0"
                   CornerRadius="{DynamicResource ShadowRadiusMd}"
@@ -176,11 +188,6 @@
     <Style Selector="^.no-sub /template/ Viewbox#PART_Chevron">
       <Setter Property="IsVisible" Value="False" />
     </Style>
-    <!-- Toggle hover/press highlight lives in Controls.axaml: PART_Toggle is a default Button whose
-         own :pointerover paints the inner PART_Border with ShadowPrimaryHoverBrush (bright in dark
-         themes). Overriding that Border needs a descendant + single /template/ selector, which a
-         ControlTheme child style cannot express (double /template/ is forbidden). The :active
-         highlight below still works — at rest PART_Border binds to the control Background. -->
     <!-- Active: accent bg only (no weight change) -->
     <Style Selector="^:active /template/ Button#PART_Toggle">
       <Setter Property="Background" Value="{DynamicResource ShadowSidebarAccentBrush}" />
