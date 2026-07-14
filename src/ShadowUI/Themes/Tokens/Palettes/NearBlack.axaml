@@ -1,9 +1,6 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     x:Class="ShadowUI.NearBlackPalette">
-  <!-- NearBlack: near-black (#09090B) Zinc-derived dark with deep, low-lift elevated surfaces
-       (card/popover #141417, sidebar #0B0B0D) and subtle white-alpha borders. Darker and more
-       recessed than Charcoal/Graphite. The Light variant mirrors Zinc Light. -->
   <ResourceDictionary.ThemeDictionaries>
     <ResourceDictionary x:Key="Light">
       <SolidColorBrush x:Key="ShadowBackgroundBrush" Color="#FFFFFF" />
@@ -56,31 +53,31 @@
       <SolidColorBrush x:Key="ShadowForegroundBrush" Color="#E4E4E7" />
       <SolidColorBrush x:Key="ShadowCardBrush" Color="#141417" />
       <SolidColorBrush x:Key="ShadowCardForegroundBrush" Color="#E4E4E7" />
-      <SolidColorBrush x:Key="ShadowPopoverBrush" Color="#141417" />
+      <SolidColorBrush x:Key="ShadowPopoverBrush" Color="#18181C" />
       <SolidColorBrush x:Key="ShadowPopoverForegroundBrush" Color="#E4E4E7" />
       <SolidColorBrush x:Key="ShadowPrimaryBrush" Color="#E4E4E7" />
       <SolidColorBrush x:Key="ShadowPrimaryHoverBrush" Color="#E6E4E4E7" />
       <SolidColorBrush x:Key="ShadowPrimaryForegroundBrush" Color="#18181B" />
-      <SolidColorBrush x:Key="ShadowSecondaryBrush" Color="#141417" />
-      <SolidColorBrush x:Key="ShadowSecondaryHoverBrush" Color="#CC141417" />
+      <SolidColorBrush x:Key="ShadowSecondaryBrush" Color="#202024" />
+      <SolidColorBrush x:Key="ShadowSecondaryHoverBrush" Color="#CC303036" />
       <SolidColorBrush x:Key="ShadowSecondaryForegroundBrush" Color="#E4E4E7" />
-      <SolidColorBrush x:Key="ShadowMutedBrush" Color="#141417" />
-      <SolidColorBrush x:Key="ShadowMutedForegroundBrush" Color="#71717A" />
-      <SolidColorBrush x:Key="ShadowAccentBrush" Color="#0DFFFFFF" />
+      <SolidColorBrush x:Key="ShadowMutedBrush" Color="#18181C" />
+      <SolidColorBrush x:Key="ShadowMutedForegroundBrush" Color="#A1A1AA" />
+      <SolidColorBrush x:Key="ShadowAccentBrush" Color="#242429" />
       <SolidColorBrush x:Key="ShadowAccentForegroundBrush" Color="#E4E4E7" />
       <SolidColorBrush x:Key="ShadowDestructiveBrush" Color="#FF6467" />
       <SolidColorBrush x:Key="ShadowDestructiveForegroundBrush" Color="#FAFAFA" />
-      <SolidColorBrush x:Key="ShadowBorderBrush" Color="#12FFFFFF" />
-      <SolidColorBrush x:Key="ShadowInputBrush" Color="#12FFFFFF" />
-      <SolidColorBrush x:Key="ShadowRingBrush" Color="#71717B" />
+      <SolidColorBrush x:Key="ShadowBorderBrush" Color="#2BFFFFFF" />
+      <SolidColorBrush x:Key="ShadowInputBrush" Color="#3AFFFFFF" />
+      <SolidColorBrush x:Key="ShadowRingBrush" Color="#8A8A93" />
       <SolidColorBrush x:Key="ShadowPrimary20Brush" Color="#33E4E4E7" />
       <SolidColorBrush x:Key="ShadowSwitchThumbBrush" Color="#FAFAFA" />
       <SolidColorBrush x:Key="ShadowSwitchThumbCheckedBrush" Color="#18181B" />
-      <BoxShadows x:Key="ShadowFocusRing">0 0 0 3 #8071717B</BoxShadows>
-      <SolidColorBrush x:Key="ShadowFocusRingBrush" Color="#8071717B" />
+      <BoxShadows x:Key="ShadowFocusRing">0 0 0 3 #808A8A93</BoxShadows>
+      <SolidColorBrush x:Key="ShadowFocusRingBrush" Color="#808A8A93" />
       <SolidColorBrush x:Key="ShadowErrorRingBrush" Color="#66FF6467" />
-      <SolidColorBrush x:Key="ShadowInputBackgroundBrush" Color="#141417" />
-      <SolidColorBrush x:Key="ShadowInputHoverBrush" Color="#17FFFFFF" />
+      <SolidColorBrush x:Key="ShadowInputBackgroundBrush" Color="#0FFFFFFF" />
+      <SolidColorBrush x:Key="ShadowInputHoverBrush" Color="#1AFFFFFF" />
       <SolidColorBrush x:Key="ShadowDestructiveButtonBrush" Color="#99FF6467" />
       <SolidColorBrush x:Key="ShadowDestructiveButtonHoverBrush" Color="#8AFF6467" />
       <BoxShadows x:Key="ShadowErrorRing">0 0 0 3 #66FF6467</BoxShadows>
@@ -91,11 +88,11 @@
       <SolidColorBrush x:Key="ShadowChart5Brush" Color="#FF2056" />
       <SolidColorBrush x:Key="ShadowSidebarBrush" Color="#0B0B0D" />
       <SolidColorBrush x:Key="ShadowSidebarForegroundBrush" Color="#E4E4E7" />
-      <SolidColorBrush x:Key="ShadowSidebarAccentBrush" Color="#0AFFFFFF" />
+      <SolidColorBrush x:Key="ShadowSidebarAccentBrush" Color="#202025" />
       <SolidColorBrush x:Key="ShadowSidebarAccentForegroundBrush" Color="#E4E4E7" />
       <SolidColorBrush x:Key="ShadowSidebarPrimaryBrush" Color="#E4E4E7" />
       <SolidColorBrush x:Key="ShadowSidebarPrimaryForegroundBrush" Color="#18181B" />
-      <SolidColorBrush x:Key="ShadowSidebarBorderBrush" Color="#0FFFFFFF" />
+      <SolidColorBrush x:Key="ShadowSidebarBorderBrush" Color="#2BFFFFFF" />
     </ResourceDictionary>
   </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
