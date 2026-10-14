@@ -5,9 +5,20 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [1.2.3] — 2026-10-14
+
+### Changed
+- **README and component docs updated.** Cover `Toolbar`, the soft status tokens for badges, the full `Dialog` property table and the `ColorPicker` swatch mode.
+
+## [1.2.2] — 2026-07-14
+
 ### Fixed
 - **Expandable sidebar items now keep readable hover and pressed states.** Their nested toggle buttons use the sidebar accent instead of the primary button hover color, preventing light text and icons from disappearing in dark palettes.
 - **NearBlack dark controls and boundaries are now easier to distinguish.** Secondary and hover surfaces, inputs, borders, focus rings, muted text, popovers, and sidebar states have clearer contrast while the palette keeps its near-black base.
+
+## [1.2.0] — 2026-07-04
+
+### Fixed
 - **`Dialog`/`AlertDialog` and `Sheet` bodies now auto-scroll instead of clipping.** Both cards had an `Auto`-sized body row with no scroll region and an unbounded effective max-height, so tall content simply overflowed the overlay. The body row is now `*` and wrapped in a `ScrollViewer`; `Dialog`'s card max-height defaults to the window/overlay height (minus margin) so overflow triggers scroll automatically, with an explicit `CardMaxHeight` still taking effect when smaller. Title/description/footer stay pinned; short content still hugs its size instead of stretching to the cap.
 
 ## [1.1.6] — 2026-07-03
