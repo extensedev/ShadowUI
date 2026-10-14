@@ -4,7 +4,7 @@ A port of [shadcn/ui](https://ui.shadcn.com) for [Avalonia UI](https://avaloniau
 50+ components · Light/Dark theme · 14 color palettes · Custom title bar · Native AOT compatible.
 
 <p align="center">
-  <img src="docs/screenshots/overview.gif" width="720" alt="ShadowUI Gallery" />
+  <img src="docs/screenshots/overview.gif" width="720" alt="ShadowUI components" />
 </p>
 
 ## Requirements
@@ -180,14 +180,6 @@ Key `DynamicResource` brushes for custom markup:
 ## Documentation
 
 Full component reference with code examples — [`docs/components.md`](docs/components.md).
-
-## Gallery
-
-Run the interactive component gallery:
-
-```bash
-dotnet run --project samples/ShadowUI.Gallery/ShadowUI.Gallery.csproj
-```
 
 ## Native AOT
 
