@@ -144,7 +144,7 @@ Menu / DropdownMenu / ContextMenu, NavigationMenu, Menubar, HoverCard, TreeView,
 **CommandPalette** (⌘K, fuzzy search, keyboard nav), Sheet / Drawer, ScrollBar
 
 ### Forms & Input
-NumericUpDown, SearchableComboBox, OtpInput, InputGroup, ButtonGroup, Field, ColorPicker,
+NumericUpDown, SearchableComboBox, OtpInput, InputGroup, ButtonGroup, Toolbar, Field, ColorPicker,
 SplitButton / ToggleSplitButton, DropDownButton, HyperlinkButton, RepeatButton, ButtonSpinner
 
 ### Data & Tables
@@ -170,7 +170,8 @@ Key `DynamicResource` brushes for custom markup:
 | `ShadowBackgroundBrush` / `ShadowForegroundBrush` | background / text |
 | `ShadowPrimaryBrush` / `ShadowPrimaryForegroundBrush` | primary accent |
 | `ShadowMutedBrush`, `ShadowAccentBrush` | secondary surfaces |
-| `ShadowDestructiveBrush`, `ShadowSuccessBrush`, `ShadowWarningBrush`, `ShadowInfoBrush` | semantic status |
+| `ShadowDestructiveBrush`, `ShadowSuccessBrush`, `ShadowWarningBrush`, `ShadowInfoBrush` | semantic status (saturated accent) |
+| `ShadowSuccessSoftBrush` / `SoftForegroundBrush` / `SoftBorderBrush` (and warning/info) | semantic status (soft treatment for badges) |
 | `ShadowBorderBrush`, `ShadowInputBrush` | borders / inputs |
 | `ShadowSidebarBrush`, `ShadowSidebarForegroundBrush` | sidebar surfaces |
 | `ShadowRadiusSm` / `ShadowRadiusMd` / `ShadowRadiusLg` / `ShadowRadiusXl` | corner radii |

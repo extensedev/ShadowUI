@@ -73,9 +73,7 @@ Square button for icons — use the `icon` class, combinable with any variant:
 <shadowui:Badge Classes="info"    Content="Info" />
 ```
 
-`success/warning/info` colors come from semantic tokens
-(`ShadowSuccessBrush`, `ShadowWarningBrush`, `ShadowInfoBrush`) — palette-independent,
-with Light and Dark variants.
+`success/warning/info` colors use the soft treatment (a tinted background, bright colored text, and a faint border) backed by semantic tokens (`ShadowSuccessSoftBrush` / `ShadowSuccessSoftForegroundBrush` / `ShadowSuccessSoftBorderBrush`, and matching warning/info sets) — palette-independent, with Light and Dark variants. The saturated status brushes (e.g., `ShadowSuccessBrush`) are still used for text in Alerts and accent stripes in Toasts.
 
 ---
 
@@ -249,6 +247,8 @@ ConfirmDialog.Open();    // or ConfirmDialog.IsOpen = true;
 ConfirmDialog.Close();
 ```
 
+Tall content inside `Dialog` automatically scrolls instead of clipping because the body area is wrapped in a `ScrollViewer`. The card's maximum height automatically defaults to the window/overlay height minus margins so that scrollbars appear dynamically when the content is tall, while keeping the title, description, and footer pinned.
+
 | Property | Description |
 |----------|-------------|
 | `IsOpen` | open/closed state (TwoWay) |
@@ -257,6 +257,14 @@ ConfirmDialog.Close();
 | `Content` | dialog body |
 | `Footer` | action area (right-aligned) |
 | `ShowCloseButton` | show X button (default `true`) |
+| `CloseOnClickOutside` | whether clicking outside the card closes the dialog (default `true`) |
+| `CloseOnEscape` | whether pressing Esc closes the dialog (default `true`) |
+| `CardWidth` | explicit card width (default `NaN` / auto) |
+| `CardMinWidth` | minimum card width (default `320`) |
+| `CardMaxWidth` | maximum card width (default `480`) |
+| `CardHeight` | explicit card height (default `NaN` / auto) |
+| `CardMaxHeight` | maximum card height (default `PositiveInfinity`, caps content) |
+| `Overlay` | whether the dimming scrim behind the card is shown (default `true`) |
 
 ---
 
@@ -481,10 +489,12 @@ Single-selection (radio-like) — segments sharing a `GroupName`:
 
 ```xml
 <shadowui:ColorPicker SelectedColor="#2563EB" />
+
+<!-- swatch mode (collapses to a single square color chip trigger) -->
+<shadowui:ColorPicker Classes="swatch" SelectedColor="#2563EB" />
 ```
 
-Swatch button + popover with a full spectrum (`ColorView`): hue/saturation field,
-sliders, hex input. `SelectedColor` is TwoWay.
+The trigger is styled as an input field (transparent background, input border, focus ring). Setting `Classes="swatch"` collapses the trigger to a simple square color swatch. Opens a popover with a full spectrum (`ColorView`): hue/saturation field, sliders, hex input. `SelectedColor` is TwoWay.
 
 ---
 
@@ -584,11 +594,9 @@ Palette.Items = new List<CommandItem>
 Palette.Open();
 ```
 
----
-
 ## Sheet / Drawer
 
-Slide-in panel from any side. Place in the root `Grid`:
+Slide-in panel from the right side or bottom (Drawer). Place in the root `Grid` to overlay window content. Tall content automatically scrolls in a `ScrollViewer` instead of clipping.
 
 ```xml
 <shadowui:Sheet x:Name="RightPanel"
@@ -600,12 +608,29 @@ Slide-in panel from any side. Place in the root `Grid`:
 </shadowui:Sheet>
 ```
 
-`Side`: `Right` (default), `Left`, `Top`, `Bottom`.
+`Side`: `Right` (default), `Bottom` (Drawer).
 
 ```csharp
 RightPanel.Open();
 RightPanel.Close();
 ```
+
+| Property | Description |
+|----------|-------------|
+| `IsOpen` | open/closed state (TwoWay) |
+| `Side` | slide-in side (`Right` or `Bottom`) |
+| `Title` | panel title |
+| `Description` | subtitle below the title |
+| `ShowCloseButton` | show X button (default `true`) |
+| `CloseOnClickOutside` | close when clicking on scrim (default `true`) |
+| `CloseOnEscape` | close when pressing Esc (default `true`) |
+| `Overlay` | show dimming scrim behind panel (default `true`) |
+| `IsResizable` | allow resizing by dragging the inner edge (default `true`) |
+| `PanelSize` | size along resize axis (width for `Right`, height for `Bottom`; default `NaN` / auto) |
+| `PanelMinSize` | minimum panel size when resizing (default `240`) |
+| `PanelMaxSize` | maximum panel size when resizing (default `PositiveInfinity`) |
+| `PanelCornerRadius` | corner radius of the sliding panel (defaults to the theme's large radius) |
+| `PanelMargin` | outer margin around the sliding panel (default none) |
 
 ---
 
@@ -697,6 +722,35 @@ Groups buttons with shared borders — only outer edges are rounded, no double b
   <Button Classes="outline" Content="Center" />
   <Button Classes="outline" Content="Right" />
 </shadowui:ButtonGroup>
+```
+
+---
+
+## Toolbar
+
+Horizontal toolbar container for buttons, toggle groups, and separators with standard spacing in the shadcn style:
+
+```xml
+<shadowui:Toolbar>
+  <Button Classes="ghost icon" ToolTip.Tip="Bold">
+    <Viewbox Width="18" Height="18">
+      <Path Data="M 6 4 L 11 4 A 3 3 0 0 1 14 7 A 3 3 0 0 1 11 10 L 6 10 Z M 6 10 L 12 10 A 3 3 0 0 1 15 13 A 3 3 0 0 1 12 16 L 6 16 Z"
+            Stroke="{DynamicResource ShadowForegroundBrush}" StrokeThickness="2" />
+    </Viewbox>
+  </Button>
+  <Button Classes="ghost icon" ToolTip.Tip="Italic">
+    <Viewbox Width="18" Height="18">
+      <Path Data="M 11 4 L 8 16 M 13 4 L 9 4 M 10 16 L 6 16"
+            Stroke="{DynamicResource ShadowForegroundBrush}" StrokeThickness="2" />
+    </Viewbox>
+  </Button>
+  <shadowui:Separator Orientation="Vertical" />
+  <shadowui:ToggleGroup>
+    <shadowui:ToggleGroupItem GroupName="align" Content="Left" IsChecked="True" />
+    <shadowui:ToggleGroupItem GroupName="align" Content="Center" />
+    <shadowui:ToggleGroupItem GroupName="align" Content="Right" />
+  </shadowui:ToggleGroup>
+</shadowui:Toolbar>
 ```
 
 ---
@@ -1116,7 +1170,8 @@ Core brushes for custom markup:
 | `ShadowBackgroundBrush` / `ShadowForegroundBrush` | background / text |
 | `ShadowPrimaryBrush` / `ShadowPrimaryForegroundBrush` | primary accent |
 | `ShadowSecondaryBrush`, `ShadowMutedBrush`, `ShadowAccentBrush` | secondary surfaces |
-| `ShadowDestructiveBrush`, `ShadowSuccessBrush`, `ShadowWarningBrush`, `ShadowInfoBrush` | semantic status |
+| `ShadowDestructiveBrush`, `ShadowSuccessBrush`, `ShadowWarningBrush`, `ShadowInfoBrush` | semantic status (saturated accent) |
+| `ShadowSuccessSoftBrush` / `SoftForegroundBrush` / `SoftBorderBrush` (and warning/info) | semantic status (soft treatment for badges) |
 | `ShadowBorderBrush`, `ShadowInputBrush` | borders / inputs |
 | `ShadowSidebarBrush`, `ShadowSidebarForegroundBrush`, `ShadowSidebarAccentBrush`, `ShadowSidebarBorderBrush` | sidebar |
 | `ShadowRadiusSm` / `ShadowRadiusMd` / `ShadowRadiusLg` / `ShadowRadiusXl` | corner radii |
