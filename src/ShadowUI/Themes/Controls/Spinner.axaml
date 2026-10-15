@@ -16,18 +16,23 @@
              StrokeThickness="2.5"
              StrokeLineCap="Round"
              RenderTransformOrigin="50%,50%">
-          <Arc.RenderTransform>
-            <RotateTransform />
-          </Arc.RenderTransform>
           <Arc.Styles>
             <Style Selector="Arc">
               <Style.Animations>
                 <Animation Duration="0:0:0.85" IterationCount="INFINITE" Easing="LinearEasing">
                   <KeyFrame Cue="0%">
-                    <Setter Property="RotateTransform.Angle" Value="0" />
+                    <Setter Property="RenderTransform" Value="rotate(0deg)">
+                      <Animation.Animator>
+                        <shadowui:TransformOperationsAnimator />
+                      </Animation.Animator>
+                    </Setter>
                   </KeyFrame>
                   <KeyFrame Cue="100%">
-                    <Setter Property="RotateTransform.Angle" Value="360" />
+                    <Setter Property="RenderTransform" Value="rotate(360deg)">
+                      <Animation.Animator>
+                        <shadowui:TransformOperationsAnimator />
+                      </Animation.Animator>
+                    </Setter>
                   </KeyFrame>
                 </Animation>
               </Style.Animations>
@@ -63,18 +68,23 @@
                     StrokeLineCap="Round"
                     RenderTransformOrigin="50%,50%"
                     Data="M12 2 L12 6 M12 18 L12 22 M4.93 4.93 L7.76 7.76 M16.24 16.24 L19.07 19.07 M2 12 L6 12 M18 12 L22 12 M4.93 19.07 L7.76 16.24 M16.24 7.76 L19.07 4.93">
-                <Path.RenderTransform>
-                  <RotateTransform />
-                </Path.RenderTransform>
                 <Path.Styles>
                   <Style Selector="Path">
                     <Style.Animations>
                       <Animation Duration="0:0:1" IterationCount="INFINITE" Easing="LinearEasing">
                         <KeyFrame Cue="0%">
-                          <Setter Property="RotateTransform.Angle" Value="0" />
+                          <Setter Property="RenderTransform" Value="rotate(0deg)">
+                            <Animation.Animator>
+                              <shadowui:TransformOperationsAnimator />
+                            </Animation.Animator>
+                          </Setter>
                         </KeyFrame>
                         <KeyFrame Cue="100%">
-                          <Setter Property="RotateTransform.Angle" Value="360" />
+                          <Setter Property="RenderTransform" Value="rotate(360deg)">
+                            <Animation.Animator>
+                              <shadowui:TransformOperationsAnimator />
+                            </Animation.Animator>
+                          </Setter>
                         </KeyFrame>
                       </Animation>
                     </Style.Animations>

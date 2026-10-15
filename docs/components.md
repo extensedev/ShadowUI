@@ -469,6 +469,8 @@ Composed from `BreadcrumbItem` and `BreadcrumbSeparator` (like shadcn):
 
 Sizes: `sm` / (default) / `lg`; class `primary` — accent color. Class `loader` swaps the ring for a lucide-style 8-spoke sunburst that spins continuously (`animate-spin` equivalent).
 
+The rotation pauses while the spinner is hidden (its own `IsVisible`, a hidden parent) and stops once it leaves the visual tree, so toggling `IsVisible` costs no CPU.
+
 ---
 
 ## Toggle Group

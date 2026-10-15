@@ -5,6 +5,9 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+### Fixed
+- **Hidden spinners no longer burn CPU.** `Spinner` (ring and `loader`) animated a `RotateTransform.Angle`, and Avalonia does not pause such animations, so a spinner hidden via `IsVisible` or inside a hidden parent kept spinning and redrawing the window forever. The rotation now animates the shape's own `RenderTransform` and pauses while hidden.
+
 ## [1.2.3] — 2026-10-14
 
 ### Changed
