@@ -5,6 +5,8 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+## [1.2.4] — 2026-10-16
+
 ### Added
 - **`AutoCompleteBox` theme.** Free-text input with a filtered suggestion popup: the field uses the standard `TextBox` look (border, focus ring, placeholder) and the suggestions open in a popover styled like `SearchableComboBox`. Without it the control had no template and rendered nothing, since ShadowUI apps do not load FluentTheme.
 
