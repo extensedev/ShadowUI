@@ -5,6 +5,9 @@ Format: [Keep a Changelog](https://keepachangelog.com), versioning: [SemVer](htt
 
 ## [Unreleased]
 
+### Added
+- **`AutoCompleteBox` theme.** Free-text input with a filtered suggestion popup: the field uses the standard `TextBox` look (border, focus ring, placeholder) and the suggestions open in a popover styled like `SearchableComboBox`. Without it the control had no template and rendered nothing, since ShadowUI apps do not load FluentTheme.
+
 ### Fixed
 - **Hidden spinners no longer burn CPU.** `Spinner` (ring and `loader`) animated a `RotateTransform.Angle`, and Avalonia does not pause such animations, so a spinner hidden via `IsVisible` or inside a hidden parent kept spinning and redrawing the window forever. The rotation now animates the shape's own `RenderTransform` and pauses while hidden.
 

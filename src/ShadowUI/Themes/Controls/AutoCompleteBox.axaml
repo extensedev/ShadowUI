@@ -1,0 +1,46 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Free-text input with a filtered suggestion popup: TextBox look + SearchableComboBox popup -->
+  <ControlTheme x:Key="{x:Type AutoCompleteBox}" TargetType="AutoCompleteBox">
+    <Setter Property="Foreground" Value="{DynamicResource ShadowForegroundBrush}" />
+    <Setter Property="PlaceholderForeground" Value="{DynamicResource ShadowMutedForegroundBrush}" />
+    <Setter Property="MaxDropDownHeight" Value="300" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="PART_LayoutRoot">
+          <TextBox Name="PART_TextBox"
+                   Foreground="{TemplateBinding Foreground}"
+                   PlaceholderText="{TemplateBinding PlaceholderText}"
+                   PlaceholderForeground="{TemplateBinding PlaceholderForeground}"
+                   MaxLength="{TemplateBinding MaxLength}"
+                   CaretIndex="{TemplateBinding CaretIndex, Mode=TwoWay}"
+                   InnerLeftContent="{TemplateBinding InnerLeftContent}"
+                   InnerRightContent="{TemplateBinding InnerRightContent}"
+                   DataValidationErrors.Errors="{TemplateBinding (DataValidationErrors.Errors)}" />
+          <Popup Name="PART_Popup"
+                 WindowManagerAddShadowHint="False"
+                 IsLightDismissEnabled="True"
+                 MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                 PlacementTarget="{TemplateBinding}"
+                 Placement="BottomEdgeAlignedLeft"
+                 VerticalOffset="4">
+            <Border Background="{DynamicResource ShadowPopoverBrush}"
+                    BorderBrush="{DynamicResource ShadowBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{DynamicResource ShadowRadiusMd}"
+                    ClipToBounds="True"
+                    Padding="4">
+              <ListBox Name="PART_SelectingItemsControl"
+                       Foreground="{DynamicResource ShadowPopoverForegroundBrush}"
+                       FontSize="14"
+                       ItemTemplate="{TemplateBinding ItemTemplate}" />
+            </Border>
+          </Popup>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

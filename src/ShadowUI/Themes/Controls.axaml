@@ -37,6 +37,7 @@
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ScrollBar.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ScrollViewer.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/ListBox.axaml" />
+        <ResourceInclude Source="avares://ShadowUI/Themes/Controls/AutoCompleteBox.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Menu.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/Menubar.axaml" />
         <ResourceInclude Source="avares://ShadowUI/Themes/Controls/TitleBar.axaml" />
